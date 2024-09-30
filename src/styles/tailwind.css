@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /*------Color variables------*/
+    --amber_500: #f4c417;
+    --black_900: #040405;
+    --black_900_01: #000000;
+    --black_900_3f: #0000003f;
+    --blue_400: #52a6f9;
+    --blue_700: #0b75cd;
+    --blue_a100_54: #76b8fa54;
+    --blue_a400: #2d75f1;
+    --blue_a700: #276df9;
+    --blue_gray_100: #d9d9d9;
+    --blue_gray_100_4c: #d9d9d94c;
+    --blue_gray_400: #8e8e8f;
+    --blue_gray_400_01: #7d869e;
+    --blue_gray_800: #294157;
+    --blue_gray_900: #373737;
+    --blue_gray_900_01: #363636;
+    --blue_gray_900_4c: #3737374c;
+    --deep_purple_a100: #c66fef;
+    --gray_100: #f6f6f6;
+    --gray_100_00: #f8f5f500;
+    --gray_100_01: #f2f2f2;
+    --gray_100_59: #f5f5f559;
+    --gray_200: #e9e9e9;
+    --gray_200_01: #eeeeee;
+    --gray_300: #e3e3e3;
+    --gray_400: #b9b9ba;
+    --gray_50: #fbfbfb;
+    --gray_500: #adadad;
+    --gray_50_01: #f8f8f8;
+    --gray_600: #707073;
+    --gray_600_75: #70707375;
+    --gray_800: #444444;
+    --gray_900: #222222;
+    --gray_900_01: #1e1e1e;
+    --green_800: #0fa709;
+    --green_800_01: #0fa70a;
+    --green_900: #0f581f;
+    --green_a700: #1ac22e;
+    --indigo_400_7f: #536bb57f;
+    --indigo_50_a0: #ebeef7a0;
+    --indigo_a100: #96adf1;
+    --indigo_a100_01: #88a6e7;
+    --indigo_a200: #547bf1;
+    --indigo_a700: #1145e0;
+    --indigo_a700_01: #1144df;
+    --light_blue_a200: #36cff6;
+    --light_blue_a700: #0d82f7;
+    --light_green_300: #93f97a;
+    --light_green_900: #4e580f;
+    --light_green_a700: #4cf636;
+    --lime_300: #ddec73;
+    --pink_300: #f952b7;
+    --pink_700: #cc2549;
+    --pink_a100: #ff8da6;
+    --purple_700: #8000bc;
+    --white_a700: #ffffff;
+    --yellow_500: #f6f636;
+    --yellow_800: #deb11d;
+
+    /*------Shadow variables------*/
+    --shadow-bs: inset 0 4px 4px 0 #0000003f;
+
+    /*------Border radius variables------*/
+    --radius-xs: 4px;
+    --radius-sm: 5px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --radius-xl: 14px;
+    --radius-2xl: 16px;
+    --radius-3xl: 24px;
+    --radius-4xl: 28px;
+    --radius-5xl: 38px;
+    --radius-6xl: 42px;
+    --radius-7xl: 46px;
+    --radius-8xl: 64px;
+
+    /*------Spacing variables------*/
+    --space-xs: 2px;
+    --space-sm: 4px;
+    --space-md: 6px;
+    --space-lg: 8px;
+    --space-xl: 9px;
+    --space-2xl: 10px;
+    --space-3xl: 11px;
+    --space-4xl: 12px;
+    --space-5xl: 14px;
+    --space-6xl: 15px;
+    --space-7xl: 16px;
+    --space-8xl: 18px;
+    --space-9xl: 19px;
+    --space-10xl: 20px;
+    --space-11xl: 21px;
+    --space-12xl: 22px;
+    --space-13xl: 24px;
+    --space-14xl: 26px;
+    --space-15xl: 30px;
+    --space-16xl: 36px;
+  }
+}

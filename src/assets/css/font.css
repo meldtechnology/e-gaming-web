@@ -1,0 +1,28 @@
+@font-face {
+    font-display: swap;
+    font-style: normal;
+    src: url("../../../public/fonts/InterBold.otf");
+    font-family: "Inter";
+    font-weight: 700;
+}
+@font-face {
+    font-display: swap;
+    font-style: normal;
+    src: url("../../../public/fonts/InterItalic.otf");
+    font-family: "Helvetica";
+    font-weight: 300;
+}
+@font-face {
+    font-display: swap;
+    font-style: normal;
+    src: url("../../../public/fonts/InterRegular.otf");
+    font-family: "Helvetica";
+    font-weight: 400;
+}
+@font-face {
+    font-display: swap;
+    font-style: normal;
+    src: url("../../../public/fonts/InterBoldItalic.otf");
+    font-family: "Helvetica";
+    font-weight: 700;
+}
