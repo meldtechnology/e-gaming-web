@@ -1,6 +1,8 @@
 import { Dashboard } from "../../pages/Dashboard";
 import { Users } from "../../pages/Users";
 import { NewUser } from "../../pages/Users/NewUser";
+import { EditUser } from "../../pages/Users/EditUser";
+import { Profile } from "../../pages/Users/Profile";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -20,7 +22,9 @@ export const PagesRoute = ({ page, params }) => {
     switch (parse(page)) {
       case 'dashboard': return <Dashboard />;
       case 'users': return <Users />;
+      case 'profile': return <Profile />;
       case '_new': return <NewUser />;
+      case '_edit': return <EditUser />;
       default: return <Dashboard />
     }
 

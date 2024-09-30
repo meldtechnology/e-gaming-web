@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Model } from "../../Model";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { RolesModal } from "../../Model/RolesModal";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -26,10 +26,12 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const AddUserForm = () => {
+  const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
     setIsOpen(!isOpen);
+    setOpen(isOpen ? 'visible' : 'invisible');
   }
 
   return (
@@ -222,13 +224,14 @@ export const AddUserForm = () => {
                     >
                       <Img src="/images/img_thumbs_up_indigo_a700_01.svg" className="hover:bg-blue-300" />
                     </Button>
-                    {/*<Model isOpen={isOpen} />*/}
+                    <Model isOpen={open}
+                           modal={<RolesModal onClick={openModal} />}
+                    />
 
                   </div>
                 </div>
               </div>
             </div>
-
           </Form>
         )}
       </Formik>

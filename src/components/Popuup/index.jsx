@@ -18,7 +18,7 @@ export const Popuup = () => {
         <div className="py-1">
           <MenuItem className="flex items-center gap-2 ">
             <Link
-              to="#"
+              to={`/app/users/profile`}
               className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ export const Popuup = () => {
           </MenuItem>
           <MenuItem>
             <Link
-              to="#"
+              to={`/app/users/_edit`}
               className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg"

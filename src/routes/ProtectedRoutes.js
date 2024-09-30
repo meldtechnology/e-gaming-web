@@ -15,6 +15,10 @@ const ProtectedRoutes = {
             element: <AppLayout />
         },
         {
+            path: 'users/profile',
+            element: <AppLayout />
+        },
+        {
             path: 'users/_new',
             element: <AppLayout />
         },
