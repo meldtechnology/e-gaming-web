@@ -1,4 +1,4 @@
-import { LeftSidebar } from "../../components/LeftSidebar";
+import { LeftSidebar } from "../../ui-components/LeftSidebar";
 import { useLocation, useParams } from "react-router-dom";
 import { PagesRoute } from "../PagesRoute";
 

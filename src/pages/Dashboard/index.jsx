@@ -1,6 +1,6 @@
-import { Header, Text, Heading, Img } from "../../components";
+import { Header, Text, Heading, Img } from "../../ui-components";
 import { Suspense } from "react";
-import AgentProfile from "../../components/AgentProfile";
+import AgentProfile from "../../ui-components/AgentProfile";
 
 
 const data = [

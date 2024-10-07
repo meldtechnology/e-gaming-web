@@ -1,5 +1,5 @@
-import { Heading } from "../../../components";
-import { AddUserForm } from "../../../components/Form";
+import { Heading } from "../../../ui-components";
+import { AddUserForm } from "../../../ui-components/Form";
 
 export const NewUser = () => {
   return (

@@ -1,0 +1,1 @@
+export { GetUsersService } from './user';

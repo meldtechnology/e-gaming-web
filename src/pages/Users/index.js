@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Heading } from "../../components";
-import { UserMetricsInfo } from "../../components/UserMetricsInfo";
-import { UsersList } from "../../components/UsersList";
-import { InputText } from "../../components/InputText";
-import { SearchIcon } from "../../components/Icons";
+import { Heading } from "../../ui-components";
+import { UserMetricsInfo } from "../../ui-components/UserMetricsInfo";
+import { UsersList } from "../../ui-components/UsersList";
+import { InputText } from "../../ui-components/InputText";
+import { SearchIcon } from "../../ui-components/Icons";
 
 
 export const Users = () => {

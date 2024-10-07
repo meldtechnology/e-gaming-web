@@ -1,4 +1,4 @@
-import { UserProfile } from "../../../components/UserProfile";
+import { UserProfile } from "../../../ui-components/UserProfile";
 
 
 export const Profile = () => {
