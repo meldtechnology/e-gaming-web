@@ -1,4 +1,5 @@
 import React from "react";
+
 export const Home = () => {
     return (
         <div className="bg-blue-50 p-8">
