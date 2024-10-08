@@ -7,6 +7,7 @@ import { Img } from "../../Img";
 import { Model } from "../../Model";
 import { RolesModal } from "../../Model/RolesModal";
 
+
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, 'First Name is not valid! minimum is 2')

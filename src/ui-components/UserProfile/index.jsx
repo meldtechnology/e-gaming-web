@@ -3,19 +3,15 @@ import { Heading } from "../Heading";
 import { Img } from "../Img";
 import { Text } from "../Text";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
 import { GetUsersService as getMetricsService } from "../../services";
 import { Loader } from "../Loader";
 import { MeldAlert } from "../Alerts";
 import { AlertType } from "../Alerts/AlertType";
 
-const urlprofile = '/v1/users/profiles';
 const USER_PROFILES_URL = process.env.REACT_APP_USER_APP_PROFILE_URL;
 
 export const UserProfile = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({});
 
   const { users, isLoading, isError }
   = getMetricsService(`${USER_PROFILES_URL}`);
