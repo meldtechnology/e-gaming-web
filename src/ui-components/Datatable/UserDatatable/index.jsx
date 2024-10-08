@@ -31,7 +31,7 @@ export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
                     <div className="flex flex-col">
                       <p
                         className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {d?.profile?.firstName}
+                        {`${d?.profile?.firstName} ${d?.profile?.lastName}`}
                       </p>
                       <p
                         className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">

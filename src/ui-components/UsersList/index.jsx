@@ -16,7 +16,7 @@ export const UsersList = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const { users, isLoading, isError }
-    = getMetricsService(`${USER_PROFILES_URL}?page=${page}&size=2`);
+    = getMetricsService(`${USER_PROFILES_URL}?page=${page}&size=5`);
 
   if (isLoading) return ( <Loader /> );
 
@@ -30,8 +30,6 @@ export const UsersList = () => {
   const previousPage = () => {
     setPage(page - 1);
   }
-
-  console.log(users.data);
 
   return (
     <div className="flex flex-col h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
