@@ -6,7 +6,9 @@ import { Button } from "@headlessui/react";
 import { Img } from "../../Img";
 import { Model } from "../../Model";
 import { RolesModal } from "../../Model/RolesModal";
+import { UpdateUserService as putUsersService } from "../../../services";
 
+const USER_PROFILES_URL = process.env.REACT_APP_USER_UPDATE_PROFILE_URL;
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -26,6 +28,7 @@ const SignupSchema = Yup.object().shape({
   userRole: Yup.string().required('User Role is Required')
 });
 
+
 export const EditUserForm = () => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +45,9 @@ export const EditUserForm = () => {
     setIsOpen(!isOpen);
     setOpen(isOpen ? 'visible' : 'invisible');
   }
+
+   const { data, isLoading, isError } = putUsersService(`${USER_PROFILES_URL}`, initialValues); 
+   console.log("result", data);
 
   return (
     <Formik
