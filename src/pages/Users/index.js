@@ -4,15 +4,20 @@ import { UserMetricsInfo } from "../../ui-components/UserMetricsInfo";
 import { UsersList } from "../../ui-components/UsersList";
 import { InputText } from "../../ui-components/InputText";
 import { SearchIcon } from "../../ui-components/Icons";
+import { GetUsersService as getMetricsService } from "../../services";
 
-
+const PROFILE_SEARCH_URL = process.env.REACT_APP_USER_PROFILE_URL;
 export const Users = () => {
-  // const [searchParams] = useSearchParams();
-  // const reference = searchParams.get('reference');
-  // const { userId } = useParams();
   const [searchBarValue, setSearchBarValue] = useState("");
+  const { users, isLoading }
+    = getMetricsService((Object.keys(searchBarValue).length === 0) ?
+    null : `${PROFILE_SEARCH_URL}?search=${searchBarValue}&page=1&size=5`, 0);
 
-  console.log(searchBarValue);
+  const useKeyPressed = async (event) => {
+    setSearchBarValue(event.target.value);
+  }
+
+  console.log(users);
 
   return (
     <>
@@ -22,17 +27,21 @@ export const Users = () => {
                 <Heading size="headinglg" as="h4" className="text-[24px] font-bold text-gray-600 md:text-[22px]">
                   Users
                 </Heading>
-                <InputText size={`w-[30%]`}
-                           value={searchBarValue}
-                           placeHolderText="Find Users..."
-                           icon={<SearchIcon iconColor='gray' />}
-                           onChange={(e) => setSearchBarValue(e.target.value)}
-                />
-              </div>
+                  <InputText id="search-input"
+                             size={`w-[30%]`}
+                             value={searchBarValue}
+                             placeHolderText="Search for Users..."
+                             icon={<SearchIcon iconColor='gray' />}
+                             autocomplete="off"
+                             onChange={useKeyPressed}
+                             loading={isLoading}
+                             users={users}
+                  />
+                </div>
             </header>
             <UserMetricsInfo />
           </div>
       <UsersList />
     </>
-  );
+);
 }

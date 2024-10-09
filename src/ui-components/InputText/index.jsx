@@ -1,4 +1,7 @@
-export const InputText = ({ size, value, placeHolderText, icon, onChange }) => {
+import { SearchResult } from "../SearchResult";
+
+
+export const InputText = ({ size, value, placeHolderText, icon, onChange, loading, users }) => {
   return (
     <div className={size}>
       <div className="relative">
@@ -10,6 +13,7 @@ export const InputText = ({ size, value, placeHolderText, icon, onChange }) => {
                onChange={onChange} />
         {icon}
       </div>
+      <SearchResult value={value} users={users} loading={loading} />
     </div>
   );
 }
