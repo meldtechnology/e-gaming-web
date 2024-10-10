@@ -46,6 +46,10 @@ export const AddUserForm = () => {
       await addNewUser({ ...values, username: values.email });
   }
 
+  const resetError = () => {
+    error = null;
+  }
+
   console.log("isError", isError)
   console.log("error", error)
   if(posts) {

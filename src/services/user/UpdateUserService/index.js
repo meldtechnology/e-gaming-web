@@ -12,6 +12,6 @@ export const UpdateUserService = ( endpoint, delay ) => {
     modifyPost: trigger,
     update: resp?.data,
     error: err?.data,
-    isError: err
+    isError: (err && err?.data?.status !== 200)
   }
 }
