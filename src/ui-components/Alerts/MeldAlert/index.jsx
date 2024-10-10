@@ -2,13 +2,10 @@ import { Img } from "../../Img";
 import { AlertType } from "../AlertType";
 
 export const MeldAlert = ({ alertType, message, show }) => {
-  // console.log(show);
-  // const hide = false;
-  // const reRun = useCallback(() => {
-  //     setTimeout(() => { show = hide}, 10000);
-  // }, []);
 
-  // reRun();
+  const close = () => {
+    show = false;
+  }
 
   if(alertType === AlertType.ERROR) {
     return (
@@ -17,7 +14,11 @@ export const MeldAlert = ({ alertType, message, show }) => {
         <Img src="/images/eroor.svg" className="w-[28px] h-[28px] inline mr-2" alt={"Error Info"} />
       </span>
         <span>{message}</span>
-
+        <span className="float-right">
+          <button className="font-bold" type="button" onClick={close}>
+            X
+          </button>
+        </span>
       </div>
     )
   }else if(alertType === AlertType.SUCCESS) {
