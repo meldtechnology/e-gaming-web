@@ -8,7 +8,7 @@ import { Model } from "../../Model";
 import { RolesModal } from "../../Model/RolesModal";
 import { UpdateUserService as putUsersService } from "../../../services";
 
-const USER_PROFILES_URL = process.env.REACT_APP_USER_UPDATE_PROFILE_URL;
+const USER_PROFILES_URL = process.env.REACT_APP_USER_APP_PROFILE_URL;
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -41,13 +41,17 @@ export const EditUserForm = () => {
     userRole:''
   }
 
+  const { modifyPost, update, error, isError } = putUsersService(`${USER_PROFILES_URL}`); 
+
   const openModal = () => {
     setIsOpen(!isOpen);
     setOpen(isOpen ? 'visible' : 'invisible');
   }
 
-   const { data, isLoading, isError } = putUsersService(`${USER_PROFILES_URL}`, initialValues); 
-   console.log("result", data);
+  const submitEdit = async (value) => {
+    await modifyPost(JSON.stringify(value));
+  }
+ 
 
   return (
     <Formik
@@ -55,6 +59,7 @@ export const EditUserForm = () => {
       validationSchema={SignupSchema}
       onSubmit={values => {
         // same shape as initial values
+        submitEdit(values);
         console.log(values);
       }}
     >
