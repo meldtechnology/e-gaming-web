@@ -2,7 +2,6 @@ const headers = {
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        mode: 'no-cors',
         Authorization: 'Bearer eyJraWQiOiJiODY1ZDJjNy1hYmM0LTQ4N2MtOGNkOS0zYTYzNGYwYjEyNjIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzdGFyc2hpcCIsImF1ZCI6IlU1QlNIUE8xTEJIS0xGSE5SUlFNV0szS0pLTUhFVU9MM0hLVURUWFpQRUMiLCJuYmYiOjE3MjgxNTk4MDAsInNjb3BlIjpbIkdBTUlORyJdLCJyb2xlcyI6WyJBRE1JTiJdLCJpc3MiOiJodHRwOi8vMTcyLjMxLjQuMTU0OjkwMTEiLCJleHAiOjE3Mjg3NjQ2MDAsImlhdCI6MTcyODE1OTgwMCwianRpIjoiM2RmOWJmODctNjIxOC00OTAzLTk5ZjAtOWM1YWVmNDZmMDIzIiwicHVibGljSWQiOiIxMjMifQ.TLjajfi7Ts10PLT04J1rofyt9AVFjMSV0kS_FieD1s-bZfctws6lVR-kunZkUbO2yy3hv1ZXsw21rArXgb0pCGW8c1phXzAxEVbJTGMVsnZNdABZaIenCnTajQ7PB_XgbjrWUSRDQAp48lDfaRrVeOmndnfKGrh24rPfivn-kzgINjRdVY4QoQqHcLjUSWhIaNGi_9oGgBsDZmMKJIsJ-nFL5vkMvpZtnsu3E4Cs6QCXt0B24lV6qiHF8rCqf6apu1_zZwyYmVGI9bflppZ9r6BP9WYCXh5UOsG4Cn2i6WjkQnleZzOvA5t7RSD_bJmShO8kKuJk2x34RilIU2dBWg'
     }
 }

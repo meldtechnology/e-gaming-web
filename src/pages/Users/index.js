@@ -6,7 +6,7 @@ import { InputText } from "../../ui-components/InputText";
 import { SearchIcon } from "../../ui-components/Icons";
 import { GetUsersService as getMetricsService } from "../../services";
 
-const PROFILE_SEARCH_URL = process.env.REACT_APP_USER_PROFILE_URL;
+const PROFILE_SEARCH_URL = process.env.REACT_APP_ADMIN_USER_PROFILE_URL;
 export const Users = () => {
   const [searchBarValue, setSearchBarValue] = useState("");
   const { users, isLoading }
@@ -16,8 +16,6 @@ export const Users = () => {
   const useKeyPressed = async (event) => {
     setSearchBarValue(event.target.value);
   }
-
-  console.log(users);
 
   return (
     <>

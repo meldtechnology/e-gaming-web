@@ -6,6 +6,10 @@ import * as Yup from 'yup';
 import { Model } from "../../Model";
 import { useState } from "react";
 import { RolesModal } from "../../Model/RolesModal";
+import { CreateUserService as createUser } from "../../../services";
+import { AlertType } from "../../Alerts/AlertType";
+import { MeldAlert } from "../../Alerts";
+import { passwordGenerator } from "../../../services/passworGenerator";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -22,32 +26,50 @@ const SignupSchema = Yup.object().shape({
     .required('Phone/Mobile is Required'),
   profilePicture: Yup.string(),
   email: Yup.string().email('Invalid email').required('Email is Required'),
-  userRole: Yup.string().required('User Role is Required')
+  role: Yup.string().required('User Role is Required')
 });
 
+const ADD_USER_URL = process.env.REACT_APP_USER_SIGN_UP_URL
 export const AddUserForm = () => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
+  const { addNewUser, posts, error, isError } = createUser(ADD_USER_URL);
+
 
   const openModal = () => {
     setIsOpen(!isOpen);
     setOpen(isOpen ? 'visible' : 'invisible');
   }
 
+  const inviteUser = async (values) => {
+      const passwd = passwordGenerator(7);
+      await addNewUser({ ...values, username: values.email });
+  }
+
+  console.log("isError", isError)
+  console.log("error", error)
+  if(posts) {
+    return (
+      <div className="alert alert-success" role="alert">
+        Your New Post has been added Successfully!
+      </div>
+    )
+  }
+
   return (
-      <Formik
+    <Formik
         initialValues={{
           firstName: '',
           lastName: '',
           email: '',
           phone: '',
           profilePicture: '',
-          userRole:''
+          role:''
         }}
         validationSchema={SignupSchema}
         onSubmit={values => {
-          // same shape as initial values
-          console.log(values);
+          passwordGenerator(6);
+          inviteUser({ ...values, username: values.email });
         }}
       >
         {({ errors, touched, dirty, isValid }) => (
@@ -205,13 +227,13 @@ export const AddUserForm = () => {
                 <div
                   className="mr-[212px] mt-2 flex w-[52%] items-center justify-center gap-2.5 bg-white-a700 px-5 py-[22px] md:mr-0 md:flex-col sm:w-full sm:py-5">
                   <div className="flex-grow">
-                    <Field name="userRole"
+                    <Field name="role"
                            placeholder={`STANDARD USER`}
                            readOnly={false}
                            className="flex-grow rounded-[5px] border border-gray-900_01 px-3 !text-black-900_01 md:px-5"
                     />
                     <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
-                      {errors.userRole && touched.userRole ? (errors.userRole) : null}
+                      {errors.role && touched.role ? (errors.role) : null}
                     </p>
                   </div>
                   <div className="flex-grow">
@@ -231,6 +253,9 @@ export const AddUserForm = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div>
+              <MeldAlert alertType={AlertType.ERROR} message={error?.userMessage} show={isError} />
             </div>
           </Form>
         )}

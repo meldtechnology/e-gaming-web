@@ -1,15 +1,18 @@
 import useSWRMutation from "swr/mutation";
 import { headers } from "../../../core/httpHeaders/HttpHeaders";
-import { PostCall as post } from "../../../core/ApiAdapter";
+import { PostCall as postCall } from "../../../core/ApiAdapter";
 
 export const CreateUserService = ( endpoint, delay ) => {
-  const { trigger, error, data: resp }
-    = useSWRMutation([endpoint, headers], post, {refreshInterval: delay});
+  let { trigger, data: resp, error: err }
+    = useSWRMutation([endpoint, headers], postCall, {refreshInterval: delay});
+
+  // Check if an error occurred and was returned.
+  if(resp?.error !== undefined) err = resp?.error;
 
   return {
-    addNewPost: trigger,
+    addNewUser: trigger,
     posts: resp?.data,
-    error,
-    isError: error
+    error: err?.data,
+    isError: (err && err?.data?.status !== 200)
   }
 }

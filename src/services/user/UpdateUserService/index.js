@@ -3,13 +3,15 @@ import { PutCall as put } from "../../../core/ApiAdapter";
 import useSWRMutation from "swr/mutation";
 
 export const UpdateUserService = ( endpoint, delay ) => {
-  const { trigger, error, data: resp }
+  let { trigger, data: resp, error: err }
     = useSWRMutation([endpoint, headers], put, {refreshInterval: delay});
+// Check if an error occurred and was returned.
+  if(resp?.error !== undefined) err = resp?.error;
 
   return {
     modifyPost: trigger,
     update: resp?.data,
-    error,
-    isError: error
+    error: err?.data,
+    isError: err
   }
 }
