@@ -19,7 +19,7 @@ export const UserMetricsInfo = () => {
   if (isLoading) return ( <Loader /> );
 
   if (isError) return <MeldAlert alertType={AlertType.ERROR}
-                      message={"Sorry Users profile could not be retrieved. Please try again later"} />
+                      message={"Users profile could not be retrieved. Please try again later"} />
 
   data[0].userCount = users.data.total;
   data[1].userCount = users.data.totalEnabled;

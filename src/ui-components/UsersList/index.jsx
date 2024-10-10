@@ -11,7 +11,7 @@ const columnHeading = [
   "Name", "Phone", "Role", "Status", ""
 ]
 
-const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
+const USER_PROFILES_URL = process.env.REACT_APP_ADMIN_USER_PROFILE_URL;
 export const UsersList = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
