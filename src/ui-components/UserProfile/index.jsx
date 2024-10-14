@@ -8,7 +8,7 @@ import { Loader } from "../Loader";
 import { MeldAlert } from "../Alerts";
 import { AlertType } from "../Alerts/AlertType";
 
-const USER_PROFILES_URL = process.env.REACT_APP_USER_APP_PROFILE_URL;
+const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
 
 export const UserProfile = () => {
   const navigate = useNavigate();

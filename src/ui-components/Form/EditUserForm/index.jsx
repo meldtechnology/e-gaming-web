@@ -7,8 +7,10 @@ import { Img } from "../../Img";
 import { Model } from "../../Model";
 import { RolesModal } from "../../Model/RolesModal";
 import { UpdateUserService as putUsersService } from "../../../services";
+import { GetUsersService as getUsersService } from "../../../services";
 
-const USER_PROFILES_URL = process.env.REACT_APP_USER_APP_PROFILE_URL;
+
+const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -28,21 +30,23 @@ const SignupSchema = Yup.object().shape({
   userRole: Yup.string().required('User Role is Required')
 });
 
-
 export const EditUserForm = () => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
+  
+  const {users} = getUsersService(`${USER_PROFILES_URL}`);
+
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    profilePicture: '',
-    userRole:''
+    firstName: users?.data?.profile?.firstName,
+    lastName: users?.data?.profile?.lastName,
+    email: users?.data?.profile?.email,
+    phone: users?.data?.profile?.phoneNumber,
+    profilePicture: users?.data?.profile?.profilePicture,
+    userRole: users?.data?.profile?.settings?.role
   }
 
   const { modifyPost, update, error, isError } = putUsersService(`${USER_PROFILES_URL}`); 
-
+   
   const openModal = () => {
     setIsOpen(!isOpen);
     setOpen(isOpen ? 'visible' : 'invisible');
@@ -51,12 +55,15 @@ export const EditUserForm = () => {
   const submitEdit = async (value) => {
     await modifyPost(JSON.stringify(value));
   }
- 
+
+  if(isError) return "Error occured here" (error.userMessage);
+  if(update) return "Records successfully updated";
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
+      enableReinitialize={true} 
       onSubmit={values => {
         // same shape as initial values
         submitEdit(values);
@@ -168,7 +175,8 @@ export const EditUserForm = () => {
               <div
                 className="flex w-[80%] items-start justify-end gap-28 self-center pl-[76px] py-1 md:w-full md:flex-col md:gap-5 sm:px-5">
                 <Img
-                  src="/images/img_ellipse_210.png"
+                  /* src="/images/img_ellipse_210.png"  */
+                  src={initialValues.profilePicture}
                   alt="Image"
                   className="h-[92px] w-[92px] rounded-[46px] object-cover md:w-full"
                 />
