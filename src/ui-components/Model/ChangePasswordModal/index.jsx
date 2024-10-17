@@ -32,7 +32,6 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
       = { newPassword: values.password, currentPassword: "" }
     setIsSaving(true);
     const result = await modifyPost(newPasswordUpdate);
-    console.log(result);
     if(result?.error !== undefined){
       setError(result?.error);
       setMessage(result?.error?.userMessage);
