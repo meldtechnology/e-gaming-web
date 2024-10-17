@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ChangeRoleModal } from "../../Model/ChangeRoleModal";
 import { EnableToggleModal } from "../../Model/EnableToggleModal";
 
-
 export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previousPage }) => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
