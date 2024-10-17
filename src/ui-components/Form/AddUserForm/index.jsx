@@ -3,6 +3,7 @@ import { Button } from "@headlessui/react";
 import { Img } from "../../Img";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+<<<<<<< HEAD
 import { Model } from "../../Model";
 import { useState } from "react";
 import { RolesModal } from "../../Model/RolesModal";
@@ -10,6 +11,14 @@ import {
   CreateUserService as createUser,
   passwordGenerator,
   UploadDocumentService as uploadDocument } from "../../../services";
+=======
+import { useState } from "react";
+import {
+  CreateUserService as createUser,
+  passwordGenerator,
+  UploadDocumentService as uploadDocument,
+  GetRolesService as getRoles } from "../../../services";
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
 import { AlertType } from "../../Alerts/AlertType";
 import { MeldAlert } from "../../Alerts";
 import { DEFAULT_IMAGE } from "../../../constant";
@@ -43,10 +52,16 @@ const initialValues={
 }
 
 const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
+<<<<<<< HEAD
 const ADD_USER_URL = process.env.REACT_APP_USER_SIGN_UP_URL
 export const AddUserForm = () => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
+=======
+const ADD_USER_URL = process.env.REACT_APP_USER_SIGN_UP_URL;
+const APP_ROLE_URL = process.env.REACT_APP_ROLES_URL;
+export const AddUserForm = () => {
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
   const [saving, setSaving] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -55,12 +70,16 @@ export const AddUserForm = () => {
   const [profilePic, setProfilePics] = useState(initialValues.profilePicture);
   const { addNewUser, posts, error } = createUser(ADD_USER_URL);
   const { uploadDoc,  } = uploadDocument(UPLOAD_DOCUMENT_URL);
+<<<<<<< HEAD
 
 
   const openModal = () => {
     setIsOpen(!isOpen);
     setOpen(isOpen ? 'visible' : 'invisible');
   }
+=======
+  const { roles, isLoading } = getRoles(`${APP_ROLE_URL}?page=1&size=15`);
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
 
   const inviteUser = async (values) => {
       const passwd = passwordGenerator(7);
@@ -293,15 +312,32 @@ export const AddUserForm = () => {
                 <div
                   className="mr-[212px] mt-2 flex w-[52%] items-center justify-center gap-2.5 bg-white-a700 px-5 py-[22px] md:mr-0 md:flex-col sm:w-full sm:py-5">
                   <div className="flex-grow">
+<<<<<<< HEAD
                     <Field name="role"
                            placeholder={`STANDARD USER`}
                            readOnly={false}
                            className="flex-grow rounded-[5px] border border-gray-900_01 px-3 !text-black-900_01 md:px-5"
                     />
+=======
+                    <div className={` ${isLoading? '':'hidden'}`}>
+                      <Loader />
+                    </div>
+                    <Field name="role"
+                           placeholder={`STANDARD USER`}
+                           as="select"
+                           className={`flex-grow w-full ${!isLoading? '':'hidden'} rounded-[5px] border border-gray-900_01 px-3 !text-black-900_01 md:px-5"`}
+                    >
+                      <option value=''>---</option>
+                      {(roles?.results.map((role, index) => (
+                        <option value={role.name} key={`role-${index}`}>{role.name}</option>
+                      )))}
+                    </Field>
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
                     <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
                       {errors.role && touched.role ? (errors.role) : null}
                     </p>
                   </div>
+<<<<<<< HEAD
                   <div className="flex-grow">
                     <Button
                       color="gray_900_01"
@@ -317,6 +353,8 @@ export const AddUserForm = () => {
                     />
 
                   </div>
+=======
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
                 </div>
               </div>
             </div>

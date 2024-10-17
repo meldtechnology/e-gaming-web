@@ -1,11 +1,23 @@
 import * as Yup from "yup";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { useEffect, useState } from "react";
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
 import { Field, Form, Formik } from "formik";
 import { Heading } from "../../Heading";
 import { Button } from "@headlessui/react";
 import { Img } from "../../Img";
 import { Model } from "../../Model";
+<<<<<<< HEAD
 import { RolesModal } from "../../Model/RolesModal";
+=======
+import { GetUsersService as getUserProfile } from "../../../services";
+import { Loader } from "../../Loader";
+import { MeldAlert } from "../../Alerts";
+import { AlertType } from "../../Alerts/AlertType";
+import { ChangeRoleModal } from "../../Model/ChangePasswordModal";
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -22,6 +34,7 @@ const SignupSchema = Yup.object().shape({
     .required('Phone/Mobile is Required'),
   profilePicture: Yup.string(),
   email: Yup.string().email('Invalid email').required('Email is Required'),
+<<<<<<< HEAD
   userRole: Yup.string().required('User Role is Required')
 });
 
@@ -29,11 +42,25 @@ export const EditUserForm = () => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
   const initialValues = {
+=======
+  // userRole: Yup.string().required('User Role is Required')
+});
+
+const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
+export const EditUserForm = () => {
+  const [open, setOpen] = useState('invisible');
+  const [isOpen, setIsOpen] = useState(false);
+  const { users, isLoading, isError }
+    = getUserProfile(USER_PROFILES_URL);
+
+  const [initialValues, setInitialValues] = useState({
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     profilePicture: '',
+<<<<<<< HEAD
     userRole:''
   }
 
@@ -42,10 +69,38 @@ export const EditUserForm = () => {
     setOpen(isOpen ? 'visible' : 'invisible');
   }
 
+=======
+    // userRole:''
+  });
+
+  // formik.setFieldValue('query_string', active?.query);
+
+  // const openModal = () => {
+  //   setIsOpen(!isOpen);
+  //   setOpen(isOpen ? 'visible' : 'invisible');
+  // }
+
+  // if (isError) return <MeldAlert alertType={AlertType.ERROR}
+  //                                message={"Sorry Users profile could not be retrieved. Please try again later"} />
+
+  useEffect(() => {
+    setInitialValues({
+      firstName: users?.data?.profile?.firstName,
+      lastName: users?.data?.profile?.lastName,
+      email: users?.data?.profile?.email,
+      phone: users?.data?.profile?.phoneNumber,
+      profilePicture: users?.data?.profile?.profilePicture,
+    });
+  }, [users]);
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
+<<<<<<< HEAD
+=======
+      enableReinitialize={true}
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
       onSubmit={values => {
         // same shape as initial values
         console.log(values);
@@ -80,6 +135,10 @@ export const EditUserForm = () => {
               </Button>
             </div>
           </div>
+<<<<<<< HEAD
+=======
+          <div className={`${isLoading ? '' : 'hidden'}`}><Loader /></div>
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
           {/* Form data entry */}
           <div className="mb-[134px] bg-white-a700">
             <div>
@@ -167,12 +226,17 @@ export const EditUserForm = () => {
                           className="relative z-[1] ml-[30%] h-[72px] w-[72px] md:ml-0"
                           onClick={(e) => {
                             document.getElementById('upload-file').click();
+<<<<<<< HEAD
                           }} >
+=======
+                          }}>
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
                     <Img
                       src="/images/img_upload_duotone_line.svg"
                       alt="Uploadduotone"
                       className="relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0"
                     />
+<<<<<<< HEAD
                     <input  id='upload-file'
                             type='file'
                             name='profilePicture'
@@ -181,6 +245,16 @@ export const EditUserForm = () => {
                               console.log(e.target.value);
                               console.log(e.currentTarget.files[0]);
                             }} />
+=======
+                    <input id='upload-file'
+                           type='file'
+                           name='profilePicture'
+                           hidden
+                           onChange={(e) => {
+                             console.log(e.target.value);
+                             console.log(e.currentTarget.files[0]);
+                           }} />
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
                   </button>
                   <Heading
                     as="h6"
@@ -198,6 +272,7 @@ export const EditUserForm = () => {
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
             <div
               className="flex items-end justify-between gap-5 border-b border-solid border-blue_gray-400 pl-[76px] py-2.5 md:px-5 sm:flex-col">
               <Heading size="headingmd" as="h5" className="mb-[30px] text-[20px] font-bold text-black-900_01">
@@ -232,6 +307,42 @@ export const EditUserForm = () => {
                 </div>
               </div>
             </div>
+=======
+            {/*<div*/}
+            {/*  className="flex items-end justify-between gap-5 border-b border-solid border-blue_gray-400 pl-[76px] py-2.5 md:px-5 sm:flex-col">*/}
+            {/*  <Heading size="headingmd" as="h5" className="mb-[30px] text-[20px] font-bold text-black-900_01">*/}
+            {/*    Role:*/}
+            {/*  </Heading>*/}
+            {/*  <div*/}
+            {/*    className="mr-[212px] mt-2 flex w-[52%] items-center justify-center gap-2.5 bg-white-a700 px-5 py-[22px] md:mr-0 md:flex-col sm:w-full sm:py-5">*/}
+            {/*    <div className="flex-grow">*/}
+            {/*      <Field name="userRole"*/}
+            {/*             placeholder={`STANDARD USER`}*/}
+            {/*             readOnly={false}*/}
+            {/*             className="flex-grow rounded-[5px] border border-gray-900_01 px-3 !text-black-900_01 md:px-5"*/}
+            {/*      />*/}
+            {/*      <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">*/}
+            {/*        {errors.userRole && touched.userRole ? (errors.userRole) : null}*/}
+            {/*      </p>*/}
+            {/*    </div>*/}
+            {/*    <div className="flex-grow">*/}
+            {/*      <Button*/}
+            {/*        color="gray_900_01"*/}
+            {/*        size="lg"*/}
+            {/*        variant="outline"*/}
+            {/*        onClick={openModal}*/}
+            {/*        className="mt-1 w-[48px] self-end rounded-[10px] border-none px-1 md:self-auto md:px-5"*/}
+            {/*      >*/}
+            {/*        <Img src="/images/img_thumbs_up_indigo_a700_01.svg" className="hover:bg-blue-300" />*/}
+            {/*      </Button>*/}
+            {/*      <Model isOpen={open}*/}
+            {/*             modal={<RolesModal onClick={openModal} />}*/}
+            {/*      />*/}
+
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+>>>>>>> 47a4933 (Egaming Admin User Mgmt)
           </div>
         </Form>
       )}

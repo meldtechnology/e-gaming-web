@@ -1,7 +1,34 @@
-import { Popuup } from "../../Popuup";
+import { Popup } from "../../Popup";
+import { ChangePasswordModal } from "../../Model/ChangePasswordModal";
+import { Model } from "../../Model";
+import { useEffect, useState } from "react";
+import { ChangeRoleModal } from "../../Model/ChangeRoleModal";
+import { EnableToggleModal } from "../../Model/EnableToggleModal";
 
 
 export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previousPage }) => {
+  const [open, setOpen] = useState('invisible');
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [userData, setUserData] = useState([]);
+
+  const openModal = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const selectedUser = (value) => {
+    setUserData(value);
+  }
+
+  const selectedModal = (value) => {
+    setModalType(value);
+  }
+
+
+  useEffect(() => {
+    setOpen(isOpen ? 'visible' : 'invisible');
+  }, [isOpen, open]);
+
   return (
     <div
       className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
@@ -62,7 +89,12 @@ export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
                   </p>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
-                  <Popuup />
+                  <Popup openModal={openModal}
+                         value={[ d?.username, d?.publicId, d?.profile?.settings?.role, d?.profile?.settings?.isEmailVerified]}
+                         selectedUser={selectedUser}
+                         selectedModal={selectedModal}
+                         isActive={d?.profile?.settings?.isEmailVerified}
+                  />
                 </td>
               </tr>
             )
@@ -89,6 +121,18 @@ export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
           </button>
         </div>
       </div>
+      <Model isOpen={modalType === 'pwd'? open : 'invisible'}
+             modal={<ChangePasswordModal
+               onClick={openModal}
+               userData={userData} />} />
+      <Model isOpen={modalType === 'rle'? open : 'invisible'}
+             modal={<ChangeRoleModal
+               onClick={openModal}
+               userData={userData} />} />
+      <Model isOpen={modalType === 'act'? open : 'invisible'}
+             modal={<EnableToggleModal
+               onClick={openModal}
+               userData={userData} />} />
     </div>
   );
 }
