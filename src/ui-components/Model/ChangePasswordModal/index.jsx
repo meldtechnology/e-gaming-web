@@ -100,6 +100,7 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                           <Form>
                             <div className="w-full h-[40px]">
                               <Field name="password"
+                                     type={"password"}
                                      placeholder={`New Password`}
                                      className="h-full rounded-[10px] border border-gray-500 px-3 md:w-full"
                               />
@@ -109,6 +110,7 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                             </div>
                             <div className="w-full h-[40px] mt-5">
                               <Field name="confirm"
+                                     type='password'
                                      placeholder={`Confirm Password`}
                                      className="h-full rounded-[10px] border border-gray-500 px-3 md:w-full"
                               />
