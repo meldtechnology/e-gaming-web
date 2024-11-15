@@ -3,7 +3,7 @@ export const RolesModal = ({ onClick }) => {
     <>
       <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="false"></div>
       <div className="fixed  inset-0 z-10 w-screen h-screen ">
-        <div className="flex mt-[25%] justify-center p-4 text-center sm:items-center sm:p-0">
+        <div className="flex mt-[2%] justify-center p-4 text-center sm:items-center sm:p-0">
           <div
             className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
             <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
