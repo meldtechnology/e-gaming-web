@@ -26,6 +26,18 @@ const ProtectedRoutes = {
             path: 'users/_edit',
             element: <AppLayout />
         },
+        {
+            path: 'documents',
+            element: <AppLayout />
+        },
+        {
+            path: 'documents/T_46042b50',
+            element: <AppLayout />
+        },
+        {
+            path: 'documents/F_322f9837',
+            element: <AppLayout />
+        },
     ]
 };
 

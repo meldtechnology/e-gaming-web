@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
 import { Heading } from "../../Heading";
 import { Button } from "@headlessui/react";
@@ -27,8 +27,9 @@ const SignupSchema = Yup.object().shape({
     .required('Phone/Mobile is Required'),
   profilePicture: Yup.string(),
   email: Yup.string().email('Invalid email').required('Email is Required'),
-  userRole: Yup.string().required('User Role is Required')
+  // userRole: Yup.string().required('User Role is Required')
 });
+
 
 export const EditUserForm = () => {
   const [open, setOpen] = useState('invisible');
@@ -99,6 +100,7 @@ export const EditUserForm = () => {
               </Button>
             </div>
           </div>
+          <div className={`${isLoading ? '' : 'hidden'}`}><Loader /></div>
           {/* Form data entry */}
           <div className="mb-[134px] bg-white-a700">
             <div>
@@ -187,20 +189,20 @@ export const EditUserForm = () => {
                           className="relative z-[1] ml-[30%] h-[72px] w-[72px] md:ml-0"
                           onClick={(e) => {
                             document.getElementById('upload-file').click();
-                          }} >
+                          }}>
                     <Img
                       src="/images/img_upload_duotone_line.svg"
                       alt="Uploadduotone"
                       className="relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0"
                     />
-                    <input  id='upload-file'
-                            type='file'
-                            name='profilePicture'
-                            hidden
-                            onChange={(e) => {
-                              console.log(e.target.value);
-                              console.log(e.currentTarget.files[0]);
-                            }} />
+                    <input id='upload-file'
+                           type='file'
+                           name='profilePicture'
+                           hidden
+                           onChange={(e) => {
+                             console.log(e.target.value);
+                             console.log(e.currentTarget.files[0]);
+                           }} />
                   </button>
                   <Heading
                     as="h6"
@@ -215,40 +217,6 @@ export const EditUserForm = () => {
                       </>
                     </span>
                   </Heading>
-                </div>
-              </div>
-            </div>
-            <div
-              className="flex items-end justify-between gap-5 border-b border-solid border-blue_gray-400 pl-[76px] py-2.5 md:px-5 sm:flex-col">
-              <Heading size="headingmd" as="h5" className="mb-[30px] text-[20px] font-bold text-black-900_01">
-                Role:
-              </Heading>
-              <div
-                className="mr-[212px] mt-2 flex w-[52%] items-center justify-center gap-2.5 bg-white-a700 px-5 py-[22px] md:mr-0 md:flex-col sm:w-full sm:py-5">
-                <div className="flex-grow">
-                  <Field name="userRole"
-                         placeholder={`STANDARD USER`}
-                         readOnly={false}
-                         className="flex-grow rounded-[5px] border border-gray-900_01 px-3 !text-black-900_01 md:px-5"
-                  />
-                  <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
-                    {errors.userRole && touched.userRole ? (errors.userRole) : null}
-                  </p>
-                </div>
-                <div className="flex-grow">
-                  <Button
-                    color="gray_900_01"
-                    size="lg"
-                    variant="outline"
-                    onClick={openModal}
-                    className="mt-1 w-[48px] self-end rounded-[10px] border-none px-1 md:self-auto md:px-5"
-                  >
-                    <Img src="/images/img_thumbs_up_indigo_a700_01.svg" className="hover:bg-blue-300" />
-                  </Button>
-                  <Model isOpen={open}
-                         modal={<RolesModal onClick={openModal} />}
-                  />
-
                 </div>
               </div>
             </div>

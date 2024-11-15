@@ -5,5 +5,7 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@material-tailwind/html" level="application" />
+    <orderEntry type="library" name="flatpickr" level="application" />
   </component>
 </module>

@@ -11,12 +11,12 @@ const columnHeading = [
   "Name", "Phone", "Role", "Status", ""
 ]
 
-const USER_PROFILES_URL = process.env.REACT_APP_ADMIN_USER_PROFILE_URL;
+const USER_PROFILE_URL = process.env.REACT_APP_ADMIN_USER_PROFILE_URL;
 export const UsersList = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const { users, isLoading, isError }
-    = getMetricsService(`${USER_PROFILES_URL}?page=${page}&size=5`);
+    = getMetricsService(`${USER_PROFILE_URL}?page=${page}&size=5`);
 
   if (isLoading) return ( <Loader /> );
 
@@ -46,7 +46,7 @@ export const UsersList = () => {
         <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
           <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">
             <UserDatatable columnHeader={columnHeading}
-                           data={users.data.results}
+                           data={users?.data?.results}
                            pageInfo={{page: users?.data?.page,
                              previous: users?.data?.previousPage,
                              next: users?.data?.nextPage,

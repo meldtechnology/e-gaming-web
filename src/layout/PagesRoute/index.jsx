@@ -3,6 +3,9 @@ import { Users } from "../../pages/Users";
 import { NewUser } from "../../pages/Users/NewUser";
 import { EditUser } from "../../pages/Users/EditUser";
 import { Profile } from "../../pages/Users/Profile";
+import { Documents } from "../../pages/Documents";
+import { Types } from "../../pages/Documents/Types";
+import { Files } from "../../pages/Documents/Files";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -25,6 +28,9 @@ export const PagesRoute = ({ page, params }) => {
       case 'profile': return <Profile />;
       case '_new': return <NewUser />;
       case '_edit': return <EditUser />;
+      case 'documents': return <Documents />;
+      case 'T_46042b50': return <Types />;
+      case 'F_322f9837': return <Files />;
       default: return <Dashboard />
     }
 
