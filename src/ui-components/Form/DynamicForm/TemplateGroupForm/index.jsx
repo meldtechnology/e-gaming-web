@@ -21,8 +21,6 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
   const openPopUp = (selectedGroup, selectedField) => {
     setOpenField(selectedField?.name);
     setFieldSelected(selectedField);
-    console.log(selectedGroup);
-    console.log(selectedField);
   }
 
   const closePopUp = () => {
@@ -42,12 +40,16 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
     // update the container
     setContainer( container.filter(item => {
       if(item.groupId === selectedGroup) {
-        console.log('Item found', item)
         item.formControls = item?.formControls?.filter(fc => fc.name !== selectedField);
       }
       return item;
       })
     );
+  }
+
+  const updateField = () => {
+    setOpenField('');
+    setFieldSelected({});
   }
 
   const addField = (group) => {
@@ -173,7 +175,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
                   </button>
                 </div>
               </div>
-            <EditFieldPopUp openEdit={openField === field.name} field={fieldSelected} close={closePopUp} />
+            <EditFieldPopUp openEdit={openField === field.name} field={fieldSelected} update={updateField} close={closePopUp} />
             </div>
             ))}
         </div>

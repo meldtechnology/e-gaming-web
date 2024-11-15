@@ -38,6 +38,10 @@ const ProtectedRoutes = {
             path: 'documents/F_322f9837',
             element: <AppLayout />
         },
+        {
+            path: 'applications',
+            element: <AppLayout />
+        },
     ]
 };
 
