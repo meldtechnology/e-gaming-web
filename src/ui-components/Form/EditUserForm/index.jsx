@@ -56,7 +56,7 @@ export const EditUserForm = () => {
     await modifyPost(JSON.stringify(value));
   }
 
-  if(isError) return "Error occured here" (error.userMessage);
+  if(isError) return "Error occured here " + (error.userMessage );
   if(update) return "Records successfully updated";
 
   return (
