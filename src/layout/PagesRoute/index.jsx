@@ -28,7 +28,8 @@ export const PagesRoute = ({ page, params }) => {
       case 'profile': return <Profile />;
       case '_new': return <NewUser />;
       case '_edit': return <EditUser />;
-      case 'documents': return <Documents />;
+      case 'documents': return <Types />;
+      case 'applications': return <Documents />;
       case 'T_46042b50': return <Types />;
       case 'F_322f9837': return <Files />;
       default: return <Dashboard />

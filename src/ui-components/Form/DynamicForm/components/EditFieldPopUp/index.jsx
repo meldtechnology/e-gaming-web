@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { FormFieldTypes } from "../FormFieldTypes";
 
-export const EditFieldPopUp = ({ openEdit, field, close }) => {
+export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
   const [fieldType, setFieldType] = useState('');
   const [label, setLabel] = useState('');
   const [hint, setHint] = useState('');
   const [required, setRequired] = useState(false);
 
   const updateFiled = () => {
-    console.log("field type ", fieldType);
-    console.log("label ", label);
-    console.log("hint ", hint);
-    console.log("required ", required);
+    field.fieldType = fieldType;
+    field.label = label;
+    field.hints = hint;
+    field.required = required;
+    return field;
   }
 
   const isRequired = (checked) => {
@@ -93,7 +94,7 @@ export const EditFieldPopUp = ({ openEdit, field, close }) => {
       <div className={`w-full flex p-4`}>
           <button type="button"
                   className={`w-full p-2 bg-black-900 text-white-a700 rounded-lg shadow-lg`}
-                  onClick={updateFiled} >
+                  onClick={() => update(updateFiled())} >
             Update
           </button>
       </div>

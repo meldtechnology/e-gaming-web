@@ -53,40 +53,44 @@ export const FormBuilderModal = ({ onClick, fileData }) => {
           <div
             className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
             <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
+              <div className="align-middle items-center text-center">
+                <span className="font-bold text-[36px] mt-1 text-[#939393]">Form Designer</span>
               <button type="button"
                       onClick={onClick}
-                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
-                <span className="min-w-full text-center">X</span>
-              </button>
-              <div style={{ display: (isError) ? "" : "none" }}>
-                <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
+                        className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                  <span className="min-w-full text-center">X</span>
+                </button>
               </div>
-              <div style={{ display: isSuccess ? "" : "none" }}>
-                <MeldAlert alertType={AlertType.SUCCESS} message={`Form Template update for ${name}`} show={isSuccess} />
+                <div style={{ display: (isError) ? "" : "none" }}>
+                  <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
+                </div>
+                <div style={{ display: isSuccess ? "" : "none" }}>
+                  <MeldAlert alertType={AlertType.SUCCESS} message={`Form Template update for ${name}`}
+                             show={isSuccess} />
+                </div>
               </div>
-            </div>
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
-                <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
-                  <div className="w-[720px] h-[800px] items-center overflow-y-scroll">
-                    <div className="align-middle items-center text-center">
-                      <span className="font-bold text-[24px] block mt-1">
-                        Form Designer for {fileObject?.name} -
-                        <span className="text-blue-600"> {fileObject?.code}</span>
+              <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
+                    <div className="w-[720px] h-[800px] items-center overflow-y-scroll">
+                      <div className="align-middle items-center text-center mb-4">
+                        <span className="font-bold text-[24px] block">{fileObject?.name}
+                          <span className="text-blue-600"> ({fileObject?.code})</span>
                       </span>
-                    </div>
-                    <hr />
-                    <div className="w-full">
-                      <div className="border-b border-slate-200">
-                        <div className={`${loadingTemplate? '':'hidden'}`}>
-                          <Loader />
-                        </div>
-                        <div className={`${loadingTemplate? 'hidden':''} w-[90%]`}>
-                          <TemplateForm className={`${loadingTemplate? 'hidden':''}`}
-                                        data={(!!(fileObject?.formTemplate)) ?
-                                          fileObject?.formTemplate : extractTemplate(template) }
-                                        saveTemplate={saveTemplate}
-                                        saving={saving}/>
+                      </div>
+                      <hr />
+                      <div className="w-full">
+                        <div className="border-b border-slate-200">
+                          <div className={`${loadingTemplate ? '' : 'hidden'}`}>
+                            <Loader />
+                          </div>
+                          <div className={`${loadingTemplate ? 'hidden' : ''} w-[95%]`}>
+                            <TemplateForm className={`${loadingTemplate ? 'hidden' : ''}`}
+                                          data={(!!(fileObject?.formTemplate)) ?
+                                            fileObject?.formTemplate : extractTemplate(template)}
+                                          saveTemplate={saveTemplate}
+                                          saving={saving} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -96,7 +100,6 @@ export const FormBuilderModal = ({ onClick, fileData }) => {
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-}
+      </>
+      );
+      }
