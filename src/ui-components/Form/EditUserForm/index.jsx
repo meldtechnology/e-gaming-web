@@ -100,7 +100,7 @@ export const EditUserForm = () => {
               </Button>
             </div>
           </div>
-          <div className={`${isLoading ? '' : 'hidden'}`}><Loader /></div>
+
           {/* Form data entry */}
           <div className="mb-[134px] bg-white-a700">
             <div>

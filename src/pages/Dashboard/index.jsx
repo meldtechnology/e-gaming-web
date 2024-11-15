@@ -5,10 +5,11 @@ import AgentProfile from "../../ui-components/AgentProfile";
 
 const data = [
   { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 100 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
+  { userName: "9jaBet", userEmail: "info@9jabet.com", userPrice: "NGN 600 K" },
+  { userName: "Betway", userEmail: "info.betway@betway.com", userPrice: "NGN 200 K" },
+  { userName: "BetKing", userEmail: "info@betking.com", userPrice: "NGN 200 K" },
+  { userName: "22Bet", userEmail: "info@22bet.com", userPrice: "NGN 200 K" },
+  { userName: "1xbet", userEmail: "info@1xbet.com", userPrice: "NGN 200 K" },
 ];
 
 export const Dashboard = () => {
@@ -21,38 +22,44 @@ export const Dashboard = () => {
             Analytics
           </Text>
           <div className="mx-5 flex flex-col items-center gap-9 self-stretch md:mx-0">
-            <div className="relative h-[188px] w-[46%] content-center md:h-auto">
+{/*             <div className="relative h-[188px] w-[46%] content-center md:h-auto"> */}
+            <div className="relative h-[188px] w-[74%] content-center md:h-auto">
               <div className="mx-auto flex flex-1 items-start">
                 <div className="flex flex-1 items-center">
                   <div className="flex flex-1 items-start justify-center">
                     <Img
                       src="/images/donut_blue.svg"
                       alt="Donut"
+/*                       className="h-[188px] w-[99px] flex-1 self-center rounded-[46px]" */
                       className="h-[188px] w-[99px] flex-1 self-center rounded-[46px]"
                     />
                     <Heading
                       size="headinglg"
                       as="h1"
-                      className="relative ml-[-49px] mt-[72px] text-[24px] font-bold text-gray-600 md:text-[22px]"
+/*                       className="relative ml-[-49px] mt-[72px] text-[24px] font-bold text-gray-600 md:text-[22px]" */
+                      className="relative ml-[-65px] mt-[72px] text-[24px] font-bold text-gray-600 md:text-[22px]"
                     >
-                      5.2
+                     5.2 
                     </Heading>
                   </div>
                   <Img
                     src="/images/img_mobile.svg"
                     alt="Mobile"
+/*                     className="relative ml-[-46px] h-[75px] w-[85px] self-end object-contain" */
                     className="relative ml-[-46px] h-[75px] w-[85px] self-end object-contain"
                   />
                 </div>
                 <Img
                   src="/images/img_subtract_black.svg"
                   alt="Subtractblack"
+/*                   className="relative ml-[-85px] h-[115px] w-[92px] object-contain" */
                   className="relative ml-[-85px] h-[115px] w-[92px] object-contain"
                 />
               </div>
               <Heading
                 as="h2"
-                className="absolute bottom-[39%] left-0 right-0 m-auto w-max text-[16px] font-bold text-gray-600"
+/*                 className="absolute bottom-[39%] left-0 right-0 m-auto w-max text-[16px] font-bold text-gray-600" */
+                className="absolute bottom-[39%] left-20 right-5 m-auto w-max text-[16px] font-bold text-gray-600"
               >
                 Licenses
               </Heading>
@@ -195,7 +202,12 @@ export const Dashboard = () => {
                       alt="Sep"
                       className="h-[160px] w-[10%] object-contain sm:w-full"
                     />
-                    <div className="h-[160px] w-[8px] flex-1 rounded bg-indigo-a200 sm:self-stretch sm:px-5" />
+                    <Img
+                      src="/images/img_jan.svg"
+                      alt="Oct"
+                      className="h-[160px] w-[10%] object-contain sm:w-full"
+                    />
+{/*                     <div className="h-[160px] w-[8px] flex-1 rounded bg-indigo-a200 sm:self-stretch sm:px-5" /> */}
                     <Img
                       src="/images/img_jan.svg"
                       alt="Nov"
@@ -208,9 +220,9 @@ export const Dashboard = () => {
                     />
                   </div>
                 </div>
-                <Text size="texts" as="p" className="mr-3 text-[14px] font-light text-gray-600 md:mr-0">
+{/*                  <Text size="texts" as="p" className="mr-3 text-[14px] font-light text-gray-600 md:mr-0"> 
                   Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec{" "}
-                </Text>
+                </Text> */}
               </div>
             </div>
           </div>
