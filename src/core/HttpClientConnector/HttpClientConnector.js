@@ -1,5 +1,12 @@
 import connection from 'axios';
 
+const postForm = async (url, payload) => {
+    return await connection.postForm(url, payload)
+      .catch(e => {
+          return {error: e?.response};
+      });
+}
+
 const post = async (url, payload, headers) => {
     return await connection.post(url, payload, headers)
       .catch(e => {
@@ -25,4 +32,4 @@ const remove = async (url, headers)  => {
       });
 }
 
-export { post, put, get, remove }
+export { postForm, post, put, get, remove }

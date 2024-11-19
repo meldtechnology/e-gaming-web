@@ -6,6 +6,7 @@ import { Profile } from "../../pages/Users/Profile";
 import { Documents } from "../../pages/Documents";
 import { Types } from "../../pages/Documents/Types";
 import { Files } from "../../pages/Documents/Files";
+import { DocumentFormBuilder } from "../../pages/Documents/DocumentFormBuilder";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -32,6 +33,7 @@ export const PagesRoute = ({ page, params }) => {
       case 'applications': return <Documents />;
       case 'T_46042b50': return <Types />;
       case 'F_322f9837': return <Files />;
+      case 'F_D5N2M19': return <DocumentFormBuilder />;
       default: return <Dashboard />
     }
 

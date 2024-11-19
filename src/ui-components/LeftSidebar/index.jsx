@@ -4,6 +4,7 @@ import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
 import { activeSelection, activeStatus, isItemSelected, MENU_ITEMS } from "../ActiveStatus";
 import { Link, useLocation } from "react-router-dom";
 
+
 export const LeftSidebar = ({ ...props }) => {
   const [collapsed, ] = useState(false);
   const location = useLocation();
@@ -116,7 +117,7 @@ export const LeftSidebar = ({ ...props }) => {
               Admin
             </Text>
           </div>
-          <Link to={'/'} >
+          <Link to={`/logout`} >
             <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
           </Link>
         </div>

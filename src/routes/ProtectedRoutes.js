@@ -39,6 +39,10 @@ const ProtectedRoutes = {
             element: <AppLayout />
         },
         {
+            path: 'documents/F_D5N2M19',
+            element: <AppLayout />
+        },
+        {
             path: 'applications',
             element: <AppLayout />
         },
