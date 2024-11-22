@@ -1,10 +1,10 @@
 import useSWR from "swr";
 import { GetCall as get } from "../../../core/ApiAdapter";
-import { headers } from "../../../core/httpHeaders/HttpHeaders";
+import { headerConfig as headers } from "../../../core/httpHeaders";
 
 export const GetAuthService = ( endpoint, delay ) => {
   const { data: resp, error, isLoading }
-    = useSWR([endpoint, headers], get, { refreshInterval: delay,
+    = useSWR([endpoint, headers()], get, { refreshInterval: delay,
       // revalidateIfStale: false,
       // revalidateOnFocus: false,
       // revalidateOnReconnect: false

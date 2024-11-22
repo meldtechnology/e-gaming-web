@@ -1,8 +1,9 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Img, Text, Heading } from './..';
 import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
 import { activeSelection, activeStatus, isItemSelected, MENU_ITEMS } from "../ActiveStatus";
 import { Link, useLocation } from "react-router-dom";
+import { getItem } from "../../services";
 
 
 export const LeftSidebar = ({ ...props }) => {
@@ -11,10 +12,17 @@ export const LeftSidebar = ({ ...props }) => {
   const [pathName, ] = useState(location.pathname
     .substring(location.pathname
       .lastIndexOf('/') + 1) );
+  const [user, setUser] = useState({});
 
   // const collapseSidebar = () => {
   //    setCollapsed(!collapsed)
   // }
+  const userName = (name) => {
+    return name.substring(0, 13);
+  }
+  useEffect(() => {
+    setUser(JSON.parse(getItem('profile')));
+  }, []);
 
   return (
     <Sidebar
@@ -105,16 +113,16 @@ export const LeftSidebar = ({ ...props }) => {
         <div
           className="ml-2 mr-2.5 mt-[264px] flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5">
           <Img
-            src="/images/img_rectangle_4163.png"
+            src={user?.profile?.profilePicture}
             alt="Image"
-            className="h-[66px] w-[30%] rounded-[10px] object-contain"
+            className="h-[66px] w-[30%] rounded-full object-contain"
           />
           <div className="flex flex-1 flex-col items-start">
             <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700">
-              Francis Oruno
+              {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
             </Text>
             <Text size="texts" as="p" className="text-[14px] font-light text-blue_gray-400">
-              Admin
+              {user?.profile?.settings?.role}
             </Text>
           </div>
           <Link to={`/logout`} >

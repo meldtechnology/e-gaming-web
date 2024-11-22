@@ -1,14 +1,18 @@
 import useSWR from "swr";
 import { GetCall as get } from "../../../core/ApiAdapter";
-import { headers } from "../../../core/httpHeaders/HttpHeaders";
+import { headerConfig as headers } from "../../../core/httpHeaders";
+import { useAuthenticateCheck } from "../../useAuthenticateCheck";
 
 export const GetUsersService = ( endpoint, delay ) => {
+  const { config } = headers();
   const { data: resp, error, isLoading }
-    = useSWR([endpoint, headers], get, { refreshInterval: delay,
+    = useSWR([endpoint, config], get, { refreshInterval: delay,
       // revalidateIfStale: false,
       // revalidateOnFocus: false,
       // revalidateOnReconnect: false
     });
+
+  useAuthenticateCheck(error);
 
   return {
     users: resp?.data,
