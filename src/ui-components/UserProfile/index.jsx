@@ -3,9 +3,18 @@ import { Heading } from "../Heading";
 import { Img } from "../Img";
 import { Text } from "../Text";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { getItem } from "../../services";
 export const UserProfile = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const userProfile = getItem('profile');
+    if(userProfile !== undefined) {
+      setUser(JSON.parse(userProfile));
+    }
+  }, []);
   return (
     <>
       <div>
@@ -43,13 +52,13 @@ export const UserProfile = () => {
           />
           <div className="flex flex-col items-start gap-2">
             <Heading size="headinglg" as="h2" className="text-[24px] font-bold text-black-900_01 md:text-[22px]">
-              Onyeka Chukwu
+              {user?.profile?.firstName} {user?.profile?.lastName}
             </Heading>
             <Heading as="h3" className="text-[16px] font-bold text-black-900_01">
-              STANDARD User
+              {user?.profile?.settings?.role} User
             </Heading>
             <Heading size="headingmd" as="h4" className="text-[20px] font-bold text-light_blue-a700">
-              aliu.musa@yopmail.com
+              {user?.username}
             </Heading>
           </div>
         </div>
@@ -70,10 +79,10 @@ export const UserProfile = () => {
           </div>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-5 self-stretch">
             <Heading size="headingmd" as="h3" className="mb-1.5 text-[20px] font-bold text-gray-600">
-              Onyeka
+              {user?.profile?.firstName}
             </Heading>
-            <Heading size="headingmd" as="h4" className="mr-[396px] self-end text-[20px] font-bold text-gray-600">
-              Chukwu
+            <Heading size="headingmd" as="h4" className="mr-[400px] self-end text-[20px] font-bold text-gray-600">
+              {user?.profile?.lastName}
             </Heading>
           </div>
           <div className="mt-[46px] flex flex-wrap items-center justify-between gap-5 self-stretch">
@@ -84,19 +93,19 @@ export const UserProfile = () => {
               Phone
             </Text>
           </div>
-          <div className="mt-3 flex flex-wrap justify-between gap-5 self-stretch">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-5 self-stretch">
             <Heading size="headingmd" as="h5" className="text-[20px] font-bold text-gray-600">
-              aliu.musa@yopmail.com
+              {user?.profile?.email}
             </Heading>
-            <Heading size="headingmd" as="h6" className="mr-[306px] text-[20px] font-bold text-gray-600">
-              +23480142669988
+            <Heading size="headingmd" as="h6" className="mr-[346px] text-[20px] font-bold text-gray-600">
+              {user?.profile?.phoneNumber}
             </Heading>
           </div>
           <Text size="textlg" as="p" className="mt-[62px] text-[20px] font-normal text-gray-600">
             Role
           </Text>
           <Heading size="headingmd" as="h5" className="mb-[42px] mt-3 text-[20px] font-bold text-gray-600">
-            STANDARD
+            {user?.profile?.settings?.role}
           </Heading>
         </div>
       </div>

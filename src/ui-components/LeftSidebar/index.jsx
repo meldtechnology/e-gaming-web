@@ -118,8 +118,10 @@ export const LeftSidebar = ({ ...props }) => {
             className="h-[66px] w-[30%] rounded-full object-contain"
           />
           <div className="flex flex-1 flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700">
-              {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
+            <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
+              <Link to={`/app/users/profile`} >
+                {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
+              </Link>
             </Text>
             <Text size="texts" as="p" className="text-[14px] font-light text-blue_gray-400">
               {user?.profile?.settings?.role}
