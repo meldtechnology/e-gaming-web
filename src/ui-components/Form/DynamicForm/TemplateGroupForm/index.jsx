@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { ComponentSelector } from "../ComponentSelector";
 import { createGroup, createFormField } from "../../../../services/model";
-import { EditFieldPopUp, InputText } from "../components";
+import { EditFieldPopUp } from "../components";
 import { ProgressButton } from "../../component/ProgressButton";
 import { extractGroupWithId } from "../../../../services/extractRow";
+import { EditGroupPopUp } from "../components/EditGroupPopUp";
 
 export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
   const [container, setContainer] = useState([]);
-  const [openGroup, setOpenGroup] = useState(false);
+  const [openGroup, setOpenGroup] = useState('');
   const [openField, setOpenField] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groupId, setGroupId] = useState('');
   const [fieldSelected, setFieldSelected] = useState({});
 
   const openModal = (selectedGroup) => {
-    setOpenGroup(!openGroup);
+    setOpenGroup(selectedGroup);
     setGroupId(selectedGroup);
   }
 
@@ -72,7 +73,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
       return item;
     }));
     setGroupName('');
-    setOpenGroup(!openGroup);
+    setOpenGroup('');
   }
 
   useEffect(() => {
@@ -96,19 +97,10 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
           <span className="font-bold text-blue-600 text-2xl mb-2 mt-6">
             {comp?.headerTitle}
           </span>
-          <div
-            className={`${openGroup ? '' : 'hidden'} flex absolute z-10 p-4 left-0 font-sans text-sm font-normal break-words whitespace-normal bg-white-a700 border rounded-lg shadow-lg w-[60%] border-blue-gray-50 text-blue-gray-500 shadow-blue-gray-500/10 focus:outline-none data-[enter]:ease-out data-[leave]:ease-in`}>
-            <InputText name={groupName}
-                       value={groupName}
-                       label={`Group Title`}
-                       required={true}
-                       onChange={(e) => setGroupName(e.target.value)} />
-            <button type="button"
-                    className="ml-4 bg-blue_gray-900 text-white-a700 px-1 rounded-lg h-[3rem]"
-                    onClick={editControl}>
-              Update
-            </button>
-          </div>
+          <EditGroupPopUp openGroup={openGroup === comp.groupId}
+                          groupName={groupName}
+                          updateGroupName={setGroupName}
+                          editControl={editControl} />
           <span className="float-right py-4 overflow-hidden block ">
             <button type="button"
                     className="mr-2 bg-blue_gray-900 p-1 rounded-b-xl rounded-t-xl"

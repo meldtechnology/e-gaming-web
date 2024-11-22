@@ -1,1 +1,1 @@
-export { post, put, get, remove } from './HttpClientConnector';
+export { postForm, post, put, get, remove } from './HttpClientConnector';

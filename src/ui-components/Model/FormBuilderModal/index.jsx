@@ -102,4 +102,4 @@ export const FormBuilderModal = ({ onClick, fileData }) => {
         </div>
       </>
       );
-      }
+}

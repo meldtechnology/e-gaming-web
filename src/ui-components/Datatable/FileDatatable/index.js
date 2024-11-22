@@ -1,29 +1,19 @@
 import { Loader } from "../../Loader";
-import { unitTens } from "../../../services";
-import { Model } from "../../Model";
-import { FormBuilderModal } from "../../Model/FormBuilderModal";
-import { useEffect, useState } from "react";
+import { storeItem, unitTens } from "../../../services";
+import { useNavigate } from "react-router-dom";
 
 export const FileDatatable = ({ columnHeader, data, pageInfo, nextPage, previousPage, isLoading, updateFile }) => {
-  const [open, setOpen] = useState('invisible');
-  const [isOpen, setIsOpen] = useState(false);
-  const [fileData, setFileData] = useState([]);
+  const navigate = useNavigate();
 
-  const openModal = () => {
-    setIsOpen(!isOpen);
-  }
+
   const setSelectedFile = (selectedFile) => {
-    setFileData([selectedFile]);
-    openModal();
+    storeItem('rhData', JSON.stringify(selectedFile));
+    navigate('/app/documents/F_D5N2M19');
   }
 
   const refreshPage = () => {
     window.location.reload();
   }
-
-  useEffect(() => {
-    setOpen(isOpen ? 'visible' : 'invisible');
-  }, [isOpen, open]);
 
   return (
     <div
@@ -157,10 +147,6 @@ export const FileDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
           </button>
         </div>
       </div>
-      <Model isOpen={open}
-             modal={<FormBuilderModal
-               onClick={openModal}
-               fileData={fileData} />} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import { Index } from "../pages/NotFound";
+import { NotFound } from "../pages/public/NotFound";
 
 const UnavailableRoutes = {
   path: "*",
-  element: <Index />
+  element: <NotFound />
 }
 
 export default UnavailableRoutes
