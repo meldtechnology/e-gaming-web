@@ -4,8 +4,15 @@ import { Field, Form, Formik } from "formik";
 import { Heading } from "../../Heading";
 import { Button } from "@headlessui/react";
 import { Img } from "../../Img";
-import { GetUsersService as getUserProfile } from "../../../services";
+import {
+  getItem,
+  UpdateUserService as updateProfile,
+  UploadDocumentService as uploadDocument
+} from "../../../services";
 import { Loader } from "../../Loader";
+import { ProgressButton } from "../component/ProgressButton";
+import { MeldAlert } from "../../Alerts";
+import { AlertType } from "../../Alerts/AlertType";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -16,7 +23,7 @@ const SignupSchema = Yup.object().shape({
     .min(2, 'Last Name is not valid! minimum is 2!')
     .max(50, 'Last name is not valid! maximum is 30')
     .required('Last Name is Required'),
-  phone: Yup.string()
+  phoneNumber: Yup.string()
     .min(10, 'Invalid Phone/Mobile number not complete')
     .max(14, 'Invalid Phone/Mobile number more than required')
     .required('Phone/Mobile is Required'),
@@ -25,41 +32,84 @@ const SignupSchema = Yup.object().shape({
   // userRole: Yup.string().required('User Role is Required')
 });
 
+const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
 const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
 export const EditUserForm = () => {
-  const [open, setOpen] = useState('invisible');
-  const [isOpen, setIsOpen] = useState(false);
-  const { users, isLoading, isError }
-    = getUserProfile(USER_PROFILES_URL);
+  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [profilePic, setProfilePics] = useState(user?.profile?.profilePicture);
+  const [saving, setSaving] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const { modifyPost } = updateProfile(USER_PROFILES_URL);
+  const { uploadDoc,  } = uploadDocument(UPLOAD_DOCUMENT_URL);
 
-  const [initialValues, setInitialValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+  const initialValues = {
+    firstName: user?.profile?.firstName,
+    lastName: user?.profile?.lastName,
+    email: user?.profile?.email,
+    phoneNumber: user?.profile?.phoneNumber,
     profilePicture: '',
-    // userRole:''
-  });
+  }
 
-  // formik.setFieldValue('query_string', active?.query);
+  const updateUser = async (values) => {
+    setSaving(true);
+    values.profilePicture = profilePic;
+    const result = await modifyPost({ profile: { ...values } });
+    setSaving(false);
+    if(result?.error !== undefined){
+      setIsError(true);
+      setErrorMsg(result?.error?.data?.userMessage);
+    }
+    else {
+      setIsSuccess(true);
+    }
+    closeAlert(10000);
+  }
 
-  // const openModal = () => {
-  //   setIsOpen(!isOpen);
-  //   setOpen(isOpen ? 'visible' : 'invisible');
-  // }
+  const onUpload = (e) => {
+    if(e.currentTarget.files[0].size > (1024 * 100)) {
+      setIsError(true);
+      setErrorMsg('Image size is bigger than 100 kb')
+      closeAlert(10000);
+      return;
+    }
+    setUploading(true);
+    const uploadData = new FileReader();
+    uploadData.readAsDataURL(e.currentTarget.files[0]);
+    uploadData.addEventListener('load', () => {
+      uploadFile(uploadData.result);
+    });
+  }
 
-  // if (isError) return <MeldAlert alertType={AlertType.ERROR}
-  //                                message={"Sorry Users profile could not be retrieved. Please try again later"} />
+  const uploadFile = async ( base64File ) => {
+    const result = await uploadDoc({ base64Image: base64File, resourceType: 'image' });
+    if(result?.error !== undefined){
+      setIsError(true);
+      setErrorMsg('Your Upload could not be completed. Please contact support');
+    }
+    else setProfilePics(result?.data?.data?.resourceUrl);
+    setUploading(false);
+  }
+
+  const closeAlert = (duration) => {
+    setTimeout(()=> {
+      setIsError(false);
+      setIsSuccess(false);
+    }, duration);
+  }
 
   useEffect(() => {
-    setInitialValues({
-      firstName: users?.data?.profile?.firstName,
-      lastName: users?.data?.profile?.lastName,
-      email: users?.data?.profile?.email,
-      phone: users?.data?.profile?.phoneNumber,
-      profilePicture: users?.data?.profile?.profilePicture,
-    });
-  }, [users]);
+    const userProfile = getItem('profile');
+    setIsLoading(true);
+    if(userProfile !== undefined) {
+      setUser(JSON.parse(userProfile));
+    }
+    setIsLoading(false);
+  }, []);
+
   return (
     <Formik
       initialValues={initialValues}
@@ -67,7 +117,7 @@ export const EditUserForm = () => {
       enableReinitialize={true}
       onSubmit={values => {
         // same shape as initial values
-        console.log(values);
+        updateUser(values);
       }}
     >
       {({ errors, touched, dirty, isValid }) => (
@@ -92,11 +142,12 @@ export const EditUserForm = () => {
               <Button
                 shape="round"
                 disabled={!(dirty && isValid)}
-                className={`min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
+                className={`${saving?'hidden':''} min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
                 type='submit'
               >
                 Save
               </Button>
+              <ProgressButton saving={saving} />
             </div>
           </div>
           <div className={`${isLoading ? '' : 'hidden'}`}><Loader /></div>
@@ -158,12 +209,12 @@ export const EditUserForm = () => {
                   Phone/Mobile
                 </Heading>
                 <div className="w-[64%] h-[48px]">
-                  <Field name="phone"
+                  <Field name="phoneNumber"
                          placeholder={`00000000000`}
                          className="w-[64%] h-[48px] gap-2 rounded-[10px] border border-gray-500 px-2.5 md:w-full"
                   />
                   <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
-                    {errors.phone && touched.phone ? (errors.phone) : null}
+                    {errors.phoneNumber && touched.phoneNumber ? (errors.phoneNumber) : null}
                   </p>
                 </div>
               </div>
@@ -176,13 +227,13 @@ export const EditUserForm = () => {
               <div
                 className="flex w-[80%] items-start justify-end gap-28 self-center pl-[76px] py-1 md:w-full md:flex-col md:gap-5 sm:px-5">
                 <Img
-                  src="/images/img_ellipse_210.png"
+                  src={profilePic}
                   alt="Image"
                   className="h-[92px] w-[92px] rounded-[46px] object-cover md:w-full"
                 />
-                <Field name="profilePicture" hidden />
+                <Field name="profilePicture"  value={profilePic} hidden />
                 <div
-                  className="my-1 flex w-[60%] flex-col items-start self-center rounded-[10px] bg-gray-50_01 py-2.5 pl-[76px] pr-14 md:my-0 md:w-full md:px-5">
+                  className={`my-1 flex w-[60%] ${!uploading? '' : 'hidden'} flex-col items-start self-center rounded-[10px] bg-gray-50_01 py-2.5 pl-[76px] pr-14 md:my-0 md:w-full md:px-5`}>
                   <button type='button'
                           className="relative z-[1] ml-[30%] h-[72px] w-[72px] md:ml-0"
                           onClick={(e) => {
@@ -193,14 +244,11 @@ export const EditUserForm = () => {
                       alt="Uploadduotone"
                       className="relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0"
                     />
-                    <input id='upload-file'
-                           type='file'
-                           name='profilePicture'
+                    <input id="upload-file"
+                           type="file"
+                           name="profilePicture"
                            hidden
-                           onChange={(e) => {
-                             console.log(e.target.value);
-                             console.log(e.currentTarget.files[0]);
-                           }} />
+                           onChange={onUpload} />
                   </button>
                   <Heading
                     as="h6"
@@ -216,8 +264,13 @@ export const EditUserForm = () => {
                     </span>
                   </Heading>
                 </div>
+                <div className={`my-1 flex w-[60%] ${!uploading? 'hidden' : ''} flex-col items-start self-center`}>
+                  <Loader />
+                </div>
               </div>
             </div>
+            <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
+            <MeldAlert alertType={AlertType.SUCCESS} message={'Profile Updated!'} show={isSuccess} />
           </div>
         </Form>
       )}
