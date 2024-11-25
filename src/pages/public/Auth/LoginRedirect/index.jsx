@@ -1,4 +1,4 @@
-import { GetAuthService  as getAuth } from "../../../../services";
+import { GetAuthService as getAuth, removeAll } from "../../../../services";
 import { Main } from "../../../../mui/layouts";
 import Box from "@mui/material/Box";
 import { Loader } from "../../../../ui-components/Loader";
@@ -8,8 +8,8 @@ const AUTHORIZE_URL = process.env.REACT_APP_AUTHORIZE_URL;
 export const LoginRedirect = () => {
   const { auth, isLoading } = getAuth(AUTHORIZE_URL);
 
-  console.log(auth);
   useEffect(() => {
+    removeAll();
     if(auth) window.location.replace(auth);
   }, [auth]);
 

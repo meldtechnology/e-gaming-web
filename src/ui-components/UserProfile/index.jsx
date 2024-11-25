@@ -3,26 +3,18 @@ import { Heading } from "../Heading";
 import { Img } from "../Img";
 import { Text } from "../Text";
 import { useNavigate } from "react-router-dom";
-import { GetUsersService as getMetricsService } from "../../services";
-import { Loader } from "../Loader";
-import { MeldAlert } from "../Alerts";
-import { AlertType } from "../Alerts/AlertType";
-
-const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
-
+import { useEffect, useState } from "react";
+import { getItem } from "../../services";
 export const UserProfile = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState({});
 
-  const { users, isLoading, isError }
-  = getMetricsService(`${USER_PROFILES_URL}`);
-
-if (isLoading) return ( <Loader /> );
-
-if (isError) return <MeldAlert alertType={AlertType.ERROR}
-                               message={"Sorry User profile could not be retrieved. Please try again later"} />
-
-  console.log("users data", users );
-
+  useEffect(() => {
+    const userProfile = getItem('profile');
+    if(userProfile !== undefined) {
+      setUser(JSON.parse(userProfile));
+    }
+  }, []);
   return (
     <>
       <div>
@@ -54,19 +46,19 @@ if (isError) return <MeldAlert alertType={AlertType.ERROR}
         <div
           className="flex items-start justify-left gap-7 bg-white-a700 border-b border-solid border-blue_gray-400 p-[22px] sm:flex-col sm:p-5">
           <Img
-           src={users?.data?.profile?.profilePicture}
+           src={user?.profile?.profilePicture}
             alt="Image"
             className="mb-[18px] h-[128px] w-[128px] rounded-[64px] object-cover sm:w-full"
           />
           <div className="flex flex-col items-start gap-2">
             <Heading size="headinglg" as="h2" className="text-[24px] font-bold text-black-900_01 md:text-[22px]">
-              {users?.data?.profile?.firstName} {users?.data?.profile?.lastName}
+              {user?.profile?.firstName} {user?.profile?.lastName}
             </Heading>
             <Heading as="h3" className="text-[16px] font-bold text-black-900_01">
-            {users?.data?.profile?.settings?.role}
+              {user?.profile?.settings?.role} User
             </Heading>
             <Heading size="headingmd" as="h4" className="text-[20px] font-bold text-light_blue-a700">
-              {users?.data?.profile?.email}
+              {user?.username}
             </Heading>
           </div>
         </div>
@@ -87,10 +79,10 @@ if (isError) return <MeldAlert alertType={AlertType.ERROR}
           </div>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-5 self-stretch">
             <Heading size="headingmd" as="h3" className="mb-1.5 text-[20px] font-bold text-gray-600">
-              {users?.data?.profile?.firstName}
+              {user?.profile?.firstName}
             </Heading>
-            <Heading size="headingmd" as="h4" className="mr-[360px] self-end text-[20px] font-bold text-gray-600">
-              {users?.data?.profile?.lastName}
+            <Heading size="headingmd" as="h4" className="mr-[400px] self-end text-[20px] font-bold text-gray-600">
+              {user?.profile?.lastName}
             </Heading>
           </div>
           <div className="mt-[46px] flex flex-wrap items-center justify-between gap-5 self-stretch">
@@ -101,19 +93,19 @@ if (isError) return <MeldAlert alertType={AlertType.ERROR}
               Phone
             </Text>
           </div>
-          <div className="mt-3 flex flex-wrap justify-between gap-5 self-stretch">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-5 self-stretch">
             <Heading size="headingmd" as="h5" className="text-[20px] font-bold text-gray-600">
-              {users?.data?.profile?.email}
+              {user?.profile?.email}
             </Heading>
-            <Heading size="headingmd" as="h6" className="mr-[306px] text-[20px] font-bold text-gray-600">
-              {users?.data?.profile?.phoneNumber}
+            <Heading size="headingmd" as="h6" className="mr-[346px] text-[20px] font-bold text-gray-600">
+              {user?.profile?.phoneNumber}
             </Heading>
           </div>
           <Text size="textlg" as="p" className="mt-[62px] text-[20px] font-normal text-gray-600">
             Role
           </Text>
           <Heading size="headingmd" as="h5" className="mb-[42px] mt-3 text-[20px] font-bold text-gray-600">
-            {users?.data?.profile?.settings?.role}
+            {user?.profile?.settings?.role}
           </Heading>
         </div>
       </div>

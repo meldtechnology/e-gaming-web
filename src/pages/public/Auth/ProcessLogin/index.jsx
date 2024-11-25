@@ -25,7 +25,7 @@ export const ProcessLogin = () => {
       else {
           storeItem('at', getAccessTokenData?.data?.data?.access_token);
           storeItem('rt', getAccessTokenData?.data?.data?.refresh_token);
-          navigate('/app');
+          navigate('/complete/login', {replace: true});
       }
       setIsLoading(false);
     }
@@ -37,8 +37,11 @@ export const ProcessLogin = () => {
     <Main showFooter={false}>
       <Box width={1} height={1}>
         <Box width={0.5}
-             className={`my-[25%] mx-auto ${isLoading? '' : 'hidden'}`}>
-          <Loader h={'h-16'} w={'w-16'}/>
+             className={`my-[25%] mx-auto ${isLoading ? '' : 'hidden'}`}>
+          <Loader h={'h-16'} w={'w-16'} />
+          <p className="text-blue-600 text-center text-[16px]">
+            Finalizing sign in...
+          </p>
         </Box>
       </Box>
     </Main>

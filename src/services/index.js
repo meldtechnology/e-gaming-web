@@ -14,4 +14,5 @@ export { unitTens } from './unitTens';
 export { storeItem, getItem, removeItem, removeAll } from './secureLocalStorage';
 export { GetAuthService, CreateAuthService } from './authentication';
 export { loginData } from './loginData';
+export { useAuthenticateCheck } from './useAuthenticateCheck';
 

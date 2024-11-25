@@ -1,13 +1,15 @@
-import { headers } from "../../../core/httpHeaders/HttpHeaders";
+import { headerConfig as headers } from "../../../core/httpHeaders";
 import { PutCall as put } from "../../../core/ApiAdapter";
 import useSWRMutation from "swr/mutation";
+import { useAuthenticateCheck } from "../../useAuthenticateCheck";
 
 export const UpdateUserService = ( endpoint, delay ) => {
+  const { config } = headers();
   let { trigger, data: resp, error: err }
-    = useSWRMutation([endpoint, headers], put, {refreshInterval: delay});
+    = useSWRMutation([endpoint, config], put, {refreshInterval: delay});
 // Check if an error occurred and was returned.
   if(resp?.error !== undefined) err = resp?.error;
-
+  useAuthenticateCheck(err);
   return {
     modifyPost: trigger,
     update: resp?.data,
