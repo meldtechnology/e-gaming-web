@@ -9,72 +9,45 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useTheme } from '@mui/material/styles';
-import { formatAmount, GetPublicFileService as getFiles, storeItem } from "../../../../../../services";
-import { Link, useNavigate } from "react-router-dom";
+import { formatAmount, GetPublicFileService as getFiles } from "../../../../../../services";
 
 const mock = [
   {
-    media: 'https://assets.maccarianagency.com/backgrounds/img37.png',
-    title: 'Music player',
-    price: '₦320,000,000',
-  },
-  {
     media: 'https://assets.maccarianagency.com/backgrounds/img38.png',
     title: 'Headphones',
-    price: '₦450',
+    price: '$450',
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img39.png',
     title: 'Wireless headpohones',
-    price: '₦280',
+    price: '$280',
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img40.png',
     title: 'Bluetooth headphones',
-    price: '₦300',
+    price: '$300',
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img41.png',
     title: 'Headphones',
-    price: '₦280',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img42.png',
-    title: 'Music player',
-    price: '₦340',
+    price: '$280',
   },
 ];
 
-const FILES_URL = process.env.REACT_APP_DOCUMENT_FILE_PUBLIC_URL;
-const Products = () => {
+const FILTER_FILES_URL = process.env.REACT_APP_DOCUMENT_FILTER_FILE_PUBLIC_URL;
+const LatestProducts = ({operatorType}) => {
   const theme = useTheme();
   const [products, setProduct] = useState([]);
-  const { documents } = getFiles(`${FILES_URL}?page=1&size=6`);
-  const navigate = useNavigate();
-
-
-  const selectPermit = (selectedPermit) => {
-    storeItem('permit', JSON.stringify(selectedPermit));
-    navigate('/apply/operator/form');
-  }
+  const [page, ] = useState(1);
+  const { documents } = getFiles(`${FILTER_FILES_URL}?page=${page}&size=10&categoryFilter=${operatorType}`);
 
   useEffect(() => {
     if(documents !== null) setProduct(documents?.data?.results)
   }, [documents]);
+
   return (
     <Box>
       <Box marginBottom={4}>
-        {/*<Typography*/}
-        {/*  sx={{*/}
-        {/*    textTransform: 'uppercase',*/}
-        {/*    fontWeight: 'medium',*/}
-        {/*  }}*/}
-        {/*  gutterBottom*/}
-        {/*  color={'secondary'}*/}
-        {/*  align={'center'}*/}
-        {/*>*/}
-        {/*  Products*/}
-        {/*</Typography>*/}
         <Typography
           variant="h4"
           align={'center'}
@@ -84,7 +57,7 @@ const Products = () => {
             fontWeight: 700,
           }}
         >
-          Featured gaming applications
+          The {operatorType} application types
         </Typography>
         <Typography
           variant="h6"
@@ -92,17 +65,8 @@ const Products = () => {
           color={'text.secondary'}
           data-aos={'fade-up'}
         >
-          Experience your license or permit application and approval as never before.
-          Pay with ease by getting your invoice online.
+          Pick your desired proprietor permit/license type from the available list.
         </Typography>
-        <Box display="flex" justifyContent={'center'} marginTop={2} >
-          <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d] !mr-4"}>
-            <Link to={`/apply/operator/Proprietor`}>View all for Proprietor</Link>
-          </Button>
-          <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d]"}>
-            <Link to={`/apply/operator/Agent`}>View all for Agent</Link>
-          </Button>
-        </Box>
       </Box>
       <Grid container spacing={4}>
         {products?.map((item, i) => (
@@ -110,7 +74,7 @@ const Products = () => {
             item
             xs={12}
             sm={6}
-            md={4}
+            md={3}
             key={i}
             data-aos={'fade-up'}
             data-aos-delay={i * 100}
@@ -169,7 +133,7 @@ const Products = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="#18801d"
+                        stroke="currentColor"
                         width={20}
                         height={20}
                         color={'secondary.main'}
@@ -204,18 +168,18 @@ const Products = () => {
                     </Box>
                   </Box>
                   <CardActions sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontWeight: 700 }} color={'#FE0000'}>
+                    <Typography sx={{ fontWeight: 700 }} color={'primary'}>
                       ₦ {`${formatAmount(item?.value)} ${item?.feeType?.includes('FLAT')? '' : '% of Revenue'}`}
                     </Typography>
                     <Button
-                      variant={'outlined'}
-                      className={`!border-solid !border-[#18801d] !bg-[#18801d] !text-white-a700`}
+                      variant={'contained'}
+                      className={`!bg-[#18801d]`}
                       startIcon={
                         <Box
                           component={'svg'}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
-                          fill="#FFFFFF"
+                          fill="currentColor"
                           width={20}
                           height={20}
                         >
@@ -227,7 +191,6 @@ const Products = () => {
                           <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                         </Box>
                       }
-                      onClick={(e)=>selectPermit((item))}
                     >
                       Apply
                     </Button>
@@ -242,4 +205,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default LatestProducts;

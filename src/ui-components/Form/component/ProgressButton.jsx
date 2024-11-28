@@ -1,6 +1,6 @@
-export const ProgressButton = ({saving, position}) => (
+export const ProgressButton = ({saving, position, width}) => (
   <button disabled type="button"
-          className={`py-2.5 px-5 me-2 ${saving ? '' : 'hidden'} text-sm font-medium text-white-a700 bg-[#707073] rounded-lg border border-gray-200 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center ${position? position : ''}`}>
+          className={`py-2.5 px-5 me-2 ${saving ? '' : 'hidden'} ${width? width : ''} text-sm font-medium text-white-a700 bg-[#707073] rounded-lg border border-gray-200 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center ${position? position : ''} `}>
     <svg aria-hidden="true" role="status"
          className="inline w-4 h-4 me-3 text-gray-200 animate-spin dark:text-gray-600"
          viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import { Link } from "react-router-dom";
 const Hero = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -56,7 +57,9 @@ const Hero = () => {
               marginTop={2}
               className={`!bg-[#18801d] hover:bg-[#0f6b14]`}
             >
-              See gaming applications
+              <Link to={`/apply/operator/Proprietor`}>
+                See gaming Permits
+              </Link>
             </Box>
           </Box>
           <Box
