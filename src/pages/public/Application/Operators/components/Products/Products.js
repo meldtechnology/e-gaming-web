@@ -9,8 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useTheme } from '@mui/material/styles';
-import { formatAmount, GetPublicFileService as getFiles, storeItem } from "../../../../../../services";
-import { Link, useNavigate } from "react-router-dom";
+import { formatAmount, GetPublicFileService as getFiles } from "../../../../../../services";
 
 const mock = [
   {
@@ -50,13 +49,6 @@ const Products = () => {
   const theme = useTheme();
   const [products, setProduct] = useState([]);
   const { documents } = getFiles(`${FILES_URL}?page=1&size=6`);
-  const navigate = useNavigate();
-
-
-  const selectPermit = (selectedPermit) => {
-    storeItem('permit', JSON.stringify(selectedPermit));
-    navigate('/apply/operator/form');
-  }
 
   useEffect(() => {
     if(documents !== null) setProduct(documents?.data?.results)
@@ -97,10 +89,10 @@ const Products = () => {
         </Typography>
         <Box display="flex" justifyContent={'center'} marginTop={2} >
           <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d] !mr-4"}>
-            <Link to={`/apply/operator/Proprietor`}>View all for Proprietor</Link>
+            View all for Proprietor
           </Button>
           <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d]"}>
-            <Link to={`/apply/operator/Agent`}>View all for Agent</Link>
+            View all for Agent
           </Button>
         </Box>
       </Box>
@@ -227,7 +219,6 @@ const Products = () => {
                           <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                         </Box>
                       }
-                      onClick={(e)=>selectPermit((item))}
                     >
                       Apply
                     </Button>
