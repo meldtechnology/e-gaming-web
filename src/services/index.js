@@ -5,7 +5,8 @@ export { GetDocumentService,
   GetCyclesService,
   GetFeeTypeService,
   GetTypeService,
-  GetFormTemplateService } from './document';
+  GetFormTemplateService,
+  GetPublicFileService } from './document';
 export { UploadDocumentService } from './UploadDocumentService';
 export { passwordGenerator } from './passworGenerator';
 export { GetRolesService } from './GetRolesService';
@@ -15,4 +16,5 @@ export { storeItem, getItem, removeItem, removeAll } from './secureLocalStorage'
 export { GetAuthService, CreateAuthService } from './authentication';
 export { loginData } from './loginData';
 export { useAuthenticateCheck } from './useAuthenticateCheck';
+export { formatAmount } from './formatAmount';
 

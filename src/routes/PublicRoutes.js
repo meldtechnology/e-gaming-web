@@ -7,6 +7,7 @@ import { LoginRedirect } from "../pages/public/Auth/LoginRedirect";
 import { ProcessLogin } from "../pages/public/Auth/ProcessLogin";
 import { ProfileAccount } from "../pages/public/Auth/ProfileAccount";
 import { EmailVerify } from "../pages/public/EmailVerify";
+import { General } from "../pages/public/Application";
 
 const PublicRoutes = {
     path: '/',
@@ -40,6 +41,10 @@ const PublicRoutes = {
         {
             path: '/verify/email/otp',
             element: <EmailVerify />
+        },
+        {
+            path: '/apply',
+            element: <General />
         },
     ]
 }
