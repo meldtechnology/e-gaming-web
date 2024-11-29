@@ -260,7 +260,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         <DemoContainer components={['DatePicker']}>
           <DatePicker label={label}
                       name={name}
-                      onChange={(e)=> formik.setFieldValue(name, e.toISOString())}
+                      onChange={(e)=> formik.setFieldValue(name, e.format("YYYY-MM-D"))}
                       required={required}
                       onInvalid={(e) => inValid(e, errMsg)}
                       onInput={valid}
