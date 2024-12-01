@@ -9,7 +9,8 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useTheme } from '@mui/material/styles';
-import { formatAmount, GetPublicFileService as getFiles } from "../../../../../../services";
+import { formatAmount, GetPublicFileService as getFiles, removeAll, storeItem } from "../../../../../../services";
+import { useNavigate } from "react-router-dom";
 
 const mock = [
   {
@@ -39,10 +40,17 @@ const LatestProducts = ({operatorType}) => {
   const theme = useTheme();
   const [products, setProduct] = useState([]);
   const [page, ] = useState(1);
+  const navigate = useNavigate();
   const { documents } = getFiles(`${FILTER_FILES_URL}?page=${page}&size=10&categoryFilter=${operatorType}`);
 
+  const selectPermit = (selectedPermit) => {
+    storeItem('permit', JSON.stringify(selectedPermit));
+    navigate('/apply/operator/verification');
+  }
+
   useEffect(() => {
-    if(documents !== null) setProduct(documents?.data?.results)
+    if(documents !== null) setProduct(documents?.data?.results);
+    removeAll();
   }, [documents]);
 
   return (
@@ -191,6 +199,7 @@ const LatestProducts = ({operatorType}) => {
                           <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                         </Box>
                       }
+                      onClick={(e) => selectPermit(item)}
                     >
                       Apply
                     </Button>

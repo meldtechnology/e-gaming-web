@@ -7,7 +7,7 @@ import { LoginRedirect } from "../pages/public/Auth/LoginRedirect";
 import { ProcessLogin } from "../pages/public/Auth/ProcessLogin";
 import { ProfileAccount } from "../pages/public/Auth/ProfileAccount";
 import { EmailVerify } from "../pages/public/EmailVerify";
-import { General, Operators } from "../pages/public/Application";
+import { General, Operators, Verification } from "../pages/public/Application";
 import { Form } from "../pages/public/Application/Form";
 
 const PublicRoutes = {
@@ -54,6 +54,10 @@ const PublicRoutes = {
         {
             path: '/apply/operator/form',
             element: <Form />
+        },
+        {
+            path: '/apply/operator/verification',
+            element: <Verification />
         },
     ]
 }

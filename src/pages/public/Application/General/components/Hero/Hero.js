@@ -41,13 +41,6 @@ const Hero = () => {
             <Typography variant="h6" component="p" color="text.secondary">
               Apply for Casino, lottery, sport betting, pools betting and raffles:
             </Typography>
-            {/*<Typography*/}
-            {/*  variant="h3"*/}
-            {/*  color="text.primary"*/}
-            {/*  sx={{ fontWeight: 700, color: colors.red[400] }}*/}
-            {/*>*/}
-            {/*  $299.95*/}
-            {/*</Typography>*/}
             <Box
               component={Button}
               variant="contained"
