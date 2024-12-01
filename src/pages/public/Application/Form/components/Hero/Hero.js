@@ -3,8 +3,11 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { getItem } from "../../../../../../services";
+import { getItem, GetPublicFileService as generateReference } from "../../../../../../services";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../../../ui-components/Loader";
+
+const APPLICATION_REFERENCE_URL = process.env.REACT_APP_GENERATE_DOCUMENT_REFERENCE_URL;
 const Hero = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -12,6 +15,7 @@ const Hero = () => {
   });
   const [operator, setOperator] = useState({});
   const navigate = useNavigate();
+  const { documents, isLoading} = generateReference(APPLICATION_REFERENCE_URL);
 
   useEffect(() => {
     const verified = getItem('operator');
@@ -26,13 +30,27 @@ const Hero = () => {
          justifyContent={'space-between'}
          width={1}
         >
-      <Box
-        component={'img'}
-        loading="lazy"
-        src={'https://res.cloudinary.com/dyvxnpvxa/image/upload/v1731948390/h6n0cce2dtcacy4dn0h7.svg'}
-        height={0.1}
-        width={0.1}
-      />
+      <Box>
+        <Box
+          component={'img'}
+          loading="lazy"
+          src={'https://res.cloudinary.com/dyvxnpvxa/image/upload/v1731948390/h6n0cce2dtcacy4dn0h7.svg'}
+          height={0.3}
+          width={0.3}
+        />
+        <Typography component={'h4'} sx={{
+          fontWeight: 400,
+          color: "black",
+          textAlign: "center",
+          fontSize: "0.9rem"
+        }} className={`${isLoading? 'hidden':''}`}>
+          <span style={{ fontWeight: 4700 }}> Application #:</span>
+          <span style={{ color: 'darkblue'}}>{documents?.data}</span>
+        </Typography>
+        <span className={`${isLoading? '':'hidden'}`}>
+          <Loader />
+        </span>
+      </Box>
       <Typography component={'h4'} sx={{
         fontWeight: 400,
         color: "#616161",
