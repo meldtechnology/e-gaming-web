@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useTheme } from '@mui/material/styles';
-import { formatAmount, GetPublicFileService as getFiles, storeItem } from "../../../../../../services";
+import { formatAmount, GetPublicFileService as getFiles, removeAll, storeItem } from "../../../../../../services";
 import { Link, useNavigate } from "react-router-dom";
 
 const mock = [
@@ -52,29 +52,18 @@ const Products = () => {
   const { documents } = getFiles(`${FILES_URL}?page=1&size=6`);
   const navigate = useNavigate();
 
-
   const selectPermit = (selectedPermit) => {
     storeItem('permit', JSON.stringify(selectedPermit));
-    navigate('/apply/operator/form');
+    navigate('/apply/operator/verification');
   }
 
   useEffect(() => {
     if(documents !== null) setProduct(documents?.data?.results)
+    removeAll();
   }, [documents]);
   return (
     <Box>
       <Box marginBottom={4}>
-        {/*<Typography*/}
-        {/*  sx={{*/}
-        {/*    textTransform: 'uppercase',*/}
-        {/*    fontWeight: 'medium',*/}
-        {/*  }}*/}
-        {/*  gutterBottom*/}
-        {/*  color={'secondary'}*/}
-        {/*  align={'center'}*/}
-        {/*>*/}
-        {/*  Products*/}
-        {/*</Typography>*/}
         <Typography
           variant="h4"
           align={'center'}

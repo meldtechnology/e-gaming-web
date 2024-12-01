@@ -1,0 +1,205 @@
+import React, { useEffect, useState } from "react";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Select from '@mui/material/Select';
+import MenuItem from "@mui/material/MenuItem";
+import { ProgressButton } from "../../../../../../ui-components/Form/component/ProgressButton";
+import { useNavigate } from "react-router-dom";
+import {
+  UserVerificationService as verifyEntity
+} from "../../../../../../services/user/UserVerificationService";
+import { storeItem } from "../../../../../../services";
+
+const validationSchema = yup.object({
+  regNumber: yup
+    .string()
+    .trim()
+    .required('Government Issued Number is required.'),
+  firstName: yup
+    .string()
+    .required('Please specify matching your First Name'),
+  lastName: yup
+    .string()
+    .required('Please specify your matching Last Name')
+});
+
+const OPERATOR_TYPE = {
+  Proprietor: 'CAC',
+  Agent: 'NIN'
+}
+
+const VERIFICATION_URL = process.env.REACT_APP_VERIFY_IDENTITY_URL;
+export const Form = () => {
+  const [type, setType] = useState('');
+  const [regLabel, setRegLabel] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [verifying, setVerifying] = useState(false);
+  const navigate = useNavigate();
+  const { verify } = verifyEntity(`${VERIFICATION_URL}?type=${OPERATOR_TYPE[type]}`);
+
+  const initialValues = {
+    regNumber: '',
+    firstName: '',
+    lastName: ''
+  };
+
+  const onSubmit = async (values) => {
+    setVerifying(true);
+    console.log(configRegNumber(values));
+    const result = await verify(configRegNumber(values));
+    if(result?.error !== undefined){
+      setIsError(true);
+      setErrorMsg(result?.error?.data?.userMessage);
+    }
+    else {
+      storeItem('operator', JSON.stringify(result?.data?.data));
+      navigate('/apply/operator/form', { replace: true});
+    }
+    setVerifying(false);
+  };
+
+  const configRegNumber = (values) => {
+    if(type === 'Proprietor')
+      values['regNumber'] = 'RC' + values['regNumber'].replace(/RC|rc|Rc|rC/, '');
+    else
+      values['regNumber'] = values['regNumber'].replace(/RC|rc|Rc|rC/, '');
+    return values;
+  }
+
+  const onChangeOperator = (e) => {
+    setType(e.target.value);
+    if(e.target.value === 'Proprietor') {
+      formik.setFieldValue('firstName', '.');
+      formik.setFieldValue('lastName', '.');
+    }else {
+      formik.setFieldValue('firstName', '');
+      formik.setFieldValue('lastName', '');
+    }
+  }
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
+
+  useEffect(() => {
+    if(type === 'Proprietor') setRegLabel('Business Registration Number')
+    else if(type === 'Agent') setRegLabel('Agent NIN')
+    else setRegLabel('');
+  }, [type]);
+
+  return (
+    <Box>
+      <Box marginBottom={4}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Operator Verification
+        </Typography>
+        <Typography color="text.secondary">
+          Verify your identity (<span style={{ fontWeight: 700 }}>Proprietor or Agent</span>).
+           to submit your application
+        </Typography>
+        <Typography color={`white`}
+                    bgcolor={'red'}
+                    borderColor={'darkred'}
+                    borderRadius={'10px'}
+                    className={`block w-[100%] text-center p-4 !mt-4 ${isError?'':'hidden'}`} >
+          {errorMsg}
+        </Typography>
+      </Box>
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={4}>
+          <Grid item xs={12}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              Select your operator category
+            </Typography>
+            <Select
+              label="Operator *"
+              variant="outlined"
+              defaultValue=""
+              name={'type'}
+              fullWidth
+              value={type}
+              onChange={onChangeOperator}
+            >
+              {['Proprietor', 'Agent'].map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
+              ))}
+            </Select>
+          </Grid>
+          <Grid item xs={12} className={`${type? '' : 'hidden'}`}>
+            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+              {regLabel}
+            </Typography>
+            <TextField
+              label={`${regLabel} *`}
+              variant="outlined"
+              name={'regNumber'}
+              fullWidth
+              value={formik.values.regNumber}
+              onChange={formik.handleChange}
+              error={formik.touched.regNumber && Boolean(formik.errors.regNumber)}
+              helperText={formik.touched.regNumber && formik.errors.regNumber}
+            />
+          </Grid>
+          <Grid item xs={12} className={`${type === 'Agent'? '' : 'hidden'}`}>
+            <TextField
+              label="First Name *"
+              variant="outlined"
+              name={'firstName'}
+              fullWidth
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+              helperText={formik.touched.firstName && formik.errors.firstName}
+            />
+          </Grid>
+          <Grid item xs={12} className={`${type === 'Agent'? '' : 'hidden'}`}>
+            <TextField
+              label="Last Name *"
+              variant="outlined"
+              name={'lastName'}
+              fullWidth
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+            />
+          </Grid>
+          <Grid item container xs={12}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: 'column', sm: 'row' }}
+              alignItems={{ xs: 'stretched', sm: 'center' }}
+              justifyContent={'space-between'}
+              width={1}
+              maxWidth={600}
+              margin={'0 auto'}
+            >
+                <Button size={'large'}
+                        fullWidth
+                        variant={'contained'}
+                        type={'submit'}
+                        className={`!w-[100%] !bg-gray-950 !text-white-a700 !p-4 !rounded-lg ${verifying? '!hidden':''}`}
+                >
+                  Verify
+                </Button>
+              <ProgressButton saving={verifying} width={'w-[100%]'} position={'justify-center'} text={'Verifying...'} />
+            </Box>
+          </Grid>
+        </Grid>
+      </form>
+    </Box>
+  );
+}
