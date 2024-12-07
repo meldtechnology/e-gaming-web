@@ -17,4 +17,5 @@ export { GetAuthService, CreateAuthService } from './authentication';
 export { loginData } from './loginData';
 export { useAuthenticateCheck } from './useAuthenticateCheck';
 export { formatAmount } from './formatAmount';
+export { updateForm } from './updateFormValues';
 

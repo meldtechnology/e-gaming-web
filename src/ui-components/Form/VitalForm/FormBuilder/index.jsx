@@ -49,7 +49,7 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, onSub
       ))}
       <button type="submit"
               className={`w-[100%] bg-gray-950 text-white-a700 p-4 rounded-lg ${formik.isSubmitting? 'hidden':''}`}>
-        Submit Form
+        Submit Application
       </button>
       <ProgressButton saving={formik.isSubmitting} width={'w-[100%]'} position={'justify-center'} />
     </form>

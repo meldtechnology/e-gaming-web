@@ -3,33 +3,22 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { getItem, GetPublicFileService as generateReference } from "../../../../../../services";
-import { useNavigate } from "react-router-dom";
+import { getItem } from "../../../../../../services";
 import { Loader } from "../../../../../../ui-components/Loader";
 
-const APPLICATION_REFERENCE_URL = process.env.REACT_APP_GENERATE_DOCUMENT_REFERENCE_URL;
-const Hero = ({setReference}) => {
+const Index = () => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const [operator, setOperator] = useState({});
-  const [generateOnce, setGenerateOnce] = useState(false);
-  const [appReference, setAppReference] = useState('');
-  const navigate = useNavigate();
-  const { documents, isLoading} = generateReference(APPLICATION_REFERENCE_URL);
+  const [form, setForm] = useState(null);
+
+  console.log("form ", form);
 
   useEffect(() => {
-    if(!generateOnce) {
-      if(documents !== undefined) {
-        setAppReference(documents?.data)
-        setReference(documents?.data);
-        setGenerateOnce(true);
-      }
-    }
-    const verified = getItem('operator');
-    verified? setOperator(JSON.parse(verified)) : navigate('/apply');
-  }, [navigate, documents, setReference, generateOnce]);
+    const appForm = getItem('applicationForm');
+    if(appForm !== undefined) setForm(JSON.parse(appForm));
+  }, []);
 
   return (
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}
@@ -52,11 +41,11 @@ const Hero = ({setReference}) => {
           color: "black",
           textAlign: "center",
           fontSize: "0.9rem"
-        }} className={`${isLoading? 'hidden':''}`}>
+        }} className={`${form === null? 'hidden':''}`}>
           <span style={{ fontWeight: 4700 }}> Application #:</span>
-          <span style={{ color: 'darkblue'}}>{appReference}</span>
+          <span style={{ color: 'darkblue'}}>{form?.reference}</span>
         </Typography>
-        <span className={`${isLoading? '':'hidden'}`}>
+        <span className={`${form === null? '':'hidden'}`}>
           <Loader />
         </span>
       </Box>
@@ -74,35 +63,18 @@ const Hero = ({setReference}) => {
           color: "#616161",
           fontSize: "1rem"
         }}>
-          {operator?.name}
+          {form?.applicant?.name}
         </Typography>
         <Typography component={'h4'} sx={{
           fontWeight: 400,
           color: "#616161",
           fontSize: "1rem"
         }}>
-          {operator?.type}{` `}{operator?.idNumber}
-        </Typography>
-        <Typography component={'h4'} sx={{
-          fontWeight: 400,
-          color: "#FFFFFF",
-          fontSize: "1rem",
-          backgroundColor: (operator?.details?.status?.status === 'verified')? 'green' : 'red',
-          borderRadius: '10px',
-          textAlign: 'center'
-        }}>
-          {operator?.details?.status?.status}
-        </Typography>
-        <Typography component={'h4'} sx={{
-          fontWeight: 400,
-          color: "#616161",
-          fontSize: "1rem"
-        }}>
-          {operator?.address}
+          {form?.applicant?.type}{` `}{form?.applicant?.id}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Hero;
+export default Index;

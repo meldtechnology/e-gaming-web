@@ -19,7 +19,7 @@ import { Loader } from "../../Loader";
 const validationSchema = yup.object({
   code: yup
     .string()
-    .min(10, "RH Code is too short. Must be 10 Alphanumeric or more")
+    .min(5, "RH Code is too short. Must be 10 Alphanumeric or more")
     .required('Please provide revenue head code.'),
   name: yup
     .string()
@@ -38,6 +38,9 @@ const validationSchema = yup.object({
     .string()
     .required('Please Select one Fee Type.'),
   value: yup
+    .number()
+    .required('Please provide the value. The minimum is 0.')
+  ,flatFee: yup
     .number()
     .required('Please provide the flat fee. The minimum is 0.'),
 
@@ -65,7 +68,8 @@ export const FileForm = ({selectedFile, isNew}) => {
       renewalDuration: 0,
       typeName: '',
       feeType: '',
-      value: 0
+      value: 0,
+      flatFee: 0
   });
   const { types, loadingTypes }
     = getDocService(`${DOCUMENT_TYPE_URL}?page=1&size=100&sortBy=name&sortIn=ASC`);
@@ -114,10 +118,10 @@ export const FileForm = ({selectedFile, isNew}) => {
       renewalDuration: 0,
       typeName: '',
       feeType: '',
-      value: 0
+      value: 0,
+      flatFee: 0
     });
   }
-
   const closeAlert = (duration) => {
     setTimeout(()=> {
       setIsError(false);
@@ -164,6 +168,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        placeHolderText={`i.e 20212024/XXXXXXX`}
                        required={true}
                        value={formik.values.code}
+                       onChange={formik.handleChange}
                        fieldName='code'
                        error={formik.touched.code && formik.errors.code}
                        errorText={formik.touched.code && formik.errors.code}
@@ -174,6 +179,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        placeHolderText={`i.e Weekly Tax`}
                        required={true}
                        value={formik.values.name}
+                       onChange={formik.handleChange}
                        fieldName='name'
                        error={formik.touched.name && formik.errors.name}
                        errorText={formik.touched.name && formik.errors.name}
@@ -183,6 +189,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        labelText={`Description`}
                        value={formik.values.description}
                        fieldName='description'
+                       onChange={formik.handleChange}
                        error={formik.touched.description && formik.errors.description}
                        errorText={formik.touched.description && formik.errors.description}
                        fieldClass="w-full max-w-sm min-w-[200px]"
@@ -229,6 +236,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        labelText={`Renewal Duration`}
                        value={formik.values.renewalDuration}
                        fieldName='renewalDuration'
+                       onChange={formik.handleChange}
                        fieldClass="w-full max-w-sm min-w-[200px]"
                        isDisabled={true} />
             <div className={`${loadingFee ? "" : "hidden"}`}>
@@ -252,12 +260,22 @@ export const FileForm = ({selectedFile, isNew}) => {
                        labelText={`Fee Value`}
                        value={formik.values.value}
                        fieldName='value'
+                       onChange={formik.handleChange}
                        error={formik.touched.value && formik.errors.value}
                        errorText={formik.touched.value && formik.errors.value}
+                       fieldClass="w-full max-w-sm min-w-[200px]" />
+            <TextField formik={formik}
+                       labelText={`Default Flat Fee`}
+                       value={formik.values.flatFee}
+                       fieldName='flatFee'
+                       onChange={formik.handleChange}
+                       error={formik.touched.flatFee && formik.errors.flatFee}
+                       errorText={formik.touched.flatFee && formik.errors.flatFee}
                        fieldClass="w-full max-w-sm min-w-[200px]" />
             <ToggleSwitch formik={formik}
                           labelText={`Public Access`}
                           value={formik.values.publicVisibility}
+                          onChange={formik.handleChange}
                           fieldName='publicVisibility'
                           fieldClass="w-full max-w-sm min-w-[200px]" />
             <button

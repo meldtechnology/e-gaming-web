@@ -51,7 +51,6 @@ export const Form = () => {
 
   const onSubmit = async (values) => {
     setVerifying(true);
-    console.log(configRegNumber(values));
     const result = await verify(configRegNumber(values));
     if(result?.error !== undefined){
       setIsError(true);
