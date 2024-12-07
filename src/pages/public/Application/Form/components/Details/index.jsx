@@ -1,4 +1,4 @@
-import { formatAmount, getItem } from "../../../../../../services";
+import { formatAmount, getItem, removeAll, storeItem, updateForm } from "../../../../../../services";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
@@ -7,6 +7,10 @@ import { FormBuilder } from "../../../../../../ui-components/Form/VitalForm/Form
 import { createSchema } from "../../../../../../services/createSchema";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import {
+  CreatePublicApplicationService as createApp } from "../../../../../../services/document/CreatePublicApplicationService";
+import { MeldAlert } from "../../../../../../ui-components/Alerts";
+import { AlertType } from "../../../../../../ui-components/Alerts/AlertType";
 
 const defaultImg = [
   {
@@ -14,22 +18,69 @@ const defaultImg = [
   },
 ]
 
-export const Details = () => {
+const ADD_APPLICATION_URL = process.env.REACT_APP_CREATE_DOCUMENT_URL;
+export const Details = ({reference}) => {
   const [file, setFile] = useState({});
   const [initialValue, setInitialValue] = useState({});
   const [schema, setSchema] = useState({});
+  const [operator, setOperator] = useState({});
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+  const { addApplication } = createApp(ADD_APPLICATION_URL);
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = async (values, { setSubmitting }) => {
     // Handle form submission (e.g., send data to the server)
-    console.log("Form submitted with values:", values);
+    const result = await addApplication(constructApp(values));
+    if(result?.error !== undefined){
+      setIsError(true);
+      setErrorMsg(result?.error?.data?.userMessage);
+    }
+    else {
+      removeAll();
+      storeItem('feeType', file?.feeType);
+      storeItem('applicationForm', JSON.stringify(result?.data?.data));
+      navigate('/apply/payment/invoice', { replace: true});
+    }
     setSubmitting(false);
+    closeAlert(5000);
+  }
+
+  const constructApp = (values) => {
+    return {
+      amountPaid: 0,
+      amountPayable: file?.value,
+      applicant: {
+        name: operator?.name,
+        id: operator?.idNumber,
+        type: operator?.type
+      },
+      applicantPublicId: operator?.idNumber,
+      fileName: file?.name,
+      code: file?.code,
+      feeType: file?.feeType,
+      formData: {
+        formTemplate: updateForm(file?.formTemplate, values)
+      },
+      reference,
+      requester: operator?.name,
+      typeName: file?.typeName,
+      validity: file?.renewalDuration
+    }
+  }
+
+  const closeAlert = (duration) => {
+    setTimeout(()=> {
+      setIsError(false);
+    }, duration);
   }
 
   useEffect(() => {
     const permit = getItem('permit');
-    if(!getItem('operator')) navigate('/apply') ;
+    const verified = getItem('operator')
     if(permit !== undefined) setFile(JSON.parse(getItem('permit')));
+    if(!verified) navigate('/apply') ;
+    else setOperator(JSON.parse(verified))
   }, [navigate]);
 
   useEffect(() => {
@@ -38,6 +89,7 @@ export const Details = () => {
       setSchema(createSchema(file?.formTemplate));
     }
   }, [file]);
+
   return (
     <Box border={'gray'}
          boxShadow={'inherit'}
@@ -94,31 +146,34 @@ export const Details = () => {
               </Box>
           </Grid>
           <Grid
-              item
-              xs={12}
-              sm={6}
-              md={8}
-              data-aos={'fade-up'}
-              data-aos-offset={100}
-              data-aos-duration={600}
-            >
-              <Box width={1}
-                   borderRadius={'10px'}
-                   padding={'1rem'}
-                   bgcolor={'#f2f2f2'}>
-                {file?.formTemplate? (
-                  <FormBuilder formConfig={file?.formTemplate}
-                               initialValues={initialValue}
-                               validationSchema={schema}
-                               onSubmit={onSubmit} />
-                ) : (
-                  <div className={`py-[25%]`}>
-                    <h1 className={`text-red-700 text-center text-[2.4rem]`}>
-                      No Document Form is Available!
-                    </h1>
-                  </div>
-                )}
-              </Box>
+            item
+            xs={12}
+            sm={6}
+            md={8}
+            data-aos={'fade-up'}
+            data-aos-offset={100}
+            data-aos-duration={600}
+          >
+            <Box width={1}
+                 borderRadius={'10px'}
+                 padding={'1rem'}
+                 bgcolor={'#f2f2f2'}>
+              {file?.formTemplate ? (
+                <FormBuilder formConfig={file?.formTemplate}
+                             initialValues={initialValue}
+                             validationSchema={schema}
+                             onSubmit={onSubmit} />
+              ) : (
+                <div className={`py-[25%]`}>
+                  <h1 className={`text-red-700 text-center text-[2.4rem]`}>
+                    No Document Form is Available!
+                  </h1>
+                </div>
+              )}
+            </Box>
+            <div style={{ display: ( isError) ? '' : 'none' }}>
+              <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
+            </div>
           </Grid>
         </Grid>
     </Box>

@@ -9,6 +9,7 @@ import { ProfileAccount } from "../pages/public/Auth/ProfileAccount";
 import { EmailVerify } from "../pages/public/EmailVerify";
 import { General, Operators, Verification } from "../pages/public/Application";
 import { Form } from "../pages/public/Application/Form";
+import { Invoice } from "../pages/public/Application/Invoice";
 
 const PublicRoutes = {
     path: '/',
@@ -58,6 +59,10 @@ const PublicRoutes = {
         {
             path: '/apply/operator/verification',
             element: <Verification />
+        },
+        {
+            path: '/apply/payment/invoice',
+            element: <Invoice />
         },
     ]
 }
