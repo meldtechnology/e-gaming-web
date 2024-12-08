@@ -113,7 +113,7 @@ const LatestProducts = ({operatorType}) => {
                   <Box
                     component={'img'}
                     loading="lazy"
-                    src={mock[i].media}
+                    src={item?.logo? item?.logo : mock[i].media}
                     sx={{
                       '& img': {
                         objectFit: 'contain',

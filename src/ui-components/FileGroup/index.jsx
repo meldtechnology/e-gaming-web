@@ -10,10 +10,6 @@ export const FileGroup = () => {
     setSelectedFile(extractRowWithName(data, name));
   }
 
-  const refreshPage = () => {
-    console.log('Reload');
-  }
-
   return (
     <div className="w-full bg-white-a700 flex gap-1">
       <div className="flex-auto w-[65%]">
