@@ -41,7 +41,7 @@ export const FileDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
                     <div className="flex flex-col">
                       <p
                         className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
-                        <img src={d?.logo} alt="Img" />
+                        <img src={d?.logo} alt="Img" className={"w-[36px] h-[36px]"} />
                       </p>
                     </div>
                   </div>

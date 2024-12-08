@@ -5,7 +5,7 @@ import {
   GetTypeService as getDocService,
   GetCyclesService as getCycleService,
   GetFeeTypeService as getFeeService,
-  UpdateDocumentService as editDocument, extractRowWithName
+  UpdateDocumentService as editDocument, extractRowWithName,
 } from "../../../services";
 import { useFormik } from "formik";
 import { MeldAlert } from "../../Alerts";
@@ -15,6 +15,7 @@ import { ProgressButton } from "../component/ProgressButton";
 import { DropDown } from "../component/DropDown";
 import { ToggleSwitch } from "../component/ToggleSwitch";
 import { Loader } from "../../Loader";
+import { ImageUploader } from "../component/ImageUploader";
 
 const validationSchema = yup.object({
   code: yup
@@ -57,6 +58,7 @@ export const FileForm = ({selectedFile, isNew}) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [name, setName] = useState('');
   const [isEdit, setIsEdit ] = useState(false);
+  const [permitLogo, setPermitLogo ] = useState('/images/building.jpg');
   const [initialValues, setInitialValues] = useState(
     {
       code: '',
@@ -80,8 +82,10 @@ export const FileForm = ({selectedFile, isNew}) => {
   const { addNewDocument, documents, error } = createDocument(ADD_EDIT_FILE_URL);
   const { modifyDocument, update, } =
     editDocument(`${ADD_EDIT_FILE_URL}/${name}`);
+  // const { uploadDoc,  } = uploadDocument(UPLOAD_DOCUMENT_URL);
 
   const onSubmit =  async (values) => {
+    values.logo = permitLogo;
     setSaving(true);
     const result = !isEdit?
       await addNewDocument(values) :
@@ -108,11 +112,12 @@ export const FileForm = ({selectedFile, isNew}) => {
     formik.setFieldValue("typeName", "");
     formik.setFieldValue("feeType", "");
     formik.setFieldValue("value", 0);
+    setPermitLogo('/images/building.jpg');
     setInitialValues({
       code: '',
       name: '',
       description: '',
-      logo: '',
+      logo: '/images/building.jpg',
       publicVisibility: false,
       renewalName: '',
       renewalDuration: 0,
@@ -122,6 +127,7 @@ export const FileForm = ({selectedFile, isNew}) => {
       flatFee: 0
     });
   }
+
   const closeAlert = (duration) => {
     setTimeout(()=> {
       setIsError(false);
@@ -140,7 +146,8 @@ export const FileForm = ({selectedFile, isNew}) => {
   useEffect(() => {
     if (!isNew) {
       setInitialValues(selectedFile);
-      setName(selectedFile.name);
+      setName(selectedFile?.name);
+      setPermitLogo(selectedFile?.logo)
       setIsEdit(!isNew);
     }
   }, [selectedFile, isNew]);
@@ -278,6 +285,12 @@ export const FileForm = ({selectedFile, isNew}) => {
                           onChange={formik.handleChange}
                           fieldName='publicVisibility'
                           fieldClass="w-full max-w-sm min-w-[200px]" />
+            <ImageUploader labelText={`Permit Logo`}
+                           value={permitLogo}
+                           setImage={setPermitLogo}
+                           containerClass="w-full max-w-sm min-w-[200px]"
+                           fieldClass={`relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0 cursor-pointer`}  />
+
             <button
               disabled={!(formik.dirty && formik.isValid)}
               className={`${saving ? 'hidden' : ''} mt-4 w-full rounded-md text-white-a700 bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
