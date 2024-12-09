@@ -7,6 +7,7 @@ import { Documents } from "../../pages/Documents";
 import { Types } from "../../pages/Documents/Types";
 import { Files } from "../../pages/Documents/Files";
 import { DocumentFormBuilder } from "../../pages/Documents/DocumentFormBuilder";
+import { DocumentReviewer } from "../../pages/Documents/DocumentReviewer";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -34,6 +35,7 @@ export const PagesRoute = ({ page, params }) => {
       case 'T_46042b50': return <Types />;
       case 'F_322f9837': return <Files />;
       case 'F_D5N2M19': return <DocumentFormBuilder />;
+      case 'R_SHFB95GH': return <DocumentReviewer />;
       default: return <Dashboard />
     }
 

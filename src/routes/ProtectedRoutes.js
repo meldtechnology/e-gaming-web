@@ -46,6 +46,10 @@ const ProtectedRoutes = {
             path: 'applications',
             element: <AppLayout />
         },
+        {
+            path: 'documents/R_SHFB95GH',
+            element: <AppLayout />
+        },
     ]
 };
 

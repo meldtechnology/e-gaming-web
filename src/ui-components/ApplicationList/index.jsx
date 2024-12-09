@@ -3,14 +3,14 @@ import { GetDocumentService as getDocService } from "../../services";
 import { ApplicationDataTable } from "../Datatable";
 
 const columnHeading = [
-  "Reference #", "Submitted By", "Submitted Date", "Amount Paid", "Fee", "Status", "Action"
+  "Reference #", "Submitted By", "Submitted On", "Amount Paid", "Fee", "Status", "Action"
 ]
 
 const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
 export const ApplicationList= () => {
   const [page, setPage] = useState(1);
   const { documents, isLoading, isError }
-    = getDocService(`${APPLICATION_URL}?page=${page}&size=5&sortIn=DESC`);
+    = getDocService(`${APPLICATION_URL}?page=${page}&size=10&sortIn=DESC`);
 
   const nextPage = () => {
     setPage(page + 1);
