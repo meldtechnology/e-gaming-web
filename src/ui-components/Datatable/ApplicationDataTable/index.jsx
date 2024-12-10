@@ -18,8 +18,6 @@ export const ApplicationDataTable = ({ columnHeader, data, pageInfo, nextPage, p
     navigate('/app/documents/R_SHFB95GH');
   }
 
-  console.log(data);
-
   return (
     <div
       className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">

@@ -3,10 +3,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import Grid from "@mui/material/Grid";
+import { DocumentHistory } from "../DocumentHistory";
+import { DocumentApplication } from "../DocumentApplication";
+import { DocumentReviewForm } from "../DocumentReviewForm";
 
 export const ReviewForm = ({ onClick, fileData }) => {
   const data = fileData[0];
-  console.log(data);
+
   return (
     <Container>
       <Box>
@@ -59,11 +62,80 @@ export const ReviewForm = ({ onClick, fileData }) => {
                 till the evaluation/investigation process is completed. Please note
                 that you can keep updating your reviewal comment upto 1000 letters.
               </Typography>
-              <div>
-                ESG-5462399749088317
-                {data?.reference}
-              </div>
             </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={2}  >
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                data-aos={'fade-up'}
+                data-aos-offset={100}
+                data-aos-duration={600}
+              >
+                <Typography
+                  variant="h5"
+                  align={'center'}
+                  data-aos={'fade-up'}
+                  gutterBottom
+                  sx={{
+                    fontWeight: 700,
+                  }}
+                >
+                  Document History
+                </Typography>
+                <Box padding={'2%'}>
+                  <DocumentHistory docHistory={fileData} />
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                data-aos={'fade-up'}
+                data-aos-offset={100}
+                data-aos-duration={600}
+              >
+                <Typography
+                  variant="h5"
+                  align={'center'}
+                  data-aos={'fade-up'}
+                  gutterBottom
+                  sx={{
+                    fontWeight: 700,
+                  }}
+                >
+                  Application Details
+                </Typography>
+                <DocumentApplication document={fileData} />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                data-aos={'fade-up'}
+                data-aos-offset={100}
+                data-aos-duration={600}
+              >
+                <Typography
+                  variant="h5"
+                  align={'center'}
+                  data-aos={'fade-up'}
+                  gutterBottom
+                  sx={{
+                    fontWeight: 700,
+                    color: '#0000AE'
+                  }}
+                >
+                  Application Review
+                </Typography>
+                <DocumentReviewForm application={fileData} />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Box>
