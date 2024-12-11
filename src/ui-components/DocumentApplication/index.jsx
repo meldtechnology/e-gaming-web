@@ -13,7 +13,7 @@ export const DocumentApplication = ({document}) => {
   const highlightAppStatus = (status) => {
     return status === 'PENDING'? 'bg-orange-600' :
       (status === 'REVIEW') ? 'bg-purple-600' :
-      (status === 'APPROVE') ? 'bg-purple-600' : 'bg-red-600';
+      (status === 'APPROVE') ? 'bg-green-600' : 'bg-red-600';
   }
 
   return (
