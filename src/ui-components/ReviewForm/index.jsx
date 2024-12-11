@@ -1,14 +1,24 @@
 import Container from "../../mui/components/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { DocumentHistory } from "../DocumentHistory";
 import { DocumentApplication } from "../DocumentApplication";
 import { DocumentReviewForm } from "../DocumentReviewForm";
+import { useNavigate } from "react-router-dom";
 
 export const ReviewForm = ({ onClick, fileData }) => {
   const data = fileData[0];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(fileData[0] === null) {
+      navigate('/app/applications', { replace: true});
+    }
+  }, [navigate, fileData]);
+
+  if(fileData[0] === null) return ;
 
   return (
     <Container>

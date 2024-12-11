@@ -9,7 +9,7 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 export const DocumentHistory = ({docHistory}) => {
   const applicationHistory = docHistory[0];
   const extractDate = (date) => {
-    return Date(date).substring(0, 16);
+    return new Date(date.split('T')[0]).toDateString();
   }
   return (
     <Timeline position="alternate">
