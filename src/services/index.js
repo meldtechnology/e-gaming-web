@@ -18,4 +18,5 @@ export { loginData } from './loginData';
 export { useAuthenticateCheck } from './useAuthenticateCheck';
 export { formatAmount } from './formatAmount';
 export { updateForm } from './updateFormValues';
+export { extractDay, extractMonth, extractYear } from './datePartExtraxt';
 

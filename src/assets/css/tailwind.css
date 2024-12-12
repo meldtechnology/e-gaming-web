@@ -85,6 +85,7 @@
     --space-7xl: 36px;
     --space-8xl: 50px;
 }
+    img { display: initial; }
 }
 @layer components {
     /*----------------- Input CSS ----------------------------*/
