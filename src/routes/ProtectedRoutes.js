@@ -50,6 +50,14 @@ const ProtectedRoutes = {
             path: 'documents/R_SHFB95GH',
             element: <AppLayout />
         },
+        {
+            path: 'licenses',
+            element: <AppLayout />
+        },
+        {
+            path: 'licenses/L_10O9I78',
+            element: <AppLayout />
+        },
     ]
 };
 

@@ -8,6 +8,8 @@ import { Types } from "../../pages/Documents/Types";
 import { Files } from "../../pages/Documents/Files";
 import { DocumentFormBuilder } from "../../pages/Documents/DocumentFormBuilder";
 import { DocumentReviewer } from "../../pages/Documents/DocumentReviewer";
+import { License } from "../../pages/Documents/License";
+import { LicenseForm } from "../../ui-components/LicenseForm";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -32,10 +34,12 @@ export const PagesRoute = ({ page, params }) => {
       case '_edit': return <EditUser />;
       case 'documents': return <Types />;
       case 'applications': return <Documents />;
+      case 'licenses': return <License />;
       case 'T_46042b50': return <Types />;
       case 'F_322f9837': return <Files />;
       case 'F_D5N2M19': return <DocumentFormBuilder />;
       case 'R_SHFB95GH': return <DocumentReviewer />;
+      case 'L_10O9I78': return <LicenseForm />;
       default: return <Dashboard />
     }
 
