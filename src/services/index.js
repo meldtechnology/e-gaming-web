@@ -10,6 +10,7 @@ export { GetDocumentService,
 export { UploadDocumentService } from './UploadDocumentService';
 export { passwordGenerator } from './passworGenerator';
 export { GetRolesService } from './GetRolesService';
+export { GetPaymentService } from './payments';
 export { extractRowWithName, extractRowWithId } from './extractRow';
 export { unitTens } from './unitTens';
 export { storeItem, getItem, removeItem, removeAll } from './secureLocalStorage';

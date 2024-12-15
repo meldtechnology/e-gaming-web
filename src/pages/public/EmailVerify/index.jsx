@@ -1,16 +1,13 @@
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Main from "../../../mui/layouts/Main";
 import Box from "@mui/material/Box";
-import Container from "../../../mui/components/Container";
-import Grid from "@mui/material/Grid";
 import { Form } from "../EmailVerify/components";
 
 export const EmailVerify = () => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
+  // const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+  //   defaultMatches: true,
+  // });
 
   return (
     <Main>

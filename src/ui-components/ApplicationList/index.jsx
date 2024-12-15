@@ -9,7 +9,7 @@ const columnHeading = [
 const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
 export const ApplicationList= () => {
   const [page, setPage] = useState(1);
-  const { documents, isLoading, isError }
+  const { documents, }
     = getDocService(`${APPLICATION_URL}?page=${page}&size=10&sortIn=DESC`);
 
   const nextPage = () => {

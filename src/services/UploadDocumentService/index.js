@@ -1,7 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import { headerConfig as headers } from "../../core/httpHeaders";
 import { PostCall as postCall } from "../../core/ApiAdapter";
-import { useAuthenticateCheck } from "../useAuthenticateCheck";
 
 
 export const UploadDocumentService = (endpoint, delay) => {

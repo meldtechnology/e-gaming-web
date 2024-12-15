@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 // import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -10,12 +10,12 @@ import Divider from '@mui/material/Divider';
 import Container from '../../components/Container';
 // import TopNav from '../../components/TopNav';
 
-import { Topbar, Sidebar, Footer } from './components';
+import { Footer } from './components';
 
 // import pages from '../navigation';
 
 const Main = ({ children, colorInvert = false, bgcolor = 'transparent', showFooter = true }) => {
-  const theme = useTheme();
+  // const theme = useTheme();
   // const isMd = useMediaQuery(theme.breakpoints.up('md'), {
   //   defaultMatches: true,
   // });
