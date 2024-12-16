@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { Text } from "../../Text";
 import { Heading } from "../../Heading";
-import { formatAmount } from "../../../services";
+import { formatAmount, thousandMillion } from "../../../services";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -44,39 +44,39 @@ export const Analytic = ({metric, license}) => {
       <div className="flex items-center self-stretch">
         <div className="flex w-[24%] justify-center">
           <div className="flex w-full flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-normal text-gray-600">
+            <Text size="textmd" as="p" className="text-[18px] font-normal text-gray-600">
               Total Paid
             </Text>
-            <div className="mx-2 flex gap-2 items-center self-stretch md:mx-0">
+            <div className="mx-2 flex gap-1 items-center self-stretch md:mx-0">
               <div className="h-[8px] w-[8px] rounded bg-blue-a400" />
-              <Heading size="headingxs" as="h2" className="text-[14px] font-bold text-black-900_01">
-                {formatAmount(metric[0])}
+              <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
+                {formatAmount(thousandMillion(metric[0]))}
               </Heading>
             </div>
           </div>
         </div>
         <div className="flex w-[34%] justify-center px-[26px] sm:px-5">
           <div className="flex w-full flex-col items-center">
-            <Text size="textmd" as="p" className="text-[16px] font-normal text-gray-600">
+            <Text size="textmd" as="p" className="text-[18px] font-normal text-gray-600">
               Total Unpaid
             </Text>
-            <div className="flex w-[48%] gap-2 items-center justify-center md:w-full">
-              <div className="h-[8px] w-[8px] rounded bg-black-900_01" />
-              <Heading size="headingxs" as="h2" className="text-[14px] font-bold text-black-900_01">
-                {formatAmount(metric[1])}
+            <div className="flex w-[40%] gap-1 items-center justify-center md:w-full">
+              <div className="h-[8px] w-[8px] rounded bg-black-900_01 " />
+              <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
+                {formatAmount(thousandMillion(metric[1]))}
               </Heading>
             </div>
           </div>
         </div>
         <div className="flex-1 px-[26px] sm:px-5">
           <div className="flex flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-normal text-gray-600">
+            <Text size="textmd" as="p" className="text-[18px] font-normal text-gray-600">
               Total Overdue
             </Text>
-            <div className="flex w-[46%] gap-2 items-center justify-center md:w-full">
+            <div className="flex w-[46%] gap-1 items-center justify-center md:w-full">
               <div className="h-[8px] w-[8px] rounded bg-indigo-a100_01" />
-              <Heading size="headingxs" as="h2" className="text-[14px] font-bold text-black-900_01">
-                {metric[2]}
+              <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
+                {formatAmount(thousandMillion(metric[2]))}
               </Heading>
             </div>
           </div>

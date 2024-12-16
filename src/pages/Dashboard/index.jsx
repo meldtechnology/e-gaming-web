@@ -26,8 +26,6 @@ export const Dashboard = () => {
   const { payments } = getPaymentMetrics(PAYMENT_METRIC_URL);
   const { documents } = getLicenseMetrics(LICENSE_METRIC_URL);
   const { users } = getEntityMetrics(ENTITY_METRIC_URL);
-  console.log(payments);
-  console.log(documents);
   return (
     <>
       <Header metrics={[
@@ -41,7 +39,9 @@ export const Dashboard = () => {
             Analytics
           </Text>
           <Analytic license={documents?.data?.totalMonthly?.toFixed(1)}
-                    metric={[payments?.data?.totalVolume, payments?.data?.totalUnpaid, payments?.data?.totalOverdue]} />
+                    metric={[payments?.data?.totalVolume,
+                      payments?.data?.unpaidVolume,
+                      payments?.data?.overDueVolume]} />
         </div>
         <div className="flex w-[60%] justify-center rounded-[5px] bg-white-a700 p-2.5 md:w-full md:px-5">
           <div className="mb-4 flex w-full flex-col gap-3.5">
