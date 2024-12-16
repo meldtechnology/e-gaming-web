@@ -7,5 +7,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@material-tailwind/html" level="application" />
     <orderEntry type="library" name="flatpickr" level="application" />
+    <orderEntry type="library" name="anychart-base" level="application" />
   </component>
 </module>

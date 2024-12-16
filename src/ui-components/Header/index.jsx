@@ -2,13 +2,13 @@ import { Text, Heading, Img } from "./..";
 import React, { Suspense } from "react";
 
 const data = [
-  { n21000000One: "/images/img_user_gray_200.svg", nCounter: "N 21,000,000", totalRevenue: "Total Revenue", bkgColor: 'bg-blue-400' },
+  { n21000000One: "/images/img_user_gray_200.svg", nCounter: "N 0", totalRevenue: "Total Revenue", bkgColor: 'bg-blue-400' },
   { n21000000One: "/images/img_thumbs_up.svg", nCounter: "1,254", totalRevenue: "Total Payments", bkgColor: 'bg-pink-300' },
   { n21000000One: "/images/img_contrast.svg", nCounter: "25", totalRevenue: "Total Proprietor", bkgColor: 'bg-green-800_01' },
   { n21000000One: "/images/img_bag.svg", nCounter: "17", totalRevenue: "Total License", bkgColor: 'bg-yellow-800' },
 ];
 
-export default function Header({ ...props }) {
+export default function Header({ metrics, ...props }) {
   return (
     <header {...props} className={`${props.className} flex flex-col mr-[50px] gap-9 md:mr-0 mt-5`}>
       <Heading size="headinglg" as="h4" className="text-[24px] font-bold text-gray-600 md:text-[22px]">
@@ -27,10 +27,10 @@ export default function Header({ ...props }) {
                     </a>
                   </div>
                   <div className="mb-4 flex flex-1 flex-col items-start self-end">
-                    <Heading as="h6" className="text-[16px] font-bold text-gray-600">
-                      {d.nCounter}
+                    <Heading as="h4" className="text-[24px] font-bold text-gray-600">
+                      {metrics[index]}
                     </Heading>
-                    <Text size="textxs" as="p" className="text-[12px] font-normal text-gray-600">
+                    <Text size="textxs" as="p" className="text-[18px] font-normal text-gray-600">
                       {d.totalRevenue}
                     </Text>
                   </div>

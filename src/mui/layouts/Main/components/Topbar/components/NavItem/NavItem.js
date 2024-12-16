@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { alpha, useTheme } from '@mui/material/styles';
-import Popover from '@mui/material/Popover';
+// import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from "react-router-dom";
 
 const NavItem = ({ title, id, items, colorInvert = false }) => {
-  const theme = useTheme();
+  // const theme = useTheme();
   const navigate = useNavigate();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [ setAnchorEl] = useState(null);
   const [openedPopoverId, setOpenedPopoverId] = useState(null);
 
   const handleClick = (event, popoverId) => {
