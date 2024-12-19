@@ -39,5 +39,9 @@ const extractYear = (date) => {
   return new Date(date).getFullYear();
 }
 
+const extractFullDate = (date) => {
+  return "".concat(extractDay(date), " Of ", extractMonth(date), " ", extractYear(date) );
+}
 
-export { extractDay, extractMonth, extractYear }
+
+export { extractDay, extractMonth, extractYear, extractFullDate }

@@ -1,23 +1,13 @@
 import { Header, Text, Img } from "../../ui-components";
 import { Suspense } from "react";
 import AgentProfile from "../../ui-components/AgentProfile";
-import { Analytic } from "../../ui-components/DashBoardReport";
+import { Analytic, LatestReport } from "../../ui-components/DashBoardReport";
 import {
   GetPaymentService as getPaymentMetrics,
   GetDocumentService as getLicenseMetrics,
   formatAmount,
   GetUsersService as getEntityMetrics
 } from "../../services";
-
-
-const data = [
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 100 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-  { userName: "Bet365", userEmail: "info@bet365.com", userPrice: "NGN 200 K" },
-];
-
 
 const PAYMENT_METRIC_URL = process.env.REACT_APP_PAYMENTS_METRIC_URL;
 const LICENSE_METRIC_URL = process.env.REACT_APP_DOCUMENTS_LICENSE_METRICS_URL;
@@ -159,37 +149,7 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mr-[50px] mt-3 flex items-center gap-2 md:mr-0 md:flex-col">
-        <div className="flex-1 md:self-stretch md:px-5">
-          <div className="rounded-[5px] bg-white-a700 p-3">
-            <div className="mb-[22px] flex flex-col gap-6">
-              <div className="mr-[18px] flex flex-wrap items-center justify-between gap-5 md:mr-0">
-                <Text as="p" className="text-[24px] font-light text-gray-600 md:text-[22px]">
-                  Recent Applications
-                </Text>
-                <Text size="textmd" as="p" className="text-[16px] font-normal text-black-900_01">
-                  ...
-                </Text>
-              </div>
-              {/*ReactTable*/}
-            </div>
-          </div>
-        </div>
-        <div className="w-[26%] md:w-full md:px-5">
-          <div className="flex flex-col items-start justify-center gap-8 rounded-[5px] bg-white-a700 px-1.5 py-2">
-            <Text as="p" className="ml-1.5 mt-1 text-[24px] font-light text-gray-600 md:ml-0 md:text-[22px]">
-              Latest Licenses
-            </Text>
-            <div className="mr-1.5 flex flex-col gap-3 self-stretch md:mr-0">
-              <Suspense fallback={<div>Loading feed...</div>}>
-                {data.map((d, index) => (
-                  <AgentProfile {...d} key={"listing200K" + index} className="ml-1.5 md:ml-0" />
-                ))}
-              </Suspense>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LatestReport />
     </>
   );
 }
