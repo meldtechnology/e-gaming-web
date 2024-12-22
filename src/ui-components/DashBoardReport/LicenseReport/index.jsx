@@ -8,7 +8,6 @@ const DOCUMENT_HISTORY_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
 export const LicenseReport = () => {
   const { documents, isLoading }
     = GetDocumentService(`${DOCUMENT_HISTORY_URL}/status/ISSUED?page=1&size=5&sortBy=issuedOn&sortIn=DESC`);
-  console.log(documents);
   return (isLoading) ?
     (
       <div className="w-[26%] md:w-full md:px-5">

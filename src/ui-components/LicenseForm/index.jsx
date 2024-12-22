@@ -46,8 +46,6 @@ export const LicenseForm = () => {
     else {
       console.log(result?.data?.data);
       setLicense(result?.data?.data);
-      // setIsSuccess(true);
-      // setDisabled(type === 'APPROVE' || type === 'DECLINE');
     }
     setShow(false);
   }

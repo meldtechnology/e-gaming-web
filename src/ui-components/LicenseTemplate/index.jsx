@@ -1,7 +1,6 @@
 import { extractDay, extractMonth, extractYear } from "../../services";
 
 export const LicenseTemplate = ({license}) => {
-  console.log(license);
   return (
     <div id="license-id">
       <div className={`bg-amber-50 p-4`}>
