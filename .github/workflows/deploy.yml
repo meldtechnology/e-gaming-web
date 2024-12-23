@@ -12,23 +12,23 @@ jobs:
       contents: read
       packages: write
     env:
-      BASE-IMAGE: josleke/middleware-service
+      BASE-IMAGE: josleke/esgc
       RELEASE-TAG: $(echo "${GITHUB_REF}" | cut -d "/" -f3)
 
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v2
 
-      - name: Node version 20 Setup
-        uses: actions/setup-node@v4
-        with:
-          node-version: '21'
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Generate Production Build
-        run: npm run build
+#      - name: Node version 20 Setup
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: '21'
+#
+#      - name: Install dependencies
+#        run: npm install --legacy-peer-deps
+#
+#      - name: Generate Production Build
+#        run: npm run build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: josleke/esgc
+          images: ${{ env.BASE-IMAGE }}
           tags: ${{ env.RELEASE-TAG }}
 
       - name: Build and push Docker image
