@@ -11,6 +11,9 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      BASE-IMAGE: josleke/middleware-service
+      RELEASE-TAG: $(echo "${GITHUB_REF}" | cut -d "/" -f3)
 
     steps:
       - name: Checkout latest code
@@ -38,7 +41,7 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: josleke/esgc
-          tags: latest
+          tags: ${{ env.RELEASE-TAG }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
