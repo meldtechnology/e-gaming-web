@@ -67,5 +67,6 @@ jobs:
           ssh -o "StrictHostKeyChecking no" -i private_key.pem ${USER_NAME}@${HOSTNAME} '
               # Now we have got the access of EC2 and to will start the deploy .
               export LATEST=${NEW_VERSION}
+              echo $LATEST
               docker-compose -f /app/gaming-app.yml up -d
               ' 
