@@ -13,7 +13,7 @@ jobs:
       packages: write
     env:
       BASE-IMAGE: josleke/esgc
-      RELEASE-TAG: ${{ GITHUB_REF }}
+      RELEASE-TAG: ${{ env.GITHUB_REF }}
 #      $(echo ${GITHUB_REF} | cut -d '/' -f3)
 
     steps:
