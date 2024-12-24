@@ -20,10 +20,10 @@ const validationSchema = yup.object({
     .string()
     .trim()
     .required('Government Issued Number is required.'),
-  firstName: yup
+  firstname: yup
     .string()
     .required('Please specify matching your First Name'),
-  lastName: yup
+  lastname: yup
     .string()
     .required('Please specify your matching Last Name')
 });
@@ -45,8 +45,8 @@ export const Form = () => {
 
   const initialValues = {
     regNumber: '',
-    firstName: '',
-    lastName: ''
+    firstname: '',
+    lastname: ''
   };
 
   const onSubmit = async (values) => {
@@ -74,11 +74,11 @@ export const Form = () => {
   const onChangeOperator = (e) => {
     setType(e.target.value);
     if(e.target.value === 'Proprietor') {
-      formik.setFieldValue('firstName', '.');
-      formik.setFieldValue('lastName', '.');
+      formik.setFieldValue('firstname', '.');
+      formik.setFieldValue('lastname', '.');
     }else {
-      formik.setFieldValue('firstName', '');
-      formik.setFieldValue('lastName', '');
+      formik.setFieldValue('firstname', '');
+      formik.setFieldValue('lastname', '');
     }
   }
 
@@ -156,24 +156,24 @@ export const Form = () => {
             <TextField
               label="First Name *"
               variant="outlined"
-              name={'firstName'}
+              name={'firstname'}
               fullWidth
-              value={formik.values.firstName}
+              value={formik.values.firstname}
               onChange={formik.handleChange}
-              error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-              helperText={formik.touched.firstName && formik.errors.firstName}
+              error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+              helperText={formik.touched.firstname && formik.errors.firstname}
             />
           </Grid>
           <Grid item xs={12} className={`${type === 'Agent'? '' : 'hidden'}`}>
             <TextField
               label="Last Name *"
               variant="outlined"
-              name={'lastName'}
+              name={'lastname'}
               fullWidth
-              value={formik.values.lastName}
+              value={formik.values.lastname}
               onChange={formik.handleChange}
-              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-              helperText={formik.touched.lastName && formik.errors.lastName}
+              error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+              helperText={formik.touched.lastname && formik.errors.lastname}
             />
           </Grid>
           <Grid item container xs={12}>

@@ -80,7 +80,7 @@ const Hero = () => {
           loading="lazy"
           height={1}
           width={1}
-          borderRadius={'5px'}
+          borderRadius={'7px'}
           src={'https://res.cloudinary.com/dh1mgjbev/image/upload/v1734086648/Shutterstock_online_betting-smaller-size_s5wyt8.png'}
           alt="..."
           maxWidth={600}
