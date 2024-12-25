@@ -4,8 +4,8 @@ import React, { Suspense } from "react";
 const data = [
   { n21000000One: "/images/img_user_gray_200.svg", nCounter: "N 0", totalRevenue: "Total Revenue", bkgColor: 'bg-blue-400' },
   { n21000000One: "/images/img_thumbs_up.svg", nCounter: "1,254", totalRevenue: "Total Payments", bkgColor: 'bg-pink-300' },
-  { n21000000One: "/images/img_contrast.svg", nCounter: "25", totalRevenue: "Total Proprietor", bkgColor: 'bg-green-800_01' },
-  { n21000000One: "/images/img_bag.svg", nCounter: "17", totalRevenue: "Total License", bkgColor: 'bg-yellow-800' },
+  { n21000000One: "/images/img_contrast.svg", nCounter: "25", totalRevenue: "Total Operators", bkgColor: 'bg-green-800_01' },
+  { n21000000One: "/images/img_bag.svg", nCounter: "17", totalRevenue: "Total Licenses", bkgColor: 'bg-yellow-800' },
 ];
 
 export default function Header({ metrics, ...props }) {
