@@ -5,7 +5,7 @@ import { ReportDataTable } from "../../Datatable";
 import { LicenseReport } from "../LicenseReport";
 
 const columnHeader = [
- "Operator", "Category", "Amount", "Submitted On", "Status"
+ "Operator", "KYC", "Amount", "Submitted On", "Status"
 ];
 
 

@@ -33,11 +33,11 @@ export const LeftSidebar = ({ ...props }) => {
       className={`${props.className} flex flex-col h-screen pt-2.5 top-0 bg-blue_gray-900_01 !sticky overflow-auto`}
     >
       <div className="mx-3 mt-6 self-stretch">
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col bg-black-900 py-2 items-center gap-1 rounded-[10px]">
           <div className="flex items-center justify-center gap-2.5 self-stretch">
-            <Img src="/images/img_subtract.png" alt="Subtract" className="h-[42px] w-[42] object-cover" />
+            <Img src="/images/enugu_logo2.png" alt="Subtract" className="h-[42px] w-[42] object-cover" />
             <Text as="p" className="text-[16px] font-light text-white-a700 !important">
-              MELD ADMIN
+              ESGC
             </Text>
           </div>
           <Heading as="h6" className="font-inter text-1 font-bold text-gray-600">

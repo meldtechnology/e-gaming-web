@@ -1,6 +1,6 @@
 import { MeldAlert } from "../../Alerts";
 import { AlertType } from "../../Alerts/AlertType";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UpdateUserService as toggleEnabled } from "../../../services";
 import { Loader } from "../../Loader";
 
@@ -12,6 +12,7 @@ export const EnableToggleModal = ({ onClick, userData }) => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
   const userDataSplit = "".concat(userData).split(",");
+  const [isEnabled, setIsEnabled] = useState(false);
   const { modifyPost } = toggleEnabled(`${ENABLE_URL}/${userDataSplit[1]}`);
   const { modifyPost: disable } = toggleEnabled(`${DISABLE_URL}/${userDataSplit[1]}`);
 
@@ -41,6 +42,10 @@ export const EnableToggleModal = ({ onClick, userData }) => {
     }, 5000);
   }
 
+  useEffect(() => {
+    setIsEnabled(userDataSplit[3] === "true");
+  }, [userDataSplit]);
+
   return (
     <>
       <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="false"></div>
@@ -68,10 +73,10 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                     <img src="/images/permission.svg" alt="Roles" className="relative ml-[35%]"/>
                     <div className="align-middle items-center text-center">
                       <span className="font-bold text-[24px] block">Enable/Disable User</span>
-                      <span className="text-[14px]">{(userDataSplit[3] === true)? 'Disable' : 'Enable'}
+                      <span className="text-[14px]">{(isEnabled)? 'Disable' : 'Enable'}
                         <span className="text-blue-600 pl-1">{userDataSplit[0]}</span>
                       </span>
-                      <span className={`block mt-2 text-[14px] ${(userDataSplit[3] === true)? 'hidden': ''}`}>
+                      <span className={`block mt-2 text-[14px] ${(isEnabled)? 'hidden': ''}`}>
                         An activation OTP will be sent to the email
                         <br />associated with account
                         <span className="text-blue-600 pl-1">{userDataSplit[0]}</span>
@@ -84,12 +89,14 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                       <label className={`inline-flex items-center cursor-pointer ${!isSaving ? '' : 'hidden'}`}>
                         <input type="checkbox"
                                value=""
+                               checked={isEnabled}
+                               onChange={() => setIsEnabled(!isEnabled)}
                                className="sr-only peer"
                                onClick={toggle} />
                         <div
                           className="relative w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-amber-50 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                          {(userDataSplit[3] === true) ? "Disable" : "Enable"} <span
+                          {(isEnabled) ? "Disable" : "Enable"} <span
                           className="text-blue-600 pl-1">{userDataSplit[0]}</span>
                         </span>
                       </label>

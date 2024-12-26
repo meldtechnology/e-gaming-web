@@ -1,7 +1,7 @@
 const dateSuffix = (number) => {
-  return ((''+number).includes('1') && checkNumber(number)) ? 'st' :
-    ((''+number).includes('2') && checkNumber(number)) ? 'nd' :
-    ((''+number).includes('3') && checkNumber(number)) ? 'rd' : 'th';
+  return ((''+number).endsWith('1') && checkNumber(number)) ? 'st' :
+    ((''+number).endsWith('2') && checkNumber(number)) ? 'nd' :
+    ((''+number).endsWith('3') && checkNumber(number)) ? 'rd' : 'th';
 }
 
 const checkNumber = (number) => {
