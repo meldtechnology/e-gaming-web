@@ -193,9 +193,9 @@ const Products = () => {
                     </Box>
                   </Box>
                   <CardActions sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontWeight: 700 }} color={'#FE0000'}>
+{/*                     <Typography sx={{ fontWeight: 700 }} color={'#FE0000'}>
                       ₦ {`${formatAmount(item?.value)} ${item?.feeType?.includes('FLAT')? '' : '% of Revenue'}`}
-                    </Typography>
+                    </Typography> */}
                     <Button
                       variant={'outlined'}
                       className={`!border-solid !border-[#18801d] !bg-[#18801d] !text-white-a700`}

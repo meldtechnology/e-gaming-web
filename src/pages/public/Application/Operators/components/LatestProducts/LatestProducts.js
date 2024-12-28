@@ -176,9 +176,9 @@ const LatestProducts = ({operatorType}) => {
                     </Box>
                   </Box>
                   <CardActions sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontWeight: 700 }} color={'primary'}>
+{/*                     <Typography sx={{ fontWeight: 700 }} color={'primary'}>
                       ₦ {`${formatAmount(item?.value)} ${item?.feeType?.includes('FLAT')? '' : '% of Revenue'}`}
-                    </Typography>
+                    </Typography> */}
                     <Button
                       variant={'contained'}
                       className={`!bg-[#18801d]`}
