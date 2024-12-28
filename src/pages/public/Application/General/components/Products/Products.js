@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useTheme } from '@mui/material/styles';
-import { formatAmount, GetPublicFileService as getFiles, removeAll, storeItem } from "../../../../../../services";
+import { GetPublicFileService as getFiles, removeAll, storeItem } from "../../../../../../services";
 import { Link, useNavigate } from "react-router-dom";
 
 const mock = [
@@ -193,8 +193,8 @@ const Products = () => {
                     </Box>
                   </Box>
                   <CardActions sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontWeight: 700 }} color={'#FE0000'}>
-                      ₦ {`${formatAmount(item?.value)} ${item?.feeType?.includes('FLAT')? '' : '% of Revenue'}`}
+                    <Typography sx={{ fontWeight: 700 }} color={'#A6A6A6'}>
+                      {item?.description}
                     </Typography>
                     <Button
                       variant={'outlined'}

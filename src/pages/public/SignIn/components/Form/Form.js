@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useSearchParams } from "react-router-dom";
 
 const validationSchema = yup.object({
   username: yup
@@ -21,6 +22,7 @@ const validationSchema = yup.object({
 
 const LOGIN_URL = 'http://3.249.214.239:9011/login';
 const Form = () => {
+  const [searchParams] = useSearchParams();
   const initialValues = {
     username: '',
     password: '',
@@ -60,6 +62,10 @@ const Form = () => {
         <Typography color="text.secondary">
           Login to manage your account.
         </Typography>
+        <div className={`${searchParams.get('error') !== null? '':'hidden'} mt-3 p-2 text-white-a700 bg-red-600 rounded-[10px] text-[1.2rem] text-center`}>
+          <span className={'block text-amber-100-400'}> Username/Password is incorrect.</span>
+          <span className={'text-[0.9rem]'}><strong>Note:</strong> Make sure your account is also  active.</span>
+        </div>
       </Box>
       <form onSubmit={formik.submitForm} action={LOGIN_URL} method="POST">
         <Grid container spacing={4}>

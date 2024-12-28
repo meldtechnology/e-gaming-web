@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ChangeRoleModal } from "../../Model/ChangeRoleModal";
 import { EnableToggleModal } from "../../Model/EnableToggleModal";
 
-export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previousPage }) => {
+export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previousPage, refresh }) => {
   const [open, setOpen] = useState('invisible');
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -13,6 +13,7 @@ export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
 
   const openModal = () => {
     setIsOpen(!isOpen);
+    // if(!isOpen) setUserData([]);
   }
 
   const selectedUser = (value) => {
@@ -105,30 +106,44 @@ export const UserDatatable = ({ columnHeader, data, pageInfo, nextPage, previous
         <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
           {`Page ${pageInfo.page} of ${pageInfo.totalPages}`}
         </p>
+        <div className={'flex gap-2'}>
+          <button type="button"
+                  className="flex gap-2 bg-white-a700 border-solid border-gray-50_01 p-2 items-center"
+                  onClick={refresh}>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 512 512"
+                 fill="#909090"
+                 className="w-4 h-4">
+              <path
+                d="M125.7 160l50.3 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L48 224c-17.7 0-32-14.3-32-32L16 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z" />
+            </svg>
+            Refresh Data
+          </button>
+        </div>
         <div className="flex gap-2">
           <button
             className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button" disabled={pageInfo?.previous <= 0}
-            onClick={previousPage} >
+            onClick={previousPage}>
             Previous
           </button>
           <button
             className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"disabled={pageInfo?.next <= 0}
-            onClick={nextPage} >
+            type="button" disabled={pageInfo?.next <= 0}
+            onClick={nextPage}>
             Next
           </button>
         </div>
       </div>
-      <Model isOpen={modalType === 'pwd'? open : 'invisible'}
+      <Model isOpen={modalType === 'pwd' ? open : 'invisible'}
              modal={<ChangePasswordModal
                onClick={openModal}
                userData={userData} />} />
-      <Model isOpen={modalType === 'rle'? open : 'invisible'}
+      <Model isOpen={modalType === 'rle' ? open : 'invisible'}
              modal={<ChangeRoleModal
                onClick={openModal}
                userData={userData} />} />
-      <Model isOpen={modalType === 'act'? open : 'invisible'}
+      <Model isOpen={modalType === 'act' ? open : 'invisible'}
              modal={<EnableToggleModal
                onClick={openModal}
                userData={userData} />} />
