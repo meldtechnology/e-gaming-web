@@ -12,24 +12,28 @@ export const EnableToggleModal = ({ onClick, userData }) => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
   const userDataSplit = "".concat(userData).split(",");
-  const [isEnabled, setIsEnabled] = useState(false);
+  let status = (userDataSplit[3] === 'true')
+  const [isEnabled, setIsEnabled] = useState(status);
   const { modifyPost } = toggleEnabled(`${ENABLE_URL}/${userDataSplit[1]}`);
   const { modifyPost: disable } = toggleEnabled(`${DISABLE_URL}/${userDataSplit[1]}`);
 
   const toggle = async (e) => {
-    console.log(e.target.checked);
-    const result = await updateUserStatus(e.target.checked);
+    const result = await updateUserStatus(isEnabled);
     if(result?.error !== undefined){
       setError(result?.error);
       setMessage(result?.error?.userMessage);
     }
     else {
       setSuccess(result?.data);
-      setMessage(result?.data?.data?.message);
+      setMessage(result?.data?.message);
+      setIsEnabled(!isEnabled);
     }
+    // setIsEnabled(!isEnabled);
     setIsSaving(false);
     closeAlert();
   }
+
+
   const updateUserStatus = async (values) => {
     setIsSaving(true);
     return (values) ? await modifyPost(null) : await disable(null);
@@ -42,9 +46,9 @@ export const EnableToggleModal = ({ onClick, userData }) => {
     }, 5000);
   }
 
-  useEffect(() => {
-    setIsEnabled(userDataSplit[3] === "true");
-  }, [userDataSplit]);
+  // useEffect(() => {
+  //     setIsEnabled(userDataSplit[3] === "true");
+  // }, [userDataSplit]);
 
   return (
     <>
@@ -101,6 +105,10 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                         </span>
                       </label>
 
+                    </div>
+                    <div className={'w-[70%] mt-4 mx-auto text-[0.8rem] text-center font-bold'}>
+                      Note: if the data is not updated immediately, please use the
+                      <span className={'text-red-700'}> refresh data </span> button
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { formatAmount, getItem, removeAll, storeItem, updateForm } from "../../../../../../services";
+import { getItem, removeAll, storeItem, updateForm } from "../../../../../../services";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
@@ -137,9 +137,9 @@ export const Details = ({reference}) => {
                   </Typography>
                   <Typography component={'p'} sx={{ fontSize: 'large'}}
                   >
-                    <span style={{ fontWeight: 700, color: '#636363', display: 'block'}}>Amount: </span>
+                    {/*<span style={{ fontWeight: 700, color: '#636363', display: 'block'}}>Amount: </span>*/}
                     <span style={{ fontWeight: 700, fontSize: 'xx-large', color: 'red' }}>
-                  ₦ {formatAmount(file?.value)} {file?.feeType?.includes('FLAT')?'':'% of Revenue'}
+                  {/*₦ {formatAmount(file?.value)} {file?.feeType?.includes('FLAT')?'':'% of Revenue'}*/}
                 </span>
                   </Typography>
                 </Box>

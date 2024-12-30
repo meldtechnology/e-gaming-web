@@ -31,6 +31,10 @@ export const UsersList = () => {
     setPage(page - 1);
   }
 
+  const refreshPage = () => {
+    window.location.reload();
+  }
+
   return (
     <div className="flex flex-col h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
       <Button
@@ -47,13 +51,15 @@ export const UsersList = () => {
           <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">
             <UserDatatable columnHeader={columnHeading}
                            data={users?.data?.results}
-                           pageInfo={{page: users?.data?.page,
+                           pageInfo={{
+                             page: users?.data?.page,
                              previous: users?.data?.previousPage,
                              next: users?.data?.nextPage,
-                             totalPages: users?.data?.totalPages }}
+                             totalPages: users?.data?.totalPages
+                           }}
                            nextPage={nextPage}
                            previousPage={previousPage}
-
+                           refresh={refreshPage}
             />
           </div>
         </div>
