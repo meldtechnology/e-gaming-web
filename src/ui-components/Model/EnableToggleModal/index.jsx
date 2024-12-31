@@ -1,6 +1,6 @@
 import { MeldAlert } from "../../Alerts";
 import { AlertType } from "../../Alerts/AlertType";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UpdateUserService as toggleEnabled } from "../../../services";
 import { Loader } from "../../Loader";
 
@@ -45,10 +45,6 @@ export const EnableToggleModal = ({ onClick, userData }) => {
       setSuccess(null);
     }, 5000);
   }
-
-  // useEffect(() => {
-  //     setIsEnabled(userDataSplit[3] === "true");
-  // }, [userDataSplit]);
 
   return (
     <>
