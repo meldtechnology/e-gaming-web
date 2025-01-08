@@ -84,7 +84,7 @@ export const FormBuilder = ({ onClick, fileData }) => {
                           </div>
                           <div className={`${loadingTemplate ? 'hidden' : ''} w-[95%]`}>
                             <TemplateForm className={`${loadingTemplate ? 'hidden' : ''}`}
-                                          data={(!!(fileObject?.formTemplate)) ?
+                                          data={(Object.keys(fileObject?.formTemplate).length > 0) ?
                                             fileObject?.formTemplate : extractTemplate(template)}
                                           saveTemplate={saveTemplate}
                                           saving={saving} />

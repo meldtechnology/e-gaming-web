@@ -16,6 +16,7 @@ export const createFormField = () => {
     hints: 'Provide your text',
     label: 'Default Label',
     name: uniqueId.replaceAll('-', ''),
+    options: [],
     required: false
   };
 }

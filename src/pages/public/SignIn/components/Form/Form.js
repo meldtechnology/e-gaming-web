@@ -20,7 +20,8 @@ const validationSchema = yup.object({
     // .min(8, 'The password should have at minimum length of 8'),
 });
 
-const LOGIN_URL = 'http://3.249.214.239:9011/login';
+const LOGIN_URL = 'http://localhost:9011/login';
+// const LOGIN_URL = 'http://3.249.214.239:9011/login';
 const Form = () => {
   const [searchParams] = useSearchParams();
   const initialValues = {

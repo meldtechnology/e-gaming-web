@@ -128,11 +128,11 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         name={name}
         onChange={formik.handleChange}
         required={required}
-        onInvalid={(e) => inValid(e, errMsg)}
-        onInput={valid}
+        // onInvalid={(e) => inValid(e, errMsg)}
+        // onInput={valid}
       >
-        {options?.map(option => (
-          <FormControlLabel value={option?.value} control={<Radio />} label={option?.label} />
+        {options?.map((option, idx) => (
+          <FormControlLabel key={idx} value={option} control={<Radio />} label={option} />
         ))}
       </RadioGroup>
       <div className={`${required?'':'hidden'}`}>
@@ -144,9 +144,10 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   )
   if(fieldType === 'rating') return (
     <>
-      <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
+      <FormLabel id="demo-radio-buttons-group-label">{label} <span
+        className={`${required ? "" : "hidden"} text-red-700`}>*</span></FormLabel>
       <Rating name={name}
-              defaultValue={2.5}
+              defaultValue={0}
               precision={0.5}
               size="large"
               onChange={formik.handleChange}
@@ -161,21 +162,22 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   if(fieldType === 'select') return (
     <>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <InputLabel id="demo-simple-select-label">{label} <span
+          className={`${required ? "" : "hidden"} text-red-700`}>*</span></InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          // value={age}
           name={name}
           label={label}
+          defaultValue={''}
           onChange={formik.handleChange}
           required={required}
-          onInvalid={(e) => inValid(e, errMsg)}
-          onInput={valid}
+          // onInvalid={(e) => inValid(e, errMsg)}
+          // onInput={valid}
           className={`w-[100%]`}
           variant={'filled'} >
-          {options?.map(option => (
-            <MenuItem value={option}>{option}</MenuItem>
+          {options?.map((option, idx) => (
+            <MenuItem key={idx} value={option}>{option}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -277,14 +279,15 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   );
   if (fieldType === "checkbtn") return (
     <>
+      <div>{label} <span className={`${required? '' :'hidden'} text-red-700`}>*</span></div>
       <FormGroup>
-        {options?.map(option => (
-          <FormControlLabel name={name}
+        {options?.map((option, idx) => (
+          <FormControlLabel key={idx}
+                            name={name}
                             onChange={formik.handleChange}
-                            required={required}
-                            onInvalid={(e) => inValid(e, errMsg)}
-                            onInput={valid}
-                            control={<Checkbox  />} label={option} />
+                            // onInvalid={(e) => inValid(e, errMsg)}
+                            // onInput={valid}
+                            control={<Checkbox value={option} />} label={option} />
         ))}
       </FormGroup>
       <div className={`${required ? "" : "hidden"}`}>
