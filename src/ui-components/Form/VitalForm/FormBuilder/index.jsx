@@ -39,6 +39,7 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, onSub
                         required={field?.required}
                         name={field?.name}
                         label={field?.label}
+                        options={field?.options}
                         isError={error}
                         errMsg={`Please provide the ${field?.label}`}
                         inValid={inValidField}

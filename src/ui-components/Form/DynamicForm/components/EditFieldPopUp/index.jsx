@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { FormFieldTypes } from "../FormFieldTypes";
+import { Tag } from "../../../../Tag";
+
 
 export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
   const [fieldType, setFieldType] = useState('');
   const [label, setLabel] = useState('');
   const [hint, setHint] = useState('');
   const [required, setRequired] = useState(false);
+  const [options, setOptions] = useState([]);
 
   const updateFiled = () => {
     field.fieldType = fieldType;
     field.label = label;
     field.hints = hint;
     field.required = required;
+    field.options = options;
     return field;
   }
 
@@ -23,6 +27,10 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
   const fieldValue = (value) => {
     if(value === undefined) return '';
     return value;
+  }
+
+  const handleSelectedTags = (items) => {
+    setOptions(items);
   }
 
   useEffect(() => {
@@ -71,6 +79,21 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
                    className="rounded-2xl"
                    onChange={(e) => setHint(e.target.value)}
             />
+          </div>
+        </div>
+      </div>
+      <div className={`w-[100%] flex p-4`}>
+        <div className="flex flex-row w-full gap-8">
+          <div className="w-20 font-bold">Options:</div>
+          <div>
+            <Tag
+              selectedTags={handleSelectedTags}
+              fullWidth
+              variant="outlined"
+              id="tags"
+              name="tags"
+              placeholder="add Options"
+              label="Options" />
           </div>
         </div>
       </div>
