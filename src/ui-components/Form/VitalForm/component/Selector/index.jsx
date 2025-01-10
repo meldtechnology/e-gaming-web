@@ -19,8 +19,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Label } from "@mui/icons-material";
-
 
 export const Selector = ({fieldType, formik, name, label, required, options, isError, errMsg, inValid, valid}) => {
   const adornmentCountry = (type) => (
@@ -101,7 +99,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   );
   if (fieldType === "label") return (
     <>
-      <Label className={'w-full font-bold'}>{label}</Label>
+      <label className={'w-full font-bold'}>{label}</label>
     </>
   );
   if (fieldType === "textarea") return (
