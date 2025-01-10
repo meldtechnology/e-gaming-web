@@ -106,6 +106,8 @@ export const LeftSidebar = ({ ...props }) => {
             {/*  {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}*/}
             {/*  { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }*/}
             {/*</MenuItem>*/}
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
           </div>
         </Menu>
       </div>
