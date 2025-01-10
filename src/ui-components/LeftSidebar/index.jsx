@@ -41,7 +41,7 @@ export const LeftSidebar = ({ ...props }) => {
             </Text>
           </div>
           <Heading as="h6" className="font-inter text-1 font-bold text-gray-600">
-            Revenue Dashboard
+            Dashboard
           </Heading>
         </div>
         <Menu
