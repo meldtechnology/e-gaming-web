@@ -41,7 +41,7 @@ const LatestProducts = ({operatorType}) => {
   const [products, setProduct] = useState([]);
   const [page, ] = useState(1);
   const navigate = useNavigate();
-  const { documents } = getFiles(`${FILTER_FILES_URL}?page=${page}&size=10&categoryFilter=${operatorType}`);
+  const { documents } = getFiles(`${FILTER_FILES_URL}?page=${page}&size=500&categoryFilter=${operatorType}`);
 
   const selectPermit = (selectedPermit) => {
     storeItem('permit', JSON.stringify(selectedPermit));
