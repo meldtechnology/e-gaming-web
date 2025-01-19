@@ -47,7 +47,7 @@ export const PaymentInvoice = () => {
     const paymentData = {
       amountPayable: form?.amountPayable,
       description: `Payment for ${form?.code} was requested by ${form?.applicant?.name}`,
-      itemCode: form?.code,
+      itemCode: form?.serviceTypeCode,
       payerEmail: values.email,
       payerName: form?.applicant?.name,
       payerPhone: "08031154652",

@@ -58,6 +58,10 @@ const ProtectedRoutes = {
             path: 'licenses/L_10O9I78',
             element: <AppLayout />
         },
+        {
+            path: 'report',
+            element: <AppLayout />
+        },
     ]
 };
 

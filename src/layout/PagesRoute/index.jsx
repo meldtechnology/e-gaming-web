@@ -10,6 +10,7 @@ import { DocumentFormBuilder } from "../../pages/Documents/DocumentFormBuilder";
 import { DocumentReviewer } from "../../pages/Documents/DocumentReviewer";
 import { License } from "../../pages/Documents/License";
 import { LicenseForm } from "../../ui-components/LicenseForm";
+import { ReportForm } from "../../ui-components/ReportForm";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -40,6 +41,7 @@ export const PagesRoute = ({ page, params }) => {
       case 'F_D5N2M19': return <DocumentFormBuilder />;
       case 'R_SHFB95GH': return <DocumentReviewer />;
       case 'L_10O9I78': return <LicenseForm />;
+      case 'report': return <ReportForm />;
       default: return <Dashboard />
     }
 
