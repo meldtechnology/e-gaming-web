@@ -41,7 +41,7 @@ export const LeftSidebar = ({ ...props }) => {
             </Text>
           </div>
           <Heading as="h6" className="font-inter text-1 font-bold text-gray-600">
-            Revenue Dashboard
+            Dashboard
           </Heading>
         </div>
         <Menu
@@ -88,24 +88,26 @@ export const LeftSidebar = ({ ...props }) => {
               {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
               { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
             </MenuItem>
-            <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
-                                 alt="License" className="h-[40px] w-[40px]" />}
-                      href={'/app/report'}>
-              {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}
-              { isItemSelected(pathName, MENU_ITEMS.REPORT) }
-            </MenuItem>
+            {/*<MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}*/}
+            {/*                     alt="License" className="h-[40px] w-[40px] hidden" />}*/}
+            {/*          href={'/app/report'}>*/}
+            {/*  {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}*/}
+            {/*  { isItemSelected(pathName, MENU_ITEMS.REPORT) }*/}
+            {/*</MenuItem>*/}
             <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
                                  alt="User" className="h-[44px] w-[44px]" />}
                       href={'/app/users'}>
               {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
               { isItemSelected(pathName, MENU_ITEMS.USERS) }
             </MenuItem>
-            <MenuItem icon={<Img src={activeStatus( "img_settings.svg", pathName, MENU_ITEMS.SETTINGS)}
-                                 alt="Search" className="h-[40px] w-[40px]" />}
-                      href={'/app/settings'}>
-              {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}
-              { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }
-            </MenuItem>
+            {/*<MenuItem icon={<Img src={activeStatus( "img_settings.svg", pathName, MENU_ITEMS.SETTINGS)}*/}
+            {/*                     alt="Search" className="h-[40px] w-[40px] hidden" />}*/}
+            {/*          href={'/app/settings'}>*/}
+            {/*  {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}*/}
+            {/*  { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }*/}
+            {/*</MenuItem>*/}
+            <MenuItem></MenuItem>
+            <MenuItem></MenuItem>
           </div>
         </Menu>
       </div>

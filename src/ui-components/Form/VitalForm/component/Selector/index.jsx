@@ -20,7 +20,6 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-
 export const Selector = ({fieldType, formik, name, label, required, options, isError, errMsg, inValid, valid}) => {
   const adornmentCountry = (type) => (
     <div className="inline-flex items-center">
@@ -96,6 +95,11 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
                       {label} must be provided
                     </span>
       </div>
+    </>
+  );
+  if (fieldType === "label") return (
+    <>
+      <label className={'w-full font-bold'}>{label}</label>
     </>
   );
   if (fieldType === "textarea") return (
