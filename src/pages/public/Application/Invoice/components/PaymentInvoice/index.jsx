@@ -43,12 +43,12 @@ export const PaymentInvoice = () => {
 
   const onSubmit =  async (values) => {
     console.log(values);
-    alert(form);
+    alert(JSON.stringify(form));
     setShow(true);
     const paymentData = {
       amountPayable: form?.amountPayable,
       description: `Payment for ${form?.code} was requested by ${form?.applicant?.name}`,
-      itemCode: form?.serviceTypeCode,
+      itemCode: form?.code,
       payerEmail: values.email,
       payerName: form?.applicant?.name,
       payerPhone: "08031154652",
