@@ -44,9 +44,6 @@ const validationSchema = yup.object({
   ,flatFee: yup
     .number()
     .required('Please provide the flat fee. The minimum is 0.'),
-  systemTypeId: yup
-    .number()
-    .required('Please provide the System Type ID.'),
 
 });
 
@@ -65,7 +62,6 @@ export const FileForm = ({selectedFile, isNew}) => {
   const [initialValues, setInitialValues] = useState(
     {
       code: '',
-      systemTypeId: '',
       name: '',
       description: '',
       logo: '',
@@ -108,7 +104,6 @@ export const FileForm = ({selectedFile, isNew}) => {
 
   const reset = () => {
     formik.setFieldValue("code", '');
-    formik.setFieldValue("systemTypeId", '');
     formik.setFieldValue("name", '');
     formik.setFieldValue("description", '');
     formik.setFieldValue("publicVisibility", false);
@@ -120,7 +115,6 @@ export const FileForm = ({selectedFile, isNew}) => {
     setPermitLogo('/images/building.jpg');
     setInitialValues({
       code: '',
-      systemTypeId: '',
       name: '',
       description: '',
       logo: '/images/building.jpg',
@@ -187,17 +181,6 @@ export const FileForm = ({selectedFile, isNew}) => {
                        errorText={formik.touched.code && formik.errors.code}
                        fieldClass="w-full max-w-sm min-w-[200px]"
             />
-            <TextField formik={formik}
-                       labelText={`System Type ID`}
-                       placeHolderText={`i.e 14996410000`}
-                       required={true}
-                       value={formik.values.systemTypeId}
-                       onChange={formik.handleChange}
-                       fieldName='systemTypeId'
-                       error={formik.touched.systemTypeId && formik.errors.systemTypeId}
-                       errorText={formik.touched.systemTypeId && formik.errors.systemTypeId}
-                       fieldClass="w-full max-w-sm min-w-[200px]"
-            />            
             <TextField formik={formik}
                        labelText={`Name`}
                        placeHolderText={`i.e Weekly Tax`}
