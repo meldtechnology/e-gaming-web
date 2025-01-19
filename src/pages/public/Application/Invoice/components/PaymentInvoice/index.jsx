@@ -43,6 +43,7 @@ export const PaymentInvoice = () => {
 
   const onSubmit =  async (values) => {
     console.log(values);
+    console.log(form);
     setShow(true);
     const paymentData = {
       amountPayable: form?.amountPayable,
