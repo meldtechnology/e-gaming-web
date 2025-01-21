@@ -83,13 +83,13 @@ export const LeftSidebar = ({ ...props }) => {
             </div>
             <MenuItem
               icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
-                         alt="File" className="h-[44px] w-[44px]" />}
+                         alt="Licenses" className="h-[44px] w-[44px]" />}
               href={'/app/licenses'}>
               {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
               { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
             </MenuItem>
             <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
-                                 alt="License" className="h-[40px] w-[40px]" />}
+                                 alt="Reports" className="h-[40px] w-[40px]" />}
                       // className={'hidden'}
                       href={'/app/reports'}>
               {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}
