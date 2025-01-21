@@ -89,8 +89,9 @@ export const LeftSidebar = ({ ...props }) => {
               { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
             </MenuItem>
             <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
-                                 alt="License" className="h-[40px] w-[40px] hidden" />}
-                      href={'/app/report'}>
+                                 alt="License" className="h-[40px] w-[40px]" />}
+                      // className={'hidden'}
+                      href={'/app/reports'}>
               {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}
               { isItemSelected(pathName, MENU_ITEMS.REPORT) }
             </MenuItem>

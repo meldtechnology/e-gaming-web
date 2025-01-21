@@ -59,7 +59,15 @@ const ProtectedRoutes = {
             element: <AppLayout />
         },
         {
-            path: 'report',
+            path: 'reports',
+            element: <AppLayout />
+        },
+        {
+            path: 'reports/R_1786100',
+            element: <AppLayout />
+        },
+        {
+            path: 'reports/R_1786101',
             element: <AppLayout />
         },
     ]
