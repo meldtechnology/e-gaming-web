@@ -10,6 +10,7 @@ export const ProfileAccount = () => {
   const {users, isLoading } = getProfile(USER_PROFILE);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if(users) {
       storeItem('profile', JSON.stringify(users?.data));

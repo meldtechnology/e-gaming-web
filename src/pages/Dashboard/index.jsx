@@ -4,7 +4,7 @@ import {
   GetPaymentService as getPaymentMetrics,
   GetDocumentService as getLicenseMetrics,
   formatAmount,
-  GetUsersService as getEntityMetrics
+  GetUsersService as getEntityMetrics, getItem
 } from "../../services";
 
 const PAYMENT_METRIC_URL = process.env.REACT_APP_PAYMENTS_METRIC_URL;
@@ -14,6 +14,7 @@ export const Dashboard = () => {
   const { payments } = getPaymentMetrics(PAYMENT_METRIC_URL);
   const { documents } = getLicenseMetrics(LICENSE_METRIC_URL);
   const { users } = getEntityMetrics(ENTITY_METRIC_URL);
+  console.log(getItem('at'));
   return (
     <>
       <Header metrics={[
