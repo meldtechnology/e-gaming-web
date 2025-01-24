@@ -36,7 +36,6 @@ export const LicenseList = ({status}) => {
                               }}
                               nextPage={nextPage}
                               previousPage={previousPage}
-
             />
           </div>
           <div className={`${isLoading ? '' : 'hidden'} items-center justify-center`}>

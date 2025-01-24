@@ -13,6 +13,7 @@ import { Loader } from "../../Loader";
 import { ProgressButton } from "../component/ProgressButton";
 import { MeldAlert } from "../../Alerts";
 import { AlertType } from "../../Alerts/AlertType";
+import { checkPermission } from "../../../services/autorization";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -134,7 +135,7 @@ export const EditUserForm = () => {
             <div className="flex">
               <Button
                 shape="round"
-                className="min-w-[104px] min-h-[43px] rounded-[14px] border border-solid border-black-900_01 bg-white-a700 px-[19px] mr-2"
+                className={`min-w-[104px] min-h-[43px] rounded-[14px] border border-solid border-black-900_01 bg-white-a700 px-[19px] mr-2`}
                 type='reset'
               >
                 Cancel
@@ -142,7 +143,7 @@ export const EditUserForm = () => {
               <Button
                 shape="round"
                 disabled={!(dirty && isValid)}
-                className={`${saving?'hidden':''} min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
+                className={`${checkPermission('CAN_EDIT_USER')} ${saving?'hidden':''} min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
                 type='submit'
               >
                 Save

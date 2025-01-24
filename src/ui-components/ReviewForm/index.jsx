@@ -7,6 +7,7 @@ import { DocumentHistory } from "../DocumentHistory";
 import { DocumentApplication } from "../DocumentApplication";
 import { DocumentReviewForm } from "../DocumentReviewForm";
 import { useNavigate } from "react-router-dom";
+import { checkPermission } from "../../services/autorization";
 
 export const ReviewForm = ({ onClick, fileData }) => {
   const data = fileData[0];
@@ -20,7 +21,8 @@ export const ReviewForm = ({ onClick, fileData }) => {
 
   if(fileData[0] === null) return ;
 
-  return (
+  return (checkPermission('CAN_REVIEW_APPLICATION') === '' ||
+  checkPermission('CAN_APPROVE_APPLICATION') === '') ? (
     <Container>
       <Box>
         <Box display={'block'}
@@ -150,5 +152,16 @@ export const ReviewForm = ({ onClick, fileData }) => {
         </Grid>
       </Box>
     </Container>
+  ) : (
+    <>
+      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
+        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
+          Access Denied! - You do not have sufficient access to view the screen
+        </div>
+        <div className={'w-[70%] h-[]70%'}>
+          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
+        </div>
+      </div>
+    </>
   );
 }

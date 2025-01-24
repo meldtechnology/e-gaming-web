@@ -23,8 +23,8 @@ export const LicenseTemplate = ({license}) => {
                          alt={"GovLogo"}
                          className={"w-[102px] h-[102px] rounded-full border-2 border-solid border-green-600"} />
                   </div>
-                  <div className={"m-0 pt-2 p-4 text-[24px] text-left"}>
-                    <div><strong>No.:</strong> {license?.reference}</div>
+                  <div className={"ml-4 pt-2 p-4 text-[24px] text-left"}>
+                    <div><strong>No.:</strong> {license?.invoiceNumber}</div>
                   </div>
                 </div>
               </div>
@@ -87,6 +87,9 @@ export const LicenseTemplate = ({license}) => {
             <div className={'pt-[40px] text-left text-[22px] px-8'}>
               <strong>Signed</strong><br />
               Executive Secretary
+            </div>
+            <div className={'text-center justify-items-center'}>
+              <strong>Reference #: {license?.reference} </strong>
             </div>
           </div>
         </div>

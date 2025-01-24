@@ -5,6 +5,7 @@ import { UsersList } from "../../ui-components/UsersList";
 import { InputText } from "../../ui-components/InputText";
 import { SearchIcon } from "../../ui-components/Icons";
 import { GetUsersService as getMetricsService } from "../../services";
+import { checkPermission } from "../../services/autorization";
 
 const PROFILE_SEARCH_URL = process.env.REACT_APP_ADMIN_USER_PROFILE_URL;
 export const Users = () => {
@@ -17,7 +18,7 @@ export const Users = () => {
     setSearchBarValue(event.target.value);
   }
 
-  return (
+  return checkPermission('CAN_VIEW_USERS') === '' ? (
     <>
           <div>
             <header className="border-b border-solid border-blue_gray-400 bg-white-a700 gap-9 p-[18px] mb-4">
@@ -41,5 +42,16 @@ export const Users = () => {
           </div>
       <UsersList />
     </>
-);
+) : (
+    <>
+      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
+        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
+          Access Denied! - You do not have sufficient access to view the screen
+        </div>
+        <div className={'w-[70%] h-[]70%'}>
+          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
+        </div>
+      </div>
+    </>
+  );
 }

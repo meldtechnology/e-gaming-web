@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getItem, UpdateDocumentService as reviewApplication } from "../../services";
 import Typography from "@mui/material/Typography";
 import { ProgressButton } from "../Form/component/ProgressButton";
+import { checkPermission } from "../../services/autorization";
 
 const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
 export const LicenseForm = () => {
@@ -57,7 +58,7 @@ export const LicenseForm = () => {
     if(app !== undefined) setUser(JSON.parse(app));
   }, []);
 
-  return (
+  return checkPermission('CAN_ISSUE_LICENSE') === '' ? (
     <Container>
       <Box>
         <Box display={'block'}
@@ -106,5 +107,16 @@ export const LicenseForm = () => {
         </Box>
       </Box>
     </Container>
+  ) : (
+    <>
+      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
+        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
+          Access Denied! - You do not have sufficient access to view the screen
+        </div>
+        <div className={'w-[70%] h-[]70%'}>
+          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
+        </div>
+      </div>
+    </>
   );
 }

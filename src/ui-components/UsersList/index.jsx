@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Loader } from "../Loader";
 import { MeldAlert } from "../Alerts";
 import { AlertType } from "../Alerts/AlertType";
+import { checkPermission } from "../../services/autorization";
 
 const columnHeading = [
   "Name", "Phone", "Role", "Status", ""
@@ -41,7 +42,7 @@ export const UsersList = () => {
         color="blue_gray_900"
         size="sm"
         rightIcon={<Img src="/images/img_add_user.svg" alt="Add_User" className="h-[30px] w-[30px]" />}
-        className="mr-2 min-w-[182px] gap-3 rounded-[8px] px-1 md:mr-0 mt-5"
+        className={`${checkPermission('CAN_CREATE_USER')} mr-2 min-w-[182px] gap-3 rounded-[8px] px-1 md:mr-0 mt-5`}
         buttonClicked={(e) => navigate('/app/users/_new')}
       >
         Add User

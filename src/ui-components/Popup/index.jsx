@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { checkPermission } from "../../services/autorization";
 
 export const Popup = ({openModal, value, selectedUser, selectedModal, isActive}) => {
   return (
@@ -24,7 +25,7 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
               onClick={openModal}
               onMouseDown={(e) => selectedModal("pwd")}
               to={"#"}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className={`${checkPermission('CAN_CHANGE_USER_PASSWORD')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
             >
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"
@@ -42,7 +43,7 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
             <Link
               onClick={openModal}
               onMouseDown={(e) => selectedModal("rle")}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className={`${checkPermission('CAN_CHANGE_USER_PASSWORD')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
               to={"#"}>
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"
@@ -59,7 +60,7 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
               onClick={openModal}
               onMouseDown={(e) => selectedModal("act")}
               to={"#"}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className={`${checkPermission('CAN_ENABLE_DISABLE_USER')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
             >
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"

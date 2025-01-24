@@ -1,23 +1,21 @@
-import { GetUsersService as getProfile, storeItem } from "../../../../services";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { GetUsersService as getPermissions, storeItem } from "../../../../services";
+import { useEffect } from "react";
 import { Main } from "../../../../mui/layouts";
 import Box from "@mui/material/Box";
 import { Loader } from "../../../../ui-components/Loader";
 
-const USER_PROFILE = process.env.REACT_APP_USER_PROFILE_URL;
-export const ProfileAccount = () => {
-  const {users, isLoading }
-    = getProfile(USER_PROFILE);
+const USER_PERMISSION = process.env.REACT_APP_USER_PERMISSION_URL;
+export const LoadAuthorities = () => {
+  const { users: perm, isLoading } = getPermissions(USER_PERMISSION);
   const navigate = useNavigate();
-
-
   useEffect(() => {
-    if(users) {
-      storeItem('profile', JSON.stringify(users?.data));
-      navigate('/app', {replace: true});
+    if(perm) {
+        console.log("permissions ",perm);
+        storeItem('perm', JSON.stringify(perm?.data));
+        navigate('/complete/login', {replace: true});
     }
-  }, [users, navigate]);
+  }, [perm, navigate]);
 
   return (
     <Main showFooter={false}>
@@ -26,7 +24,7 @@ export const ProfileAccount = () => {
              className={`my-[25%] mx-auto ${isLoading ? '' : 'hidden'}`}>
           <Loader h={'h-16'} w={'w-16'} />
           <p className="text-blue-600 text-center text-[16px]">
-            retrieving user profile settings...
+            loading user privilege settings...
           </p>
         </Box>
       </Box>

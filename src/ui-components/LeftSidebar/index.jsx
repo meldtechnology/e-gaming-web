@@ -4,6 +4,7 @@ import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
 import { activeSelection, activeStatus, isItemSelected, MENU_ITEMS } from "../ActiveStatus";
 import { Link, useLocation } from "react-router-dom";
 import { getItem } from "../../services";
+import { checkPermission } from "../../services/autorization";
 
 
 export const LeftSidebar = ({ ...props }) => {
@@ -61,6 +62,7 @@ export const LeftSidebar = ({ ...props }) => {
             <MenuItem icon={<Img src={activeStatus( "img_grid.svg", pathName, MENU_ITEMS.DASHBOARD)}
                                  alt="Dashboard"
                                  className="h-[42px] w-[42px]" />}
+                      className={checkPermission('CAN_VIEW_DASHBOARD')}
                       href={'/app/dashboard'}>
               {activeSelection("Dashboard", pathName, MENU_ITEMS.DASHBOARD)}
               { isItemSelected(pathName, MENU_ITEMS.DASHBOARD) }
@@ -69,6 +71,7 @@ export const LeftSidebar = ({ ...props }) => {
               <MenuItem icon={<Img src={activeStatus( "img_checkmark.svg", pathName, MENU_ITEMS.DOCUMENTS)}
                                    alt="Document"
                                    className="h-[40px] w-[40px]" />}
+                        className={checkPermission('CAN_VIEW_DOCUMENTS')}
                         href={'/app/documents'}>
                 {activeSelection("Documents", pathName, MENU_ITEMS.DOCUMENTS)}
                 { isItemSelected(pathName, MENU_ITEMS.DOCUMENTS) }
@@ -76,6 +79,7 @@ export const LeftSidebar = ({ ...props }) => {
               <MenuItem icon={<Img src={activeStatus( "img_application.svg", pathName, MENU_ITEMS.APPLICATIONS)}
                                    alt="Applications"
                                    className="h-[34px] w-[34px]" />}
+                        className={checkPermission('CAN_VIEW_APPLICATIONS')}
                         href={'/app/applications'}>
                 {activeSelection("Applications", pathName, MENU_ITEMS.APPLICATIONS)}
                 { isItemSelected(pathName, MENU_ITEMS.APPLICATIONS) }
@@ -84,19 +88,21 @@ export const LeftSidebar = ({ ...props }) => {
             <MenuItem
               icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
                          alt="Licenses" className="h-[44px] w-[44px]" />}
+              className={checkPermission('CAN_VIEW_LICENSES')}
               href={'/app/licenses'}>
               {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
               { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
             </MenuItem>
             <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
                                  alt="Reports" className="h-[40px] w-[40px]" />}
-                      // className={'hidden'}
+                      className={checkPermission('CAN_VIEW_REPORTS')}
                       href={'/app/reports'}>
-              {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}
+              {activeSelection("Reports", pathName, MENU_ITEMS.REPORT)}
               { isItemSelected(pathName, MENU_ITEMS.REPORT) }
             </MenuItem>
             <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
                                  alt="User" className="h-[44px] w-[44px]" />}
+                      className={checkPermission('CAN_VIEW_USERS')}
                       href={'/app/users'}>
               {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
               { isItemSelected(pathName, MENU_ITEMS.USERS) }
@@ -114,7 +120,7 @@ export const LeftSidebar = ({ ...props }) => {
       </div>
       {!collapsed ? (
         <div
-          className="ml-2 mr-2.5 mt-[264px] flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5">
+          className={`${checkPermission('CAN_VIEW_PROFILE')} ml-2 mr-2.5 mt-[264px] flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5`}>
           <Img
             src={user?.profile?.profilePicture}
             alt="Image"
@@ -126,8 +132,8 @@ export const LeftSidebar = ({ ...props }) => {
                 {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
               </Link>
             </Text>
-            <Text size="texts" as="p" className="text-[14px] font-light text-blue_gray-400">
-              {user?.profile?.settings?.role}
+            <Text size="sm" as="p" className="text-[12px] font-bold text-blue_gray-400">
+              {user?.profile?.settings?.role?.substring(0, 13)}
             </Text>
           </div>
           <Link to={`/logout`} >

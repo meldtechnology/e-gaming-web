@@ -5,6 +5,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { GenerateReport } from "../../../services/reportServices/GenerateReport";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { checkPermission } from "../../../services/autorization";
 
 const APPLICATION_REPORT_URL = process.env.REACT_APP_APPLICATION_REPORT_URL;
 export const FormSection = ({isLoading, setDownloadLink}) => {
@@ -84,7 +85,7 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
       '' : selectedDate.split('T')[0];
   }
 
-  return (
+  return checkPermission('CAN_GENERATE_REPORT') === '' ? (
     <>
       <div className="relative flex flex-col rounded-xl bg-transparent pb-10 mt-4 mb-10 ml-4">
         <h4 className="block text-xl font-medium text-slate-800">
@@ -144,12 +145,24 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
         <div className={'w-full overflow-hidden border-solid border-t-2 border-t-black-900_01 pt-4'}>
           <button type={'button'}
                   onClick={requestGeneration}
-                  className={'bg-gray-950 text-amber-100 p-6 rounded-[10px] float-right'}>Generate Report
+                  className={` ${checkPermission('CAN_GENERATE_REPORT')} bg-gray-950 text-amber-100 p-6 rounded-[10px] float-right`}>
+            Generate Report
           </button>
         </div>
         <div
           className={`${error ? '' : 'hidden'} mt-4 p-4 text-center bg-red-200 rounded-[10px] text-red-700 border-red-700 border-2`}>
           {error}
+        </div>
+      </div>
+    </>
+  ) : (
+    <>
+      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
+        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
+          Access Denied! - You do not have sufficient access to view the screen
+        </div>
+        <div className={'w-[70%] h-[]70%'}>
+          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
         </div>
       </div>
     </>

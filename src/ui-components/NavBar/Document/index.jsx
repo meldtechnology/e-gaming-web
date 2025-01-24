@@ -16,7 +16,7 @@ const NavList = () => {
         </Link>
       </li>
       <li className="p-1 font-medium">
-        <Link to={`/app/documents`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/applications`} className="flex items-center hover:text-blue-500 transition-colors">
           Applications
         </Link>
       </li>

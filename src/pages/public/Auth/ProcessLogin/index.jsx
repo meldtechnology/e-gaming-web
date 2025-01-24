@@ -25,7 +25,7 @@ export const ProcessLogin = () => {
       else {
           storeItem('at', getAccessTokenData?.data?.data?.access_token);
           storeItem('rt', getAccessTokenData?.data?.data?.refresh_token);
-          navigate('/complete/login', {replace: true});
+          navigate('/authorizing/login', {replace: true});
       }
       setIsLoading(false);
     }
