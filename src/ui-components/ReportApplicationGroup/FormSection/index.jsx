@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -13,7 +13,13 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
   const [to, setTo] = useState('');
   const [filter, setFilter] = useState('');
   const [filterPath, setFilterPath] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('');
+  const [pending, setPending] = useState(false);
+  const [review, setReview] = useState(false);
+  const [approve, setApprove] = useState(false);
+  const [decline, setDecline] = useState(false);
+  const [issue, setIssue] = useState(false);
+  const [isPaid, setIsPaid] = useState(false);
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [error, setError] = useState('');
@@ -36,10 +42,9 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
       setError('You cannot select more than 60 days of a report!');
       return;
     }
+    console.log(start);
+    console.log(isPaid);
     setError('');
-    setStart(from.split('T')[0]);
-    setEnd(to.split('T')[0]);
-    // (selectedFilter.length > 0)? setFilterPath('/filter') : setFilterPath('');
     generateReport();
   }
 
@@ -60,30 +65,52 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
     isLoading(false);
   }
 
-  const addRemoveFilter = (value) => {
-    const index = selectedFilter.findIndex(item => item === value);
-    if(index > -1) {
-      setSelectedFilter(selectedFilter.splice(index, 1));
-    }else {
-      setSelectedFilter([...selectedFilter, value]);
-    }
-    (selectedFilter.length > 0)? setFilterPath('/filter') : setFilterPath('');
-    buildFilter();
-  }
-
-  const buildFilter = () => {
-    let status = "&status=";
-    selectedFilter.map(item => status = status.concat(item, ","));
-    console.log(status);
-    console.log(status.substring(0, status.length -1));
-    setFilter(status.substring(0, status.length -1).replaceAll(',', '%2C'));
-
-  }
-
   const setDate = (selectedDate) => {
-    return (selectedDate === undefined || selectedDate.length === 0)?
-      '' : selectedDate.split('T')[0];
+    if(selectedDate !== undefined || selectedDate === '') {
+      selectedDate = new Date(selectedDate);
+      selectedDate.setTime(selectedDate.getTime() - new Date().getTimezoneOffset()*60*1000);
+      return selectedDate.toISOString().split('T')[0];
+    }
+    return '';
   }
+
+  useEffect(() => {
+    const buildParams = () => {
+      let filterBuilder = '';
+
+      if(pending) filterBuilder +=  'PENDING,';
+      if(review) filterBuilder += 'REVIEW,';
+      if(approve) filterBuilder += 'APPROVE,';
+      if(decline) filterBuilder += 'DECLINE,';
+      if(issue) filterBuilder += 'ISSUED,';
+      const index = filterBuilder.lastIndexOf(',');
+
+      return filterBuilder.substring(0, index);
+    }
+
+    const buildFilter = () => {
+      let status = "&status=" + selectedFilter;
+      setFilter(status.replaceAll(',', '%2C'));
+    }
+    if(pending || review || approve || decline || issue) {
+      setSelectedFilter(buildParams());
+      setFilterPath('/filter');
+      setIsPaid(false);
+      buildFilter();
+    } else {
+      setFilterPath('')
+    }
+    if(isPaid) {
+      setPending(false);
+      setReview(false);
+      setApprove(false);
+      setDecline(false);
+      setIssue(false);
+      setSelectedFilter("PAID");
+      setFilterPath('/payment');
+      buildFilter();
+    }
+  }, [pending, approve, decline, review, issue, selectedFilter, isPaid]);
 
   return checkPermission('CAN_GENERATE_REPORT') === '' ? (
     <>
@@ -109,7 +136,7 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DatePicker']}>
                 <DatePicker label={'End Date'}
-                            name={from}
+                            name={to}
                             onChange={(e) => {
                               setTo(e.toISOString());
                               setEnd(setDate(e.toISOString()));
@@ -126,23 +153,33 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
           </div>
           <FormGroup>
               <FormControlLabel name={'pending'}
-                                onChange={(e)=> addRemoveFilter(e.target.value)}
-                                control={<Checkbox value={'PENDING'} />} label={'PENDING'} />
+                                onChange={(e)=> setPending(!pending)}
+                                control={<Checkbox checked={pending} value={'PENDING'} />} label={'PENDING'} />
             <FormControlLabel name={'review'}
-                                onChange={(e)=> addRemoveFilter(e.target.value)}
-                                control={<Checkbox value={'REVIEW'} />} label={'REVIEWED'} /><
+                                onChange={(e)=> setReview(!review)}
+                                control={<Checkbox checked={review} value={'REVIEW'} />} label={'REVIEWED'} /><
             FormControlLabel name={'approve'}
-                                onChange={(e)=> addRemoveFilter(e.target.value)}
-                                control={<Checkbox value={'APPROVE'} />} label={'APPROVED'} />
+                                onChange={(e)=> setApprove(!approve)}
+                                control={<Checkbox checked={approve} value={'APPROVE'} />} label={'APPROVED'} />
             <FormControlLabel name={'decline'}
-                                onChange={(e)=> addRemoveFilter(e.target.value)}
-                                control={<Checkbox value={'DECLINE'} />} label={'DECLINED'} />
+                                onChange={(e)=> setDecline(!decline)}
+                                control={<Checkbox checked={decline} value={'DECLINE'} />} label={'DECLINED'} />
             <FormControlLabel name={'issue'}
-                                onChange={(e)=> addRemoveFilter(e.target.value)}
-                                control={<Checkbox value={'ISSUED'} />} label={'ISSUED'} />
+                                onChange={(e)=> setIssue(!issue)}
+                                control={<Checkbox checked={issue} value={'ISSUED'} />} label={'ISSUED'} />
           </FormGroup>
         </div>
-        <div className={'w-full overflow-hidden border-solid border-t-2 border-t-black-900_01 pt-4'}>
+        <div className={'relative flex gap-2 rounded-xl bg-transparent mt-4 mb-5 ml-4'}>
+          <div className={"text-gray-900_01 font-bold"}>
+            Application Paid Status:
+          </div>
+          <FormGroup>
+            <FormControlLabel name={'isPaid'}
+                              onChange={(e)=> setIsPaid(!isPaid)}
+                              control={<Checkbox checked={isPaid} value={'PAID'} />} label={'PAID'} />
+          </FormGroup>
+        </div>
+        <div className={"w-full overflow-hidden border-solid border-t-2 border-t-black-900_01 pt-4"}>
           <button type={'button'}
                   onClick={requestGeneration}
                   className={` ${checkPermission('CAN_GENERATE_REPORT')} bg-gray-950 text-amber-100 p-6 rounded-[10px] float-right`}>

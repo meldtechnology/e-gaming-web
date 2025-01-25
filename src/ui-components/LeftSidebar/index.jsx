@@ -21,6 +21,7 @@ export const LeftSidebar = ({ ...props }) => {
   const userName = (name) => {
     return name.substring(0, 13);
   }
+
   useEffect(() => {
     setUser(JSON.parse(getItem('profile')));
   }, []);
@@ -45,6 +46,29 @@ export const LeftSidebar = ({ ...props }) => {
             Dashboard
           </Heading>
         </div>
+        {!collapsed ? (
+          <div
+            className={`${checkPermission('CAN_VIEW_PROFILE')} w-full ml-2 mr-2.5 flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5`}>
+            <Img
+              src={user?.profile?.profilePicture}
+              alt="Image"
+              className="h-[66px] w-[30%] rounded-full object-contain"
+            />
+            <div className="flex flex-1 flex-col items-start">
+              <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
+                <Link to={`/app/users/profile`} >
+                  {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
+                </Link>
+              </Text>
+              <Text size="sm" as="p" className="text-[12px] font-bold text-blue_gray-400">
+                {user?.profile?.settings?.role?.substring(0, 13)}
+              </Text>
+            </div>
+            <Link to={`/logout`} >
+              <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
+            </Link>
+          </div>
+        ) : null}
         <Menu
           menuItemStyles={{
             button: {
@@ -113,34 +137,11 @@ export const LeftSidebar = ({ ...props }) => {
             {/*  {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}*/}
             {/*  { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }*/}
             {/*</MenuItem>*/}
+           {/*<MenuItem></MenuItem>*/}
             {/*<MenuItem></MenuItem>*/}
-            <MenuItem></MenuItem>
           </div>
         </Menu>
       </div>
-      {!collapsed ? (
-        <div
-          className={`${checkPermission('CAN_VIEW_PROFILE')} ml-2 mr-2.5 mt-[264px] flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5`}>
-          <Img
-            src={user?.profile?.profilePicture}
-            alt="Image"
-            className="h-[66px] w-[30%] rounded-full object-contain"
-          />
-          <div className="flex flex-1 flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
-              <Link to={`/app/users/profile`} >
-                {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
-              </Link>
-            </Text>
-            <Text size="sm" as="p" className="text-[12px] font-bold text-blue_gray-400">
-              {user?.profile?.settings?.role?.substring(0, 13)}
-            </Text>
-          </div>
-          <Link to={`/logout`} >
-            <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
-          </Link>
-        </div>
-      ) : null}
     </Sidebar>
   );
 }
