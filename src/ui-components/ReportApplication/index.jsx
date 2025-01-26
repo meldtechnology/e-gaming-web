@@ -1,5 +1,6 @@
 import { Heading } from "../Heading";
 import { ReportApplicationGroup } from "../ReportApplicationGroup";
+import { ReportNavBar } from "../ReportNavBar";
 
 export const ReportApplication = () => {
   return (
@@ -11,6 +12,7 @@ export const ReportApplication = () => {
                 Application Report
               </Heading>
             </div>
+            <ReportNavBar />
           </header>
           <ReportApplicationGroup />
         </div>

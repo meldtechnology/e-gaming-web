@@ -8,7 +8,7 @@ const NavList = () => {
     <ul className="my-2 flex gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li className="p-1 font-medium">
         <Link to={`/app/reports/R_1786101`} className="flex items-center hover:text-blue-500 transition-colors">
-          Payment
+          Payments
         </Link>
       </li>
       <li className="p-1 font-medium">

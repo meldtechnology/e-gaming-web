@@ -12,6 +12,7 @@ import { License } from "../../pages/Documents/License";
 import { LicenseForm } from "../../ui-components/LicenseForm";
 import { Report } from "../../pages/report/Report";
 import { ReportApplication } from "../../ui-components/ReportApplication";
+import { ReportPayment } from "../../ui-components/ReportPayment";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -43,8 +44,8 @@ export const PagesRoute = ({ page, params }) => {
       case 'R_SHFB95GH': return <DocumentReviewer />;
       case 'L_10O9I78': return <LicenseForm />;
       case 'reports': return <Report />;
-      case 'R_17861100': return <ReportApplication />;
-      case 'R_17861101': return <ReportApplication />;
+      case 'R_1786100': return <ReportApplication />;
+      case 'R_1786101': return <ReportPayment />;
       default: return <Dashboard />
     }
 
