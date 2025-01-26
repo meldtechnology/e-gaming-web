@@ -57,7 +57,7 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
     }
     else {
       let url = window.URL.createObjectURL(new Blob([result?.data], { type: 'application/pdf' }));
-      url = url.replaceAll("http", "https"); // Dev and Prod
+      // url = url.replaceAll("http", "https"); // Dev and Prod
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', 'Report.pdf');
