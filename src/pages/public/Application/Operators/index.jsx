@@ -6,7 +6,7 @@ import { LatestProducts } from "./components";
 
 export const Operators = () => {
   const { operatorType } = useParams();
-  console.log(operatorType);
+
   return (
     <Main>
       <Container>

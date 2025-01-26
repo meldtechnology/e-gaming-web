@@ -42,8 +42,6 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
       setError('You cannot select more than 60 days of a report!');
       return;
     }
-    console.log(start);
-    console.log(isPaid);
     setError('');
     generateReport();
   }

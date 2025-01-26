@@ -6,6 +6,7 @@ import { GetFeeTypeService } from "./GetFeeTypeService";
 import { GetTypeService } from "./GetTypeService";
 import { GetFormTemplateService } from "./GetFormTemplateService";
 import { GetPublicFileService } from "./GetPublicFileService";
+import { GetLicenseService } from "./GetLicenseService";
 
 export {
   GetDocumentService,
@@ -16,4 +17,5 @@ export {
   GetTypeService,
   GetFormTemplateService,
   GetPublicFileService,
+  GetLicenseService,
 }
