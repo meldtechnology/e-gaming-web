@@ -91,7 +91,7 @@ export const LicenseDataTable = ({ columnHeader, data, pageInfo, nextPage, previ
                     </svg>
                   </button>
                   <button type="button"
-                          className={"ml-2"}
+                          className={`${d?.status === 'ISSUED'? '' : 'hidden'} ml-2`}
                           onClick={() => openQRLicense(d)}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          className="w-[24px] h-[24px] inline-block"

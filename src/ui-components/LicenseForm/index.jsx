@@ -3,7 +3,7 @@ import { LicenseTemplate } from "../LicenseTemplate";
 import Container from "../../mui/components/Container";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getItem, UpdateDocumentService as reviewApplication } from "../../services";
+import { getItem, storeItem, UpdateDocumentService as reviewApplication } from "../../services";
 import Typography from "@mui/material/Typography";
 import { ProgressButton } from "../Form/component/ProgressButton";
 import { checkPermission } from "../../services/autorization";
@@ -45,7 +45,7 @@ export const LicenseForm = () => {
       setErrorMsg(result?.error?.data?.userMessage);
     }
     else {
-      console.log(result?.data?.data);
+      storeItem('ld', result?.data);
       setLicense(result?.data?.data);
     }
     setShow(false);

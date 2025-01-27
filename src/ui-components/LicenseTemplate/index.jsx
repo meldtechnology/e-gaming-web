@@ -1,5 +1,7 @@
 import { extractDay, extractMonth, extractYear } from "../../services";
+import QRCode from "react-qr-code";
 
+const GET_LICENCE_BY_NUMBER_URL = process.env.REACT_APP_VALIDATE_URL;
 export const LicenseTemplate = ({license}) => {
   return (
     <div id="license-id">
@@ -84,12 +86,19 @@ export const LicenseTemplate = ({license}) => {
               {extractMonth(new Date().toDateString())} {' '}
               {extractYear(new Date().toDateString())}
             </div>
-            <div className={'pt-[40px] text-left text-[22px] px-8'}>
-              <strong>Signed</strong><br />
-              Executive Secretary
-            </div>
-            <div className={'text-center justify-items-center'}>
-              <strong>Reference #: {license?.reference} </strong>
+            <div className={'flex overflow-hidden'}>
+              <div className={"pt-[40px] text-left text-[22px] px-8"}>
+                <strong>Signed</strong><br />
+                Executive Secretary
+              </div>
+              <div className={"pt-[40px] text-center justify-items-center"}>
+                <strong>Reference #: {license?.reference} </strong>
+              </div>
+              <div className={'pt-[20px] w-[40%] overflow-hidden'}>
+                <QRCode size={64}
+                        className={'float-right'}
+                        value={`${GET_LICENCE_BY_NUMBER_URL}${license?.invoiceNumber}`} />
+              </div>
             </div>
           </div>
         </div>
