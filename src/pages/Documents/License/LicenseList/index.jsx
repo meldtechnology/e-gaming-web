@@ -11,7 +11,7 @@ const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
 export const LicenseList = ({status}) => {
   const [page, setPage] = useState(1);
   const { documents, isLoading }
-    = getDocService(`${APPLICATION_URL}/status/${status}?page=${page}&size=10&sortIn=DESC&sortBy=${status === 'ISSUED'? 'issued_on' : 'approve_on'}`);
+    = getDocService(`${APPLICATION_URL}/status/${status}?page=${page}&size=10&sortIn=DESC&sortBy=${status === 'ISSUED'? 'issuedOn' : 'approvedOn'}`);
 
   const nextPage = () => {
     setPage(page + 1);
