@@ -15,7 +15,7 @@ export const Dashboard = () => {
   const { payments } = getPaymentMetrics(PAYMENT_METRIC_URL);
   const { documents } = getLicenseMetrics(LICENSE_METRIC_URL);
   const { users } = getEntityMetrics(ENTITY_METRIC_URL);
-  console.log(getItem('at'))
+
   return checkPermission('CAN_VIEW_DASHBOARD') === '' ? (
     <>
       <Header metrics={[
