@@ -48,9 +48,6 @@ const validationSchema = yup.object({
   ,flatFee: yup
     .number()
     .required('Please provide the flat fee. The minimum is 0.'),
-  systemTypeId: yup
-    .number()
-    .required('Please provide the System Type ID.'),
 
 });
 
@@ -197,7 +194,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        required={true}
                        value={formik.values.serviceTypeCode}
                        onChange={formik.handleChange}
-                       fieldName='systemTypeId'
+                       fieldName='serviceTypeCode'
                        error={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
                        errorText={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
                        fieldClass="w-full max-w-sm min-w-[200px]"
