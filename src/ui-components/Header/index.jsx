@@ -22,7 +22,7 @@ export default function Header({ metrics, ...props }) {
                 <div className={`h-[5px] w-[90%] ${d.bkgColor}`} />
                 <div className="mr-1.5 flex items-center justify-end gap-2 self-stretch md:mr-0">
                   <div className={`flex flex-col items-center rounded-[38px] ${d.bkgColor} p-[22px] sm:p-5`}>
-                    <a href="/dashboard">
+                    <a href="/app/applications">
                       <Img src={d.n21000000One} alt="N 21000000" className="h-[32px] w-[32px]" />
                     </a>
                   </div>
