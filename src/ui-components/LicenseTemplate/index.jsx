@@ -86,20 +86,20 @@ export const LicenseTemplate = ({license}) => {
               {extractMonth(new Date().toDateString())} {' '}
               {extractYear(new Date().toDateString())}
             </div>
+            <div className={"pt-[1px] pl-4"} >
+              <img src={"/images/SIGNATURE_enugu.png"}
+                   className={"w-[150px] h-[50px]"}
+                   alt={"Signature"} />
+            </div>
             <div className={'flex overflow-hidden'}>
-              <div className={"pt-[40px] text-left text-[22px] px-8"}>
-                <strong>Signed</strong><br />
-                <div
-                  className={"w-[98px] h-[98px] rounded-full bg-white-a700 items-center justify-items-center border-2 border-solid border-black-900 float-right"}>
-                  <img src={"/images/esgc_license_signature.png"}
-                       alt={"ES-Signature"} className={"w-[72px] h-[102px]"} />
-                </div>
+              <div className={"pt-[5px] text-left text-[18px] px-8"}>
+                {/*<strong>Signed</strong><br />*/}
                 Executive Secretary
               </div>
-              <div className={"pt-[40px] text-center justify-items-center"}>
+              <div className={"pt-[10px] pl-4 text-center justify-items-center"}>
                 <strong>Reference #: {license?.reference} </strong>
               </div>
-              <div className={'pt-[20px] w-[40%] overflow-hidden'}>
+              <div className={'pt-[1px] w-[40%] overflow-hidden'}>
                 <QRCode size={64}
                         className={'float-right'}
                         value={`${GET_LICENCE_BY_NUMBER_URL}${license?.invoiceNumber}`} />
