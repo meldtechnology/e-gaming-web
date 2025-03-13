@@ -89,6 +89,11 @@ export const LicenseTemplate = ({license}) => {
             <div className={'flex overflow-hidden'}>
               <div className={"pt-[40px] text-left text-[22px] px-8"}>
                 <strong>Signed</strong><br />
+                <div
+                  className={"w-[98px] h-[98px] rounded-full bg-white-a700 items-center justify-items-center border-2 border-solid border-black-900 float-right"}>
+                  <img src={"/images/esgc_license_signature.png"}
+                       alt={"ES-Signature"} className={"w-[72px] h-[102px]"} />
+                </div>
                 Executive Secretary
               </div>
               <div className={"pt-[40px] text-center justify-items-center"}>
