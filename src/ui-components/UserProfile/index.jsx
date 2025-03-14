@@ -47,7 +47,7 @@ export const UserProfile = () => {
         <div
           className="flex items-start justify-left gap-7 bg-white-a700 border-b border-solid border-blue_gray-400 p-[22px] sm:flex-col sm:p-5">
           <Img
-            src="/images/img_ellipse_211.png"
+           src={user?.profile?.profilePicture}
             alt="Image"
             className="mb-[18px] h-[128px] w-[128px] rounded-[64px] object-cover sm:w-full"
           />

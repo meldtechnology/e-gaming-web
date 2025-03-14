@@ -115,7 +115,7 @@ export const EditUserForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
-      enableReinitialize={true}
+      enableReinitialize={true} 
       onSubmit={values => {
         // same shape as initial values
         updateUser(values);
@@ -151,7 +151,7 @@ export const EditUserForm = () => {
               <ProgressButton saving={saving} />
             </div>
           </div>
-          <div className={`${isLoading ? '' : 'hidden'}`}><Loader /></div>
+
           {/* Form data entry */}
           <div className="mb-[134px] bg-white-a700">
             <div>

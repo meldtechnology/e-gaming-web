@@ -79,7 +79,7 @@ export const LicenseTemplate = ({license}) => {
             </div>
             <div className={'py-[10px] text-center text-[22px] px-8'}>
               This license is given under my hand by the authority of the
-              Governor of Enugu and it is valid for {'One year'}
+              Governor of Enugu State and it is valid for {'One year'}
             </div>
             <div className={'py-[10px] font-bold text-center text-[22px] px-8'}>
               Dated {extractDay(new Date().toDateString())} Day of {' '}
