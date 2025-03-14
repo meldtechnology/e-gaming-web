@@ -21,7 +21,8 @@ const validationSchema = yup.object({
 });
 
 // const LOGIN_URL = 'http://localhost:9011/login';
-const LOGIN_URL = 'http://3.249.214.239:9011/login';
+// const LOGIN_URL = 'http://academy.meld-tech.com/login';
+const LOGIN_URL = 'https://auth.meld-tech.com/login';
 const Form = () => {
   const [searchParams] = useSearchParams();
   const initialValues = {

@@ -8,7 +8,7 @@ const sizes = {
   textxl: "text-[24px] font-normal lg:text-[24px] md:text-[22px]",
 };
 
-const Text = ({ children, className = "", as, size = "textxl", ...restProps }) => {
+const Text = ({ children, className = "", as, size = "sm", ...restProps }) => {
   const Component = as || "p";
 
   return (

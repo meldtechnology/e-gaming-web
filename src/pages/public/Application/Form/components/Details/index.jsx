@@ -57,7 +57,7 @@ export const Details = ({reference}) => {
       },
       applicantPublicId: operator?.idNumber,
       fileName: file?.name,
-      code: file?.code,
+      code: file?.serviceTypeCode,
       feeType: file?.feeType,
       formData: {
         formTemplate: updateForm(file?.formTemplate, values)

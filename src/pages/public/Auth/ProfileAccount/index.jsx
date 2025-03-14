@@ -7,8 +7,10 @@ import { Loader } from "../../../../ui-components/Loader";
 
 const USER_PROFILE = process.env.REACT_APP_USER_PROFILE_URL;
 export const ProfileAccount = () => {
-  const {users, isLoading } = getProfile(USER_PROFILE);
+  const {users, isLoading }
+    = getProfile(USER_PROFILE);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if(users) {

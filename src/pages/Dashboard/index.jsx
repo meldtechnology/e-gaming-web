@@ -4,8 +4,9 @@ import {
   GetPaymentService as getPaymentMetrics,
   GetDocumentService as getLicenseMetrics,
   formatAmount,
-  GetUsersService as getEntityMetrics
+  GetUsersService as getEntityMetrics,
 } from "../../services";
+import { checkPermission } from "../../services/autorization";
 
 const PAYMENT_METRIC_URL = process.env.REACT_APP_PAYMENTS_METRIC_URL;
 const LICENSE_METRIC_URL = process.env.REACT_APP_DOCUMENTS_LICENSE_METRICS_URL;
@@ -14,7 +15,8 @@ export const Dashboard = () => {
   const { payments } = getPaymentMetrics(PAYMENT_METRIC_URL);
   const { documents } = getLicenseMetrics(LICENSE_METRIC_URL);
   const { users } = getEntityMetrics(ENTITY_METRIC_URL);
-  return (
+
+  return checkPermission('CAN_VIEW_DASHBOARD') === '' ? (
     <>
       <Header metrics={[
         formatAmount(payments?.data?.totalVolume),
@@ -34,6 +36,17 @@ export const Dashboard = () => {
         <StackBarReport />
       </div>
       <LatestReport />
+    </>
+  ) : (
+    <>
+      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
+        <div className={'mt-8 p-4 text-center text-[2.1rem] text-blue-800 font-bold'}>
+          Welcome to the Enugu State Gaming Commission Platform
+        </div>
+        <div className={'w-[70%] h-[]70%'}>
+          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'}/>
+        </div>
+      </div>
     </>
   );
 }

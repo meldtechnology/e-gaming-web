@@ -4,6 +4,7 @@ import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
 import { activeSelection, activeStatus, isItemSelected, MENU_ITEMS } from "../ActiveStatus";
 import { Link, useLocation } from "react-router-dom";
 import { getItem } from "../../services";
+import { checkPermission } from "../../services/autorization";
 
 
 export const LeftSidebar = ({ ...props }) => {
@@ -20,6 +21,7 @@ export const LeftSidebar = ({ ...props }) => {
   const userName = (name) => {
     return name.substring(0, 13);
   }
+
   useEffect(() => {
     setUser(JSON.parse(getItem('profile')));
   }, []);
@@ -44,6 +46,29 @@ export const LeftSidebar = ({ ...props }) => {
             Dashboard
           </Heading>
         </div>
+        {!collapsed ? (
+          <div
+            className={`${checkPermission('CAN_VIEW_PROFILE')} w-full ml-2 mr-2.5 flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5`}>
+            <Img
+              src={user?.profile?.profilePicture}
+              alt="Image"
+              className="h-[66px] w-[30%] rounded-full object-contain"
+            />
+            <div className="flex flex-1 flex-col items-start">
+              <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
+                <Link to={`/app/users/profile`} >
+                  {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
+                </Link>
+              </Text>
+              <Text size="sm" as="p" className="text-[12px] font-bold text-blue_gray-400">
+                {user?.profile?.settings?.role?.substring(0, 13)}
+              </Text>
+            </div>
+            <Link to={`/logout`} >
+              <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
+            </Link>
+          </div>
+        ) : null}
         <Menu
           menuItemStyles={{
             button: {
@@ -61,6 +86,7 @@ export const LeftSidebar = ({ ...props }) => {
             <MenuItem icon={<Img src={activeStatus( "img_grid.svg", pathName, MENU_ITEMS.DASHBOARD)}
                                  alt="Dashboard"
                                  className="h-[42px] w-[42px]" />}
+                      className={checkPermission('CAN_VIEW_DASHBOARD')}
                       href={'/app/dashboard'}>
               {activeSelection("Dashboard", pathName, MENU_ITEMS.DASHBOARD)}
               { isItemSelected(pathName, MENU_ITEMS.DASHBOARD) }
@@ -69,6 +95,7 @@ export const LeftSidebar = ({ ...props }) => {
               <MenuItem icon={<Img src={activeStatus( "img_checkmark.svg", pathName, MENU_ITEMS.DOCUMENTS)}
                                    alt="Document"
                                    className="h-[40px] w-[40px]" />}
+                        className={checkPermission('CAN_VIEW_DOCUMENTS')}
                         href={'/app/documents'}>
                 {activeSelection("Documents", pathName, MENU_ITEMS.DOCUMENTS)}
                 { isItemSelected(pathName, MENU_ITEMS.DOCUMENTS) }
@@ -76,6 +103,7 @@ export const LeftSidebar = ({ ...props }) => {
               <MenuItem icon={<Img src={activeStatus( "img_application.svg", pathName, MENU_ITEMS.APPLICATIONS)}
                                    alt="Applications"
                                    className="h-[34px] w-[34px]" />}
+                        className={checkPermission('CAN_VIEW_APPLICATIONS')}
                         href={'/app/applications'}>
                 {activeSelection("Applications", pathName, MENU_ITEMS.APPLICATIONS)}
                 { isItemSelected(pathName, MENU_ITEMS.APPLICATIONS) }
@@ -83,19 +111,22 @@ export const LeftSidebar = ({ ...props }) => {
             </div>
             <MenuItem
               icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
-                         alt="File" className="h-[44px] w-[44px]" />}
+                         alt="Licenses" className="h-[44px] w-[44px]" />}
+              className={checkPermission('CAN_VIEW_LICENSES')}
               href={'/app/licenses'}>
               {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
               { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
             </MenuItem>
-            {/*<MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}*/}
-            {/*                     alt="License" className="h-[40px] w-[40px] hidden" />}*/}
-            {/*          href={'/app/report'}>*/}
-            {/*  {activeSelection("Report", pathName, MENU_ITEMS.REPORT)}*/}
-            {/*  { isItemSelected(pathName, MENU_ITEMS.REPORT) }*/}
-            {/*</MenuItem>*/}
+            <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
+                                 alt="Reports" className="h-[40px] w-[40px]" />}
+                      className={checkPermission('CAN_VIEW_REPORTS')}
+                      href={'/app/reports'}>
+              {activeSelection("Reports", pathName, MENU_ITEMS.REPORT)}
+              { isItemSelected(pathName, MENU_ITEMS.REPORT) }
+            </MenuItem>
             <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
                                  alt="User" className="h-[44px] w-[44px]" />}
+                      className={checkPermission('CAN_VIEW_USERS')}
                       href={'/app/users'}>
               {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
               { isItemSelected(pathName, MENU_ITEMS.USERS) }
@@ -106,34 +137,11 @@ export const LeftSidebar = ({ ...props }) => {
             {/*  {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}*/}
             {/*  { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }*/}
             {/*</MenuItem>*/}
-            <MenuItem></MenuItem>
-            <MenuItem></MenuItem>
+           {/*<MenuItem></MenuItem>*/}
+            {/*<MenuItem></MenuItem>*/}
           </div>
         </Menu>
       </div>
-      {!collapsed ? (
-        <div
-          className="ml-2 mr-2.5 mt-[264px] flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5">
-          <Img
-            src={user?.profile?.profilePicture}
-            alt="Image"
-            className="h-[66px] w-[30%] rounded-full object-contain"
-          />
-          <div className="flex flex-1 flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
-              <Link to={`/app/users/profile`} >
-                {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
-              </Link>
-            </Text>
-            <Text size="texts" as="p" className="text-[14px] font-light text-blue_gray-400">
-              {user?.profile?.settings?.role}
-            </Text>
-          </div>
-          <Link to={`/logout`} >
-            <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
-          </Link>
-        </div>
-      ) : null}
     </Sidebar>
   );
 }

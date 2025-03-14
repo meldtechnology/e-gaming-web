@@ -5,6 +5,7 @@ import { Text } from "../Text";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getItem } from "../../services";
+import { checkPermission } from "../../services/autorization";
 export const UserProfile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
@@ -35,7 +36,7 @@ export const UserProfile = () => {
             <Button
               shape="round"
               onClick={(e) => navigate('/app/users/_edit')}
-              className="mt-1.5 min-w-[100px] min-h-[43px] text-white-a700 bg-black-900_01 self-end rounded-[14px] pl-7 pr-[34px] sm:px-5 hover:bg-gray-600"
+              className={`${checkPermission('CAN_EDIT_USER')} mt-1.5 min-w-[100px] min-h-[43px] text-white-a700 bg-black-900_01 self-end rounded-[14px] pl-7 pr-[34px] sm:px-5 hover:bg-gray-600`}
             >
               Edit
             </Button>

@@ -10,6 +10,10 @@ import { DocumentFormBuilder } from "../../pages/Documents/DocumentFormBuilder";
 import { DocumentReviewer } from "../../pages/Documents/DocumentReviewer";
 import { License } from "../../pages/Documents/License";
 import { LicenseForm } from "../../ui-components/LicenseForm";
+import { Report } from "../../pages/report/Report";
+import { ReportApplication } from "../../ui-components/ReportApplication";
+import { ReportPayment } from "../../ui-components/ReportPayment";
+import { QRCodeMaker } from "../../ui-components/QRCodeMaker";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -40,6 +44,10 @@ export const PagesRoute = ({ page, params }) => {
       case 'F_D5N2M19': return <DocumentFormBuilder />;
       case 'R_SHFB95GH': return <DocumentReviewer />;
       case 'L_10O9I78': return <LicenseForm />;
+      case 'L_10O9I00': return <QRCodeMaker />;
+      case 'reports': return <Report />;
+      case 'R_1786100': return <ReportApplication />;
+      case 'R_1786101': return <ReportPayment />;
       default: return <Dashboard />
     }
 

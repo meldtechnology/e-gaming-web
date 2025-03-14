@@ -10,6 +10,8 @@ import { EmailVerify } from "../pages/public/EmailVerify";
 import { General, Operators, Verification } from "../pages/public/Application";
 import { Form } from "../pages/public/Application/Form";
 import { Invoice } from "../pages/public/Application/Invoice";
+import { LoadAuthorities } from "../pages/public/Auth/LoadAuthorities";
+import { LicenseDetails } from "../pages/Documents/License/LicenseDetails";
 
 const PublicRoutes = {
     path: '/',
@@ -41,6 +43,10 @@ const PublicRoutes = {
             element: <ProfileAccount />
         },
         {
+            path: '/authorizing/login',
+            element: <LoadAuthorities />
+        },
+        {
             path: '/verify/email/otp',
             element: <EmailVerify />
         },
@@ -51,6 +57,10 @@ const PublicRoutes = {
         {
             path: '/apply/operator/:operatorType',
             element: <Operators />
+        },
+        {
+            path: '/documents/licenses/:number',
+            element: <LicenseDetails />
         },
         {
             path: '/apply/operator/form',

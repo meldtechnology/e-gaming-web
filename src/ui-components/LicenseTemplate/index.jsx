@@ -1,5 +1,7 @@
 import { extractDay, extractMonth, extractYear } from "../../services";
+import QRCode from "react-qr-code";
 
+const GET_LICENCE_BY_NUMBER_URL = process.env.REACT_APP_VALIDATE_URL;
 export const LicenseTemplate = ({license}) => {
   return (
     <div id="license-id">
@@ -23,8 +25,8 @@ export const LicenseTemplate = ({license}) => {
                          alt={"GovLogo"}
                          className={"w-[102px] h-[102px] rounded-full border-2 border-solid border-green-600"} />
                   </div>
-                  <div className={"m-0 pt-2 p-4 text-[24px] text-left"}>
-                    <div><strong>No.:</strong> {license?.reference}</div>
+                  <div className={"ml-4 pt-2 p-4 text-[24px] text-left"}>
+                    <div><strong>No.:</strong> {license?.invoiceNumber}</div>
                   </div>
                 </div>
               </div>
@@ -84,9 +86,24 @@ export const LicenseTemplate = ({license}) => {
               {extractMonth(new Date().toDateString())} {' '}
               {extractYear(new Date().toDateString())}
             </div>
-            <div className={'pt-[40px] text-left text-[22px] px-8'}>
-              <strong>Signed</strong><br />
-              Executive Secretary
+            <div className={"pt-[1px] pl-4"} >
+              <img src={"/images/SIGNATURE_enugu.png"}
+                   className={"w-[150px] h-[50px]"}
+                   alt={"Signature"} />
+            </div>
+            <div className={'flex overflow-hidden'}>
+              <div className={"pt-[5px] text-left text-[18px] px-8"}>
+                {/*<strong>Signed</strong><br />*/}
+                Executive Secretary
+              </div>
+              <div className={"pt-[10px] pl-4 text-center justify-items-center"}>
+                <strong>Reference #: {license?.reference} </strong>
+              </div>
+              <div className={'pt-[1px] w-[40%] overflow-hidden'}>
+                <QRCode size={64}
+                        className={'float-right'}
+                        value={`${GET_LICENCE_BY_NUMBER_URL}${license?.invoiceNumber}`} />
+              </div>
             </div>
           </div>
         </div>

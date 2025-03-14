@@ -22,6 +22,10 @@ const validationSchema = yup.object({
     .string()
     .min(5, "RH Code is too short. Must be 10 Alphanumeric or more")
     .required('Please provide revenue head code.'),
+  serviceTypeCode: yup
+    .string()
+    .min(5, "Service Type Code is too short. Must be 10 Alphanumeric or more")
+    .required('Please provide service type code.'),
   name: yup
     .string()
     .min(4, "Category Name is too short")
@@ -62,6 +66,7 @@ export const FileForm = ({selectedFile, isNew}) => {
   const [initialValues, setInitialValues] = useState(
     {
       code: '',
+      serviceTypeCode: '',
       name: '',
       description: '',
       logo: '',
@@ -104,6 +109,7 @@ export const FileForm = ({selectedFile, isNew}) => {
 
   const reset = () => {
     formik.setFieldValue("code", '');
+    formik.setFieldValue("serviceTypeCode", '');
     formik.setFieldValue("name", '');
     formik.setFieldValue("description", '');
     formik.setFieldValue("publicVisibility", false);
@@ -115,6 +121,7 @@ export const FileForm = ({selectedFile, isNew}) => {
     setPermitLogo('/images/building.jpg');
     setInitialValues({
       code: '',
+      serviceTypeCode: '',
       name: '',
       description: '',
       logo: '/images/building.jpg',
@@ -181,6 +188,17 @@ export const FileForm = ({selectedFile, isNew}) => {
                        errorText={formik.touched.code && formik.errors.code}
                        fieldClass="w-full max-w-sm min-w-[200px]"
             />
+            <TextField formik={formik}
+                       labelText={`Service Type ID`}
+                       placeHolderText={`i.e 14996410000`}
+                       required={true}
+                       value={formik.values.serviceTypeCode}
+                       onChange={formik.handleChange}
+                       fieldName='serviceTypeCode'
+                       error={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
+                       errorText={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
+                       fieldClass="w-full max-w-sm min-w-[200px]"
+            />            
             <TextField formik={formik}
                        labelText={`Name`}
                        placeHolderText={`i.e Weekly Tax`}

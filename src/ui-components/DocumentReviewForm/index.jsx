@@ -8,6 +8,7 @@ import { ProgressButton } from "../Form/component/ProgressButton";
 import React, { useEffect, useState } from "react";
 import { getItem, UpdateDocumentService as reviewApplication } from "../../services";
 import { Loader } from "../Loader";
+import { checkPermission } from "../../services/autorization";
 
 const validationSchema = yup.object({
   comment: yup
@@ -124,7 +125,7 @@ export const DocumentReviewForm = ({application}) => {
             onChange={formik.handleChange}
             className={`w-[100%]`}
           />
-          <div className={`overflow-hidden block ${(showCheck)? 'hidden' : ''} ${showLoader?'hidden':''}`}>
+          <div className={`overflow-hidden block ${checkPermission('CAN_REVIEW_APPLICATION')} ${(showCheck)? 'hidden' : ''} ${showLoader?'hidden':''}`}>
             <FormGroup>
                 <FormControlLabel name={'review'}
                                   onChange={onReviewChange}
@@ -145,6 +146,7 @@ export const DocumentReviewForm = ({application}) => {
             width={1}
             maxWidth={600}
             margin={'0 auto'}
+            className={`!${checkPermission('CAN_APPROVE_APPLICATION')}`}
           >
             <Button size={"large"}
                     variant={"contained"}
