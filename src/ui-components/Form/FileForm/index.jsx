@@ -76,7 +76,8 @@ export const FileForm = ({selectedFile, isNew}) => {
       typeName: '',
       feeType: '',
       value: 0,
-      flatFee: 0
+      flatFee: 0,
+      hasAttachment: false,
   });
   const { types, loadingTypes }
     = getDocService(`${DOCUMENT_TYPE_URL}?page=1&size=100&sortBy=name&sortIn=ASC`);
@@ -131,7 +132,8 @@ export const FileForm = ({selectedFile, isNew}) => {
       typeName: '',
       feeType: '',
       value: 0,
-      flatFee: 0
+      flatFee: 0,
+      hasAttachment: false
     });
   }
 
@@ -302,6 +304,12 @@ export const FileForm = ({selectedFile, isNew}) => {
                           value={formik.values.publicVisibility}
                           onChange={formik.handleChange}
                           fieldName='publicVisibility'
+                          fieldClass="w-full max-w-sm min-w-[200px]" />
+            <ToggleSwitch formik={formik}
+                          labelText={`Attachments?`}
+                          value={formik.values.hasAttachment}
+                          onChange={formik.handleChange}
+                          fieldName='hasAttachment'
                           fieldClass="w-full max-w-sm min-w-[200px]" />
             <ImageUploader labelText={`Permit Logo`}
                            value={permitLogo}
