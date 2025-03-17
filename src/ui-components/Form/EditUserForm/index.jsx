@@ -37,7 +37,7 @@ const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
 const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
 export const EditUserForm = () => {
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
   const [profilePic, setProfilePics] = useState(user?.profile?.profilePicture);
   const [saving, setSaving] = useState(false);
   const [isError, setIsError] = useState(false);
