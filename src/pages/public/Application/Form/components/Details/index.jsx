@@ -31,6 +31,8 @@ export const Details = ({reference}) => {
 
   const onSubmit = async (values, { setSubmitting }) => {
     // Handle form submission (e.g., send data to the server)
+    console.log("values ", constructApp(values));
+    console.log("file ", file);
     const result = await addApplication(constructApp(values));
     if(result?.error !== undefined){
       setIsError(true);
@@ -65,7 +67,8 @@ export const Details = ({reference}) => {
       reference,
       requester: operator?.name,
       typeName: file?.typeName,
-      validity: file?.renewalDuration
+      validity: file?.renewalDuration,
+      attachments: file?.attachments
     }
   }
 
@@ -162,6 +165,7 @@ export const Details = ({reference}) => {
                 <FormBuilder formConfig={file?.formTemplate}
                              initialValues={initialValue}
                              validationSchema={schema}
+                             attachment={file}
                              onSubmit={onSubmit} />
               ) : (
                 <div className={`py-[25%]`}>

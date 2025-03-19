@@ -5,7 +5,7 @@ import {
   GetTypeService as getDocService,
   GetCyclesService as getCycleService,
   GetFeeTypeService as getFeeService,
-  UpdateDocumentService as editDocument, extractRowWithName,
+  UpdateDocumentService as editDocument, extractRowWithName, storeItem, getItem, removeItem
 } from "../../../services";
 import { useFormik } from "formik";
 import { MeldAlert } from "../../Alerts";
@@ -16,6 +16,7 @@ import { DropDown } from "../component/DropDown";
 import { ToggleSwitch } from "../component/ToggleSwitch";
 import { Loader } from "../../Loader";
 import { ImageUploader } from "../component/ImageUploader";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   code: yup
@@ -60,9 +61,11 @@ export const FileForm = ({selectedFile, isNew}) => {
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [attachment, setAttachment] = useState([]);
   const [name, setName] = useState('');
   const [isEdit, setIsEdit ] = useState(false);
   const [permitLogo, setPermitLogo ] = useState('/images/building.jpg');
+  const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(
     {
       code: '',
@@ -78,6 +81,7 @@ export const FileForm = ({selectedFile, isNew}) => {
       value: 0,
       flatFee: 0,
       hasAttachment: false,
+      attachments: []
   });
   const { types, loadingTypes }
     = getDocService(`${DOCUMENT_TYPE_URL}?page=1&size=100&sortBy=name&sortIn=ASC`);
@@ -92,6 +96,8 @@ export const FileForm = ({selectedFile, isNew}) => {
 
   const onSubmit =  async (values) => {
     values.logo = permitLogo;
+    values.hasAttachment = attachment.length > 0;
+    values.attachments = attachment;
     setSaving(true);
     const result = !isEdit?
       await addNewDocument(values) :
@@ -133,8 +139,22 @@ export const FileForm = ({selectedFile, isNew}) => {
       feeType: '',
       value: 0,
       flatFee: 0,
-      hasAttachment: false
+      hasAttachment: false,
+      attachments: []
     });
+  }
+
+  const addAttachmentConfig = () => {
+      if(formik.values.name) {
+        storeItem('attach', JSON.stringify(attachment));
+        storeItem('aFileName', formik.values.name)
+        storeItem('cFValues', JSON.stringify(formik.values));
+        if(isEdit) storeItem('editedForm', isEdit);
+        navigate('/app/documents/F_EAD5665');
+      }else {
+        setIsError(true);
+        setErrorMsg("The File does not have a name");
+      }
   }
 
   const closeAlert = (duration) => {
@@ -156,10 +176,35 @@ export const FileForm = ({selectedFile, isNew}) => {
     if (!isNew) {
       setInitialValues(selectedFile);
       setName(selectedFile?.name);
-      setPermitLogo(selectedFile?.logo)
+      setPermitLogo(selectedFile?.logo);
+      setAttachment(selectedFile?.attachments);
       setIsEdit(!isNew);
     }
   }, [selectedFile, isNew]);
+
+  useEffect(() => {
+    const currentForm = getItem('cFValues');
+    const modified = getItem("editedForm");
+    if(currentForm) {
+      const cachedFile = JSON.parse(currentForm);
+      setInitialValues(cachedFile);
+      setName(cachedFile?.name);
+      setPermitLogo(cachedFile?.logo === ''? '/images/building.jpg': cachedFile?.logo)
+      removeItem('cFValues')
+    }if(modified) {
+      setIsEdit(modified);
+      removeItem('editedForm');
+    }
+  }, [formik]);
+
+  useEffect(() => {
+    const isAttachedFile = getItem('attach');
+    if(isAttachedFile) {
+      setAttachment(JSON.parse(isAttachedFile));
+      removeItem('attach');
+    }
+  }, [formik]);
+
 
   return (
     <>
@@ -200,7 +245,7 @@ export const FileForm = ({selectedFile, isNew}) => {
                        error={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
                        errorText={formik.touched.serviceTypeCode && formik.errors.serviceTypeCode}
                        fieldClass="w-full max-w-sm min-w-[200px]"
-            />            
+            />
             <TextField formik={formik}
                        labelText={`Name`}
                        placeHolderText={`i.e Weekly Tax`}
@@ -221,6 +266,11 @@ export const FileForm = ({selectedFile, isNew}) => {
                        errorText={formik.touched.description && formik.errors.description}
                        fieldClass="w-full max-w-sm min-w-[200px]"
             />
+            <button type={'button'}
+                    onClick={addAttachmentConfig}
+                    className="w-full max-w-sm min-w-[200px] p-2 bg-gray-950 text-white-a700">
+              Add Attachments
+            </button>
             <div className={`${loadingTypes ? "" : "hidden"}`}>
               <Loader />
             </div>
@@ -305,17 +355,11 @@ export const FileForm = ({selectedFile, isNew}) => {
                           onChange={formik.handleChange}
                           fieldName='publicVisibility'
                           fieldClass="w-full max-w-sm min-w-[200px]" />
-            <ToggleSwitch formik={formik}
-                          labelText={`Attachments?`}
-                          value={formik.values.hasAttachment}
-                          onChange={formik.handleChange}
-                          fieldName='hasAttachment'
-                          fieldClass="w-full max-w-sm min-w-[200px]" />
             <ImageUploader labelText={`Permit Logo`}
                            value={permitLogo}
                            setImage={setPermitLogo}
                            containerClass="w-full max-w-sm min-w-[200px]"
-                           fieldClass={`relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0 cursor-pointer`}  />
+                           fieldClass={`relative z-[1] ml-[40%] h-[72px] w-[72px] md:ml-0 cursor-pointer`} />
 
             <button
               disabled={!(formik.dirty && formik.isValid)}
