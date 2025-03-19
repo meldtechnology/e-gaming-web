@@ -43,6 +43,10 @@ const ProtectedRoutes = {
             element: <AppLayout />
         },
         {
+            path: 'documents/F_EAD5665',
+            element: <AppLayout />
+        },
+        {
             path: 'applications',
             element: <AppLayout />
         },

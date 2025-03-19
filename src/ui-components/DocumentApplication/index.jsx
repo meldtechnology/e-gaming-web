@@ -83,6 +83,32 @@ export const DocumentApplication = ({document}) => {
         </Typography>
         <DocumentForm form={application?.formData?.formTemplate} />
       </Box>
+      <Box marginTop={'2%'}
+           width={1}
+           bgcolor={'#FEFEFE'}
+           paddingY={'3%'}
+           paddingX={'5%'}
+           borderRadius={'10px'} >
+        <Typography
+          variant="p"
+          data-aos={'fade-up'}
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Attachments submitted
+        </Typography>
+        {
+          application?.attachments?.map((item, idx) => (
+            <div key={idx} className={'w-full p-4 text-blue-600'}>
+              <a href={item?.url} target='_blank' rel="noreferrer">
+                {item?.name}.pdf
+              </a>
+            </div>
+          ))
+        }
+      </Box>
     </Box>
   );
 }

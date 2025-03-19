@@ -14,6 +14,7 @@ import { Report } from "../../pages/report/Report";
 import { ReportApplication } from "../../ui-components/ReportApplication";
 import { ReportPayment } from "../../ui-components/ReportPayment";
 import { QRCodeMaker } from "../../ui-components/QRCodeMaker";
+import { AddAttachment } from "../../ui-components/Form/AddAttachment";
 
 
 export const PagesRoute = ({ page, params }) => {
@@ -42,6 +43,7 @@ export const PagesRoute = ({ page, params }) => {
       case 'T_46042b50': return <Types />;
       case 'F_322f9837': return <Files />;
       case 'F_D5N2M19': return <DocumentFormBuilder />;
+      case 'F_EAD5665': return <AddAttachment />;
       case 'R_SHFB95GH': return <DocumentReviewer />;
       case 'L_10O9I78': return <LicenseForm />;
       case 'L_10O9I00': return <QRCodeMaker />;
