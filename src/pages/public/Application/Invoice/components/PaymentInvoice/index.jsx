@@ -23,7 +23,11 @@ const validationSchema = yup.object({
       .email("Invalid Confirm Email")
     .oneOf([yup.ref('email'), null], 'Email must match')
       .required('Please provide confirm email.'),
-
+  phoneNumber: yup
+    .string()
+    .min(10)
+    .max(14)
+    .required('Please provide your phone number'),
 });
 
 const GET_INVOICE_URL = process.env.REACT_APP_CREATE_PAYMENTS_BASE_URL;
@@ -38,7 +42,8 @@ export const PaymentInvoice = () => {
 
   const initialValues = {
     email: '',
-    confirmEmail: ''
+    confirmEmail: '',
+    phoneNumber: ''
   }
 
   const onSubmit =  async (values) => {
@@ -49,7 +54,7 @@ export const PaymentInvoice = () => {
       itemCode: form?.code,
       payerEmail: values.email,
       payerName: form?.applicant?.name,
-      payerPhone: "08031154652",
+      payerPhone: values.phoneNumber,
       reference: form?.reference,
       requester: form?.applicant?.name
     }
@@ -165,6 +170,18 @@ export const PaymentInvoice = () => {
                       onChange={formik.handleChange}
                       error={formik.touched.confirmEmail && Boolean(formik.errors.confirmEmail)}
                       helperText={formik.touched.confirmEmail && formik.errors.confirmEmail}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label={`Phone Number *`}
+                      variant="outlined"
+                      name={'phoneNumber'}
+                      fullWidth
+                      value={formik.values.phoneNumber}
+                      onChange={formik.handleChange}
+                      error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                      helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
                     />
                   </Grid>
                   <Grid item container xs={12}>
