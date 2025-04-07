@@ -55,7 +55,9 @@ export const Details = ({reference}) => {
       applicant: {
         name: operator?.name,
         id: operator?.idNumber,
-        type: operator?.type
+        type: operator?.type,
+        address: operator?.address,
+        contact: operator?.contact
       },
       applicantPublicId: operator?.idNumber,
       fileName: file?.name,
