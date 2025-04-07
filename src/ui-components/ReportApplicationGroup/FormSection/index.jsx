@@ -6,9 +6,12 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { GenerateReport } from "../../../services/reportServices/GenerateReport";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { checkPermission } from "../../../services/autorization";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 
 const APPLICATION_REPORT_URL = process.env.REACT_APP_APPLICATION_REPORT_URL;
-export const FormSection = ({isLoading, setDownloadLink}) => {
+export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
+  const [format, setFormat] = useState('PDF');
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [filter, setFilter] = useState('');
@@ -24,7 +27,7 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
   const [end, setEnd] = useState('');
   const [error, setError] = useState('');
 
-  const { generate } = GenerateReport(`${APPLICATION_REPORT_URL}${filterPath}?from=${start}&to=${end}&sortIn=DESC${filter}`);
+  const { generate } = GenerateReport(`${APPLICATION_REPORT_URL}${filterPath}?reportType=${format}&from=${start}&to=${end}&sortIn=DESC${filter}`);
 
   const requestGeneration = () => {
     if(from.length === 0) {
@@ -54,12 +57,15 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
       setError(result?.error?.data?.userMessage);
     }
     else {
-      let url = window.URL.createObjectURL(new Blob([result?.data], { type: 'application/pdf' }));
+      const TYPE =  format === 'CSV' ? 'text/csv' : 'application/pdf';
+      const REPORT_NAME =  'Report' + (format === 'CSV' ? '.csv' : '.pdf');
+      let url = window.URL.createObjectURL(new Blob([result?.data], { type: TYPE }));
       // url = url.replaceAll("http", "https"); // Dev and Prod
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Report.pdf');
+      link.setAttribute('download', REPORT_NAME);
       setDownloadLink(link);
+      setReportType(REPORT_NAME);
     }
     isLoading(false);
   }
@@ -120,8 +126,8 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
         <div className="relative flex rounded-xl bg-transparent mt-4 mb-5 ml-4">
           <>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DatePicker']}>
-                <DatePicker label={'Start Date'}
+              <DemoContainer components={["DatePicker"]}>
+                <DatePicker label={"Start Date"}
                             name={from}
                             onChange={(e) => {
                               setFrom(e.toISOString());
@@ -133,8 +139,8 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
             </LocalizationProvider>
             {/*<span className={'font-bold size-[1.0rem]'}> - </span>*/}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={['DatePicker']}>
-                <DatePicker label={'End Date'}
+              <DemoContainer components={["DatePicker"]}>
+                <DatePicker label={"End Date"}
                             name={to}
                             onChange={(e) => {
                               setTo(e.toISOString());
@@ -147,46 +153,50 @@ export const FormSection = ({isLoading, setDownloadLink}) => {
           </>
         </div>
         <div className="relative flex gap-2 rounded-xl bg-transparent mt-4 mb-5 ml-4">
-          <div className={'text-gray-900_01 font-bold'}>
+          <div className={"text-gray-900_01 font-bold"}>
             Application Status Filter:
           </div>
           <FormGroup>
-              <FormControlLabel name={'pending'}
-                                onChange={(e)=> setPending(!pending)}
-                                control={<Checkbox checked={pending} value={'PENDING'} />} label={'PENDING'} />
-            <FormControlLabel name={'review'}
-                                onChange={(e)=> setReview(!review)}
-                                control={<Checkbox checked={review} value={'REVIEW'} />} label={'REVIEWED'} /><
-            FormControlLabel name={'approve'}
-                                onChange={(e)=> setApprove(!approve)}
-                                control={<Checkbox checked={approve} value={'APPROVE'} />} label={'APPROVED'} />
-            <FormControlLabel name={'decline'}
-                                onChange={(e)=> setDecline(!decline)}
-                                control={<Checkbox checked={decline} value={'DECLINE'} />} label={'DECLINED'} />
-            <FormControlLabel name={'issue'}
-                                onChange={(e)=> setIssue(!issue)}
-                                control={<Checkbox checked={issue} value={'ISSUED'} />} label={'ISSUED'} />
+            <FormControlLabel name={"pending"}
+                              onChange={(e) => setPending(!pending)}
+                              control={<Checkbox checked={pending} value={"PENDING"} />} label={"PENDING"} />
+            <FormControlLabel name={"review"}
+                              onChange={(e) => setReview(!review)}
+                              control={<Checkbox checked={review} value={"REVIEW"} />} label={"REVIEWED"} /><
+            FormControlLabel name={"approve"}
+                             onChange={(e) => setApprove(!approve)}
+                             control={<Checkbox checked={approve} value={"APPROVE"} />} label={"APPROVED"} />
+            <FormControlLabel name={"decline"}
+                              onChange={(e) => setDecline(!decline)}
+                              control={<Checkbox checked={decline} value={"DECLINE"} />} label={"DECLINED"} />
+            <FormControlLabel name={"issue"}
+                              onChange={(e) => setIssue(!issue)}
+                              control={<Checkbox checked={issue} value={"ISSUED"} />} label={"ISSUED"} />
           </FormGroup>
         </div>
-        <div className={'relative flex gap-2 rounded-xl bg-transparent mt-4 mb-5 ml-4'}>
+        <div className={"relative flex gap-2 rounded-xl bg-transparent mt-4 mb-5 ml-4"}>
           <div className={"text-gray-900_01 font-bold"}>
             Application Paid Status:
           </div>
           <FormGroup>
-            <FormControlLabel name={'isPaid'}
-                              onChange={(e)=> setIsPaid(!isPaid)}
-                              control={<Checkbox checked={isPaid} value={'PAID'} />} label={'PAID'} />
+            <FormControlLabel name={"isPaid"}
+                              onChange={(e) => setIsPaid(!isPaid)}
+                              control={<Checkbox checked={isPaid} value={"PAID"} />} label={"PAID"} />
           </FormGroup>
         </div>
         <div className={"w-full overflow-hidden border-solid border-t-2 border-t-black-900_01 pt-4"}>
-          <button type={'button'}
+          <ButtonGroup variant="contained" aria-label="Seconday button group" className={'!ml-6'}>
+            <Button onClick={() => setFormat('PDF')}>PDF Format</Button>
+            <Button onClick={() => setFormat('CSV')}>CSV Format</Button>
+          </ButtonGroup>
+          <button type={"button"}
                   onClick={requestGeneration}
-                  className={` ${checkPermission('CAN_GENERATE_REPORT')} bg-gray-950 text-amber-100 p-6 rounded-[10px] float-right`}>
-            Generate Report
+                  className={` ${checkPermission("CAN_GENERATE_REPORT")} bg-gray-950 text-amber-100 p-6 rounded-[10px] float-right`}>
+            Generate {format} Report
           </button>
         </div>
         <div
-          className={`${error ? '' : 'hidden'} mt-4 p-4 text-center bg-red-200 rounded-[10px] text-red-700 border-red-700 border-2`}>
+          className={`${error ? "" : "hidden"} mt-4 p-4 text-center bg-red-200 rounded-[10px] text-red-700 border-red-700 border-2`}>
           {error}
         </div>
       </div>

@@ -4,7 +4,7 @@ import {
   GetPaymentService as getPaymentMetrics,
   GetDocumentService as getLicenseMetrics,
   formatAmount,
-  GetUsersService as getEntityMetrics,
+  GetUsersService as getEntityMetrics
 } from "../../services";
 import { checkPermission } from "../../services/autorization";
 
