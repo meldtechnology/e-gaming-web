@@ -50,7 +50,7 @@ export const LicenseTemplate = ({license}) => {
             </div>
             <div className={'text-center text-[24px] font-bold px-8'}>
               <div className={'pb-[20px] border-solid border-b-4 border-b-black-900'}>
-                {license?.applicant?.address}
+                {/*{license?.applicant?.address}*/}
               </div>
             </div>
             <div className={'text-center text-[24px] px-2 pt-8'}>
