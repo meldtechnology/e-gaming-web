@@ -9,7 +9,7 @@ const data = [
   { docInfoText: "Issued", docCount: "0", color: "bg-blue-600"},
 ];
 
-export const Application = ({pending, review, decline, approve, issue}) => {
+export const Application = ({pending, review, decline, approve, issue, setStatus}) => {
   data[0].docCount = pending;
   data[1].docCount = review;
   data[2].docCount = decline;
@@ -24,6 +24,7 @@ export const Application = ({pending, review, decline, approve, issue}) => {
                         docInfoText={d.docInfoText}
                         docCount={d.docCount}
                         color={d.color}
+                        setStatus={setStatus}
                         className="bg-gray-50_01" />
           ))}
         </Suspense>

@@ -7,9 +7,11 @@ import { AlertType } from "../../ui-components/Alerts/AlertType";
 import { MeldAlert } from "../../ui-components/Alerts";
 import { ApplicationList } from "../../ui-components/ApplicationList";
 import { checkPermission } from "../../services/autorization";
+import { useState } from "react";
 
 const DOCUMENT_METRICS_URL = process.env.REACT_APP_DOCUMENT_METRIC_URL;
 export const Documents = () => {
+  const [status, setStatus] = useState('');
   const { documents, isLoading, isError }
     = getMetricsService(DOCUMENT_METRICS_URL);
 
@@ -39,8 +41,9 @@ export const Documents = () => {
                        review={documents?.data?.review}
                        decline={documents?.data?.decline}
                        approve={documents?.data?.approve}
-                       issue={documents?.data?.issued} />
-          <ApplicationList />
+                       issue={documents?.data?.issued}
+                       setStatus={setStatus} />
+          <ApplicationList status={status}/>
         </div>
       </div>
     </>

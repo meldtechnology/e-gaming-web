@@ -92,7 +92,7 @@ export const ApplicationDataTable = ({ columnHeader, data, pageInfo, nextPage, p
                 <td className="p-4 border-b border-blue-gray-50">
                   <button type="button"
                           onClick={() => setSelectedApplication(d)}
-                          className={`${d?.status === 'ISSUED'? 'hidden' : ''}`}>
+                   >
                     <svg xmlns="http://www.w3.org/2000/svg"
                          className="w-[24px] h-[24px] inline-block"
                          viewBox="0 0 640 512">

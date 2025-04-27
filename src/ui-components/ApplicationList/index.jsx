@@ -7,10 +7,10 @@ const columnHeading = [
 ]
 
 const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
-export const ApplicationList= () => {
+export const ApplicationList= ({status = ''}) => {
   const [page, setPage] = useState(1);
   const { documents, }
-    = getDocService(`${APPLICATION_URL}?page=${page}&size=10&sortIn=DESC`);
+    = getDocService(`${APPLICATION_URL}${status}?page=${page}&size=10&sortIn=DESC`);
 
   const nextPage = () => {
     setPage(page + 1);
