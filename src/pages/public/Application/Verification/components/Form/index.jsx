@@ -36,6 +36,7 @@ const OPERATOR_TYPE = {
 const VERIFICATION_URL = process.env.REACT_APP_VERIFY_IDENTITY_URL;
 export const Form = () => {
   const [type, setType] = useState('');
+  const [bizType, setBizType] = useState('RC');
   const [regLabel, setRegLabel] = useState('');
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -65,9 +66,9 @@ export const Form = () => {
 
   const configRegNumber = (values) => {
     if(type === 'Proprietor')
-      values['regNumber'] = 'RC' + values['regNumber'].replace(/RC|rc|Rc|rC/, '');
+      values['regNumber'] = bizType + values['regNumber'].replace(/[A-Z]|[a-z]/g, '');
     else
-      values['regNumber'] = values['regNumber'].replace(/RC|rc|Rc|rC/, '');
+      values['regNumber'] = values['regNumber'].replace(/[A-Z]|[a-z]/g, '');
     return values;
   }
 
@@ -141,16 +142,48 @@ export const Form = () => {
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
               {regLabel}
             </Typography>
-            <TextField
-              label={`${regLabel} *`}
-              variant="outlined"
-              name={'regNumber'}
-              fullWidth
-              value={formik.values.regNumber}
-              onChange={formik.handleChange}
-              error={formik.touched.regNumber && Boolean(formik.errors.regNumber)}
-              helperText={formik.touched.regNumber && formik.errors.regNumber}
-            />
+            <div className={`!w-[100%] !p-0 !m-0 !rounded-lg`}>
+              <span className={`!w-[40%] ${type === 'Proprietor'? '' : 'hidden'}`}>
+                <Select
+                  label=""
+                  variant="outlined"
+                  defaultValue=""
+                  name={'bizType'}
+                  value={bizType}
+                  onChange={e => setBizType(e.target.value)}
+                >
+                {[{name: "Registered Corporation",
+                  value: "RC"}, {name: "Business Name", value: "BN"}]
+                  .map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+              </span>
+              <span className={`![60%]`}>
+                <TextField
+                  label={`${regLabel} *`}
+                  variant="outlined"
+                  name={'regNumber'}
+                  value={formik.values.regNumber}
+                  onChange={formik.handleChange}
+                  error={formik.touched.regNumber && Boolean(formik.errors.regNumber)}
+                  helperText={formik.touched.regNumber && formik.errors.regNumber}
+                  className={`${type === 'Proprietor'? '!w-[59%]' : '!w-[99%]'} !ml-2.5 !rounded-lg`}
+                />
+              </span>
+            </div>
+            {/*<TextField*/}
+            {/*  label={`${regLabel} *`}*/}
+            {/*  variant="outlined"*/}
+            {/*  name={'regNumber'}*/}
+            {/*  fullWidth*/}
+            {/*  value={formik.values.regNumber}*/}
+            {/*  onChange={formik.handleChange}*/}
+            {/*  error={formik.touched.regNumber && Boolean(formik.errors.regNumber)}*/}
+            {/*  helperText={formik.touched.regNumber && formik.errors.regNumber}*/}
+            {/*/>*/}
           </Grid>
           <Grid item xs={12} className={`${type === 'Agent'? '' : 'hidden'}`}>
             <TextField
