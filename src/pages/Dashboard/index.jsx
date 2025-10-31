@@ -7,6 +7,7 @@ import {
   GetUsersService as getEntityMetrics
 } from "../../services";
 import { checkPermission } from "../../services/autorization";
+import { formatCompactNumber } from "../../services/formatAmount";
 
 const PAYMENT_METRIC_URL = process.env.REACT_APP_PAYMENTS_METRIC_URL;
 const LICENSE_METRIC_URL = process.env.REACT_APP_DOCUMENTS_LICENSE_METRICS_URL;
@@ -19,7 +20,7 @@ export const Dashboard = () => {
   return checkPermission('CAN_VIEW_DASHBOARD') === '' ? (
     <>
       <Header metrics={[
-        formatAmount(payments?.data?.totalVolume),
+        formatCompactNumber(payments?.data?.totalVolume),
         payments?.data?.totalCount,
         users?.data,
         documents?.data?.total]}/>
