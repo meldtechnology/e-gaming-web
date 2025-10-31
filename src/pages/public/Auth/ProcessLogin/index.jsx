@@ -6,12 +6,13 @@ import Box from "@mui/material/Box";
 import { Loader } from "../../../../ui-components/Loader";
 
 const EXCHANGE_CODE_URL = process.env.REACT_APP_TOKEN_URL;
+const APP_ID = process.env.REACT_APP_APPLICATION_ID;
 export const ProcessLogin = () => {
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
   const[isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { getToken } = getAccessToken(`${EXCHANGE_CODE_URL}/${code}`);
+  const { getToken } = getAccessToken(`${EXCHANGE_CODE_URL}/${APP_ID}/${code}`);
 
 
   // The function will invoke when the user changes the tab

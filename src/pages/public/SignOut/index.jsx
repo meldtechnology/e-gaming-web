@@ -5,8 +5,9 @@ import Box from "@mui/material/Box";
 import { Loader } from "../../../ui-components/Loader";
 
 const LOG_OUT_URL =  process.env.REACT_APP_LOGOUT_URL
+const APP_ID =  process.env.REACT_APP_APPLICATION_ID
 export const SignOut = () => {
-  const { auth, isLoading} = logout(LOG_OUT_URL);
+  const { auth, isLoading} = logout(`${LOG_OUT_URL}?appId=${APP_ID}`);
 
   useEffect(() => {
     if(!isLoading) {

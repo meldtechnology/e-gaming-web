@@ -4,6 +4,7 @@ import { Home } from "../pages/public/Home";
 import { SignIn } from "../pages/public/SignIn";
 import { SignOut } from "../pages/public/SignOut";
 import { LoginRedirect } from "../pages/public/Auth/LoginRedirect";
+import { AutoBackRedirect } from "../pages/public/Auth/AutoBackRedirect";
 import { ProcessLogin } from "../pages/public/Auth/ProcessLogin";
 import { ProfileAccount } from "../pages/public/Auth/ProfileAccount";
 import { EmailVerify } from "../pages/public/EmailVerify";
@@ -33,6 +34,10 @@ const PublicRoutes = {
         {
             path: '/process/auth/login',
             element: <ProcessLogin />
+        },
+        {
+            path: '/auth/login/redirect',
+            element: <AutoBackRedirect />
         },
         {
             path: '/logout',

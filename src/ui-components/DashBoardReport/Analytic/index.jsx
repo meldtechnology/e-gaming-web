@@ -4,6 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Text } from "../../Text";
 import { Heading } from "../../Heading";
 import { formatAmount, thousandMillion } from "../../../services";
+import { formatCompactNumber } from "../../../services/formatAmount";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,7 +51,8 @@ export const Analytic = ({metric, license}) => {
             <div className="mx-2 flex gap-1 items-center self-stretch md:mx-0">
               <div className="h-[8px] w-[8px] rounded bg-blue-a400" />
               <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
-                {formatAmount(thousandMillion(metric[0]))}
+                {/*{formatAmount(thousandMillion(metric[0]))}*/}
+                {formatCompactNumber(metric[0])}
               </Heading>
             </div>
           </div>
@@ -63,7 +65,7 @@ export const Analytic = ({metric, license}) => {
             <div className="flex w-[40%] gap-1 items-center justify-center md:w-full">
               <div className="h-[8px] w-[8px] rounded bg-black-900_01 " />
               <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
-                {formatAmount(thousandMillion(metric[1]))}
+                {formatCompactNumber(metric[1])}
               </Heading>
             </div>
           </div>
@@ -76,7 +78,7 @@ export const Analytic = ({metric, license}) => {
             <div className="flex w-[46%] gap-1 items-center justify-center md:w-full">
               <div className="h-[8px] w-[8px] rounded bg-indigo-a100_01" />
               <Heading size="headingxs" as="h2" className="text-[18px] font-bold text-black-900_01">
-                {formatAmount(thousandMillion(metric[2]))}
+                {formatCompactNumber(metric[2])}
               </Heading>
             </div>
           </div>

@@ -5,8 +5,9 @@ import { Loader } from "../../../../ui-components/Loader";
 import { useEffect } from "react";
 
 const AUTHORIZE_URL = process.env.REACT_APP_AUTHORIZE_URL;
+const APP_ID = process.env.REACT_APP_APPLICATION_ID;
 export const LoginRedirect = () => {
-  const { auth, isLoading } = getAuth(AUTHORIZE_URL);
+  const { auth, isLoading } = getAuth(`${AUTHORIZE_URL}/${APP_ID}`);
 
   useEffect(() => {
     removeAll();
