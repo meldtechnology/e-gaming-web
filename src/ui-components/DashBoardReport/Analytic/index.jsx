@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { Text } from "../../Text";
 import { Heading } from "../../Heading";
-import { formatAmount, thousandMillion } from "../../../services";
+// import { formatAmount, thousandMillion } from "../../../services";
 import { formatCompactNumber } from "../../../services/formatAmount";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
