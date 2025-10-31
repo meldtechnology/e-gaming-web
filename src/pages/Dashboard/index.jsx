@@ -3,7 +3,6 @@ import { Analytic, LatestReport, StackBarReport } from "../../ui-components/Dash
 import {
   GetPaymentService as getPaymentMetrics,
   GetDocumentService as getLicenseMetrics,
-  formatAmount,
   GetUsersService as getEntityMetrics
 } from "../../services";
 import { checkPermission } from "../../services/autorization";
