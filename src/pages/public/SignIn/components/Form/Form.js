@@ -20,9 +20,10 @@ const validationSchema = yup.object({
     // .min(8, 'The password should have at minimum length of 8'),
 });
 
+const APP_ID = process.env.REACT_APP_APPLICATION_ID;
 // const LOGIN_URL = 'http://localhost:9011/login';
 // const LOGIN_URL = 'http://academy.meld-tech.com/login';
-const LOGIN_URL = 'https://auth.meld-tech.com/login';
+const LOGIN_URL = `https://auth.meld-tech.com/login?appId=${APP_ID}&error`;
 const Form = () => {
   const [searchParams] = useSearchParams();
   const initialValues = {
