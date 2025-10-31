@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate Production Build
         run: |
-          npx update-browserslist-db@latest
+          npm install caniuse-lite --legacy-peer-deps
           npm run build
 
       - name: Log in to Docker Hub
