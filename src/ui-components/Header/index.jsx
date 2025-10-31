@@ -28,7 +28,7 @@ export default function Header({ metrics, ...props }) {
                   </div>
                   <div className="mb-4 flex flex-1 flex-col items-start self-end">
                     <Heading as="h4" className="text-[24px] font-bold text-gray-600">
-                      {metrics[index]}
+                      {index === 0? '₦ ' : ''} {metrics[index]}
                     </Heading>
                     <Text size="textxs" as="p" className="text-[18px] font-normal text-gray-600">
                       {d.totalRevenue}
