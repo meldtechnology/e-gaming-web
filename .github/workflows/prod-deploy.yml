@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BASE-IMAGE: josleke/esgc
-      RELEASE-TAG: 4.1.0-Release
+      RELEASE-TAG: 4.1.1-Release
 
     steps:
       - name: Checkout latest code
