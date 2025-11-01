@@ -7,6 +7,9 @@ export const AutoBackRedirect = () => {
 
   useEffect(() => {
     alert(location.pathname);
+    alert(window.history[-1]);
+    alert(window.history[window.history.length - 1]);
+    alert(window.history[window.history.length]);
     // setTimeout(() => {
     //   if (window.history.length > 1) navigate(-1);
     //   else navigate("/", { replace: true });
