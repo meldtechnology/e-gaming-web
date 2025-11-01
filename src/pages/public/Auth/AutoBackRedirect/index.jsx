@@ -10,6 +10,7 @@ export const AutoBackRedirect = () => {
     alert(location.pathname);
     alert(location.pathname + location.search);
     alert(window.history[window.history.length]);
+    window.history.back();
     // setTimeout(() => {
     //   if (window.history.length > 1) navigate(-1);
     //   else navigate("/", { replace: true });
