@@ -7,10 +7,10 @@ export const AutoBackRedirect = () => {
 
   useEffect(() => {
     alert(location.pathname);
-    setTimeout(() => {
-      if (window.history.length > 1) navigate(-1);
-      else navigate("/", { replace: true });
-    }, 100); // short delay for smoother UX
+    // setTimeout(() => {
+    //   if (window.history.length > 1) navigate(-1);
+    //   else navigate("/", { replace: true });
+    // }, 100); // short delay for smoother UX
   }, [navigate, location.pathname]);
 
   return (
