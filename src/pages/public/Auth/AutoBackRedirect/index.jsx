@@ -11,10 +11,11 @@ export const AutoBackRedirect = () => {
     alert(location.pathname + location.search);
     alert(window.history[window.history.length]);
     window.history.back();
-    // setTimeout(() => {
-    //   if (window.history.length > 1) navigate(-1);
-    //   else navigate("/", { replace: true });
-    // }, 100); // short delay for smoother UX
+    setTimeout(() => {
+      if (window.history.length > 1) window.history.back();
+      // if (window.history.length > 1) navigate(-1);
+      else navigate("/", { replace: true });
+    }, 100); // short delay for smoother UX
   }, [navigate, location.pathname, location.search]);
 
   return (
