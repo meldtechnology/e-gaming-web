@@ -84,7 +84,8 @@ export const StackBarReport = () => {
               id="demo-simple-select"
               name={'year'}
               label={''}
-              defaultValue={'2024'}
+              // defaultValue={getCurrentYear()}
+              value={year}
               onChange={(e) => setYear(e.target.value)}
               className={'!p-0 !w-[100%] !h-[50%] !border-0'}
                 variant={'outlined'}>
