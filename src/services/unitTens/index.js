@@ -9,3 +9,6 @@ export const thousandMillion = (amount) => {
   else if(amount >= 1000000000) return (amount / 1000000000).toFixed(1) + "B";
   return amount;
 }
+
+export const getCurrentYear = () => new Date().getFullYear();
+export const getCurrentMonth = () => new Date().getMonth() + 1;

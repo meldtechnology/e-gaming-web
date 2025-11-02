@@ -14,6 +14,7 @@ import { useState } from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { getCurrentYear } from "../../../services/unitTens";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -40,7 +41,7 @@ const options= {
 
 const REPORT_METRIC_URL = process.env.REACT_APP_DOCUMENTS_REPORT_METRICS_URL;
 export const StackBarReport = () => {
-  const [year, setYear] = useState(2024);
+  const [year, setYear] = useState(getCurrentYear());
   const { documents, isLoading }
     = getLicenseMetrics(`${REPORT_METRIC_URL}?from=${year}-01-01&to=${year}-12-31` );
   const report = documents?.data;
