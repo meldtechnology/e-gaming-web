@@ -9,7 +9,8 @@ import { checkPermission } from "../../../services/autorization";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 
-const APPLICATION_REPORT_URL = process.env.REACT_APP_APPLICATION_REPORT_URL;
+const APPLICATION_REPORT_URL = process.env.REACT_APP_V2_APPLICATION_REPORT_URL;
+// const APPLICATION_REPORT_URL = process.env.REACT_APP_APPLICATION_REPORT_URL;
 export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
   const [format, setFormat] = useState('PDF');
   const [from, setFrom] = useState('');

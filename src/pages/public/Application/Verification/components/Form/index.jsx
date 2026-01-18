@@ -14,6 +14,7 @@ import {
   UserVerificationService as verifyEntity
 } from "../../../../../../services/user/UserVerificationService";
 import { storeItem } from "../../../../../../services";
+import { Textarea } from "@headlessui/react";
 
 const validationSchema = yup.object({
   regNumber: yup
@@ -47,7 +48,8 @@ export const Form = () => {
   const initialValues = {
     regNumber: '',
     firstname: '',
-    lastname: ''
+    lastname: '',
+    address: ''
   };
 
   const onSubmit = async (values) => {
@@ -207,6 +209,21 @@ export const Form = () => {
               onChange={formik.handleChange}
               error={formik.touched.lastname && Boolean(formik.errors.lastname)}
               helperText={formik.touched.lastname && formik.errors.lastname}
+            />
+          </Grid>
+          <Grid item xs={12} className={`${type === 'Agent'? '' : 'hidden'} `}>
+            <Textarea
+              label="Operating Address Line *"
+              variant="outlined"
+              rows={4}
+              placeholder="Operating Address Line *"
+              className={`!w-[100%] !rounded-lg`}
+              name={'address'}
+              fullWidth
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              error={formik.touched.address && Boolean(formik.errors.address)}
+              helperText={formik.touched.address && formik.errors.address}
             />
           </Grid>
           <Grid item container xs={12}>
