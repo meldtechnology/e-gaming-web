@@ -49,6 +49,8 @@ const LatestProducts = ({operatorType}) => {
   }
 
   useEffect(() => {
+    console.log(documents);
+    console.log(operatorType);
     if(documents !== null) setProduct(documents?.data?.results);
     removeAll();
   }, [documents]);
@@ -88,6 +90,7 @@ const LatestProducts = ({operatorType}) => {
             data-aos-delay={i * 100}
             data-aos-offset={100}
             data-aos-duration={600}
+            className={`${item?.publicVisibility ? '' : '!hidden'}`}
           >
             <Box display={'block'} width={1} height={1}>
               <Box
@@ -109,6 +112,7 @@ const LatestProducts = ({operatorType}) => {
                     alignItems: 'flex-end',
                     justifyContent: 'center',
                   }}
+                  className={"hidden"}
                 >
                   <Box
                     component={'img'}
