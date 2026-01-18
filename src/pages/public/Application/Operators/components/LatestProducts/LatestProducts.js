@@ -49,8 +49,6 @@ const LatestProducts = ({operatorType}) => {
   }
 
   useEffect(() => {
-    console.log(documents);
-    console.log(operatorType);
     if(documents !== null) setProduct(documents?.data?.results);
     removeAll();
   }, [documents]);
