@@ -34,11 +34,11 @@ export const LicenseTemplate = ({license}) => {
             <div className={"w-full text-center"}>
               <h1 className={"text-[32px] font-bold"}>GAMING/LOTTERY LICENSE</h1>
               <p className={'text-[18px]'}>
-                Pursuant to the Enugu State Gaming Law 2004 and Enugu Gaming Commission Regulations 2017
+                Pursuant to the Enugu State Gaming and Lottery Commission Law No. 8 of 2025 and the Regulations made thereunder
               </p>
             </div>
             <div className={'py-[30px] text-center text-[24px] font-bold'}>
-              Enugu State Gaming Commission hereby licensed
+              The Enugu State Gaming and Lottery Commission hereby licenses
             </div>
             <div className={"text-center text-[24px] font-bold px-8"}>
               <div className={"pb-[20px]  border-solid border-b-4 border-b-black-900"}>
@@ -57,7 +57,7 @@ export const LicenseTemplate = ({license}) => {
               to operate a
               <span className={'font-bold px-2'}>
               {license?.fileName}
-              </span> with effect from
+              </span> within Enugu State with effect from
               <span className={'font-bold px-2'}>
                 {extractDay(license?.issuedOn)}
               </span> Day of
@@ -69,17 +69,17 @@ export const LicenseTemplate = ({license}) => {
               </span> Day of
               <span className={'font-bold px-2'}>
                 {extractMonth(license?.expiresOn)} {' '} {extractYear(license?.expiresOn)}
-              </span> in Enugu State.
+              </span>.
             </div>
             <div className={'py-[30px] text-center text-[22px] px-8'}>
-              This License is subject to the provisions of Part III, Appendix A
-              First Schedule of Enugu State Gaming Commission Regulation 2017, Cap
-              86 Enugu State Gaming Commission Law with the Force and Effect as it fully
-              set forth herein.
+              This License is subject to the provisions of the Enugu State Gaming and Lottery
+              Commission Law No. 8 of 2025 and the Enugu State Gaming and Lottery Commission
+              Regulations, 2026 made pursuant thereto, with full force and effect as if herein expressly
+              set forth.
             </div>
             <div className={'py-[10px] text-center text-[22px] px-8'}>
-              This license is given under my hand by the authority of the
-              Governor of Enugu State and it is valid for {'One year'}
+              This License is issued under my hand by the authority of the Governor of Enugu State
+              and shall remain valid for a period of {'One (1) year'}
             </div>
             <div className={'py-[10px] font-bold text-center text-[22px] px-8'}>
               Dated {extractDay(new Date().toDateString())} Day of {' '}
