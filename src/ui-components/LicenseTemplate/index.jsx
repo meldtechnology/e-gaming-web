@@ -71,13 +71,13 @@ export const LicenseTemplate = ({license}) => {
                 {extractMonth(license?.expiresOn)} {' '} {extractYear(license?.expiresOn)}
               </span>.
             </div>
-            <div className={'py-[30px] text-center text-[22px] px-8'}>
+            <div className={'py-[20px] text-center text-[18px] px-8'}>
               This License is subject to the provisions of the Enugu State Gaming and Lottery
               Commission Law No. 8 of 2025 and the Enugu State Gaming and Lottery Commission
               Regulations, 2026 made pursuant thereto, with full force and effect as if herein expressly
               set forth.
             </div>
-            <div className={'py-[10px] text-center text-[22px] px-8'}>
+            <div className={'py-[5px] text-center text-[18px] px-8'}>
               This License is issued under my hand by the authority of the Governor of Enugu State
               and shall remain valid for a period of {'One (1) year'}
             </div>
