@@ -42,7 +42,7 @@ export const DocumentReviewForm = ({application}) => {
     const reviewComment = {
       comment: values.comment,
       reference: app?.reference,
-      requester: user?.username,
+      requester: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
       requesterId: user?.publicId
     }
     const result = await modifyDocument(reviewComment);

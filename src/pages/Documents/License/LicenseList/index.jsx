@@ -4,7 +4,7 @@ import { LicenseDataTable } from "../../../../ui-components/Datatable";
 import { Loader } from "../../../../ui-components/Loader";
 
 const columnHeading = [
-  "Reference #", "Approve By", "Approved On", "Fee", "Valid (Days)", "Status", "Action"
+  "Reference #", "Approve By", "Approved On", "Licensee", "Fee", "Valid (Days)", "Status", "Action"
 ]
 
 const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
