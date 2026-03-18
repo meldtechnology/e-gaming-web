@@ -11,6 +11,7 @@ export const LicenseDataTable = ({ columnHeader, data, pageInfo, nextPage, previ
     storeItem('ld', JSON.stringify(selectedApp))
     navigate('/app/licenses/L_10O9I00');
   }
+  console.log('data', data);
   return (
     <div
       className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
@@ -54,7 +55,15 @@ export const LicenseDataTable = ({ columnHeader, data, pageInfo, nextPage, previ
                   <div className="flex flex-col">
                     <p
                       className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                      {d?.approvedOn}
+                      {new Date(d?.approvedOn).toDateString()}
+                    </p>
+                  </div>
+                </td>
+                <td className="p-2 border-b border-blue-gray-50">
+                  <div className="flex flex-col">
+                    <p
+                      className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                      {d?.applicant?.name}
                     </p>
                   </div>
                 </td>
