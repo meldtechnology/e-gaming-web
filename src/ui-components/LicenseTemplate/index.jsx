@@ -57,7 +57,7 @@ export const LicenseTemplate = ({license}) => {
               to operate a
               <span className={'font-bold px-2'}>
               {license?.fileName}
-              </span> within Enugu State with effect from
+              </span> with effect from
               <span className={'font-bold px-2'}>
                 {extractDay(license?.issuedOn)}
               </span> Day of
