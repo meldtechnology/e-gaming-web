@@ -4,7 +4,6 @@ import { headerConfig as headers } from "../../../core/httpHeaders";
 
 export const CreateAuthService = ( endpoint, delay ) => {
   const { config } = headers();
-  console.log(endpoint);
   let { trigger, data: resp, error: err }
     = useSWRMutation([endpoint, config], postCall, {refreshInterval: delay});
 

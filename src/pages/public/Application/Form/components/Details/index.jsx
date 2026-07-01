@@ -1,3 +1,4 @@
+import { env } from "../../../../../../config/env";
 import { getItem, removeAll, storeItem, updateForm } from "../../../../../../services";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -18,7 +19,7 @@ const defaultImg = [
   },
 ]
 
-const ADD_APPLICATION_URL = process.env.REACT_APP_CREATE_DOCUMENT_URL;
+const ADD_APPLICATION_URL = env.CREATE_DOCUMENT_URL;
 export const Details = ({reference}) => {
   const [file, setFile] = useState({});
   const [initialValue, setInitialValue] = useState({});
@@ -30,9 +31,6 @@ export const Details = ({reference}) => {
   const { addApplication } = createApp(ADD_APPLICATION_URL);
 
   const onSubmit = async (values, { setSubmitting }) => {
-    // Handle form submission (e.g., send data to the server)
-    console.log("values ", constructApp(values));
-    console.log("file ", file);
     const result = await addApplication(constructApp(values));
     if(result?.error !== undefined){
       setIsError(true);

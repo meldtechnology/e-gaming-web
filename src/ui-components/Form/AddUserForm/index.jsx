@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import { Heading } from "../../Heading";
 import { Button } from "@headlessui/react";
 import { Img } from "../../Img";
@@ -41,9 +42,9 @@ const initialValues={
     role:''
 }
 
-const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
-const ADD_USER_URL = process.env.REACT_APP_USER_SIGN_UP_URL;
-const APP_ROLE_URL = process.env.REACT_APP_ROLES_URL;
+const UPLOAD_DOCUMENT_URL = env.DOCUMENT_UPLOAD_URL;
+const ADD_USER_URL = env.USER_SIGN_UP_URL;
+const APP_ROLE_URL = env.ROLES_URL;
 export const AddUserForm = () => {
   const [saving, setSaving] = useState(false);
   const [isError, setIsError] = useState(false);

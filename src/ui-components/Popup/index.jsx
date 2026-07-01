@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import { checkPermission } from "../../services/autorization";
 
 export const Popup = ({openModal, value, selectedUser, selectedModal, isActive}) => {
+  const canChangePassword = checkPermission('CAN_CHANGE_USER_PASSWORD');
+  const canEnableDisableUser = checkPermission('CAN_ENABLE_DISABLE_USER');
+
+  const selectCurrentUser = () => selectedUser(value);
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton
+          onClick={selectCurrentUser}
           className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 ring-inset ring-gray-300 "
         >
           <img src="/images/img_notification.svg" alt='select'
-               name={value}
-               onClick={(e) => selectedUser(e.target.name)} />
+               name={value} />
         </MenuButton>
       </div>
 
@@ -19,13 +24,14 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
         transition
         className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-200_01 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
+        {canChangePassword ? (
         <div className="py-1">
           <MenuItem>
             <Link
               onClick={openModal}
               onMouseDown={(e) => selectedModal("pwd")}
               to={"#"}
-              className={`${checkPermission('CAN_CHANGE_USER_PASSWORD')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
+              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"
@@ -38,12 +44,14 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
             </Link>
           </MenuItem>
         </div>
+        ) : null}
         <div className="py-1">
+          {canChangePassword ? (
           <MenuItem>
             <Link
               onClick={openModal}
               onMouseDown={(e) => selectedModal("rle")}
-              className={`${checkPermission('CAN_CHANGE_USER_PASSWORD')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
+              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
               to={"#"}>
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"
@@ -55,12 +63,14 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
               Change permission
             </Link>
           </MenuItem>
+          ) : null}
+          {canEnableDisableUser ? (
           <MenuItem>
             <Link
               onClick={openModal}
               onMouseDown={(e) => selectedModal("act")}
               to={"#"}
-              className={`${checkPermission('CAN_ENABLE_DISABLE_USER')} block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900`}
+              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg"
                    className="w-[14px] h-[14px] inline-block mr-2"
@@ -72,6 +82,7 @@ export const Popup = ({openModal, value, selectedUser, selectedModal, isActive})
               {isActive?'Disable' : 'Enable'}
             </Link>
           </MenuItem>
+          ) : null}
           <MenuItem>
             <Link
               to="#"

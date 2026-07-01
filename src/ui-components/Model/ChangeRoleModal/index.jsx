@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import { useState } from "react";
 import { GetRolesService as getRoles, UpdateUserService as updateRole } from "../../../services";
 import { MeldAlert } from "../../Alerts";
@@ -13,8 +14,8 @@ const roleSchema = Yup.object().shape({
 
 const initialValues = { role: '',}
 
-const APP_ROLE_URL = process.env.REACT_APP_ROLES_URL;
-const APP_CHANGE_ROLE_URL = process.env.REACT_APP_ADMIN_CHANGE_URL;
+const APP_ROLE_URL = env.ROLES_URL;
+const APP_CHANGE_ROLE_URL = env.ADMIN_CHANGE_URL;
 export const ChangeRoleModal = ({ onClick, userData}) => {
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState(null);

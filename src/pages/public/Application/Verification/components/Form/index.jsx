@@ -1,3 +1,4 @@
+import { env } from "../../../../../../config/env";
 import React, { useEffect, useState } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -34,7 +35,7 @@ const OPERATOR_TYPE = {
   Agent: 'NIN'
 }
 
-const VERIFICATION_URL = process.env.REACT_APP_VERIFY_IDENTITY_URL;
+const VERIFICATION_URL = env.VERIFY_IDENTITY_URL;
 export const Form = () => {
   const [type, setType] = useState('');
   const [bizType, setBizType] = useState('RC');

@@ -13,15 +13,17 @@ export const DownloadSection = ({isLoading, downLoadLink}) => {
           <div className={'mt-4 mx-auto'}>
             <Loader w={'1%'} h={'1%'} />
           </div>
-        ) : (
-          <div className={`${downLoadLink ? '' : 'hidden'} justify-items-center mt-12`}>
-            <a href={downLoadLink}
-               download={'Report.pdf'}
-               className={`${checkPermission('CAN_DOWNLOAD_REPORT')} w-[50%] text-center text-blue-600 font-bold px-2 py-4 rounded-[10px] border-2 border-gray-700`}
-               target={'_blank'} rel="noreferrer"
-            >Download Report</a>
+        ) : downLoadLink ? (
+          <div className="justify-items-center mt-12">
+            {checkPermission('CAN_DOWNLOAD_REPORT') ? (
+              <a href={downLoadLink}
+                 download={'Report.pdf'}
+                 className="w-[50%] text-center text-blue-600 font-bold px-2 py-4 rounded-[10px] border-2 border-gray-700"
+                 target={'_blank'} rel="noreferrer"
+              >Download Report</a>
+            ) : null}
           </div>
-        )
+        ) : null
       }
     </div>
   );

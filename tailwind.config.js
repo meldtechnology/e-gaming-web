@@ -4,15 +4,32 @@
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,html,mdx}",
-    "./public/index.html",
+    "./index.html",
   ],
   // corePlugins: {
   //   preflight: false,
   // },
   // important: '#root',
-  purge: ["./public/index.html",
+  purge: ["./index.html",
     "./src/**/*.{js,ts,jsx,tsx,html,mdx}",
     ],
+  safelist: [
+    "bg-blue-400",
+    "bg-pink-300",
+    "bg-green-800_01",
+    "bg-yellow-800",
+    "bg-yellow-500",
+    "bg-green-a700",
+    "bg-light_blue-a200",
+    "bg-yellow-600",
+    "bg-purple-600",
+    "bg-red-600",
+    "bg-green-600",
+    "bg-blue-600",
+    "bg-orange-600",
+    "bg-[#309630]",
+    "bg-[#963030]",
+  ],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     screens: { lg: { max: "1440px" }, md: { max: "1050px" }, sm: { max: "550px" } },
@@ -78,6 +95,21 @@ module.exports = {
         purple: { 700: "var(--purple_700)" },
         white: { a700: "var(--white_a700)" },
         yellow: { 500: "var(--yellow_500)", 800: "var(--yellow_800)" },
+        surface: "var(--color-surface)",
+        "surface-muted": "var(--color-surface-muted)",
+        "surface-raised": "var(--color-surface-raised)",
+        "text-primary": "var(--color-text-primary)",
+        "text-secondary": "var(--color-text-secondary)",
+        "text-inverse": "var(--color-text-inverse)",
+        brand: "var(--color-brand)",
+        "brand-strong": "var(--color-brand-strong)",
+        border: "var(--color-border)",
+        "border-strong": "var(--color-border-strong)",
+        success: "var(--color-success)",
+        danger: "var(--color-danger)",
+        warning: "var(--color-warning)",
+        info: "var(--color-info)",
+        sidebar: "var(--color-sidebar)",
       },
       boxShadow: { bs: "inset 0 4px 4px 0 #0000003f" },
       backgroundImage: {
@@ -94,4 +126,3 @@ module.exports = {
     require("@tailwindcss/forms"),
   ],
 }
-

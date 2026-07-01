@@ -1,84 +1,156 @@
 import React from "react";
-import {SecuredRoute} from "../layout/AppLayout/SecuredRoute";
+import { Navigate } from "react-router-dom";
+import { PermissionRoute, SecuredRoute } from "../layout/AppLayout/SecuredRoute";
 import AppLayout from "../layout/AppLayout";
+import { Dashboard } from "../pages/Dashboard";
+import { Users } from "../pages/Users";
+import { Profile } from "../pages/Users/Profile";
+import { NewUser } from "../pages/Users/NewUser";
+import { EditUser } from "../pages/Users/EditUser";
+import { Types } from "../pages/Documents/Types";
+import { Files } from "../pages/Documents/Files";
+import { DocumentFormBuilder } from "../pages/Documents/DocumentFormBuilder";
+import { AddAttachment } from "../ui-components/Form/AddAttachment";
+import { Documents } from "../pages/Documents";
+import { DocumentReviewer } from "../pages/Documents/DocumentReviewer";
+import { License } from "../pages/Documents/License";
+import { LicenseForm } from "../ui-components/LicenseForm";
+import { QRCodeMaker } from "../ui-components/QRCodeMaker";
+import { Report } from "../pages/report/Report";
+import { ReportPayment } from "../ui-components/ReportPayment";
+import { ReportApplication } from "../ui-components/ReportApplication";
+import { PrimitiveGallery } from "../pages/PrimitiveGallery";
+
+const protect = (permission, element) => (
+  <PermissionRoute permission={permission}>{element}</PermissionRoute>
+);
 
 const ProtectedRoutes = {
-    path: '/app',
-    element: <SecuredRoute />,
-    children: [
+  path: "/app",
+  element: <SecuredRoute />,
+  children: [
+    {
+      element: <AppLayout />,
+      children: [
         {
-            path: 'dashboard',
-            element: <AppLayout />
+          index: true,
+          element: <Navigate to="dashboard" replace />,
         },
         {
-            path: 'users',
-            element: <AppLayout />
+          path: "dashboard",
+          element: <Dashboard />,
         },
         {
-            path: 'users/profile',
-            element: <AppLayout />
+          path: "_primitives",
+          element: <PrimitiveGallery />,
         },
         {
-            path: 'users/_new',
-            element: <AppLayout />
+          path: "users",
+          element: protect("CAN_VIEW_USERS", <Users />),
         },
         {
-            path: 'users/_edit',
-            element: <AppLayout />
+          path: "users/profile",
+          element: protect("CAN_VIEW_PROFILE", <Profile />),
         },
         {
-            path: 'documents',
-            element: <AppLayout />
+          path: "users/_new",
+          element: protect("CAN_CREATE_USER", <NewUser />),
         },
         {
-            path: 'documents/T_46042b50',
-            element: <AppLayout />
+          path: "users/_edit",
+          element: protect("CAN_EDIT_USER", <EditUser />),
         },
         {
-            path: 'documents/F_322f9837',
-            element: <AppLayout />
+          path: "documents",
+          element: protect("CAN_VIEW_CATEGORIES", <Types />),
         },
         {
-            path: 'documents/F_D5N2M19',
-            element: <AppLayout />
+          path: "documents/types",
+          element: protect("CAN_VIEW_CATEGORIES", <Types />),
         },
         {
-            path: 'documents/F_EAD5665',
-            element: <AppLayout />
+          path: "documents/T_46042b50",
+          element: <Navigate to="/app/documents/types" replace />,
         },
         {
-            path: 'applications',
-            element: <AppLayout />
+          path: "documents/files",
+          element: protect("CAN_VIEW_DOCUMENTS", <Files />),
         },
         {
-            path: 'documents/R_SHFB95GH',
-            element: <AppLayout />
+          path: "documents/F_322f9837",
+          element: <Navigate to="/app/documents/files" replace />,
         },
         {
-            path: 'licenses',
-            element: <AppLayout />
+          path: "documents/files/form-builder",
+          element: protect("CAN_VIEW_DOCUMENTS", <DocumentFormBuilder />),
         },
         {
-            path: 'licenses/L_10O9I78',
-            element: <AppLayout />
+          path: "documents/F_D5N2M19",
+          element: <Navigate to="/app/documents/files/form-builder" replace />,
         },
         {
-            path: 'licenses/L_10O9I00',
-            element: <AppLayout />
+          path: "documents/files/attachments",
+          element: protect("CAN_VIEW_DOCUMENTS", <AddAttachment />),
         },
         {
-            path: 'reports',
-            element: <AppLayout />
+          path: "documents/F_EAD5665",
+          element: <Navigate to="/app/documents/files/attachments" replace />,
         },
         {
-            path: 'reports/R_1786101',
-            element: <AppLayout />
+          path: "applications",
+          element: protect("CAN_VIEW_APPLICATIONS", <Documents />),
         },
         {
-            path: 'reports/R_1786100',
-            element: <AppLayout />
+          path: "applications/review",
+          element: protect(["CAN_REVIEW_APPLICATION", "CAN_APPROVE_APPLICATION"], <DocumentReviewer />),
         },
-    ]
+        {
+          path: "documents/R_SHFB95GH",
+          element: <Navigate to="/app/applications/review" replace />,
+        },
+        {
+          path: "licenses",
+          element: protect("CAN_VIEW_LICENSES", <License />),
+        },
+        {
+          path: "licenses/form",
+          element: protect("CAN_ISSUE_LICENSE", <LicenseForm />),
+        },
+        {
+          path: "licenses/L_10O9I78",
+          element: <Navigate to="/app/licenses/form" replace />,
+        },
+        {
+          path: "licenses/qr-code",
+          element: protect("CAN_VIEW_LICENSES", <QRCodeMaker />),
+        },
+        {
+          path: "licenses/L_10O9I00",
+          element: <Navigate to="/app/licenses/qr-code" replace />,
+        },
+        {
+          path: "reports",
+          element: protect("CAN_VIEW_REPORTS", <Report />),
+        },
+        {
+          path: "reports/payments",
+          element: protect("CAN_GENERATE_REPORT", <ReportPayment />),
+        },
+        {
+          path: "reports/R_1786101",
+          element: <Navigate to="/app/reports/payments" replace />,
+        },
+        {
+          path: "reports/applications",
+          element: protect("CAN_GENERATE_REPORT", <ReportApplication />),
+        },
+        {
+          path: "reports/R_1786100",
+          element: <Navigate to="/app/reports/applications" replace />,
+        },
+      ],
+    },
+  ],
 };
 
 export default ProtectedRoutes;

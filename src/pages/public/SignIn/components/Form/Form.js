@@ -1,4 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
+import { env } from "../../../../../config/env";
+ 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -20,10 +21,11 @@ const validationSchema = yup.object({
     // .min(8, 'The password should have at minimum length of 8'),
 });
 
-const APP_ID = process.env.REACT_APP_APPLICATION_ID;
+// const APP_ID = env.APPLICATION_ID;
 // const LOGIN_URL = `http://localhost:9011/login?appId=${APP_ID}&error`;
 // const LOGIN_URL = 'http://academy.meld-tech.com/login?appId=${APP_ID}&error';
-const LOGIN_URL = `https://auth.meld-tech.com/login?appId=${APP_ID}&error`;
+// const LOGIN_URL = `https://auth.meld-tech.com/login?appId=${APP_ID}&error`;
+const LOGIN_URL = env.LOGIN_URL;
 const Form = () => {
   const [searchParams] = useSearchParams();
   const initialValues = {

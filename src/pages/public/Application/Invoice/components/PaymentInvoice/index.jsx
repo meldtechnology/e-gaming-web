@@ -1,3 +1,4 @@
+import { env } from "../../../../../../config/env";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -30,7 +31,7 @@ const validationSchema = yup.object({
     .required('Please provide your phone number'),
 });
 
-const GET_INVOICE_URL = process.env.REACT_APP_CREATE_PAYMENTS_BASE_URL;
+const GET_INVOICE_URL = env.CREATE_PAYMENTS_BASE_URL;
 export const PaymentInvoice = () => {
   const [form, setForm] = useState({});
   const [reference, setReference] = useState('');

@@ -4,5 +4,6 @@ import { Heading } from "./Heading";
 import Header from "./Header";
 import { Button } from "./Button";
 import { CheckBox } from "./CheckBox";
+export * from "./primitives";
 
 export { Header, Heading, Img, Text, Button, CheckBox };

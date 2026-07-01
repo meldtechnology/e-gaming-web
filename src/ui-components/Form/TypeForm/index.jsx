@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import { useFormik } from "formik";
 import * as yup from 'yup';
 import { TextField } from "../component/TextField";
@@ -19,7 +20,7 @@ const validationSchema = yup.object({
     .required('Please provide category description.'),
 });
 
-const ADD_EDIT_TYPE_URL= process.env.REACT_APP_DOCUMENT_TYPE_URL
+const ADD_EDIT_TYPE_URL= env.DOCUMENT_TYPE_URL
 export const TypeForm = ({selectedType, isNew}) => {
   const [saving, setSaving] = useState(false);
   const [isError, setIsError] = useState(false);

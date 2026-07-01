@@ -1,3 +1,4 @@
+import { env } from "../../config/env";
 import { useState } from "react";
 import { GetDocumentService as getDocService } from "../../services";
 import { FileDatatable } from "../Datatable/FileDatatable";
@@ -6,7 +7,7 @@ const columnHeading = [
   "Logo", "Name", "Public", "Validity", "Fee", "Action"
 ]
 
-const FILE_URL = process.env.REACT_APP_DOCUMENT_FILE_URL;
+const FILE_URL = env.DOCUMENT_FILE_URL;
 export const FileList = ({ updateFile }) => {
   const [page, setPage] = useState(1);
   const { documents, isLoading }
@@ -21,7 +22,7 @@ export const FileList = ({ updateFile }) => {
   }
 
   return (
-    <div className="flex flex-col h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
+    <div className="flex flex-col min-h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
       <div className="mr-2 flex flex-col gap-[26px] self-stretch md:mr-0">
         <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
           <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">

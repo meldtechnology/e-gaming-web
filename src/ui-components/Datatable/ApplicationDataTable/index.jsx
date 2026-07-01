@@ -1,5 +1,6 @@
 import { storeItem } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import { Pagination } from "../../primitives";
 
 const statusColor = (status) => {
   if(status === 'PENDING') return 'bg-orange-600';
@@ -15,7 +16,7 @@ export const ApplicationDataTable = ({ columnHeader, data, pageInfo, nextPage, p
 
   const setSelectedApplication = (selectedFile) => {
     storeItem('revApp', JSON.stringify(selectedFile));
-    navigate('/app/documents/R_SHFB95GH');
+    navigate('/app/applications/review');
   }
 
   return (
@@ -110,27 +111,7 @@ export const ApplicationDataTable = ({ columnHeader, data, pageInfo, nextPage, p
           No Application data is available
         </div>
       </div>
-      <div className="flex items-center justify-between p-4 border-t border-blue-gray-50">
-        <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-          <span className={`${pageInfo?.page === undefined ? "hidden" : ""}`}>
-            {`Page ${pageInfo?.page} of ${pageInfo?.totalPages}`}
-          </span>
-        </p>
-        <div className="flex gap-2">
-          <button
-            className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button" disabled={pageInfo?.previous <= 0 || pageInfo?.previous === undefined}
-            onClick={previousPage}>
-            Previous
-          </button>
-          <button
-            className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button" disabled={pageInfo?.next <= 0 || pageInfo?.previous === undefined}
-            onClick={nextPage} >
-            Next
-          </button>
-        </div>
-      </div>
+      <Pagination pageInfo={pageInfo} onNext={nextPage} onPrevious={previousPage} />
     </div>
   );
 }

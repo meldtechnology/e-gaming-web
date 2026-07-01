@@ -13,8 +13,6 @@ const Index = () => {
   });
   const [form, setForm] = useState(null);
 
-  console.log("form ", form);
-
   useEffect(() => {
     const appForm = getItem('applicationForm');
     if(appForm !== undefined) setForm(JSON.parse(appForm));

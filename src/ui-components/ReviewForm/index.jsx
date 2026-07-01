@@ -21,8 +21,8 @@ export const ReviewForm = ({ onClick, fileData }) => {
 
   if(fileData[0] === null) return ;
 
-  return (checkPermission('CAN_REVIEW_APPLICATION') === '' ||
-  checkPermission('CAN_APPROVE_APPLICATION') === '') ? (
+  return (checkPermission('CAN_REVIEW_APPLICATION') ||
+  checkPermission('CAN_APPROVE_APPLICATION')) ? (
     <Container>
       <Box>
         <Box display={'block'}

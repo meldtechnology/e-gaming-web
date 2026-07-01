@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
@@ -33,9 +34,10 @@ const SignupSchema = Yup.object().shape({
   // userRole: Yup.string().required('User Role is Required')
 });
 
-const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
-const USER_PROFILES_URL = process.env.REACT_APP_USER_PROFILE_URL;
+const UPLOAD_DOCUMENT_URL = env.DOCUMENT_UPLOAD_URL;
+const USER_PROFILES_URL = env.USER_PROFILE_URL;
 export const EditUserForm = () => {
+  const canEditUser = checkPermission('CAN_EDIT_USER');
   const [user, setUser] = useState({});
   const [, setIsLoading] = useState(false);
   const [profilePic, setProfilePics] = useState(user?.profile?.profilePicture);
@@ -140,14 +142,16 @@ export const EditUserForm = () => {
               >
                 Cancel
               </Button>
-              <Button
-                shape="round"
-                disabled={!(dirty && isValid)}
-                className={`${checkPermission('CAN_EDIT_USER')} ${saving?'hidden':''} min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
-                type='submit'
-              >
-                Save
-              </Button>
+              {canEditUser && !saving ? (
+                <Button
+                  shape="round"
+                  disabled={!(dirty && isValid)}
+                  className={`min-w-[100px] min-h-[43px] text-white-a700 ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] px-[26px] sm:px-5`}
+                  type='submit'
+                >
+                  Save
+                </Button>
+              ) : null}
               <ProgressButton saving={saving} />
             </div>
           </div>

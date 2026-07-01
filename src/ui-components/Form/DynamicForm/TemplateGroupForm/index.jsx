@@ -59,7 +59,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
     // Extract out the form controls in the group
     const foundGroup = extractGroupWithId(container, group);
     // Update the form controls with the new one
-    selectedGroup[0].formControls = [...foundGroup?.formControls, createFormField()];
+    selectedGroup[0].formControls = [...(foundGroup?.formControls ?? []), createFormField()];
     // update the container
     setContainer(container.filter(item => {
       if(item.groupId === selectedGroup.groupId) { item = selectedGroup; }

@@ -251,6 +251,7 @@ const ResizableFrame = ({ src, title, path, iframeStyles = {}, ...rest }) => {
                 <iframe
                   ref={iframeEl}
                   key={random}
+                  title="Resizable preview"
                   src={src}
                   onLoad={() => setTimeout(() => setIframeHeight())}
                   style={{

@@ -1,3 +1,4 @@
+import { env } from "../../../../config/env";
 import { useParams } from "react-router-dom";
 import Main from "../../../../mui/layouts/Main";
 import { GetLicenseService } from "../../../../services/document";
@@ -8,21 +9,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { formatLicenseDate, getLicenseValidity } from "../../../../services/license";
 
-const GET_LICENCE_URL = process.env.REACT_APP_DOCUMENTS_LICENSE_NUMBER_URL;
+const GET_LICENCE_URL = env.DOCUMENTS_LICENSE_NUMBER_URL;
 export const LicenseDetails = () => {
   const { number } = useParams();
   const { license } = GetLicenseService(`${GET_LICENCE_URL}${number}`);
-  console.log(license);
-  const isValid = (expiresDate, type) => {
-    const daysLeft = new Date(expiresDate).getTime() - new Date();
-    const days
-      = Math.round(daysLeft / (1000 * 3600 * 24));
-    console.log(days);
-    return (type === 1) ?
-      days > 0 ? 'VALID' : 'EXPIRED' :
-      days > 0;
-  }
+  const validity = getLicenseValidity(license?.data);
+
   return (
     <Main>
       <Container>
@@ -109,17 +103,20 @@ export const LicenseDetails = () => {
                     >
                       This license is valid for <strong>{license?.data?.validity}</strong> days only.
                       <br />
-                      <span className={`${isValid(license?.data?.expiresOn, 0)?'':'hidden'} text-green-700 text-[2.8rem] text-center font-bold`}>
-                      {isValid(license?.data?.expiresOn, 1)}
-                    </span>
-                      <span className={`${isValid(license?.data?.expiresOn, 0)?'hidden':''} text-red-700 text-[2.8rem] text-center font-bold`}>
-                      {isValid(license?.data?.expiresOn, 1)}
-                    </span>
+                      {validity.isValid ? (
+                        <span className="text-green-700 text-[2.8rem] text-center font-bold">
+                          {validity.status}
+                        </span>
+                      ) : (
+                        <span className="text-red-700 text-[2.8rem] text-center font-bold">
+                          {validity.status}
+                        </span>
+                      )}
                       <br />
                       The License was issued on {' '}
-                      <strong>{new Date(license?.data?.issuedOn).toDateString()}</strong>
+                      <strong>{formatLicenseDate(license?.data?.issuedOn)}</strong>
                       { ' and expires ' }
-                      <strong>{new Date(license?.data?.expiresOn).toDateString()}</strong>
+                      <strong>{formatLicenseDate(license?.data?.expiresOn)}</strong>
                     </Typography>
                   </CardContent>
                 </Box>

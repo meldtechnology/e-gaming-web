@@ -1,3 +1,4 @@
+import { env } from "../../config/env";
 import QRCode from 'react-qr-code';
 import { useEffect, useState } from "react";
 import { getItem } from "../../services";
@@ -6,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Container from "../../mui/components/Container";
 import { useNavigate } from "react-router-dom";
 
-const GET_LICENCE_BY_NUMBER_URL = process.env.REACT_APP_VALIDATE_URL;
+const GET_LICENCE_BY_NUMBER_URL = env.VALIDATE_URL;
 export const QRCodeMaker = () => {
   const[licenseNumber, setLicenseNumber] = useState('');
   const navigate = useNavigate();

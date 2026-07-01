@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "strict": true
+  },
+  "include": [
+    "src/config/env.ts",
+    "src/services/datePartExtraxt/index.ts",
+    "src/services/formatAmount/index.ts",
+    "src/services/license/index.ts",
+    "src/services/license/validity.ts",
+    "src/services/unitTens/index.ts"
+  ]
+}

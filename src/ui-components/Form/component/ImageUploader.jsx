@@ -1,8 +1,9 @@
+import { env } from "../../../config/env";
 import { useState } from "react";
 import { UploadDocumentService as uploadDocument } from "../../../services";
 import { Loader } from "../../Loader";
 
-const UPLOAD_DOCUMENT_URL = process.env.REACT_APP_DOCUMENT_UPLOAD_URL;
+const UPLOAD_DOCUMENT_URL = env.DOCUMENT_UPLOAD_URL;
 export const ImageUploader = ({labelText, value, setImage, containerClass, fieldClass}) => {
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -40,20 +41,34 @@ export const ImageUploader = ({labelText, value, setImage, containerClass, field
     }, duration);
   }
 
+  const openFilePicker = () => {
+    document.getElementById('upload-file')?.click();
+  }
+
+  const onPickerKeyDown = (event) => {
+    if(event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openFilePicker();
+    }
+  }
+
   return (
     <div className={containerClass}>
       <label className="mb-2 text-sm text-slate-600 mr-4">
         {labelText}
       </label>
       <div className="inline-flex items-center gap-2">
-        <img src={value} alt={`Permit Img`}
-             className={fieldClass}
-             style={{
-               display: uploading ? 'none' : ''
-             }}
-             onClick={(e) => {
-               document.getElementById('upload-file').click();
-             }} />
+        <button
+          type="button"
+          className="p-0 bg-transparent border-0"
+          style={{
+            display: uploading ? 'none' : ''
+          }}
+          onClick={openFilePicker}
+          onKeyDown={onPickerKeyDown}
+        >
+          <img src={value} alt={`Permit Img`} className={fieldClass} />
+        </button>
         <input id='upload-file'
                type='file'
                name={value}

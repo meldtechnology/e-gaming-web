@@ -1,18 +1,13 @@
-import useSWR from "swr";
-import { GetCall as get } from "../../../core/ApiAdapter";
-import { headerConfig as headers } from "../../../core/httpHeaders";
-import { useAuthenticateCheck } from "../../useAuthenticateCheck";
+import { useApi } from "../../../core/data/useApi";
 
 export const GetDocumentService = ( endpoint, delay ) => {
-  const { config } = headers();
-  const { data: resp, error, isLoading }
-    = useSWR([endpoint, config], get, { refreshInterval: delay, });
-
-  useAuthenticateCheck(error);
+  const { data, error, isLoading, isEmpty, mutate } = useApi(endpoint, delay);
 
   return {
-    documents: resp?.data,
+    documents: data,
     isLoading,
-    isError: error
+    isError: error,
+    isEmpty,
+    mutate
   }
 }

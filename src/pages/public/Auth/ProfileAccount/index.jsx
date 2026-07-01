@@ -1,3 +1,4 @@
+import { env } from "../../../../config/env";
 import { GetUsersService as getProfile, storeItem } from "../../../../services";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,7 +6,7 @@ import { Main } from "../../../../mui/layouts";
 import Box from "@mui/material/Box";
 import { Loader } from "../../../../ui-components/Loader";
 
-const USER_PROFILE = process.env.REACT_APP_USER_PROFILE_URL;
+const USER_PROFILE = env.USER_PROFILE_URL;
 export const ProfileAccount = () => {
   const {users, isLoading }
     = getProfile(USER_PROFILE);

@@ -1,11 +1,12 @@
+import { env } from "../../../config/env";
 import { MeldAlert } from "../../Alerts";
 import { AlertType } from "../../Alerts/AlertType";
 import { useState } from "react";
 import { UpdateUserService as toggleEnabled } from "../../../services";
 import { Loader } from "../../Loader";
 
-const ENABLE_URL = process.env.REACT_APP_ADMIN_ENABLE_URL;
-const DISABLE_URL = process.env.REACT_APP_ADMIN_DISABLE_URL;
+const ENABLE_URL = env.ADMIN_ENABLE_URL;
+const DISABLE_URL = env.ADMIN_DISABLE_URL;
 export const EnableToggleModal = ({ onClick, userData }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState(null);

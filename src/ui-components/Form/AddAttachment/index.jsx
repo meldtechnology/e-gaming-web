@@ -12,7 +12,7 @@ export const AddAttachment = () => {
 
   const closeForm = () => {
     storeItem('attach', JSON.stringify(attachments));
-    navigate('/app/documents/F_322f9837')
+    navigate('/app/documents/files')
   }
 
   const addNewAttachment = () => {

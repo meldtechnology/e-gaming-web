@@ -1,3 +1,4 @@
+import { env } from "../../../../../config/env";
 /* eslint-disable react/no-unescaped-entities */
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -21,7 +22,7 @@ const validationSchema = yup.object({
 });
 
 
-const VERIFY_OTP_URL = process.env.REACT_APP_VERIFY_OTP_URL;
+const VERIFY_OTP_URL = env.VERIFY_OTP_URL;
 const Form = () => {
   const [otp, setOtp] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -148,7 +149,7 @@ const Form = () => {
         <form onSubmit={formik.handleSubmit} className={`${verifying ? "hidden" : ""}`}>
           <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
             <div>
-              <label className="sr-only">First code</label>
+              <label htmlFor="code-1" className="sr-only">First code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-next="code-2"
@@ -160,7 +161,7 @@ const Form = () => {
                      required />
             </div>
             <div>
-              <label className="sr-only">Second code</label>
+              <label htmlFor="code-2" className="sr-only">Second code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-1"
@@ -173,7 +174,7 @@ const Form = () => {
                      required />
             </div>
             <div>
-              <label className="sr-only">Third code</label>
+              <label htmlFor="code-3" className="sr-only">Third code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-2"
@@ -185,7 +186,7 @@ const Form = () => {
                      required />
             </div>
             <div>
-              <label className="sr-only">Fourth code</label>
+              <label htmlFor="code-4" className="sr-only">Fourth code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-3"
@@ -197,7 +198,7 @@ const Form = () => {
                      required />
             </div>
             <div>
-              <label className="sr-only">Fifth code</label>
+              <label htmlFor="code-5" className="sr-only">Fifth code</label>
               <input type="text" maxLength="1" data-focus-input-init=""
                      data-focus-input-prev="code-4"
                      data-focus-input-next="code-6"
@@ -209,7 +210,7 @@ const Form = () => {
                      required />
             </div>
             <div>
-              <label className="sr-only">Sixth code</label>
+              <label htmlFor="code-6" className="sr-only">Sixth code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-5" id="code-6"

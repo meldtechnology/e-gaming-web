@@ -8,10 +8,11 @@ export const passwordGenerator = (length) => {
     useUpperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   }
 
-  passwordPool = characterSet.useSymbols.concat
-  (characterSet.useNumbers,
+  passwordPool = characterSet.useSymbols.concat(
+    characterSet.useNumbers,
     characterSet.useLowerCase,
-    characterSet.useUpperCase)
+    characterSet.useUpperCase,
+  )
 
   for(let index = 0; index < length; index++) {
       newPassword +=

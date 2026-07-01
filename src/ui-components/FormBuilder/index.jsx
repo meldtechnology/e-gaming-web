@@ -1,3 +1,4 @@
+import { env } from "../../config/env";
 import { GetFormTemplateService as getTemplateService, UpdateDocumentService as editDocument } from "../../services";
 import { TemplateForm } from "../Form/DynamicForm";
 import { Loader } from "../Loader";
@@ -6,8 +7,8 @@ import { MeldAlert } from "../Alerts";
 import { AlertType } from "../Alerts/AlertType";
 import { extractTemplate } from "../../services/extractRow";
 
-const FORM_TEMPLATE_URL = process.env.REACT_APP_FORM_TEMPLATE_URL;
-const ADD_EDIT_FILE_URL = process.env.REACT_APP_DOCUMENT_FILE_URL;
+const FORM_TEMPLATE_URL = env.FORM_TEMPLATE_URL;
+const ADD_EDIT_FILE_URL = env.DOCUMENT_FILE_URL;
 export const FormBuilder = ({ onClick, fileData }) => {
   const fileObject = fileData[0];
   const [name, setName] = useState(fileObject?.name);

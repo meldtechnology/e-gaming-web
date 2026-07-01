@@ -13,13 +13,15 @@ import FormControl from "@mui/material/FormControl";
 
 export const ComponentSelector = ({ name, props }) => {
   const {fieldType, hints, label, options, required } = props;
+  const noop = () => undefined;
+
   if(fieldType === 'input') {
     return <InputText name={name}
                       value=''
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   } else if(fieldType === 'email') {
     return <InputEmail name={name}
@@ -27,7 +29,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   } else if(fieldType === 'numeric') {
     return <InputNumber name={name}
@@ -35,7 +37,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   } else if(fieldType === 'mobile') {
     return <InputMobile name={name}
@@ -43,7 +45,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   } else if(fieldType === 'currency') {
     return <InputCurrency name={name}
@@ -51,7 +53,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   }else if(fieldType === 'textarea') {
     return <InputTextArea name={name}
@@ -59,7 +61,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   } else if(fieldType === 'calendar') {
     return <InputCalendar name={name}
@@ -67,7 +69,7 @@ export const ComponentSelector = ({ name, props }) => {
                       label={label}
                       placeHolderText={hints}
                       required={required}
-                      onChange={(e)=> console.log(e.target.value)}
+                      onChange={noop}
     />
   }else if(fieldType === 'yesno') {
     return (

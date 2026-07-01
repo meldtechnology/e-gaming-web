@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { Button } from "@headlessui/react";
@@ -18,7 +19,7 @@ const passwordSchema = Yup.object().shape({
 
 const initialValues = { password: '', confirm: ''}
 
-const CHANGE_PASSWORD_URL = process.env.REACT_APP_ADMIN_CHANGE_PASSWORD_URL;
+const CHANGE_PASSWORD_URL = env.ADMIN_CHANGE_PASSWORD_URL;
 export const ChangePasswordModal = ({ onClick, userData, type}) => {
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState(null);

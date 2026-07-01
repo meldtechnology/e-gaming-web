@@ -4,7 +4,7 @@ import { TypeGroup } from "../../../ui-components/TypeGroup";
 import { checkPermission } from "../../../services/autorization";
 
 export const Types = () => {
-  return checkPermission('CAN_VIEW_CATEGORIES') === '' ? (
+  return checkPermission('CAN_VIEW_CATEGORIES') ? (
     <>
       <div>
         <header className="border-b border-solid border-blue_gray-400 bg-white-a700 gap-0 p-[18px] mb-1">

@@ -1,8 +1,15 @@
+import { env } from "../../config/env";
 import { extractDay, extractMonth, extractYear } from "../../services";
+import { getLicenseValidity } from "../../services/license";
 import QRCode from "react-qr-code";
 
-const GET_LICENCE_BY_NUMBER_URL = process.env.REACT_APP_VALIDATE_URL;
+const GET_LICENCE_BY_NUMBER_URL = env.VALIDATE_URL;
 export const LicenseTemplate = ({license}) => {
+  const validity = getLicenseValidity(license);
+  const validityPeriod = validity.validityDays
+    ? `${validity.validityDays} days`
+    : 'One (1) year';
+
   return (
     <div id="license-id">
       <div className={`bg-amber-50 p-4`}>
@@ -79,7 +86,7 @@ export const LicenseTemplate = ({license}) => {
             </div>
             <div className={'py-[5px] text-center text-[18px] px-8'}>
               This License is issued under my hand by the authority of the Governor of Enugu State
-              and shall remain valid for a period of {'One (1) year'}
+              and shall remain valid for a period of {validityPeriod}
             </div>
             <div className={'py-[10px] font-bold text-center text-[22px] px-8'}>
               Dated {extractDay(new Date().toDateString())} Day of {' '}

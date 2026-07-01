@@ -14,6 +14,13 @@ export const LeftSidebar = ({ ...props }) => {
     .substring(location.pathname
       .lastIndexOf('/') + 1) );
   const [user, setUser] = useState({});
+  const canViewProfile = checkPermission('CAN_VIEW_PROFILE');
+  const canViewDashboard = checkPermission('CAN_VIEW_DASHBOARD');
+  const canViewDocuments = checkPermission('CAN_VIEW_DOCUMENTS');
+  const canViewApplications = checkPermission('CAN_VIEW_APPLICATIONS');
+  const canViewLicenses = checkPermission('CAN_VIEW_LICENSES');
+  const canViewReports = checkPermission('CAN_VIEW_REPORTS');
+  const canViewUsers = checkPermission('CAN_VIEW_USERS');
 
   // const collapseSidebar = () => {
   //    setCollapsed(!collapsed)
@@ -46,9 +53,9 @@ export const LeftSidebar = ({ ...props }) => {
             Dashboard
           </Heading>
         </div>
-        {!collapsed ? (
+        {!collapsed && canViewProfile ? (
           <div
-            className={`${checkPermission('CAN_VIEW_PROFILE')} w-full ml-2 mr-2.5 flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5`}>
+            className="w-full ml-2 mr-2.5 flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5">
             <Img
               src={user?.profile?.profilePicture}
               alt="Image"
@@ -83,54 +90,60 @@ export const LeftSidebar = ({ ...props }) => {
           className="mt-9 w-full self-stretch"
         >
           <div>
-            <MenuItem icon={<Img src={activeStatus( "img_grid.svg", pathName, MENU_ITEMS.DASHBOARD)}
-                                 alt="Dashboard"
-                                 className="h-[42px] w-[42px]" />}
-                      className={checkPermission('CAN_VIEW_DASHBOARD')}
-                      href={'/app/dashboard'}>
-              {activeSelection("Dashboard", pathName, MENU_ITEMS.DASHBOARD)}
-              { isItemSelected(pathName, MENU_ITEMS.DASHBOARD) }
-            </MenuItem>
+            {canViewDashboard ? (
+              <MenuItem icon={<Img src={activeStatus( "img_grid.svg", pathName, MENU_ITEMS.DASHBOARD)}
+                                   alt="Dashboard"
+                                   className="h-[42px] w-[42px]" />}
+                        href={'/app/dashboard'}>
+                {activeSelection("Dashboard", pathName, MENU_ITEMS.DASHBOARD)}
+                { isItemSelected(pathName, MENU_ITEMS.DASHBOARD) }
+              </MenuItem>
+            ) : null}
             <div className="flex flex-col gap-[2.66px]">
-              <MenuItem icon={<Img src={activeStatus( "img_checkmark.svg", pathName, MENU_ITEMS.DOCUMENTS)}
-                                   alt="Document"
-                                   className="h-[40px] w-[40px]" />}
-                        className={checkPermission('CAN_VIEW_DOCUMENTS')}
-                        href={'/app/documents'}>
-                {activeSelection("Documents", pathName, MENU_ITEMS.DOCUMENTS)}
-                { isItemSelected(pathName, MENU_ITEMS.DOCUMENTS) }
-              </MenuItem>
-              <MenuItem icon={<Img src={activeStatus( "img_application.svg", pathName, MENU_ITEMS.APPLICATIONS)}
-                                   alt="Applications"
-                                   className="h-[34px] w-[34px]" />}
-                        className={checkPermission('CAN_VIEW_APPLICATIONS')}
-                        href={'/app/applications'}>
-                {activeSelection("Applications", pathName, MENU_ITEMS.APPLICATIONS)}
-                { isItemSelected(pathName, MENU_ITEMS.APPLICATIONS) }
-              </MenuItem>
+              {canViewDocuments ? (
+                <MenuItem icon={<Img src={activeStatus( "img_checkmark.svg", pathName, MENU_ITEMS.DOCUMENTS)}
+                                     alt="Document"
+                                     className="h-[40px] w-[40px]" />}
+                          href={'/app/documents'}>
+                  {activeSelection("Documents", pathName, MENU_ITEMS.DOCUMENTS)}
+                  { isItemSelected(pathName, MENU_ITEMS.DOCUMENTS) }
+                </MenuItem>
+              ) : null}
+              {canViewApplications ? (
+                <MenuItem icon={<Img src={activeStatus( "img_application.svg", pathName, MENU_ITEMS.APPLICATIONS)}
+                                     alt="Applications"
+                                     className="h-[34px] w-[34px]" />}
+                          href={'/app/applications'}>
+                  {activeSelection("Applications", pathName, MENU_ITEMS.APPLICATIONS)}
+                  { isItemSelected(pathName, MENU_ITEMS.APPLICATIONS) }
+                </MenuItem>
+              ) : null}
             </div>
-            <MenuItem
-              icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
-                         alt="Licenses" className="h-[44px] w-[44px]" />}
-              className={checkPermission('CAN_VIEW_LICENSES')}
-              href={'/app/licenses'}>
-              {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
-              { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
-            </MenuItem>
-            <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
-                                 alt="Reports" className="h-[40px] w-[40px]" />}
-                      className={checkPermission('CAN_VIEW_REPORTS')}
-                      href={'/app/reports'}>
-              {activeSelection("Reports", pathName, MENU_ITEMS.REPORT)}
-              { isItemSelected(pathName, MENU_ITEMS.REPORT) }
-            </MenuItem>
-            <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
-                                 alt="User" className="h-[44px] w-[44px]" />}
-                      className={checkPermission('CAN_VIEW_USERS')}
-                      href={'/app/users'}>
-              {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
-              { isItemSelected(pathName, MENU_ITEMS.USERS) }
-            </MenuItem>
+            {canViewLicenses ? (
+              <MenuItem
+                icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
+                           alt="Licenses" className="h-[44px] w-[44px]" />}
+                href={'/app/licenses'}>
+                {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
+                { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
+              </MenuItem>
+            ) : null}
+            {canViewReports ? (
+              <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
+                                   alt="Reports" className="h-[40px] w-[40px]" />}
+                        href={'/app/reports'}>
+                {activeSelection("Reports", pathName, MENU_ITEMS.REPORT)}
+                { isItemSelected(pathName, MENU_ITEMS.REPORT) }
+              </MenuItem>
+            ) : null}
+            {canViewUsers ? (
+              <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
+                                   alt="User" className="h-[44px] w-[44px]" />}
+                        href={'/app/users'}>
+                {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
+                { isItemSelected(pathName, MENU_ITEMS.USERS) }
+              </MenuItem>
+            ) : null}
             {/*<MenuItem icon={<Img src={activeStatus( "img_settings.svg", pathName, MENU_ITEMS.SETTINGS)}*/}
             {/*                     alt="Search" className="h-[40px] w-[40px] hidden" />}*/}
             {/*          href={'/app/settings'}>*/}

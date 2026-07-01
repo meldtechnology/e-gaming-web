@@ -1,11 +1,12 @@
+import { env } from "../../../config/env";
 import { GetAuthService as logout, removeAll } from "../../../services";
 import { useEffect } from "react";
 import { Main } from "../../../mui/layouts";
 import Box from "@mui/material/Box";
 import { Loader } from "../../../ui-components/Loader";
 
-const LOG_OUT_URL =  process.env.REACT_APP_LOGOUT_URL
-const APP_ID =  process.env.REACT_APP_APPLICATION_ID
+const LOG_OUT_URL =  env.LOGOUT_URL
+const APP_ID =  env.APPLICATION_ID
 export const SignOut = () => {
   const { auth, isLoading} = logout(`${LOG_OUT_URL}?appId=${APP_ID}`);
 

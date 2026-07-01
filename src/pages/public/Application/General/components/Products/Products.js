@@ -1,3 +1,4 @@
+import { env } from "../../../../../../config/env";
 import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -45,7 +46,7 @@ const mock = [
   },
 ];
 
-const FILES_URL = process.env.REACT_APP_DOCUMENT_FILE_PUBLIC_URL;
+const FILES_URL = env.DOCUMENT_FILE_PUBLIC_URL;
 const Products = () => {
   const theme = useTheme();
   const [products, setProduct] = useState([]);

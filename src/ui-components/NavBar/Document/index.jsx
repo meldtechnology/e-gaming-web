@@ -6,12 +6,12 @@ const NavList = () => {
   return (
     <ul className="my-2 flex gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li className="p-1 font-medium">
-        <Link to={`/app/documents/T_46042b50`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/documents/types`} className="flex items-center hover:text-blue-500 transition-colors">
           Category
         </Link>
       </li>
       <li className="p-1 font-medium">
-        <Link to={`/app/documents/F_322f9837`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/documents/files`} className="flex items-center hover:text-blue-500 transition-colors">
           Revenue Head
         </Link>
       </li>

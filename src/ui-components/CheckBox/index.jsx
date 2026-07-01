@@ -55,4 +55,6 @@ CheckBox.propTypes = {
   variant: PropTypes.oneOf(["primary"]),
 };
 
+CheckBox.displayName = "CheckBox";
+
 export { CheckBox };

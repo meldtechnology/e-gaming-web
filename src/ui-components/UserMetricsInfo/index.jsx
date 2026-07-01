@@ -1,3 +1,4 @@
+import { env } from "../../config/env";
 import { Suspense } from "react";
 import { UserMetrics } from "../UserMetrics";
 import { GetUsersService as getMetricsService } from "../../services";
@@ -11,7 +12,7 @@ const data = [
   { totalUsersText: "Total Unverified", userCount: "2", bkgColor: "bg-light_blue-a200" },
 ];
 
-const USER_METRICS_URL = process.env.REACT_APP_USER_METRICS_URL;
+const USER_METRICS_URL = env.USER_METRICS_URL;
 export const UserMetricsInfo = () => {
   const { users, isLoading, isError }
     = getMetricsService(USER_METRICS_URL);
