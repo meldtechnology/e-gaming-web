@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormFieldTypes } from "../FormFieldTypes";
 import { Tag } from "../../../../Tag";
 
@@ -29,9 +29,9 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
     return value;
   }
 
-  const handleSelectedTags = (items) => {
+  const handleSelectedTags = useCallback((items) => {
     setOptions(items);
-  }
+  }, []);
 
   useEffect(() => {
     setFieldType(field?.fieldType);
