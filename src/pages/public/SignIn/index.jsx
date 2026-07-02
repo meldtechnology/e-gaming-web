@@ -1,66 +1,32 @@
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
-
 import Main from '../../../mui/layouts/Main';
-import Container from '../../../mui/components/Container';
 import { Form } from './components';
 
-
 export const SignIn = () => {
-  const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
-
   return (
-    <Main>
-      <Box
-        position={'relative'}
-        minHeight={'calc(100vh - 247px)'}
-        display={'flex'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        height={1}
-      >
-        <Container>
-          <Grid container spacing={6}>
-            {isMd ? (
-              <Grid item container justifyContent={'center'} xs={12} md={6}
-                    className="bg-[url('https://assets.maccarianagency.com/backgrounds/img18.jpg')] bg-cover">
-                <Box height={1} width={1} maxWidth={500}>
-                  <Box
-                    component={'img'}
-                    src={
-                      'https://res.cloudinary.com/dyvxnpvxa/image/upload/v1731948390/h6n0cce2dtcacy4dn0h7.svg'
-                    }
-                    width={0.65}
-                    height={0.65}
-                    sx={{
-                      filter:
-                        theme.palette.mode === 'dark'
-                          ? 'brightness(0.8)'
-                          : 'none',
-                    }}
-                    className="mx-[auto] my-[15%]"
-                  />
-                </Box>
-              </Grid>
-            ) : null}
-            <Grid
-              item
-              container
-              alignItems={'center'}
-              justifyContent={'center'}
-              xs={12}
-              md={6}
-            >
+    <Main showFooter={false}>
+      <div className="mx-auto flex min-h-[calc(100vh-65px)] max-w-[1236px] items-center justify-center px-4 py-10">
+        <div className="grid w-full max-w-4xl grid-cols-2 overflow-hidden rounded-3xl border border-border bg-surface shadow-e2 lg:grid-cols-1">
+          {/* Brand panel */}
+          <div className="relative flex flex-col justify-between bg-brand p-10 text-on-brand lg:hidden">
+            <div />
+            <div className="flex flex-col items-center text-center">
+              <span className="flex h-32 w-32 items-center justify-center rounded-2xl bg-white/10 p-4">
+                <img src="/images/enugu_logo2.png" alt="ESGC" className="h-24 w-24 object-contain" />
+              </span>
+              <h2 className="mt-6 text-xl font-semibold leading-tight">Enugu State Gaming Commission</h2>
+              <p className="mt-2 text-sm text-on-brand/80">Regulatory & licensing platform</p>
+            </div>
+            <p className="text-xs text-on-brand/60">&copy; 2024 Enugu State Gaming Commission</p>
+          </div>
+
+          {/* Form */}
+          <div className="flex items-center justify-center p-10 sm:p-6">
+            <div className="w-full max-w-sm">
               <Form />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+            </div>
+          </div>
+        </div>
+      </div>
     </Main>
   );
 }

@@ -3,7 +3,6 @@ import { env } from "../../../../../config/env";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -26,6 +25,15 @@ const validationSchema = yup.object({
 // const LOGIN_URL = 'http://academy.meld-tech.com/login?appId=${APP_ID}&error';
 // const LOGIN_URL = `https://auth.meld-tech.com/login?appId=${APP_ID}&error`;
 const LOGIN_URL = env.LOGIN_URL;
+const pillFieldSx = {
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '9999px',
+    '&.Mui-focused fieldset': {
+      borderColor: 'primary.main',
+    },
+  },
+};
+
 const Form = () => {
   const [searchParams] = useSearchParams();
   const initialValues = {
@@ -67,14 +75,14 @@ const Form = () => {
         <Typography color="text.secondary">
           Login to manage your account.
         </Typography>
-        <div className={`${searchParams.get('error') !== null? '':'hidden'} mt-3 p-2 text-white-a700 bg-red-600 rounded-[10px] text-[1.2rem] text-center`}>
-          <span className={'block text-amber-100-400'}> Username/Password is incorrect.</span>
-          <span className={'text-[0.9rem]'}><strong>Note:</strong> Make sure your account is also  active.</span>
+        <div className={`${searchParams.get('error') !== null? '':'hidden'} mt-4 rounded-xl border border-danger/30 bg-danger-soft p-3 text-danger`}>
+          <span className={'block font-semibold'}>Username or password is incorrect.</span>
+          <span className={'text-sm'}><strong>Note:</strong> Make sure your account is also active.</span>
         </div>
       </Box>
       <form onSubmit={formik.submitForm} action={LOGIN_URL} method="POST">
-        <Grid container spacing={4}>
-          <Grid item xs={12}>
+        <Box display="flex" flexDirection="column" gap={4}>
+          <Box>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
               Enter your username
             </Typography>
@@ -83,13 +91,15 @@ const Form = () => {
               variant="outlined"
               name={'username'}
               fullWidth
+              sx={pillFieldSx}
               value={formik.values.username}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.username && Boolean(formik.errors.username)}
               helperText={formik.touched.username && formik.errors.username}
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box>
             <Box
               display="flex"
               flexDirection={{ xs: 'column', sm: 'row' }}
@@ -110,33 +120,25 @@ const Form = () => {
               name={'password'}
               type={'password'}
               fullWidth
+              sx={pillFieldSx}
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-          </Grid>
-          <Grid item container xs={12}>
-            <Box
-              display="flex"
-              flexDirection={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'stretched', sm: 'center' }}
-              justifyContent={'space-between'}
-              width={1}
-              maxWidth={600}
-              margin={'0 auto'}
-            >
-              <Box marginBottom={{ xs: 1, sm: 0 }}>
-              </Box>
-              <Button size={'large'}
-                      variant={'contained'}
-                      type={'submit'}
-                      disabled={!(formik.dirty && formik.isValid)} >
-                Login
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
+          </Box>
+          <Box>
+            <Button size={'large'}
+                    variant={'contained'}
+                    type={'submit'}
+                    fullWidth
+                    sx={{ borderRadius: '9999px', textTransform: 'none', py: 1.25 }}
+                    disabled={!(formik.dirty && formik.isValid)} >
+              Login
+            </Button>
+          </Box>
+        </Box>
       </form>
     </Box>
   );
