@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { getItem } from "../../services";
 import { checkPermission } from "../../services/autorization";
+import { ThemeToggle } from "../ThemeToggle";
 
 const NAV_ITEMS = [
   { label: "Dashboard", to: "/app/dashboard", icon: HomeIcon, permission: "CAN_VIEW_DASHBOARD" },
@@ -90,7 +91,7 @@ export const LeftSidebar = ({ ...props }) => {
                   title={item.label}
                   className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors md:justify-center md:px-2 ${
                     active
-                      ? "bg-brand text-white shadow-e1"
+                      ? "bg-brand text-on-brand shadow-e1"
                       : "text-sidebar-text hover:bg-sidebar-muted hover:text-white"
                   }`}
                 >
@@ -103,8 +104,9 @@ export const LeftSidebar = ({ ...props }) => {
         </ul>
       </nav>
 
-      {/* Footer logout */}
+      {/* Footer */}
       <div className="border-t border-white/10 px-3 py-3 md:px-2">
+        <ThemeToggle />
         <Link
           to="/logout"
           className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-text transition-colors hover:bg-sidebar-muted hover:text-white md:justify-center md:px-2"

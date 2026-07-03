@@ -41,12 +41,12 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
   }, [field?.fieldType, field?.label, field?.hints, field?.required]);
 
   return (
-    <div className={`${openEdit ? '' : 'hidden'} w-[65%] relative bg-gray-200_01 border-solid border-amber-50 rounded-t-3xl`}>
+    <div className={`${openEdit ? '' : 'hidden'} w-[65%] relative bg-surface-raised border-solid border-amber-50 rounded-t-3xl`}>
       <div className="w-[100%] p-2 font-bold bg-brand text-on-brand text-center rounded-t-full">
         <span>Update Form Field</span>
         <span className="float-right pr-4">
           <button type="button"
-                  className="text-white-a700 bg-red-600 rounded-full px-1 py-0"
+                  className="text-text-inverse bg-danger rounded-full px-1 py-0"
                   onClick={close}>
             x
           </button>
@@ -116,7 +116,7 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
       </div>
       <div className={`w-full flex p-4`}>
           <button type="button"
-                  className={`w-full p-2 bg-black-900 text-white-a700 rounded-lg shadow-lg`}
+                  className={`w-full p-2 bg-brand text-on-brand rounded-lg shadow-lg`}
                   onClick={() => update(updateFiled())} >
             Update
           </button>

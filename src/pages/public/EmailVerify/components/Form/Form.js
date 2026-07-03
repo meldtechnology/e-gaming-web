@@ -142,7 +142,7 @@ const Form = () => {
       >
         <div className={`${verifying ? "" : "hidden"} block mb-2 space-x-2 rtl:space-x-reverse`}>
           <Loader />
-          <p className="text-blue-600 text-center text-[16px]">
+          <p className="text-brand text-center text-[16px]">
             Verifying the provided OTP...
           </p>
         </div>
@@ -157,7 +157,7 @@ const Form = () => {
                      name={'code1'}
                      value={formik.values.code1}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
@@ -170,7 +170,7 @@ const Form = () => {
                      name={'code2'}
                      value={formik.values.code2}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
@@ -182,7 +182,7 @@ const Form = () => {
                      name={'code3'}
                      value={formik.values.code3}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
@@ -194,7 +194,7 @@ const Form = () => {
                      name={'code4'}
                      value={formik.values.code4}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
@@ -206,7 +206,7 @@ const Form = () => {
                      name={'code5'}
                      value={formik.values.code5}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
@@ -217,14 +217,14 @@ const Form = () => {
                      name={'code6'}
                      value={formik.values.code6}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required
                      onBlur={(e) => onSubmit(formik.values)}
                      onKeyUp={(e) => onSubmit(formik.values)}
               />
             </div>
           </div>
-          <p id="helper-text-explanation" className="mt-2 text-sm text-center text-gray-900 dark:text-gray-400 mb-4">
+          <p id="helper-text-explanation" className="mt-2 text-sm text-center text-text-primary mb-4">
             Please enter the 6 digit code we sent via email.</p>
             <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
         </form>

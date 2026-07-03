@@ -7,17 +7,17 @@ const Overview = () => {
         <div>
           <p className="text-3xl font-bold">1</p>
           <p className="mt-2 text-sm font-semibold">Choose permit</p>
-          <p className="mt-1 text-sm text-white/80">Select the license type that matches your gaming operation.</p>
+          <p className="mt-1 text-sm text-on-brand">Select the license type that matches your gaming operation.</p>
         </div>
         <div>
           <p className="text-3xl font-bold">2</p>
           <p className="mt-2 text-sm font-semibold">Verify operator</p>
-          <p className="mt-1 text-sm text-white/80">Confirm proprietor or agent details before completing forms.</p>
+          <p className="mt-1 text-sm text-on-brand">Confirm proprietor or agent details before completing forms.</p>
         </div>
         <div>
           <p className="text-3xl font-bold">3</p>
           <p className="mt-2 text-sm font-semibold">Generate invoice</p>
-          <p className="mt-1 text-sm text-white/80">Submit your application and continue with payment reference details.</p>
+          <p className="mt-1 text-sm text-on-brand">Submit your application and continue with payment reference details.</p>
         </div>
       </div>
     </section>

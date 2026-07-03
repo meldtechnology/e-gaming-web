@@ -160,7 +160,7 @@ export const DocumentReviewForm = ({application}) => {
                         variant={"contained"}
                         type={"button"}
                         onClick={()=> approveDecline('DECLINE')}
-                        className="!bg-red-600 !text-white-a700 !p-2 !rounded-lg"
+                        className="!bg-danger !text-text-inverse !p-2 !rounded-lg"
                         disabled={disabled}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ export const DocumentReviewForm = ({application}) => {
                         variant={"contained"}
                         type={"button"}
                         onClick={()=> approveDecline('APPROVE')}
-                        className="!bg-green-600 !text-white-a700 !p-2 !rounded-lg"
+                        className="!bg-success !text-text-inverse !p-2 !rounded-lg"
                         disabled={disabled}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ export const DocumentReviewForm = ({application}) => {
             </Box>
           ) : null}
           {isError ? (
-            <div className="w-[100%] mt-4 p-4 bg-red-300 border-solid border-2 border-red-600 rounded-[10px] text-red-800 overflow-hidden">
+            <div className="w-[100%] mt-4 p-4 bg-danger-soft border-solid border-2 border-danger rounded-[10px] text-danger overflow-hidden">
               {errorMsg}
               <button type="button" onClick={() => setIsError(false)}
                 className={'float-right text-[16px] cursor-pointer'}>
@@ -201,7 +201,7 @@ export const DocumentReviewForm = ({application}) => {
             </div>
           ) : null}
           {isSuccess ? (
-            <div className="w-[100%] mt-4 p-4 bg-green-300 border-solid border-2 border-green-600 rounded-[10px] text-green-700 overflow-hidden">
+            <div className="w-[100%] mt-4 p-4 bg-success-soft border-solid border-2 border-success rounded-[10px] text-success overflow-hidden">
               The Review was successfully submitted!
             </div>
           ) : null}

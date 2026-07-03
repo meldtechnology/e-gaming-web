@@ -43,18 +43,18 @@ export const AddAttachment = () => {
     <>
       <div className="flex mt-[1%] justify-center p-4 text-center sm:items-center sm:p-0 overflow-y-auto">
         <div
-          className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
-          <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
+          className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-surface text-left shadow-xl transition-all ">
+          <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
             <div className="align-middle items-center text-center">
               <span className="font-bold text-[36px] mt-1 text-[#939393]">File Attachments <br />({fileName})</span>
               <button type="button"
                       onClick={closeForm}
-                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-text-primary hover:text-text-inverse shadow-sm ring-1 ring-inset ring-border-strong hover:bg-danger sm:mt-0 sm:w-auto float-right">
                 <span className="min-w-full text-center">X</span>
               </button>
             </div>
           </div>
-          <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start">
               <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
                 <div className="w-[720px] items-center">
@@ -68,12 +68,12 @@ export const AddAttachment = () => {
                   />
                   <button type={'button'}
                           disabled={name === undefined || name === ''}
-                          className={`w-full p-4 bg-gray-950 text-white-a700 ${name?'':'bg-opacity-25'}`}
+                          className={`w-full p-4 bg-surface-raised text-text-primary ${name?'':'bg-opacity-25'}`}
                           onClick={addNewAttachment}>
                     Add File Name
                   </button>
                   </div>
-                  <div className={`mt-4 p-2 w-full items-center text-center text-orange-400 border-solid border-b-gray-50_01`}>
+                  <div className={`mt-4 p-2 w-full items-center text-center text-warning border-solid border-b-border`}>
                     Attachments
                   </div>
                   <div className={`w-[720px] items-center ${attachments ? "" : "hidden"}`}>
@@ -81,7 +81,7 @@ export const AddAttachment = () => {
                       <tbody>
                       {attachments?.map((item, index) => (
                         <tr key={index} className={'h-8'}>
-                          <td className={'w-1/2 text-blue-600'}>{item?.name}</td>
+                          <td className={'w-1/2 text-brand'}>{item?.name}</td>
                           <td className={'w-1/8'}>PDF</td>
                           <td className={'w-1/4'}>500kb Max.</td>
                           <td className={'w-1/8'}>

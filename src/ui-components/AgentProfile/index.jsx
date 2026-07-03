@@ -8,7 +8,7 @@ export default function AgentProfile({
   ...props
 }) {
   return (
-    <div {...props} className={`${props.className} flex justify-center items-start p-1.5 bg-gray-100 flex-1`}>
+    <div {...props} className={`${props.className} flex justify-center items-start p-1.5 bg-surface-raised flex-1`}>
       {/*<Img*/}
       {/*  src="/images/img_rectangle_4184.png"*/}
       {/*  alt="Ngn 200 K"*/}

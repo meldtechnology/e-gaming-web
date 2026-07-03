@@ -11,11 +11,11 @@ export const TypeGroup = () => {
   }
 
   return (
-    <div className="w-full bg-white-a700 flex gap-1">
+    <div className="w-full bg-surface flex gap-1">
       <div className="flex-auto w-[60%]">
         <TypeList updateType={updateType}/>
       </div>
-      <div className="flex-auto w-[40%] border-solid border-l-gray-200">
+      <div className="flex-auto w-[40%] border-solid border-l-border">
         <TypeForm selectedType={selectedType}
                   isNew={Object.keys(selectedType).length === 0} />
       </div>

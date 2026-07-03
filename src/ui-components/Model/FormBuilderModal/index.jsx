@@ -48,17 +48,17 @@ export const FormBuilderModal = ({ onClick, fileData }) => {
   }, [fileObject?.name]);
   return (
     <>
-      <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="false"></div>
+      <div className="fixed inset-0 bg-brand/30 transition-opacity" aria-hidden="false"></div>
       <div className="fixed  inset-0 z-10 w-screen h-screen ">
         <div className="flex mt-[1%] justify-center p-4 text-center sm:items-center sm:p-0 overflow-y-auto">
           <div
-            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
+            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-surface text-left shadow-xl transition-all ">
+            <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
               <div className="align-middle items-center text-center">
                 <span className="font-bold text-[36px] mt-1 text-[#939393]">Form Designer</span>
               <button type="button"
                       onClick={onClick}
-                        className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                        className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-text-primary hover:text-text-inverse shadow-sm ring-1 ring-inset ring-border-strong hover:bg-danger sm:mt-0 sm:w-auto float-right">
                   <span className="min-w-full text-center">X</span>
                 </button>
               </div>
@@ -70,13 +70,13 @@ export const FormBuilderModal = ({ onClick, fileData }) => {
                              show={isSuccess} />
                 </div>
               </div>
-              <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
                     <div className="w-[720px] h-[800px] items-center overflow-y-scroll">
                       <div className="align-middle items-center text-center mb-4">
                         <span className="font-bold text-[24px] block">{fileObject?.name}
-                          <span className="text-blue-600"> ({fileObject?.code})</span>
+                          <span className="text-brand"> ({fileObject?.code})</span>
                       </span>
                       </div>
                       <hr />

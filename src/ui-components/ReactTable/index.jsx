@@ -3,8 +3,8 @@
 // import { flexRender, getCoreRowModel, useReactTable, getSortedRowModel } from "@tanstack/react-table";
 //
 // const variants = {
-//   simple: "bg-gray-100_59",
-//   simple1: "bg-gray-50",
+//   simple: "bg-surface-muted",
+//   simple1: "bg-surface-muted",
 // };
 // const sizes = {
 //   xs: "py-1",

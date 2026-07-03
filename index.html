@@ -17,6 +17,20 @@
       rel="stylesheet"
     />
     <title>Enugu State Gaming Commission</title>
+    <script>
+      // Pre-paint theme to avoid a light/dark flash. The stored preference is
+      // encrypted, so we apply the OS preference here (which is also the app's
+      // first-visit default); the React ThemeProvider corrects an explicit
+      // override on mount.
+      (function () {
+        try {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.dataset.theme = "dark";
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -19,7 +19,7 @@ export const InputNumber = ({name, value, label, placeHolderText, required ,onCh
       <div className="relative">
         <button
           id="decreaseButton"
-          className="absolute right-9 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className="absolute right-9 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-on-brand transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
         >
           <svg
@@ -41,7 +41,7 @@ export const InputNumber = ({name, value, label, placeHolderText, required ,onCh
 
         <button
           id="increaseButton"
-          className="absolute right-1 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className="absolute right-1 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-on-brand transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
         >
           <svg

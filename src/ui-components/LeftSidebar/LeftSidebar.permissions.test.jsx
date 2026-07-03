@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { removeAll, storeItem } from "../../services";
+import { AppThemeProvider } from "../../theme/ThemeProvider";
 import { LeftSidebar } from "./index";
 
 beforeEach(() => {
@@ -21,9 +22,11 @@ describe("LeftSidebar permissions", () => {
     storeItem("perm", JSON.stringify({ permissions: ["CAN_VIEW_DASHBOARD"] }));
 
     render(
-      <MemoryRouter initialEntries={["/app/dashboard"]}>
-        <LeftSidebar />
-      </MemoryRouter>,
+      <AppThemeProvider>
+        <MemoryRouter initialEntries={["/app/dashboard"]}>
+          <LeftSidebar />
+        </MemoryRouter>
+      </AppThemeProvider>,
     );
 
     expect(screen.getAllByText(/Dashboard/i).length).toBeGreaterThan(0);

@@ -26,7 +26,7 @@ export const ProfileAccount = () => {
         <Box width={0.5}
              className={`my-[25%] mx-auto ${isLoading ? '' : 'hidden'}`}>
           <Loader h={'h-16'} w={'w-16'} />
-          <p className="text-blue-600 text-center text-[16px]">
+          <p className="text-brand text-center text-[16px]">
             retrieving user profile settings...
           </p>
         </Box>

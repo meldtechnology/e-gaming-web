@@ -22,7 +22,7 @@ export const EditGroupPopUp = ({openGroup, groupName, updateGroupName, editContr
                  required={true}
                  onChange={(e) => updateGroupName(e.target.value)} />
       <button type="button"
-              className="ml-4 bg-blue_gray-900 text-white-a700 px-1 rounded-lg h-[3rem]"
+              className="ml-4 bg-brand text-on-brand px-1 rounded-lg h-[3rem]"
               onClick={editControl}>
         Update
       </button>

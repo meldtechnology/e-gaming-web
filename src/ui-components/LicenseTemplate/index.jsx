@@ -13,12 +13,12 @@ export const LicenseTemplate = ({license}) => {
   return (
     <div id="license-id">
       <div className={`bg-amber-50 p-4`}>
-        <div className={'p-4 border-4 border-solid border-green-700'}>
-          <div className={'p-4 border-4 border-solid border-green-700'}>
+        <div className={'p-4 border-4 border-solid border-success'}>
+          <div className={'p-4 border-4 border-solid border-success'}>
             <div className={'w-full flex gap-3'}>
               <div className={'w-1/5 pl-3.5 overflow-hidden'}>
                 <div
-                  className={"w-[98px] h-[98px] rounded-full bg-white-a700 items-center justify-items-center border-2 border-solid border-black-900 float-right"}>
+                  className={"w-[98px] h-[98px] rounded-full bg-surface items-center justify-items-center border-2 border-solid border-black-900 float-right"}>
                   <img src={"/images/enugu_logo2.png"}
                        alt={"RevenueLogo"} className={"w-[72px] h-[102px]"} />
                 </div>
@@ -27,10 +27,10 @@ export const LicenseTemplate = ({license}) => {
                 <h1 className={"text-[28px]"}>THE ENUGU STATE GOVERNMENT</h1>
                 <h1 className={"text-[32px] font-bold"}>Enugu State Gaming Commission</h1>
                 <div className={"w-full flex pl-[150px] mt-2"}>
-                  <div className={"w-[103px] h-[103px] rounded-full bg-white-a700 items-center justify-items-center"}>
+                  <div className={"w-[103px] h-[103px] rounded-full bg-surface items-center justify-items-center"}>
                     <img src={"/images/enugu_gov_logo.jpeg"}
                          alt={"GovLogo"}
-                         className={"w-[102px] h-[102px] rounded-full border-2 border-solid border-green-600"} />
+                         className={"w-[102px] h-[102px] rounded-full border-2 border-solid border-success"} />
                   </div>
                   <div className={"ml-4 pt-2 p-4 text-[24px] text-left"}>
                     <div><strong>No.:</strong> {license?.invoiceNumber}</div>

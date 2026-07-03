@@ -269,7 +269,7 @@ export const FileForm = ({selectedFile, isNew}) => {
             />
             <button type={'button'}
                     onClick={addAttachmentConfig}
-                    className="w-full max-w-sm min-w-[200px] p-2 bg-gray-950 text-white-a700">
+                    className="w-full max-w-sm min-w-[200px] p-2 bg-surface-raised text-text-primary">
               Add Attachments
             </button>
             <div className={`${loadingTypes ? "" : "hidden"}`}>
@@ -364,7 +364,7 @@ export const FileForm = ({selectedFile, isNew}) => {
 
             <button
               disabled={!(formik.dirty && formik.isValid)}
-              className={`${saving ? 'hidden' : ''} mt-4 w-full rounded-md text-white-a700 bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+              className={`${saving ? 'hidden' : ''} mt-4 w-full rounded-md text-on-brand bg-brand py-2 px-4 border border-transparent text-center text-sm text-on-brand transition-all shadow-md hover:shadow-lg focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
               type="submit">
               {!isEdit ? 'Add' : 'Edit'} Category
             </button>

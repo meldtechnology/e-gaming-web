@@ -60,15 +60,15 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="false"></div>
+      <div className="fixed inset-0 bg-brand/30 transition-opacity" aria-hidden="false"></div>
       <div className="fixed  inset-0 z-10 w-screen h-screen ">
         <div className="flex mt-[2%] justify-center p-4 text-center sm:items-center sm:p-0">
           <div
-            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
+            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-surface text-left shadow-xl transition-all ">
+            <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
               <button type="button"
                       onClick={onClick}
-                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-text-primary hover:text-text-inverse shadow-sm ring-1 ring-inset ring-border-strong hover:bg-danger sm:mt-0 sm:w-auto float-right">
                 <span className="min-w-full text-center">X</span>
               </button>
               <div style={{ display: (error !== null) ? "" : "none" }}>
@@ -78,7 +78,7 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                 <MeldAlert alertType={AlertType.SUCCESS} message={message} show={success !== null} />
               </div>
             </div>
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
                   <div className="w-[407px] h-[400px] items-center ">
@@ -86,7 +86,7 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                     <div className="align-middle items-center text-center">
                       <span className="font-bold text-[24px] block">Change User password</span>
                       <span className="text-[12px]">Update the password for
-                      <span className="text-blue-600 pl-1">{userDataSplit[0]}</span></span>
+                      <span className="text-brand pl-1">{userDataSplit[0]}</span></span>
                     </div>
                     <div className="mt-[7%] ml-[14%] w-[303px]">
                       <Formik
@@ -103,9 +103,9 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                               <Field name="password"
                                      type={"password"}
                                      placeholder={`New Password`}
-                                     className="h-full rounded-[10px] border border-gray-500 px-3 md:w-full"
+                                     className="h-full rounded-[10px] border border-border-strong px-3 md:w-full"
                               />
-                              <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
+                              <p className="mt-1 text-1xl text-danger bg-danger-soft">
                                 {errors.password && touched.password ? (errors.password) : null}
                               </p>
                             </div>
@@ -113,9 +113,9 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                               <Field name="confirm"
                                      type='password'
                                      placeholder={`Confirm Password`}
-                                     className="h-full rounded-[10px] border border-gray-500 px-3 md:w-full"
+                                     className="h-full rounded-[10px] border border-border-strong px-3 md:w-full"
                               />
-                              <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
+                              <p className="mt-1 text-1xl text-danger bg-danger-soft">
                                 {errors.confirm && touched.confirm ? (errors.confirm) : null}
                               </p>
                             </div>
@@ -123,15 +123,15 @@ export const ChangePasswordModal = ({ onClick, userData, type}) => {
                               <Button
                                 shape="round"
                                 disabled={!(dirty && isValid)}
-                                className={`min-w-full min-h-[43px] text-white-a700 ${!isSaving? '' : 'hidden'} ${!(dirty && isValid) ? 'bg-[#707073]' : 'bg-black-900_01'} border border-solid border-black-900_01 rounded-[14px] hover:bg-[#626262] px-[26px] sm:px-5`}
+                                className={`min-w-full min-h-[43px] text-text-inverse ${!isSaving? '' : 'hidden'} ${!(dirty && isValid) ? 'bg-text-secondary' : 'bg-brand'} border border-solid border-brand rounded-[14px] hover:bg-brand-strong px-[26px] sm:px-5`}
                                 type='submit'
                               >
                                 Save
                               </Button>
                               <button disabled type="button"
-                                      className={`min-w-full py-2.5 px-5 me-2 ${isSaving ? '' : 'hidden'} text-sm font-medium text-white-a700 bg-[#707073] rounded-xl border border-gray-200 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center"`}>
+                                      className={`min-w-full py-2.5 px-5 me-2 ${isSaving ? '' : 'hidden'} text-sm font-medium text-text-inverse bg-text-secondary rounded-xl border border-border focus:z-10 focus:ring-2 focus:ring-brand focus:text-brand dark:bg-surface-raised dark:text-text-secondary dark:border-border dark:hover:text-text-primary dark:hover:bg-surface-muted inline-flex items-center"`}>
                                 <svg aria-hidden="true" role="status"
-                                     className="inline w-4 h-4 me-3 text-gray-200 place-items-center animate-spin dark:text-text-secondary"
+                                     className="inline w-4 h-4 me-3 text-text-muted place-items-center animate-spin dark:text-text-secondary"
                                      viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path
                                     d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"

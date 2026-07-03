@@ -15,8 +15,8 @@ const variants = {
       "bg-brand text-on-brand shadow-e1 hover:bg-brand-strong active:bg-brand-strong",
     secondary:
       "bg-surface-raised text-text-primary hover:bg-surface-sunken",
-    danger: "bg-danger text-white hover:brightness-95",
-    success: "bg-success text-white hover:brightness-95",
+    danger: "bg-danger text-text-inverse hover:brightness-95",
+    success: "bg-success text-text-inverse hover:brightness-95",
     // legacy color keys ↓ (kept for backward compatibility)
     blue_gray_100: "bg-surface-raised text-text-primary hover:bg-surface-sunken",
     blue_gray_900_4c: "bg-brand text-on-brand hover:bg-brand-strong",

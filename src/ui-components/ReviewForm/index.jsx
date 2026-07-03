@@ -30,7 +30,7 @@ export const ReviewForm = ({ onClick, fileData }) => {
              overflow={'hidden'}>
           <button type="button"
                   onClick={onClick}
-                  className="w-[10%] rounded-xl px-3 py-2 text-sm font-semibold bg-red-600 text-white-a700 hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                  className="w-[10%] rounded-xl px-3 py-2 text-sm font-semibold bg-danger text-text-inverse hover:text-text-inverse shadow-sm ring-1 ring-inset ring-border-strong hover:bg-danger sm:mt-0 sm:w-auto float-right">
             <span className="min-w-full text-center">X</span>
           </button>
         </Box>

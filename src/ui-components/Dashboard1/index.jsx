@@ -22,11 +22,11 @@ export default function Dashboard1({
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center justify-center gap-2.5 self-stretch">
               <Img src="/images/img_subtract.png" alt="Meld Admin" className="h-[42px] w-[42px] object-cover" />
-              <Text as="p" className="text-[24px] font-light text-white-a700">
+              <Text as="p" className="text-[24px] font-light text-white">
                 {adminText}
               </Text>
             </div>
-            <Heading as="h6" className="font-inter text-[16px] font-bold text-gray-500">
+            <Heading as="h6" className="font-inter text-[16px] font-bold text-text-muted">
               {revenueText}
             </Heading>
           </div>
@@ -76,17 +76,17 @@ export default function Dashboard1({
             {settingsText}
           </Text>
         </div>
-        <div className="mx-2.5 mt-[264px] flex items-center justify-center gap-2 rounded-[10px] bg-gray-800 px-1 py-1.5">
+        <div className="mx-2.5 mt-[264px] flex items-center justify-center gap-2 rounded-[10px] bg-sidebar-muted px-1 py-1.5">
           <Img
             src="/images/img_rectangle_4163.png"
             alt="Francis Oruno"
             className="h-[66px] w-[30%] rounded-[10px] object-contain"
           />
           <div className="flex flex-1 flex-col items-start">
-            <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700">
+            <Text size="textmd" as="p" className="text-[16px] font-light text-white">
               {userName}
             </Text>
-            <Text size="texts" as="p" className="text-[14px] font-light text-blue_gray-400">
+            <Text size="texts" as="p" className="text-[14px] font-light text-text-muted">
               {userAccountType}
             </Text>
           </div>

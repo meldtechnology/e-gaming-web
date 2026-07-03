@@ -30,7 +30,7 @@ export const License = () => {
                 aria-pressed={type === tab.id}
                 className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-colors ${
                   type === tab.id
-                    ? "bg-brand text-white shadow-e1"
+                    ? "bg-brand text-on-brand shadow-e1"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
