@@ -1,16 +1,13 @@
 import { env } from "../../../config/env";
-import { Text } from "../../Text";
 import { GetDocumentService } from "../../../services";
 import { Loader } from "../../Loader";
 import { ReportDataTable } from "../../Datatable";
 import { LicenseReport } from "../LicenseReport";
-import { EmptyState } from "../../primitives";
+import { Card, EmptyState } from "../../primitives";
 
 const columnHeader = [
  "Operator", "KYC", "Amount", "Submitted On", "Status"
 ];
-
-
 
 const DOCUMENT_HISTORY_URL = env.DOCUMENTS_BASE_URL;
 export const LatestReport = () => {
@@ -21,36 +18,23 @@ export const LatestReport = () => {
     };
   const applications = documents?.data?.results ?? [];
   return (
-    <div className="mr-[50px] mt-3 flex items-center gap-2 md:mr-0 md:flex-col">
-      {
-        (isLoading) ?
-          (
-            <div className="flex-1 md:self-stretch md:px-5">
-              <Loader w={'w-8'} h={'h-8'} />
-            </div>
-          ) :
-          (
-              <div className="flex-1 md:self-stretch md:px-5">
-                <div className="rounded-[5px] bg-white-a700 p-3">
-                  <div className="mb-[22px] flex flex-col gap-6">
-                    <div className="mr-[18px] flex flex-wrap items-center justify-between gap-5 md:mr-0">
-                      <Text as="p" className="text-[24px] font-light text-gray-600 md:text-[22px]">
-                        Recent Applications
-                      </Text>
-                      <Text size="textmd" as="p" className="text-[16px] font-normal text-black-900_01">
-                        ...
-                      </Text>
-                    </div>
-                    {applications.length ? (
-                      <ReportDataTable data={applications} columnHeader={columnHeader} />
-                    ) : (
-                      <EmptyState title="No Application data is available" />
-                    )}
-                  </div>
-                </div>
-              </div>
-              )
-      }
+    <div className="mt-6 flex items-start gap-6 lg:flex-col">
+      {isLoading ? (
+        <div className="flex-1">
+          <Loader w={'w-8'} h={'h-8'} />
+        </div>
+      ) : (
+        <div className="min-w-0 flex-1">
+          <h2 className="mb-3 text-lg font-semibold text-text-primary">Recent Applications</h2>
+          {applications.length ? (
+            <ReportDataTable data={applications} columnHeader={columnHeader} />
+          ) : (
+            <Card padded>
+              <EmptyState title="No applications available" />
+            </Card>
+          )}
+        </div>
+      )}
       <LicenseReport />
     </div>
   );

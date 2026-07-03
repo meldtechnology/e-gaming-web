@@ -1,26 +1,26 @@
 export const ToggleSwitch = ({formik, labelText, required,
                                value, fieldName, fieldClass, isDisabled}) => (
   <div className={fieldClass}>
-    <label className="mb-2 text-sm text-slate-600 mr-4">
-      {labelText} <span className={`${required ? '' : 'hidden'} text-red-700`}>*</span>
+    <label className="mb-2 mr-4 text-sm font-medium text-text-secondary">
+      {labelText} <span className={`${required ? '' : 'hidden'} text-danger`}>*</span>
     </label>
     <div className="inline-flex items-center gap-2">
-      <label htmlFor="switch-component-on" className="text-slate-600 text-sm cursor-pointer">Off</label>
+      <label htmlFor="switch-component-on" className="cursor-pointer text-sm text-text-secondary">Off</label>
 
-      <div className="relative inline-block w-11 h-5">
+      <div className="relative inline-block h-5 w-11">
         <input id="switch-component-on" type="checkbox"
                name={fieldName}
                value={value}
                onChange={formik.handleChange}
                checked={value}
                disabled={isDisabled}
-               className="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800 cursor-pointer transition-colors duration-300" />
+               className="peer h-5 w-11 cursor-pointer appearance-none rounded-full bg-surface-raised transition-colors duration-300 checked:bg-brand" />
         <span aria-hidden="true"
-              className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer">
+              className="absolute left-0 top-0 h-5 w-5 cursor-pointer rounded-full border border-border bg-surface shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-brand">
         </span>
       </div>
 
-      <label htmlFor="switch-component-on" className="text-slate-600 text-sm cursor-pointer">On</label>
+      <label htmlFor="switch-component-on" className="cursor-pointer text-sm text-text-secondary">On</label>
     </div>
   </div>
 )

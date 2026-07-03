@@ -9,8 +9,8 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   wrapperClassName?: string;
 };
 
-const inputClass =
-  "w-full pl-3 pr-10 py-2 bg-transparent placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow";
+const baseInput =
+  "w-full py-2.5 bg-surface text-text-primary text-sm rounded-xl border transition-colors duration-150 placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-text-muted";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -29,28 +29,40 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const inputId = id ?? props.name;
     const helperId = inputId ? `${inputId}-helper` : undefined;
+    const borderClass = error
+      ? "border-danger focus:border-danger focus:ring-danger/30"
+      : "border-border focus:border-brand hover:border-border-strong";
+    const paddingClass = `${leftIcon ? "pl-10" : "pl-3.5"} ${rightIcon ? "pr-10" : "pr-3.5"}`;
 
     return (
       <div className={wrapperClassName}>
         {label ? (
-          <label className="block mb-2 text-sm text-slate-600" htmlFor={inputId}>
+          <label className="block mb-1.5 text-sm font-medium text-text-secondary" htmlFor={inputId}>
             {label}
           </label>
         ) : null}
         <div className="relative">
-          {leftIcon}
+          {leftIcon ? (
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-muted">
+              {leftIcon}
+            </span>
+          ) : null}
           <input
             ref={ref}
             id={inputId}
-            className={`${inputClass} ${className}`.trim()}
+            className={`${baseInput} ${borderClass} ${paddingClass} ${className}`.trim()}
             aria-invalid={Boolean(error)}
             aria-describedby={helperId}
             {...props}
           />
-          {rightIcon}
+          {rightIcon ? (
+            <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-text-muted">
+              {rightIcon}
+            </span>
+          ) : null}
         </div>
         {helperText || error ? (
-          <p id={helperId} className={error ? "mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300" : "mt-2 text-xs text-slate-400"}>
+          <p id={helperId} className={`mt-1.5 text-xs ${error ? "text-danger" : "text-text-muted"}`}>
             {error ?? helperText}
           </p>
         ) : null}

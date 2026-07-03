@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { ProgressButton } from "../Form/component/ProgressButton";
 import { checkPermission } from "../../services/autorization";
 import { Button } from "../primitives";
+import { AccessDenied } from "../AccessDenied";
 
 const APPLICATION_URL = env.DOCUMENTS_BASE_URL;
 export const LicenseForm = () => {
@@ -72,8 +73,9 @@ export const LicenseForm = () => {
           <Button unstyled
                   type="button"
                   onClick={close}
-                  className="w-[10%] rounded-xl px-3 py-2 text-sm font-semibold bg-red-600 text-white-a700 hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
-            <span className="min-w-full text-center">X</span>
+                  aria-label="Close"
+                  className="float-right inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-raised hover:text-danger">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
           </Button>
         </Box>
         <Box>
@@ -81,29 +83,23 @@ export const LicenseForm = () => {
             <Button unstyled
                     type={'button'}
                     onClick={generatePDf}
-                    className="w-[20%] rounded-xl p-2 bg-gray-950 text-white-a700 hover:bg-gray-600 sm:w-full" >
+                    className="w-[20%] rounded-xl bg-brand p-2.5 font-semibold text-on-brand transition-colors hover:bg-brand-strong sm:w-full" >
               Download License (PDF)</Button>
           ) : null}
           {!license.issuedOn && !show ? (
             <Button unstyled
                     type={'button'}
                     onClick={issueLicense}
-                    className="w-[20%] rounded-xl p-2 bg-gray-950 text-white-a700 hover:bg-gray-600 sm:w-full" >
+                    className="w-[20%] rounded-xl bg-brand p-2.5 font-semibold text-on-brand transition-colors hover:bg-brand-strong sm:w-full" >
               Issue License</Button>
           ) : null}
           <ProgressButton saving={show} text={'Issuing Licence'} />
         </Box>
         {isError ? (
           <Box className="!mt-4 !w-full" >
-            <Typography variant={'p'}
-                        bgcolor={'#FF9999'}
-                        borderRadius={'10px'}
-                        border={'solid 2px #963333'}
-                        padding={'6px'}
+            <Typography component={'div'}
                         marginTop={'3%'}
-                        sx={{
-                          color: '#F93333'
-            }}>
+                        className="rounded-xl border border-danger/30 bg-danger-soft p-3 text-danger">
               {errorMsg}
             </Typography>
           </Box>
@@ -114,7 +110,7 @@ export const LicenseForm = () => {
           </Box>
         ) : (
           <Box marginTop={'2%'}>
-            <div className={'w-full bg-amber-100 font-bold text-blue-600 text-center p-40 rounded-[10px]'}>
+            <div className={'w-full rounded-2xl border border-dashed border-border-strong bg-surface-muted p-40 text-center font-bold text-text-secondary'}>
               NO LICENSE ISSUED
             </div>
           </Box>
@@ -122,15 +118,6 @@ export const LicenseForm = () => {
       </Box>
     </Container>
   ) : (
-    <>
-      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
-        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
-          Access Denied! - You do not have sufficient access to view the screen
-        </div>
-        <div className={'w-[70%] h-[]70%'}>
-          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
-        </div>
-      </div>
-    </>
+    <AccessDenied />
   );
 }

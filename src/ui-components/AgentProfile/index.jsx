@@ -15,14 +15,14 @@ export default function AgentProfile({
       {/*  className="h-[36px] self-end rounded-[5px] object-cover"*/}
       {/*/>*/}
       <div className="ml-[26px] flex flex-1 flex-col items-start gap-0.5 self-center">
-        <Heading as="h6" className="text-[16px] font-bold text-gray-600">
+        <Heading as="h6" className="text-[16px] font-bold text-text-secondary">
           {userName}
         </Heading>
-        <Text size="textxs" as="p" className="text-[12px] font-normal text-gray-600">
+        <Text size="textxs" as="p" className="text-[12px] font-normal text-text-secondary">
           {userEmail}
         </Text>
       </div>
-      <Heading as="h6" className="ml-[18px] text-[16px] font-bold text-gray-600">
+      <Heading as="h6" className="ml-[18px] text-[16px] font-bold text-text-secondary">
         {userPrice}
       </Heading>
     </div>

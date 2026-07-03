@@ -1,7 +1,7 @@
-import { Button } from "../primitives";
-import { Heading } from "../Heading";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Button, Card } from "../primitives";
+import { PageHeader } from "../PageHeader";
 import { Img } from "../Img";
-import { Text } from "../Text";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getItem } from "../../services";
@@ -21,6 +21,13 @@ type UserProfileData = {
   };
 };
 
+const DetailItem = ({ label, value }: { label: string; value?: string }) => (
+  <div>
+    <p className="text-xs font-medium uppercase tracking-wide text-text-muted">{label}</p>
+    <p className="mt-1 text-base font-semibold text-text-primary">{value || "—"}</p>
+  </div>
+);
+
 export const UserProfile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserProfileData>({});
@@ -31,102 +38,50 @@ export const UserProfile = () => {
       setUser(JSON.parse(userProfile));
     }
   }, []);
+
+  const profile = user?.profile;
+
   return (
     <>
-      <div>
-        <div className="flex border-b border-solid border-blue_gray-400 bg-white-a700 px-[30px] py-5 sm:px-5">
-          <Heading size="headinglg" as="h1" className="mt-2.5 text-[24px] font-bold text-gray-600 md:text-[22px]">
-            User Profile
-          </Heading>
-        </div>
-        <div>
-          <div className="flex items-start justify-between gap-5 bg-indigo-50_a0 px-6 py-3.5 sm:px-5">
-            <Heading
-              size="headingmd"
-              as="h2"
-              className="ml-4 mt-2.5 text-[20px] font-bold text-black-900_01 md:ml-0"
-            >
-              My Profile
-            </Heading>
-            {checkPermission('CAN_EDIT_USER') ? (
-              <Button
-                shape="round"
-                onClick={() => navigate('/app/users/_edit')}
-                className="mt-1.5 min-w-[100px] min-h-[43px] text-white-a700 bg-black-900_01 self-end rounded-[14px] pl-7 pr-[34px] sm:px-5 hover:bg-gray-600"
-              >
-                Edit
-              </Button>
-            ) : null}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          className="flex items-start justify-left gap-7 bg-white-a700 border-b border-solid border-blue_gray-400 p-[22px] sm:flex-col sm:p-5">
+      <PageHeader
+        title="User Profile"
+        description="Your account details and contact information."
+        actions={
+          checkPermission('CAN_EDIT_USER') ? (
+            <Button leftIcon={<PencilSquareIcon className="h-5 w-5" />} onClick={() => navigate('/app/users/_edit')}>
+              Edit
+            </Button>
+          ) : undefined
+        }
+      />
+
+      <Card padded className="mx-auto max-w-3xl gap-8">
+        <div className="flex items-center gap-6 border-b border-border pb-6 sm:flex-col sm:items-start">
           <Img
-           src={user?.profile?.profilePicture}
-            alt="Image"
-            className="mb-[18px] h-[128px] w-[128px] rounded-[64px] object-cover sm:w-full"
+            src={profile?.profilePicture}
+            alt="Profile"
+            className="h-28 w-28 rounded-full object-cover ring-1 ring-border"
           />
-          <div className="flex flex-col items-start gap-2">
-            <Heading size="headinglg" as="h2" className="text-[24px] font-bold text-black-900_01 md:text-[22px]">
-              {user?.profile?.firstName} {user?.profile?.lastName}
-            </Heading>
-            <Heading as="h3" className="text-[16px] font-bold text-black-900_01">
-              {user?.profile?.settings?.role} User
-            </Heading>
-            <Heading size="headingmd" as="h4" className="text-[20px] font-bold text-light_blue-a700">
-              {user?.username}
-            </Heading>
+          <div className="flex flex-col gap-1">
+            <h2 className="text-2xl font-bold text-text-primary">
+              {profile?.firstName} {profile?.lastName}
+            </h2>
+            <p className="text-sm font-medium text-text-secondary">{profile?.settings?.role} User</p>
+            <p className="text-sm font-semibold text-brand">{user?.username}</p>
           </div>
         </div>
-      </div>
-      <div>
-        <div
-          className="flex flex-col items-start bg-white-a700 border-b border-solid border-blue_gray-400 py-2 pl-[66px] pr-14 md:px-5">
-          <Heading size="headingmd" as="h2" className="text-[20px] font-bold text-black-900_01">
-            Personal details
-          </Heading>
-          <div className="mt-7 flex flex-wrap justify-between gap-5 self-stretch">
-            <Text size="textlg" as="p" className="text-[20px] font-normal text-gray-600">
-              First Name
-            </Text>
-            <Text size="textlg" as="p" className="mr-[378px] text-[20px] font-normal text-gray-600">
-              Last Name
-            </Text>
+
+        <div>
+          <h3 className="mb-5 text-lg font-semibold text-text-primary">Personal details</h3>
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-1">
+            <DetailItem label="First Name" value={profile?.firstName} />
+            <DetailItem label="Last Name" value={profile?.lastName} />
+            <DetailItem label="Email" value={profile?.email} />
+            <DetailItem label="Phone" value={profile?.phoneNumber} />
+            <DetailItem label="Role" value={profile?.settings?.role} />
           </div>
-          <div className="mt-3 flex flex-wrap items-start justify-between gap-5 self-stretch">
-            <Heading size="headingmd" as="h3" className="mb-1.5 text-[20px] font-bold text-gray-600">
-              {user?.profile?.firstName}
-            </Heading>
-            <Heading size="headingmd" as="h4" className="mr-[400px] self-end text-[20px] font-bold text-gray-600">
-              {user?.profile?.lastName}
-            </Heading>
-          </div>
-          <div className="mt-[46px] flex flex-wrap items-center justify-between gap-5 self-stretch">
-            <Text size="textlg" as="p" className="mt-1 self-end text-[20px] font-normal text-gray-600">
-              Email
-            </Text>
-            <Text size="textlg" as="p" className="mr-[416px] self-start text-[20px] font-normal text-gray-600">
-              Phone
-            </Text>
-          </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-5 self-stretch">
-            <Heading size="headingmd" as="h5" className="text-[20px] font-bold text-gray-600">
-              {user?.profile?.email}
-            </Heading>
-            <Heading size="headingmd" as="h6" className="mr-[346px] text-[20px] font-bold text-gray-600">
-              {user?.profile?.phoneNumber}
-            </Heading>
-          </div>
-          <Text size="textlg" as="p" className="mt-[62px] text-[20px] font-normal text-gray-600">
-            Role
-          </Text>
-          <Heading size="headingmd" as="h5" className="mb-[42px] mt-3 text-[20px] font-bold text-gray-600">
-            {user?.profile?.settings?.role}
-          </Heading>
         </div>
-      </div>
+      </Card>
     </>
   );
 }

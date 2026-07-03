@@ -1,160 +1,119 @@
-import { React, useEffect, useState } from "react";
-import { Img, Text, Heading } from './..';
-import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
-import { activeSelection, activeStatus, isItemSelected, MENU_ITEMS } from "../ActiveStatus";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  HomeIcon,
+  DocumentTextIcon,
+  ClipboardDocumentCheckIcon,
+  IdentificationIcon,
+  ChartBarIcon,
+  UsersIcon,
+  ArrowRightStartOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import { getItem } from "../../services";
 import { checkPermission } from "../../services/autorization";
 
+const NAV_ITEMS = [
+  { label: "Dashboard", to: "/app/dashboard", icon: HomeIcon, permission: "CAN_VIEW_DASHBOARD" },
+  { label: "Documents", to: "/app/documents", icon: DocumentTextIcon, permission: "CAN_VIEW_DOCUMENTS" },
+  { label: "Applications", to: "/app/applications", icon: ClipboardDocumentCheckIcon, permission: "CAN_VIEW_APPLICATIONS" },
+  { label: "Licenses", to: "/app/licenses", icon: IdentificationIcon, permission: "CAN_VIEW_LICENSES" },
+  { label: "Reports", to: "/app/reports", icon: ChartBarIcon, permission: "CAN_VIEW_REPORTS" },
+  { label: "Users", to: "/app/users", icon: UsersIcon, permission: "CAN_VIEW_USERS" },
+];
+
+const truncate = (value, max = 18) => (value && value.length > max ? `${value.slice(0, max)}…` : value);
 
 export const LeftSidebar = ({ ...props }) => {
-  const [collapsed, ] = useState(false);
   const location = useLocation();
-  const [pathName, ] = useState(location.pathname
-    .substring(location.pathname
-      .lastIndexOf('/') + 1) );
   const [user, setUser] = useState({});
-  const canViewProfile = checkPermission('CAN_VIEW_PROFILE');
-  const canViewDashboard = checkPermission('CAN_VIEW_DASHBOARD');
-  const canViewDocuments = checkPermission('CAN_VIEW_DOCUMENTS');
-  const canViewApplications = checkPermission('CAN_VIEW_APPLICATIONS');
-  const canViewLicenses = checkPermission('CAN_VIEW_LICENSES');
-  const canViewReports = checkPermission('CAN_VIEW_REPORTS');
-  const canViewUsers = checkPermission('CAN_VIEW_USERS');
-
-  // const collapseSidebar = () => {
-  //    setCollapsed(!collapsed)
-  // }
-  const userName = (name) => {
-    return name.substring(0, 13);
-  }
+  const canViewProfile = checkPermission("CAN_VIEW_PROFILE");
 
   useEffect(() => {
-    setUser(JSON.parse(getItem('profile')));
+    try {
+      setUser(JSON.parse(getItem("profile")) ?? {});
+    } catch {
+      setUser({});
+    }
   }, []);
 
+  const isActive = (to) => location.pathname === to || location.pathname.startsWith(`${to}/`);
+  const profile = user?.profile ?? {};
+  const fullName = `${profile.firstName ?? ""} ${profile.lastName ?? ""}`.trim();
+
   return (
-    <Sidebar
+    <aside
       {...props}
-      width="244px !important"
-      collapsedWidth="80px !important"
-      collapsed={collapsed}
-      className={`${props.className} flex flex-col h-screen pt-2.5 top-0 bg-blue_gray-900_01 !sticky overflow-auto`}
+      className={`sticky top-0 z-30 flex h-screen w-[264px] shrink-0 flex-col bg-sidebar text-sidebar-text md:w-[76px] ${props.className ?? ""}`}
     >
-      <div className="mx-3 mt-6 self-stretch">
-        <div className="flex flex-col bg-black-900 py-2 items-center gap-1 rounded-[10px]">
-          <div className="flex items-center justify-center gap-2.5 self-stretch">
-            <Img src="/images/enugu_logo2.png" alt="Subtract" className="h-[42px] w-[42] object-cover" />
-            <Text as="p" className="text-[16px] font-light text-white-a700 !important">
-              ESGC
-            </Text>
-          </div>
-          <Heading as="h6" className="font-inter text-1 font-bold text-gray-600">
-            Dashboard
-          </Heading>
+      {/* Brand */}
+      <div className="flex items-center gap-3 px-5 py-5 md:justify-center md:px-2">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white/10 ring-1 ring-white/10">
+          <img src="/images/enugu_logo2.png" alt="ESGC" className="h-7 w-7 object-contain" />
+        </span>
+        <div className="md:hidden">
+          <p className="text-sm font-bold leading-tight text-white">ESGC</p>
+          <p className="text-[11px] leading-tight text-sidebar-text/70">Gaming Commission</p>
         </div>
-        {!collapsed && canViewProfile ? (
-          <div
-            className="w-full ml-2 mr-2.5 flex items-center justify-center gap-2 self-stretch rounded-[10px] bg-gray-800 px-1 py-1.5">
-            <Img
-              src={user?.profile?.profilePicture}
-              alt="Image"
-              className="h-[66px] w-[30%] rounded-full object-contain"
-            />
-            <div className="flex flex-1 flex-col items-start">
-              <Text size="textmd" as="p" className="text-[16px] font-light text-white-a700 cursor-pointer">
-                <Link to={`/app/users/profile`} >
-                  {userName(`${user?.profile?.firstName} ${user?.profile?.lastName}`)}
-                </Link>
-              </Text>
-              <Text size="sm" as="p" className="text-[12px] font-bold text-blue_gray-400">
-                {user?.profile?.settings?.role?.substring(0, 13)}
-              </Text>
-            </div>
-            <Link to={`/logout`} >
-              <Img src="/images/img_arrow_down.svg" alt="Arrowdown" className="mt-[18px] h-[24px] w-[24px] self-start" />
-            </Link>
-          </div>
-        ) : null}
-        <Menu
-          menuItemStyles={{
-            button: {
-              padding: "16px",
-              color: "#707073",
-              fontWeight: 400,
-              fontSize: "24px",
-              gap: "15px",
-              [`&:hover, &.ps-active`]: { color: "#276df9", background: "linear-gradient(90deg, #536bb57f,#f8f5f500)" },
-            },
-          }}
-          className="mt-9 w-full self-stretch"
-        >
-          <div>
-            {canViewDashboard ? (
-              <MenuItem icon={<Img src={activeStatus( "img_grid.svg", pathName, MENU_ITEMS.DASHBOARD)}
-                                   alt="Dashboard"
-                                   className="h-[42px] w-[42px]" />}
-                        href={'/app/dashboard'}>
-                {activeSelection("Dashboard", pathName, MENU_ITEMS.DASHBOARD)}
-                { isItemSelected(pathName, MENU_ITEMS.DASHBOARD) }
-              </MenuItem>
-            ) : null}
-            <div className="flex flex-col gap-[2.66px]">
-              {canViewDocuments ? (
-                <MenuItem icon={<Img src={activeStatus( "img_checkmark.svg", pathName, MENU_ITEMS.DOCUMENTS)}
-                                     alt="Document"
-                                     className="h-[40px] w-[40px]" />}
-                          href={'/app/documents'}>
-                  {activeSelection("Documents", pathName, MENU_ITEMS.DOCUMENTS)}
-                  { isItemSelected(pathName, MENU_ITEMS.DOCUMENTS) }
-                </MenuItem>
-              ) : null}
-              {canViewApplications ? (
-                <MenuItem icon={<Img src={activeStatus( "img_application.svg", pathName, MENU_ITEMS.APPLICATIONS)}
-                                     alt="Applications"
-                                     className="h-[34px] w-[34px]" />}
-                          href={'/app/applications'}>
-                  {activeSelection("Applications", pathName, MENU_ITEMS.APPLICATIONS)}
-                  { isItemSelected(pathName, MENU_ITEMS.APPLICATIONS) }
-                </MenuItem>
-              ) : null}
-            </div>
-            {canViewLicenses ? (
-              <MenuItem
-                icon={<Img src={activeStatus( "img_file.svg", pathName, MENU_ITEMS.LICENSES)}
-                           alt="Licenses" className="h-[44px] w-[44px]" />}
-                href={'/app/licenses'}>
-                {activeSelection("Licenses", pathName, MENU_ITEMS.LICENSES)}
-                { isItemSelected(pathName, MENU_ITEMS.LICENSES) }
-              </MenuItem>
-            ) : null}
-            {canViewReports ? (
-              <MenuItem icon={<Img src={activeStatus( "img_report.svg", pathName, MENU_ITEMS.REPORT)}
-                                   alt="Reports" className="h-[40px] w-[40px]" />}
-                        href={'/app/reports'}>
-                {activeSelection("Reports", pathName, MENU_ITEMS.REPORT)}
-                { isItemSelected(pathName, MENU_ITEMS.REPORT) }
-              </MenuItem>
-            ) : null}
-            {canViewUsers ? (
-              <MenuItem icon={<Img src={activeStatus( "img_user.svg", pathName, MENU_ITEMS.USERS)}
-                                   alt="User" className="h-[44px] w-[44px]" />}
-                        href={'/app/users'}>
-                {activeSelection("Users", pathName, MENU_ITEMS.USERS)}
-                { isItemSelected(pathName, MENU_ITEMS.USERS) }
-              </MenuItem>
-            ) : null}
-            {/*<MenuItem icon={<Img src={activeStatus( "img_settings.svg", pathName, MENU_ITEMS.SETTINGS)}*/}
-            {/*                     alt="Search" className="h-[40px] w-[40px] hidden" />}*/}
-            {/*          href={'/app/settings'}>*/}
-            {/*  {activeSelection("Settings", pathName, MENU_ITEMS.SETTINGS)}*/}
-            {/*  { isItemSelected(pathName, MENU_ITEMS.SETTINGS) }*/}
-            {/*</MenuItem>*/}
-           {/*<MenuItem></MenuItem>*/}
-            {/*<MenuItem></MenuItem>*/}
-          </div>
-        </Menu>
       </div>
-    </Sidebar>
+
+      {/* Profile */}
+      {canViewProfile && fullName ? (
+        <div className="mx-3 mb-2 flex items-center gap-3 rounded-xl bg-sidebar-muted px-3 py-2.5 md:mx-2 md:justify-center md:px-2">
+          <img
+            src={profile.profilePicture || "/images/enugu_logo2.png"}
+            alt="Profile"
+            className="h-9 w-9 shrink-0 rounded-full object-cover ring-1 ring-white/10"
+          />
+          <div className="min-w-0 flex-1 md:hidden">
+            <Link to="/app/users/profile" className="block truncate text-sm font-semibold text-white hover:text-brand-200">
+              {truncate(fullName)}
+            </Link>
+            <p className="truncate text-[11px] text-sidebar-text/70">{truncate(profile?.settings?.role ?? "", 20)}</p>
+          </div>
+          <Link to="/logout" aria-label="Sign out" className="text-sidebar-text/70 transition-colors hover:text-white md:hidden">
+            <ArrowRightStartOnRectangleIcon className="h-5 w-5" />
+          </Link>
+        </div>
+      ) : null}
+
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto px-3 py-2 md:px-2" aria-label="Primary">
+        <ul className="flex flex-col gap-1">
+          {NAV_ITEMS.filter((item) => checkPermission(item.permission)).map((item) => {
+            const active = isActive(item.to);
+            const Icon = item.icon;
+            return (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  aria-current={active ? "page" : undefined}
+                  title={item.label}
+                  className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors md:justify-center md:px-2 ${
+                    active
+                      ? "bg-brand text-white shadow-e1"
+                      : "text-sidebar-text hover:bg-sidebar-muted hover:text-white"
+                  }`}
+                >
+                  <Icon className="h-5 w-5 shrink-0" />
+                  <span className="md:hidden">{item.label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      {/* Footer logout */}
+      <div className="border-t border-white/10 px-3 py-3 md:px-2">
+        <Link
+          to="/logout"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-text transition-colors hover:bg-sidebar-muted hover:text-white md:justify-center md:px-2"
+          title="Sign out"
+        >
+          <ArrowRightStartOnRectangleIcon className="h-5 w-5 shrink-0" />
+          <span className="md:hidden">Sign out</span>
+        </Link>
+      </div>
+    </aside>
   );
-}
+};

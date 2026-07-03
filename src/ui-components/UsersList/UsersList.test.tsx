@@ -123,6 +123,6 @@ describe("UsersList module", () => {
         <UsersList />
       </MemoryRouter>,
     );
-    expect(screen.getByText("No user data is available")).toBeInTheDocument();
+    expect(screen.getByText("No users available")).toBeInTheDocument();
   });
 });

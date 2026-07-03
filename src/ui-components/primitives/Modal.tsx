@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 export type ModalProps = {
   open: boolean;
@@ -10,28 +10,47 @@ export type ModalProps = {
 };
 
 export const Modal = ({ open, title, children, onClose, className = "", labelledBy }: ModalProps) => {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
-    <>
-      <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="true" />
-      <div className="fixed inset-0 z-10 w-screen h-screen" role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
-        <div className="flex mt-[2%] justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className={`relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ${className}`.trim()}>
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
-              <button
-                type="button"
-                onClick={onClose}
-                className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right"
-              >
-                <span className="min-w-full text-center">X</span>
-              </button>
-              {title ? <div id={labelledBy}>{title}</div> : null}
-            </div>
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">{children}</div>
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:items-center">
+      <div
+        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"
+        aria-hidden="true"
+        onClick={onClose}
+      />
+      <div
+        className={`relative z-10 my-8 w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-surface text-left text-text-primary shadow-e3 transition-all ${className}`.trim()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={labelledBy}
+      >
+        <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
+          <div id={labelledBy} className="min-w-0 flex-1">
+            {title}
           </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close dialog"
+            className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-raised hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          >
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
+        <div className="px-5 py-5">{children}</div>
       </div>
-    </>
+    </div>
   );
 };

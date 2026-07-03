@@ -1,5 +1,6 @@
 import { env } from "../../config/env";
-import { Header, Text } from "../../ui-components";
+import { Header } from "../../ui-components";
+import { Card } from "../../ui-components/primitives";
 import { Analytic, LatestReport, StackBarReport } from "../../ui-components/DashBoardReport";
 import {
   GetPaymentService as getPaymentMetrics,
@@ -35,36 +36,31 @@ export const Dashboard = () => {
   const { users } = getEntityMetrics(ENTITY_METRIC_URL) as { users?: { data?: number } };
 
   return checkPermission('CAN_VIEW_DASHBOARD') ? (
-    <>
+    <div className="flex flex-col gap-6">
       <Header metrics={[
         formatCompactNumber(payments?.data?.totalVolume),
         payments?.data?.totalCount,
         users?.data,
         documents?.data?.total]}/>
-      <div className="mr-11 mt-[26px] flex items-center justify-between gap-5 md:mr-0 md:flex-col">
-        <div className="flex w-[42%] flex-col items-start rounded-[5px] bg-white-a700 px-3 md:w-full md:px-5">
-          <Text as="p" className="mt-3.5 text-[24px] font-light text-gray-600 md:text-[22px]">
-            Analytics
-          </Text>
+      <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-start gap-6 lg:grid-cols-1">
+        <Card padded className="gap-4">
+          <h2 className="text-lg font-semibold text-text-primary">Analytics</h2>
           <Analytic license={documents?.data?.totalMonthly?.toFixed(1)}
                     metric={[payments?.data?.totalVolume,
                       payments?.data?.unpaidVolume,
                       payments?.data?.overDueVolume]} />
-        </div>
+        </Card>
         <StackBarReport />
       </div>
       <LatestReport />
-    </>
+    </div>
   ) : (
-    <>
-      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
-        <div className={'mt-8 p-4 text-center text-[2.1rem] text-blue-800 font-bold'}>
-          Welcome to the Enugu State Gaming Commission Platform
-        </div>
-        <div className={'w-[70%] h-[]70%'}>
-          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'}/>
-        </div>
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 text-center">
+      <img src={'/images/enugu_logo2.png'} alt={'Enugu State Gaming Commission'} className={'h-28 w-28 object-contain'} />
+      <div>
+        <h2 className="text-2xl font-bold text-brand">Welcome to the Enugu State Gaming Commission</h2>
+        <p className="mt-2 max-w-md text-text-secondary">Your regulatory and licensing platform.</p>
       </div>
-    </>
+    </div>
   );
 }

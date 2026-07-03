@@ -1,5 +1,4 @@
 import { env } from "../../../config/env";
-import { Text } from "../../Text";
 import { Suspense } from "react";
 import AgentProfile from "../../AgentProfile";
 import { formatAmount, GetDocumentService } from "../../../services";
@@ -16,16 +15,16 @@ export const LicenseReport = () => {
   const licenses = documents?.data?.results ?? [];
   return (isLoading) ?
     (
-      <div className="w-[26%] md:w-full md:px-5">
+      <div className="w-[320px] shrink-0 lg:w-full">
         <Loader w={'w-8'} h={'h-8'} />
       </div>
     ) : (
-    <div className="w-[26%] md:w-full md:px-5">
-      <div className="flex flex-col items-start justify-center gap-8 rounded-[5px] bg-white-a700 px-1.5 py-2">
-        <Text as="p" className="ml-1.5 mt-1 text-[24px] font-light text-gray-600 md:ml-0 md:text-[22px]">
+    <div className="w-[320px] shrink-0 lg:w-full">
+      <div className="flex flex-col items-start gap-5 rounded-2xl border border-border bg-surface p-5 shadow-e1">
+        <h2 className="text-lg font-semibold text-text-primary">
           Latest Licenses
-        </Text>
-        <div className="mr-1.5 flex flex-col gap-3 self-stretch md:mr-0">
+        </h2>
+        <div className="flex w-full flex-col gap-3">
           <Suspense fallback={<div>Loading feed...</div>}>
             {licenses.length ? licenses.map((d, index) => (
               <AgentProfile userName={d?.applicant?.name}

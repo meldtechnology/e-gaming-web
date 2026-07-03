@@ -48,7 +48,7 @@ describe("ApplicationList", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("No Application data is available")).toBeInTheDocument();
+    expect(screen.getByText("No applications available")).toBeInTheDocument();
   });
 
   it("renders application rows and requests the next page", async () => {

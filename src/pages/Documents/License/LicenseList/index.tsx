@@ -2,7 +2,6 @@ import { env } from "../../../../config/env";
 import { useState } from "react";
 import { GetDocumentService as getDocService } from "../../../../services";
 import { LicenseDataTable } from "../../../../ui-components/Datatable";
-import { Loader } from "../../../../ui-components/Loader";
 
 const columnHeading = [
   "Reference #", "Approve By", "Approved On", "Licensee", "Fee", "Valid (Days)", "Status", "Action"
@@ -11,8 +10,9 @@ const columnHeading = [
 const APPLICATION_URL = env.DOCUMENTS_BASE_URL;
 export const LicenseList = ({status}: { status: string }) => {
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { documents, isLoading }
-    = getDocService(`${APPLICATION_URL}/status/${status}?page=${page}&size=10&sortIn=DESC&sortBy=${status === 'ISSUED'? 'issuedOn' : 'approvedOn'}`) as {
+    = getDocService(`${APPLICATION_URL}/status/${status}?page=${page}&size=${pageSize}&sortIn=DESC&sortBy=${status === 'ISSUED'? 'issuedOn' : 'approvedOn'}`) as {
       documents?: {
         data?: {
           results?: unknown[];
@@ -20,6 +20,8 @@ export const LicenseList = ({status}: { status: string }) => {
           previousPage?: number;
           nextPage?: number;
           totalPages?: number;
+          total?: number;
+          totalElements?: number;
         };
       };
       isLoading?: boolean;
@@ -33,27 +35,32 @@ export const LicenseList = ({status}: { status: string }) => {
     setPage(page - 1);
   }
 
+  const changePageSize = (size: number) => {
+    setPageSize(size);
+    setPage(1);
+  }
+
   return (
-    <div className="flex flex-col min-h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
-      <div className="mr-2 flex flex-col gap-[26px] self-stretch md:mr-0">
-        <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
-          <div className={`flex w-[100%] ${isLoading ? 'hidden' : ''} items-center justify-center self-end md:w-full md:self-auto`}>
-            <LicenseDataTable columnHeader={columnHeading}
-                              data={documents?.data?.results}
-                              pageInfo={{
-                                page: documents?.data?.page,
-                                previous: documents?.data?.previousPage,
-                                next: documents?.data?.nextPage,
-                                totalPages: documents?.data?.totalPages
-                              }}
-                              nextPage={nextPage}
-                              previousPage={previousPage}
-            />
-          </div>
-          <div className={`${isLoading ? '' : 'hidden'} items-center justify-center`}>
-            <Loader w={'w-8'} h={'h-8'} />
-          </div>
-        </div>
+    <div className="w-full">
+      <div role={isLoading ? "status" : undefined} aria-live={isLoading ? "polite" : undefined}>
+        {isLoading ? <span className="sr-only">Loading licenses...</span> : null}
+        <LicenseDataTable columnHeader={columnHeading}
+                          data={documents?.data?.results ?? []}
+                          pageInfo={{
+                            page: documents?.data?.page ?? page,
+                            previous: documents?.data?.previousPage,
+                            next: documents?.data?.nextPage,
+                            totalPages: documents?.data?.totalPages
+                          }}
+                          nextPage={nextPage}
+                          previousPage={previousPage}
+                          isLoading={isLoading}
+                          pageSize={pageSize}
+                          onPageSize={changePageSize}
+                          onPageChange={setPage}
+                          totalEntries={documents?.data?.totalElements ?? documents?.data?.total ?? (documents?.data?.totalPages ? documents.data.totalPages * pageSize : undefined)}
+                          currentPageCount={documents?.data?.results?.length}
+        />
       </div>
     </div>
   );

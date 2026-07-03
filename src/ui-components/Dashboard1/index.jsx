@@ -33,33 +33,33 @@ export default function Dashboard1({
         </div>
         <div className="mt-9 flex items-center gap-[9px] px-[18px] py-3.5">
           <Img src="/images/menu/img_grid.svg" alt="Dashboard" className="h-[42px] w-[42px]" />
-          <Text as="p" className="mb-1.5 self-end text-[24px] font-normal text-gray-600">
+          <Text as="p" className="mb-1.5 self-end text-[24px] font-normal text-text-secondary">
             {dashboardText}
           </Text>
         </div>
         <div className="mt-2.5">
           <div className="flex items-center gap-[15px] px-[18px] py-3.5">
             <Img src="/images/menu/img_checkmark.svg" alt="Document" className="h-[40px] w-[40px]" />
-            <Text as="p" className="mb-1.5 self-end text-[24px] font-normal text-gray-600">
+            <Text as="p" className="mb-1.5 self-end text-[24px] font-normal text-text-secondary">
               {documentText}
             </Text>
           </div>
           <div className="relative mt-[-6px] flex items-start justify-center gap-[30px] px-3 py-4">
             <Img src="/images/menu/img_application.svg" alt="Applications" className="mb-1.5 h-[34px] w-[34px]" />
-            <Text as="p" className="self-center text-[24px] font-normal text-gray-600">
+            <Text as="p" className="self-center text-[24px] font-normal text-text-secondary">
               {applicationsText}
             </Text>
           </div>
         </div>
         <div className="mt-1.5 flex items-center gap-[21px] p-3.5">
           <Img src="/images/menu/img_file.svg" alt="License" className="h-[44px] w-[44px]" />
-          <Text as="p" className="text-[24px] font-normal text-gray-600">
+          <Text as="p" className="text-[24px] font-normal text-text-secondary">
             {licenseText}
           </Text>
         </div>
         <div className="relative mt-[-2px] flex items-start gap-4 px-[18px] py-4">
           <Img src="/images/menu/img_report.svg" alt="Report" className="h-[40px] w-[40px] self-center" />
-          <Text as="p" className="mt-1 text-[24px] font-normal text-gray-600">
+          <Text as="p" className="mt-1 text-[24px] font-normal text-text-secondary">
             {reportText}
           </Text>
         </div>
@@ -72,7 +72,7 @@ export default function Dashboard1({
         </div>
         <div className="flex items-center gap-[11px] px-5 py-4">
           <Img src="/images/menu/img_settings.svg" alt="Settings" className="h-[40px] w-[40px]" />
-          <Text as="p" className="text-[24px] font-normal text-gray-600">
+          <Text as="p" className="text-[24px] font-normal text-text-secondary">
             {settingsText}
           </Text>
         </div>

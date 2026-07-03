@@ -55,7 +55,7 @@ export const FileUploader = ({labelText, value, setFile, resourceCat, code, cont
 
   return (
     <div className={containerClass}>
-      <label className="mb-2 text-sm text-slate-600 mr-4">
+      <label className="mb-2 mr-4 text-sm font-medium text-text-secondary">
         {labelText}
       </label>
       <div className="inline-flex items-center gap-2">
@@ -76,11 +76,11 @@ export const FileUploader = ({labelText, value, setFile, resourceCat, code, cont
                hidden
                onChange={onUpload} />
         <div
-          className={`my-1 flex w-[60%]  ${uploading ? '' : 'hidden'}  flex-col items-start self-center rounded-[10px] bg-gray-50_01 py-2.5 pl-[76px] pr-14 md:my-0 md:w-full md:px-5`}>
-          <span className="ml-[40%]"><Loader /></span>
+          className={`my-1 flex w-[60%]  ${uploading ? '' : 'hidden'}  flex-col items-center self-center rounded-xl bg-surface-muted py-2.5 md:my-0 md:w-full`}>
+          <Loader />
         </div>
       </div>
-      <div className={`${containerClass} ${isError? '' : 'hidden'} text-red-800 bg-red-300 p-4 rounded-[10px]`}>
+      <div className={`${containerClass} ${isError? '' : 'hidden'} mt-2 rounded-xl bg-danger-soft p-4 text-danger`}>
         {errorMsg}
       </div>
     </div>

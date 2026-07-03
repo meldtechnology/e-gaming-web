@@ -1,49 +1,26 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 
-const Overview = ({operatorType}) => {
+const Overview = () => {
   return (
-    <Box
-      bgcolor={'#18801d'}
-      borderRadius={2}
-      paddingBottom={{ xs: 2, md: 0 }}
-    >
-      <Grid container data-aos="fade-up">
-        <Grid item container alignItems="flex-start" xs={6} md={4}>
-
-        </Grid>
-        <Grid
-          item
-          container
-          alignItems="center"
-          xs={6}
-          md={4}
-          sx={{
-            marginY: 2,
-            paddingX: 1,
-          }}
-        >
-          <Box marginBottom={2}>
-            <Typography
-              variant="h5"
-              color="text.primary"
-              align={'center'}
-              sx={{ fontWeight: 700, color: 'common.white' }}
-            >
-              The {operatorType} application
-            </Typography>
-            <Typography align={'center'} sx={{ color: 'common.white' }}>
-              See available operator permit/license type below:
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item container justifyContent="flex-end" xs={6} md={4}>
-        </Grid>
-      </Grid>
-    </Box>
+    <section className="rounded-2xl bg-brand px-6 py-8 text-on-brand" data-aos="fade-up">
+      <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+        <div>
+          <p className="text-3xl font-bold">1</p>
+          <p className="mt-2 text-sm font-semibold">Choose permit</p>
+          <p className="mt-1 text-sm text-white/80">Select the license type that matches your gaming operation.</p>
+        </div>
+        <div>
+          <p className="text-3xl font-bold">2</p>
+          <p className="mt-2 text-sm font-semibold">Verify operator</p>
+          <p className="mt-1 text-sm text-white/80">Confirm proprietor or agent details before completing forms.</p>
+        </div>
+        <div>
+          <p className="text-3xl font-bold">3</p>
+          <p className="mt-2 text-sm font-semibold">Generate invoice</p>
+          <p className="mt-1 text-sm text-white/80">Submit your application and continue with payment reference details.</p>
+        </div>
+      </div>
+    </section>
   );
 };
 

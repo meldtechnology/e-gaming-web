@@ -14,15 +14,15 @@ export const DocumentForm =({form}) => {
           gutterBottom
           sx={{
             fontWeight: 700,
-            color: '#333396'
+            color: 'text.primary'
           }}
         >
           {group?.headerTitle}
         </Typography>
-        <hr className="bg-amber-400 h-1 mb-3" />
+        <hr className="mb-4 h-0.5 border-0 bg-brand" />
         <Box>
           {group?.formControls?.map((field, i) => (
-            <div key={'field-'+i} className='m-0'>
+            <div key={'field-'+i} className='mb-4'>
               <FormLabel sx={{ fontWeight: 700}}>
                 {field?.label}
               </FormLabel>

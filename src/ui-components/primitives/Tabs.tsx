@@ -16,7 +16,7 @@ export type TabsProps = {
 
 export const Tabs = ({ tabs, activeTab, onChange, className = "" }: TabsProps) => (
   <div className={className}>
-    <div className="flex gap-2 border-b border-gray-300" role="tablist">
+    <div className="flex gap-1 border-b border-border" role="tablist">
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -25,7 +25,7 @@ export const Tabs = ({ tabs, activeTab, onChange, className = "" }: TabsProps) =
           aria-selected={activeTab === tab.id}
           aria-controls={`${tab.id}-panel`}
           disabled={tab.disabled}
-          className={`px-4 py-2 text-sm font-bold border-b-2 transition-all disabled:pointer-events-none disabled:opacity-50 ${activeTab === tab.id ? "border-gray-900 text-gray-900" : "border-transparent text-gray-600"}`}
+          className={`-mb-px px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors disabled:pointer-events-none disabled:opacity-50 ${activeTab === tab.id ? "border-brand text-brand" : "border-transparent text-text-secondary hover:text-text-primary hover:border-border-strong"}`}
           onClick={() => onChange(tab.id)}
         >
           {tab.label}

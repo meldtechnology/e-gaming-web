@@ -11,8 +11,9 @@ const columnHeading = [
 const TYPE_URL = env.DOCUMENT_TYPE_URL;
 export const TypeList = ({ updateType }) => {
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { documents, isLoading }
-    = getDocService(`${TYPE_URL}?page=${page}&size=10&sortIn=DESC`);
+    = getDocService(`${TYPE_URL}?page=${page}&size=${pageSize}&sortIn=DESC`);
 
   const nextPage = () => {
     setPage(page + 1);
@@ -22,13 +23,18 @@ export const TypeList = ({ updateType }) => {
     setPage(page - 1);
   }
 
+  const changePageSize = (size) => {
+    setPageSize(size);
+    setPage(1);
+  }
+
   return (
     <div className="flex flex-col min-h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
       <div className="mr-2 flex flex-col gap-[26px] self-stretch md:mr-0">
         <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
           <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">
             <TypeDatatable columnHeader={columnHeading}
-                                  data={documents?.data?.results}
+                                  data={documents?.data?.results ?? []}
                                   pageInfo={{page: documents?.data?.page,
                                     previous: documents?.data?.previousPage,
                                     next: documents?.data?.nextPage,
@@ -37,6 +43,11 @@ export const TypeList = ({ updateType }) => {
                                   previousPage={previousPage}
                            isLoading={isLoading}
                            updateType={updateType}
+                           pageSize={pageSize}
+                           onPageSize={changePageSize}
+                           onPageChange={setPage}
+                           totalEntries={documents?.data?.totalElements ?? documents?.data?.total ?? (documents?.data?.totalPages ? documents.data.totalPages * pageSize : undefined)}
+                           currentPageCount={documents?.data?.results?.length}
 
             />
           </div>

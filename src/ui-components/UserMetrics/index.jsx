@@ -9,7 +9,7 @@ export const UserMetrics = ({ totalUsersText = "Total Users", userCount = "24", 
           <Img src="/images/img_lock.svg" alt="Total Users" className="h-[70px] w-[70px]" />
         </div>
         <div className="flex w-[65%] flex-col items-start">
-          <Heading size="headinglg" as="h4" className="text-[24px] font-bold text-gray-600">
+          <Heading size="headinglg" as="h4" className="text-[24px] font-bold text-text-secondary">
             {totalUsersText}
           </Heading>
           <Heading size="headingxl" as="h1" className="text-[36px] font-bold text-black-900_01">

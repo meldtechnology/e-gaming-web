@@ -33,8 +33,9 @@ export const QRCodeMaker = () => {
             </Typography>
             <button type="button"
                     onClick={close}
-                    className="w-[10%] rounded-xl px-3 py-2 text-sm font-semibold bg-red-600 text-white-a700 hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
-              <span className="min-w-full text-center">X</span>
+                    aria-label="Close"
+                    className="float-right inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-raised hover:text-danger">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
             </button>
           </Box>
           <Box marginTop={'2%'} className={'!justify-items-center'}>

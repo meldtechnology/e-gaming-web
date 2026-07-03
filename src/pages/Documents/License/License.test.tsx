@@ -28,7 +28,7 @@ describe("License module", () => {
     expect(screen.getByText("Licenses")).toBeInTheDocument();
     expect(screen.getByText("License list status: ISSUED")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "APPROVE" }));
+    await user.click(screen.getByRole("button", { name: "Approved" }));
 
     expect(screen.getByText("License list status: APPROVE")).toBeInTheDocument();
   });
@@ -38,8 +38,6 @@ describe("License module", () => {
 
     render(<License />);
 
-    expect(
-      screen.getByText("Access Denied! - You do not have sufficient access to view the screen"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Access denied")).toBeInTheDocument();
   });
 });

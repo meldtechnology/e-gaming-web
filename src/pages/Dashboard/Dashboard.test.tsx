@@ -60,7 +60,7 @@ describe("Dashboard module", () => {
     render(<Dashboard />);
 
     expect(
-      screen.getByText("Welcome to the Enugu State Gaming Commission Platform"),
+      screen.getByText("Welcome to the Enugu State Gaming Commission"),
     ).toBeInTheDocument();
     expect(screen.queryByText("Total Revenue")).not.toBeInTheDocument();
   });

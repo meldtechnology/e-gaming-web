@@ -42,7 +42,7 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
 
   return (
     <div className={`${openEdit ? '' : 'hidden'} w-[65%] relative bg-gray-200_01 border-solid border-amber-50 rounded-t-3xl`}>
-      <div className="w-[100%] p-2 font-bold bg-amber-400 text-amber-800 text-center rounded-t-full">
+      <div className="w-[100%] p-2 font-bold bg-brand text-on-brand text-center rounded-t-full">
         <span>Update Form Field</span>
         <span className="float-right pr-4">
           <button type="button"
@@ -106,9 +106,9 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
                      type="checkbox"
                      onChange={() => setRequired(!required)}
                      checked={isRequired(required)}
-                     className="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800 cursor-pointer transition-colors duration-300" />
+                     className="peer appearance-none w-11 h-5 bg-surface-raised rounded-full checked:bg-brand cursor-pointer transition-colors duration-300" />
               <span aria-hidden="true"
-                    className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer">
+                    className="absolute top-0 left-0 w-5 h-5 bg-surface rounded-full border border-border-strong shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-brand cursor-pointer">
               </span>
             </div>
           </div>

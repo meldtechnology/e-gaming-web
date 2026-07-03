@@ -20,10 +20,7 @@ const validationSchema = yup.object({
     // .min(8, 'The password should have at minimum length of 8'),
 });
 
-// const APP_ID = env.APPLICATION_ID;
-// const LOGIN_URL = `http://localhost:9011/login?appId=${APP_ID}&error`;
-// const LOGIN_URL = 'http://academy.meld-tech.com/login?appId=${APP_ID}&error';
-// const LOGIN_URL = `https://auth.meld-tech.com/login?appId=${APP_ID}&error`;
+
 const LOGIN_URL = env.LOGIN_URL;
 const pillFieldSx = {
   '& .MuiOutlinedInput-root': {

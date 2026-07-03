@@ -5,6 +5,7 @@ export type TableColumn<TRow> = {
   header: ReactNode;
   cell: (row: TRow, index: number) => ReactNode;
   className?: string;
+  headerClassName?: string;
 };
 
 export type TableProps<TRow> = TableHTMLAttributes<HTMLTableElement> & {
@@ -12,6 +13,7 @@ export type TableProps<TRow> = TableHTMLAttributes<HTMLTableElement> & {
   data: TRow[];
   rowKey?: (row: TRow, index: number) => string;
   emptyState?: ReactNode;
+  onRowClick?: (row: TRow, index: number) => void;
 };
 
 export const Table = <TRow,>({
@@ -19,27 +21,38 @@ export const Table = <TRow,>({
   data,
   rowKey,
   emptyState,
+  onRowClick,
   className = "",
   ...props
 }: TableProps<TRow>) => (
-  <div className="px-0 overflow-scroll">
-    <table className={`w-full mt-4 text-left table-auto min-w-max ${className}`.trim()} {...props}>
+  <div className="w-full overflow-x-auto rounded-2xl border border-border bg-surface">
+    <table className={`w-full text-left border-collapse ${className}`.trim()} {...props}>
       <thead>
-        <tr>
+        <tr className="bg-surface-muted">
           {columns.map((column) => (
-            <th key={column.key} className="h-[69px] p-4 border-y border-blue-gray-100 bg-[#BCDAF8]">
-              <p className="block font-sans text-xl antialiased font-normal leading-none text-[#707073] opacity-70">
-                {column.header}
-              </p>
+            <th
+              key={column.key}
+              className={`px-4 py-3.5 text-xs font-semibold uppercase tracking-wide text-text-secondary border-b border-border ${column.headerClassName ?? ""}`.trim()}
+            >
+              {column.header}
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {data.map((row, index) => (
-          <tr key={rowKey ? rowKey(row, index) : `table-row-${index}`} className="hover:bg-[#88a6e7] hover:bg-opacity-25">
+          <tr
+            key={rowKey ? rowKey(row, index) : `table-row-${index}`}
+            className={`border-b border-border last:border-0 transition-colors hover:bg-brand-soft/60 ${
+              onRowClick ? "cursor-pointer" : ""
+            }`}
+            onClick={onRowClick ? () => onRowClick(row, index) : undefined}
+          >
             {columns.map((column) => (
-              <td key={column.key} className={`p-4 border-b border-blue-gray-50 ${column.className ?? ""}`.trim()}>
+              <td
+                key={column.key}
+                className={`px-4 py-3.5 text-sm text-text-primary align-middle ${column.className ?? ""}`.trim()}
+              >
                 {column.cell(row, index)}
               </td>
             ))}

@@ -4,7 +4,7 @@ import { checkPermission } from "../../../services/autorization";
 export const DownloadSection = ({isLoading, downLoadLink, reportType}) => {
   return (
     <div className={'block rounded-xl bg-transparent mt-4 mb-10 ml-4'}>
-      <div className={'text-center text-green-900 font-bold'}>
+      <div className={'text-center text-text-secondary font-bold'}>
         Your generated file will appear here
       </div>
       {
@@ -17,7 +17,7 @@ export const DownloadSection = ({isLoading, downLoadLink, reportType}) => {
             {checkPermission('CAN_DOWNLOAD_REPORT') ? (
               <a href={downLoadLink}
                  download={reportType}
-                 className="w-[50%] text-center text-blue-600 font-bold px-2 py-4 rounded-[10px] border-2 border-gray-700"
+                 className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-center font-semibold text-on-brand transition-colors hover:bg-brand-strong"
                  target={'_blank'} rel="noreferrer"
               >Download Report</a>
             ) : null}

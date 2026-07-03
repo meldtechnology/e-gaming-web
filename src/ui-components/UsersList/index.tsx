@@ -1,14 +1,13 @@
 import { env } from "../../config/env";
-import { Img } from "../.";
 import { UserDatatable } from "../Datatable";
 import { useNavigate } from "react-router-dom";
 import { GetUsersService as getMetricsService } from "../../services";
 import { useState } from "react";
-import { Loader } from "../Loader";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { MeldAlert } from "../Alerts";
 import { AlertType } from "../Alerts/AlertType";
 import { checkPermission } from "../../services/autorization";
-import { Button, EmptyState } from "../primitives";
+import { Button, Card, EmptyState } from "../primitives";
 
 const columnHeading = [
   "Name", "Phone", "Role", "Status", ""
@@ -18,8 +17,9 @@ const USER_PROFILE_URL = env.ADMIN_USER_PROFILE_URL;
 export const UsersList = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { users, isLoading, isError }
-    = getMetricsService(`${USER_PROFILE_URL}?page=${page}&size=10`) as {
+    = getMetricsService(`${USER_PROFILE_URL}?page=${page}&size=${pageSize}`) as {
       users?: {
         data?: {
           results?: unknown[];
@@ -27,13 +27,13 @@ export const UsersList = () => {
           previousPage?: number;
           nextPage?: number;
           totalPages?: number;
+          total?: number;
+          totalElements?: number;
         };
       };
       isLoading?: boolean;
       isError?: unknown;
     };
-
-  if (isLoading) return ( <Loader w={'w-8'} h={'h-8'} /> );
 
   if (isError) return <MeldAlert alertType={AlertType.ERROR}
                                  message={"Sorry Users profile could not be retrieved. Please try again later"}
@@ -51,41 +51,51 @@ export const UsersList = () => {
     window.location.reload();
   }
 
+  const changePageSize = (size: number) => {
+    setPageSize(size);
+    setPage(1);
+  }
+
   return (
-    <div className="flex flex-col min-h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
+    <div className="flex w-full flex-col gap-4">
       {checkPermission('CAN_CREATE_USER') ? (
-        <Button
-          color="blue_gray_900"
-          size="sm"
-          rightIcon={<Img src="/images/img_add_user.svg" alt="Add_User" className="h-[30px] w-[30px]" />}
-          className="mr-2 min-w-[182px] gap-3 rounded-[8px] px-1 md:mr-0 mt-5"
-          buttonClicked={() => navigate('/app/users/_new')}
-        >
-          Add User
-        </Button>
-      ) : null}
-      <div className="mr-2 flex flex-col gap-[26px] self-stretch md:mr-0">
-        <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
-          <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">
-            {users?.data?.results?.length ? (
-              <UserDatatable columnHeader={columnHeading}
-                             data={users?.data?.results}
-                             pageInfo={{
-                               page: users?.data?.page,
-                               previous: users?.data?.previousPage,
-                               next: users?.data?.nextPage,
-                               totalPages: users?.data?.totalPages
-                             }}
-                             nextPage={nextPage}
-                             previousPage={previousPage}
-                             refresh={refreshPage}
-              />
-            ) : (
-              <EmptyState title="No user data is available" />
-            )}
-          </div>
+        <div className="flex justify-end">
+          <Button
+            leftIcon={<PlusIcon className="h-5 w-5" />}
+            buttonClicked={() => navigate('/app/users/_new')}
+          >
+            Add User
+          </Button>
         </div>
-      </div>
+      ) : null}
+      {users?.data?.results?.length || isLoading ? (
+        <div role={isLoading ? "status" : undefined} aria-live={isLoading ? "polite" : undefined}>
+          {isLoading ? <span className="sr-only">Loading users...</span> : null}
+          <UserDatatable
+            columnHeader={columnHeading}
+            data={users?.data?.results ?? []}
+            pageInfo={{
+              page: users?.data?.page ?? page,
+              previous: users?.data?.previousPage,
+              next: users?.data?.nextPage,
+              totalPages: users?.data?.totalPages,
+            }}
+            nextPage={nextPage}
+            previousPage={previousPage}
+            refresh={refreshPage}
+            isLoading={isLoading}
+            pageSize={pageSize}
+            onPageSize={changePageSize}
+            onPageChange={setPage}
+            totalEntries={users?.data?.totalElements ?? users?.data?.total ?? (users?.data?.totalPages ? users.data.totalPages * pageSize : undefined)}
+            currentPageCount={users?.data?.results?.length}
+          />
+        </div>
+      ) : (
+        <Card padded>
+          <EmptyState title="No users available" description="Invite a team member to get started." />
+        </Card>
+      )}
     </div>
   );
 }

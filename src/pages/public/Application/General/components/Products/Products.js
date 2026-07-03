@@ -1,55 +1,25 @@
 import { env } from "../../../../../../config/env";
-import React, { useEffect, useState } from "react";
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useMemo, useState } from "react";
 import { GetPublicFileService as getFiles, removeAll, storeItem } from "../../../../../../services";
 import { Link, useNavigate } from "react-router-dom";
+import { EmptyState, Select } from "../../../../../../ui-components/primitives";
+import { ProductCard } from "../../../components/ProductCard";
 
 const mock = [
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img37.png',
-    title: 'Music player',
-    price: '₦320,000,000',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img38.png',
-    title: 'Headphones',
-    price: '₦450',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img39.png',
-    title: 'Wireless headpohones',
-    price: '₦280',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img40.png',
-    title: 'Bluetooth headphones',
-    price: '₦300',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img41.png',
-    title: 'Headphones',
-    price: '₦280',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img42.png',
-    title: 'Music player',
-    price: '₦340',
-  },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img37.png' },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img38.png' },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img39.png' },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img40.png' },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img41.png' },
+  { media: 'https://assets.maccarianagency.com/backgrounds/img42.png' },
 ];
 
 const FILES_URL = env.DOCUMENT_FILE_PUBLIC_URL;
 const Products = () => {
-  const theme = useTheme();
   const [products, setProduct] = useState([]);
+  const [showCount, setShowCount] = useState(6);
+  const [sortBy, setSortBy] = useState("featured");
+  const [favorites, setFavorites] = useState(() => new Set());
   const { documents } = getFiles(`${FILES_URL}?page=1&size=6`);
   const navigate = useNavigate();
 
@@ -62,173 +32,155 @@ const Products = () => {
     if(documents !== null) setProduct(documents?.data?.results)
     removeAll();
   }, [documents]);
+
+  const sortedProducts = useMemo(() => {
+    const items = [...(products || [])];
+    if (sortBy === "name") return items.sort((a, b) => (a?.name || "").localeCompare(b?.name || ""));
+    if (sortBy === "duration") return items.sort((a, b) => Number(a?.renewalDuration || 0) - Number(b?.renewalDuration || 0));
+    if (sortBy === "fee") return items.sort((a, b) => Number(a?.value || 0) - Number(b?.value || 0));
+    return items;
+  }, [products, sortBy]);
+
+  const visibleProducts = sortedProducts.slice(0, showCount);
+  const featuredProducts = sortedProducts.slice(0, 3);
+
+  const toggleFavorite = (item) => {
+    const key = item?.publicId || item?.name;
+    setFavorites((current) => {
+      const next = new Set(current);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const productChips = (item) => [
+    item?.renewalDuration ? { label: `${item.renewalDuration} days`, tone: "brand" } : null,
+    item?.typeName ? { label: item.typeName, tone: "neutral" } : null,
+    item?.categoryName ? { label: item.categoryName, tone: "neutral" } : null,
+  ].filter(Boolean);
+
+  const feeLabel = (item) => {
+    if (item?.value === undefined || item?.value === null || item?.value === "") return "";
+    return item?.feeType === "FLAT FEE" ? `NGN ${item.value}` : `${item.value}%`;
+  };
+
   return (
-    <Box>
-      <Box marginBottom={4}>
-        <Typography
-          variant="h4"
-          align={'center'}
-          data-aos={'fade-up'}
-          gutterBottom
-          sx={{
-            fontWeight: 700,
-          }}
-        >
+    <div>
+      <div className="mb-10 text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-text-primary sm:text-2xl">
           Featured gaming applications
-        </Typography>
-        <Typography
-          variant="h6"
-          align={'center'}
-          color={'text.secondary'}
-          data-aos={'fade-up'}
-        >
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-base text-text-secondary">
           Experience your license or permit application and approval as never before.
           Pay with ease by getting your invoice online.
-        </Typography>
-        <Box display="flex" justifyContent={'center'} marginTop={2} >
-          <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d] !mr-4"}>
-            <Link to={`/apply/operator/Proprietor`}>View all for Proprietor</Link>
-          </Button>
-          <Button variant="contained" color="primary" size="large" className={"!bg-[#18801d]"}>
-            <Link to={`/apply/operator/Agent`}>View all for Agent</Link>
-          </Button>
-        </Box>
-      </Box>
-      <Grid container spacing={4}>
-        {products?.map((item, i) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            key={i}
-            data-aos={'fade-up'}
-            data-aos-delay={i * 100}
-            data-aos-offset={100}
-            data-aos-duration={600}
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link
+            to={`/apply/operator/Proprietor`}
+            className="rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-on-brand transition-colors hover:bg-brand-strong"
           >
-            <Box display={'block'} width={1} height={1}>
-              <Box
-                component={Card}
-                width={1}
-                height={1}
-                display={'flex'}
-                flexDirection={'column'}
-              >
-                <CardMedia
-                  sx={{
-                    position: 'relative',
-                    height: { xs: 240, sm: 340, md: 280 },
-                    overflow: 'hidden',
-                    padding: 3,
-                    paddingBottom: 0,
-                    background: theme.palette.alternate?.main,
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Box
-                    component={'img'}
-                    loading="lazy"
-                    src={item?.logo?item?.logo : mock[i].media}
-                    sx={{
-                      '& img': {
-                        objectFit: 'contain',
-                      },
-                    }}
-                  />
-                  <Box
-                    display={'flex'}
-                    justifyContent={'flex-end'}
-                    position={'absolute'}
-                    top={0}
-                    left={0}
-                    right={0}
-                    padding={2}
-                    width={1}
-                  >
-                    <Box
-                      component={IconButton}
-                      color="secondary"
-                      bgcolor={'background.paper'}
-                      size={'large'}
-                    >
-                      <Box
-                        component={'svg'}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="#18801d"
-                        width={20}
-                        height={20}
-                        color={'secondary.main'}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </Box>
-                    </Box>
-                  </Box>
-                </CardMedia>
-                <CardContent>
-                  <Typography
-                    variant={'h6'}
-                    align={'left'}
-                    sx={{ fontWeight: 700 }}
-                  >
-                    {item?.name}
-                  </Typography>
-                  <Box
-                    display={'flex'}
-                    justifyContent={'flex-start'}
-                    marginY={1}
-                  >
-                    <Box display={'flex'} justifyContent={'center'}>
-                      <Typography color={'#AEAEAE'} sx={{ fontWeight: 400 }} >
-                        valid for {item?.renewalDuration} days
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <CardActions sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontWeight: 700 }} color={'#A6A6A6'}>
-                      {item?.description}
-                    </Typography>
-                    <Button
-                      variant={'outlined'}
-                      className={`!border-solid !border-[#18801d] !bg-[#18801d] !text-white-a700`}
-                      startIcon={
-                        <Box
-                          component={'svg'}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="#FFFFFF"
-                          width={20}
-                          height={20}
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                            clipRule="evenodd"
-                          />
-                          <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                        </Box>
-                      }
-                      onClick={(e)=>selectPermit((item))}
-                    >
-                      Apply
-                    </Button>
-                  </CardActions>
-                </CardContent>
-              </Box>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+            View all for Proprietor
+          </Link>
+          <Link
+            to={`/apply/operator/Agent`}
+            className="rounded-xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text-primary transition-colors hover:bg-surface-raised"
+          >
+            View all for Agent
+          </Link>
+        </div>
+      </div>
+
+      {featuredProducts.length ? (
+        <section className="mb-10" aria-labelledby="featured-permits">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <h3 id="featured-permits" className="text-xl font-bold text-text-primary">Featured</h3>
+          </div>
+          <div className="grid grid-cols-3 gap-6 overflow-x-auto pb-2 md:flex md:snap-x md:gap-4">
+            {featuredProducts.map((item, i) => {
+              const key = item?.publicId || item?.name || i;
+              return (
+                <ProductCard
+                  key={key}
+                  permit={item}
+                  imageSrc={item?.logo}
+                  fallbackImageSrc={mock[i % mock.length].media}
+                  title={item?.name}
+                  description={item?.description}
+                  chips={productChips(item)}
+                  feeLabel={feeLabel(item)}
+                  featured
+                  favorite={favorites.has(item?.publicId || item?.name)}
+                  onFavorite={() => toggleFavorite(item)}
+                  onApply={selectPermit}
+                />
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      <section aria-labelledby="more-permits">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h3 id="more-permits" className="text-xl font-bold text-text-primary">More permits</h3>
+            <p className="mt-1 text-sm text-text-secondary">Browse available gaming permits and licenses.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Select
+              label="Show"
+              value={showCount}
+              onChange={(event) => setShowCount(Number(event.target.value))}
+              options={[
+                { label: "6 permits", value: 6 },
+                { label: "9 permits", value: 9 },
+                { label: "12 permits", value: 12 },
+              ]}
+              wrapperClassName="w-36"
+            />
+            <Select
+              label="Sort by"
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value)}
+              options={[
+                { label: "Featured", value: "featured" },
+                { label: "Name", value: "name" },
+                { label: "Duration", value: "duration" },
+                { label: "Fee", value: "fee" },
+              ]}
+              wrapperClassName="w-40"
+            />
+          </div>
+        </div>
+
+        {visibleProducts.length ? (
+          <div className="grid grid-cols-3 gap-6 lg:grid-cols-2 sm:grid-cols-1">
+            {visibleProducts.map((item, i) => {
+              const key = item?.publicId || item?.name || i;
+              return (
+                <ProductCard
+                  key={key}
+                  permit={item}
+                  imageSrc={item?.logo}
+                  fallbackImageSrc={mock[i % mock.length].media}
+                  title={item?.name}
+                  description={item?.description}
+                  chips={productChips(item)}
+                  feeLabel={feeLabel(item)}
+                  favorite={favorites.has(item?.publicId || item?.name)}
+                  onFavorite={() => toggleFavorite(item)}
+                  onApply={selectPermit}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-border bg-surface p-8">
+            <EmptyState title="No permits available" description="Available permits will appear here when published." />
+          </div>
+        )}
+      </section>
+    </div>
   );
 };
 

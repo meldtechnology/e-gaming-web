@@ -8,6 +8,7 @@ import { DocumentApplication } from "../DocumentApplication";
 import { DocumentReviewForm } from "../DocumentReviewForm";
 import { useNavigate } from "react-router-dom";
 import { checkPermission } from "../../services/autorization";
+import { AccessDenied } from "../AccessDenied";
 
 export const ReviewForm = ({ onClick, fileData }) => {
   const data = fileData[0];
@@ -153,15 +154,6 @@ export const ReviewForm = ({ onClick, fileData }) => {
       </Box>
     </Container>
   ) : (
-    <>
-      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
-        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
-          Access Denied! - You do not have sufficient access to view the screen
-        </div>
-        <div className={'w-[70%] h-[]70%'}>
-          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
-        </div>
-      </div>
-    </>
+    <AccessDenied />
   );
 }

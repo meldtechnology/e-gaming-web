@@ -2,7 +2,7 @@ import { env } from "../../config/env";
 import { useState } from "react";
 import { GetDocumentService as getDocService } from "../../services";
 import { ApplicationDataTable } from "../Datatable";
-import { EmptyState } from "../primitives";
+import { Card, EmptyState } from "../primitives";
 
 const columnHeading = [
   "Reference #", "Submitted By", "Submitted On", "Amount Paid", "Fee", "Status", "Action"
@@ -11,8 +11,9 @@ const columnHeading = [
 const APPLICATION_URL = env.DOCUMENTS_BASE_URL;
 export const ApplicationList= ({status = ''}: { status?: string }) => {
   const [page, setPage] = useState(1);
-  const { documents, }
-    = getDocService(`${APPLICATION_URL}${status}?page=${page}&size=10&sortIn=DESC`) as {
+  const [pageSize, setPageSize] = useState(10);
+  const { documents, isLoading }
+    = getDocService(`${APPLICATION_URL}${status}?page=${page}&size=${pageSize}&sortIn=DESC`) as {
       documents?: {
         data?: {
           results?: unknown[];
@@ -20,8 +21,11 @@ export const ApplicationList= ({status = ''}: { status?: string }) => {
           previousPage?: number;
           nextPage?: number;
           totalPages?: number;
+          total?: number;
+          totalElements?: number;
         };
       };
+      isLoading?: boolean;
     };
 
   const nextPage = () => {
@@ -32,28 +36,40 @@ export const ApplicationList= ({status = ''}: { status?: string }) => {
     setPage(page - 1);
   }
 
-  return (
-    <div className="flex flex-col min-h-[700px] items-end bg-white-a700 gap-2.5 px-2 ">
-      <div className="mr-2 flex flex-col gap-[26px] self-stretch md:mr-0">
-        <div className="mb-2.5 ml-2.5 flex items-center md:ml-0 md:flex-col">
-          <div className="flex w-[100%] items-center justify-center self-end md:w-full md:self-auto">
-            {documents?.data?.results?.length ? (
-              <ApplicationDataTable columnHeader={columnHeading}
-                             data={documents?.data?.results}
-                             pageInfo={{page: documents?.data?.page,
-                               previous: documents?.data?.previousPage,
-                               next: documents?.data?.nextPage,
-                               totalPages: documents?.data?.totalPages }}
-                             nextPage={nextPage}
-                             previousPage={previousPage}
+  const changePageSize = (size: number) => {
+    setPageSize(size);
+    setPage(1);
+  }
 
-              />
-            ) : (
-              <EmptyState title="No Application data is available" />
-            )}
-          </div>
-        </div>
-      </div>
+  return (
+    <div className="w-full">
+      {documents?.data?.results?.length || isLoading ? (
+        <ApplicationDataTable
+          columnHeader={columnHeading}
+          data={documents?.data?.results ?? []}
+          pageInfo={{
+            page: documents?.data?.page ?? page,
+            previous: documents?.data?.previousPage,
+            next: documents?.data?.nextPage,
+            totalPages: documents?.data?.totalPages,
+          }}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          isLoading={isLoading}
+          pageSize={pageSize}
+          onPageSize={changePageSize}
+          onPageChange={setPage}
+          totalEntries={documents?.data?.totalElements ?? documents?.data?.total ?? (documents?.data?.totalPages ? documents.data.totalPages * pageSize : undefined)}
+          currentPageCount={documents?.data?.results?.length}
+        />
+      ) : (
+        <Card padded>
+          <EmptyState
+            title="No applications available"
+            description="Submitted applications will appear here."
+          />
+        </Card>
+      )}
     </div>
   );
 }

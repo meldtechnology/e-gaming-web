@@ -50,14 +50,15 @@ export const FormBuilder = ({ onClick, fileData }) => {
     <>
         <div className="flex mt-[1%] justify-center p-4 text-center sm:items-center sm:p-0 overflow-y-auto">
           <div
-            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
-              <div className="align-middle items-center text-center">
-                <span className="font-bold text-[36px] mt-1 text-[#939393]">Form Designer</span>
-              <button type="button"
+            className="relative transform overflow-hidden rounded-2xl border border-border bg-surface text-left shadow-e3 transition-all ">
+            <div className="block w-full px-6 pb-4 pt-5">
+              <div className="flex items-center justify-between">
+                <span className="text-[28px] font-bold text-text-primary">Form Designer</span>
+                <button type="button"
                       onClick={onClick}
-                        className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
-                  <span className="min-w-full text-center">X</span>
+                      aria-label="Close form designer"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-raised hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
                 </button>
               </div>
                 <div style={{ display: (isError) ? "" : "none" }}>
@@ -68,18 +69,18 @@ export const FormBuilder = ({ onClick, fileData }) => {
                              show={isSuccess} />
                 </div>
               </div>
-              <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div className="px-6 pb-4 pt-5">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
                     <div className="w-[720px] items-center">
-                      <div className="align-middle items-center text-center mb-4">
-                        <span className="font-bold text-[24px] block">{fileObject?.name}
-                          <span className="text-blue-600"> ({fileObject?.code})</span>
+                      <div className="mb-4 text-center">
+                        <span className="block text-[22px] font-bold text-text-primary">{fileObject?.name}
+                          <span className="text-brand"> ({fileObject?.code})</span>
                       </span>
                       </div>
-                      <hr />
+                      <hr className="border-border" />
                       <div className="w-full">
-                        <div className="border-b border-slate-200">
+                        <div className="border-b border-border">
                           <div className={`${loadingTemplate ? '' : 'hidden'}`}>
                             <Loader />
                           </div>

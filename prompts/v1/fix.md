@@ -69,15 +69,16 @@ via `extractTemplate(template)`.
    saved template still loads.
 4. Confirm no `Cannot convert undefined or null to object` error in the console.
 
-Automated verification completed:
+Automated verification completed on 2026-07-02:
 
 - `npm test -- FormBuilder.test.jsx`: passed, including missing, non-empty, and
   empty `formTemplate` cases.
-- `npm test`: passed.
-- `npm run lint`: passed with warnings only.
-- `npm run build`: passed.
-- `npm run dev -- --port 3001 --host 127.0.0.1`: served the app after port
-  3000 was already in use.
+- `npm test`: passed, 28 test files / 71 tests.
+- `npm run lint`: passed with 23 existing warnings and 0 errors.
+- `npm run build`: passed with existing Tailwind config and chunk-size warnings.
+- `npm run build:check`: passed.
+- `npm run dev -- --port 3001 --host 127.0.0.1`: served the app and returned
+  `HTTP/1.1 200 OK`.
 
 Guard convention: do not call `Object.keys` on an optional object unless the
 object has first been guarded, for example
