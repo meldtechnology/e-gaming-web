@@ -64,7 +64,7 @@ export const ProductCard = ({
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="line-clamp-2 text-base font-bold leading-6 text-text-primary">{title}</h3>
-          {feeLabel ? <p className="shrink-0 text-sm font-bold text-brand">{feeLabel}</p> : null}
+          {/*{feeLabel ? <p className="shrink-0 text-sm font-bold text-brand">{feeLabel}</p> : null}*/}
         </div>
         {description ? (
           <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-text-secondary">{description}</p>
