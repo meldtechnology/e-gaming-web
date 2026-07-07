@@ -25,8 +25,8 @@ export const Details = ({reference}) => {
   const [initialValue, setInitialValue] = useState({});
   const [schema, setSchema] = useState({});
   const [operator, setOperator] = useState({});
-  const [isError, setIsError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [, setIsError] = useState(false);
+  const [, setErrorMsg] = useState('');
   const navigate = useNavigate();
   const { addApplication } = createApp(ADD_APPLICATION_URL);
 
@@ -187,92 +187,5 @@ export const Details = ({reference}) => {
         </Grid>
       </Grid>
     </Box>
-    // <Box border={'gray'}
-    //      boxShadow={'inherit'}
-    //      display={'flex'}
-    //      alignItems={'center'}
-    //      justifyContent={'center'}
-    //      sx={{ flexGrow: 1 }}
-    // >
-    //     <Grid container spacing={2}  >
-    //       <Grid
-    //         item
-    //         xs={12}
-    //         sm={6}
-    //         md={4}
-    //         data-aos={'fade-up'}
-    //         data-aos-offset={100}
-    //         data-aos-duration={600}
-    //       >
-    //           <Box width={'100%'}
-    //                height={'34rem'}
-    //                borderRadius={'10px'}
-    //                paddingBottom={'1rem'}
-    //                bgcolor={'#f2f2f2'}
-    //           >
-    //             <Box component={'img'}
-    //                  src={(file?.logo)? file?.logo : defaultImg[0].casino}
-    //                  width={1}
-    //                  height={'12.9rem'}
-    //                  borderRadius={'10px 10px 0 0'}/>
-    //             <Box paddingX={'1rem'} >
-    //               <Typography component={'h1'}
-    //                           marginY={'0.5rem'}
-    //                           sx={{
-    //                             fontWeight: 700,
-    //                             fontSize: '1.5rem'
-    //                           }}
-    //               >
-    //                 {file?.name}
-    //               </Typography>
-    //               <Typography component={'p'}
-    //                           marginBottom={'0.4rem'}
-    //                           paddingBottom={'1.6rem'}
-    //               >
-    //                 {file?.description} <br />Valid for <span style={{ fontWeight: 700}}>{file?.renewalDuration}</span> days
-    //               </Typography>
-    //               <Typography component={'p'} sx={{ fontSize: 'large'}}
-    //               >
-    //                 {/*<span style={{ fontWeight: 700, color: '#636363', display: 'block'}}>Amount: </span>*/}
-    //                 <span style={{ fontWeight: 700, fontSize: 'xx-large', color: 'red' }}>
-    //               {/*₦ {formatAmount(file?.value)} {file?.feeType?.includes('FLAT')?'':'% of Revenue'}*/}
-    //             </span>
-    //               </Typography>
-    //             </Box>
-    //           </Box>
-    //       </Grid>
-    //       <Grid
-    //         item
-    //         xs={12}
-    //         sm={6}
-    //         md={8}
-    //         data-aos={'fade-up'}
-    //         data-aos-offset={100}
-    //         data-aos-duration={600}
-    //       >
-    //         <Box width={1}
-    //              borderRadius={'10px'}
-    //              padding={'1rem'}
-    //              bgcolor={'#f2f2f2'}>
-    //           {file?.formTemplate ? (
-    //             <FormBuilder formConfig={file?.formTemplate}
-    //                          initialValues={initialValue}
-    //                          validationSchema={schema}
-    //                          attachment={file}
-    //                          onSubmit={onSubmit} />
-    //           ) : (
-    //             <div className={`py-[25%]`}>
-    //               <h1 className={`text-red-700 text-center text-[2.4rem]`}>
-    //                 No Document Form is Available!
-    //               </h1>
-    //             </div>
-    //           )}
-    //         </Box>
-    //         <div style={{ display: ( isError) ? '' : 'none' }}>
-    //           <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
-    //         </div>
-    //       </Grid>
-    //     </Grid>
-    // </Box>
   );
 }
