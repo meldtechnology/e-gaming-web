@@ -12,8 +12,8 @@ import Button from "@mui/material/Button";
 import { Button as PrimitiveButton } from "../../primitives";
 import { AccessDenied } from "../../AccessDenied";
 
-const APPLICATION_REPORT_URL = env.V2_APPLICATION_REPORT_URL;
-// const APPLICATION_REPORT_URL = env.APPLICATION_REPORT_URL;
+const APPLICATION_REPORT_URL_V2 = env.V2_APPLICATION_REPORT_URL;
+const APPLICATION_REPORT_URL = env.APPLICATION_REPORT_URL;
 export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
   const [format, setFormat] = useState('PDF');
   const [from, setFrom] = useState('');
@@ -31,7 +31,13 @@ export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
   const [end, setEnd] = useState('');
   const [error, setError] = useState('');
 
-  const { generate } = GenerateReport(`${APPLICATION_REPORT_URL}${filterPath}?reportType=${format}&from=${start}&to=${end}&sortIn=DESC${filter}`);
+  const applicationReportUrl =
+    filterPath === '/payment'
+      ? APPLICATION_REPORT_URL_V2
+      : APPLICATION_REPORT_URL;
+
+  const { generate } = GenerateReport(`${applicationReportUrl}${filterPath}?reportType=${format}&from=${start}&to=${end}&sortIn=DESC${filter}`);
+  // const { generate } = GenerateReport(`${APPLICATION_REPORT_URL}${filterPath}?reportType=${format}&from=${start}&to=${end}&sortIn=DESC${filter}`);
 
   const requestGeneration = () => {
     if(from.length === 0) {
@@ -50,7 +56,7 @@ export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
       return;
     }
     setError('');
-    generateReport();
+    generateReport().then(r => r.name);
   }
 
   const generateReport = async () => {
@@ -84,6 +90,7 @@ export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
   }
 
   useEffect(() => {
+
     const buildParams = () => {
       let filterBuilder = '';
 
@@ -93,7 +100,6 @@ export const FormSection = ({isLoading, setDownloadLink, setReportType}) => {
       if(decline) filterBuilder += 'DECLINE,';
       if(issue) filterBuilder += 'ISSUED,';
       const index = filterBuilder.lastIndexOf(',');
-
       return filterBuilder.substring(0, index);
     }
 
