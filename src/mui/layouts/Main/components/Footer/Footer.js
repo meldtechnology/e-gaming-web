@@ -19,7 +19,7 @@ const Footer = () => {
             <ul className="mt-3 space-y-2 text-sm">
               <li><a href="/" className="text-text-secondary transition-colors hover:text-brand">Home</a></li>
               <li><a href="/apply" className="text-text-secondary transition-colors hover:text-brand">Apply for a permit</a></li>
-              <li><a href="/apply/payment/invoice" className="text-text-secondary transition-colors hover:text-brand">Pay invoice</a></li>
+              {/* <li><a href="/apply/payment/invoice" className="text-text-secondary transition-colors hover:text-brand">Pay invoice</a></li> */}
             </ul>
           </div>
           <div>
