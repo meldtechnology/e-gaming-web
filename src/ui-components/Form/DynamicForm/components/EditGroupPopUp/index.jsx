@@ -15,14 +15,14 @@ export const EditGroupPopUp = ({openGroup, groupName, updateGroupName, editContr
 
   return (
     <div
-      className={`${openGroup ? '' : 'hidden'} flex absolute z-10 p-4 left-0 font-sans text-sm font-normal break-words whitespace-normal bg-white-a700 border rounded-lg shadow-lg w-[60%] border-blue-gray-50 text-blue-gray-500 shadow-blue-gray-500/10 focus:outline-none data-[enter]:ease-out data-[leave]:ease-in`}>
+      className={`${openGroup ? '' : 'hidden'} flex absolute z-10 p-4 left-0 font-sans text-sm font-normal break-words whitespace-normal bg-surface border rounded-lg shadow-lg w-[60%] border-border text-text-secondary shadow-blue-gray-500/10 focus:outline-none data-[enter]:ease-out data-[leave]:ease-in`}>
       <InputText name={groupName}
                  value={editGroupName(editName)}
                  label={`Group Title`}
                  required={true}
                  onChange={(e) => updateGroupName(e.target.value)} />
       <button type="button"
-              className="ml-4 bg-blue_gray-900 text-white-a700 px-1 rounded-lg h-[3rem]"
+              className="ml-4 bg-brand text-on-brand px-1 rounded-lg h-[3rem]"
               onClick={editControl}>
         Update
       </button>

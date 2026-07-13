@@ -11,11 +11,11 @@ export const FileGroup = () => {
   }
 
   return (
-    <div className="w-full bg-white-a700 flex gap-1">
+    <div className="w-full bg-surface flex gap-1">
       <div className="flex-auto w-[65%]">
         <FileList updateFile={updateFile} />
       </div>
-      <div className="flex-auto w-[35%] border-solid border-l-gray-200">
+      <div className="flex-auto w-[35%] border-solid border-l-border">
         <FileForm selectedFile={selectedFile}
                isNew={Object.keys(selectedFile).length === 0} />
       </div>

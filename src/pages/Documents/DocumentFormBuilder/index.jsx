@@ -7,7 +7,7 @@ export const DocumentFormBuilder = () => {
   const navigate = useNavigate();
 
   const closeForm = () => {
-    navigate('/app/documents/F_322f9837')
+    navigate('/app/documents/files')
   }
   return (<FormBuilder onClick={closeForm} fileData={[fileObject]} /> );
 }

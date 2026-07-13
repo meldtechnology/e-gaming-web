@@ -2,20 +2,23 @@ export const TextField = ({formik, labelText, placeHolderText, required,
                             value, fieldName, error, errorText, fieldClass, isDisabled}) => (
   <div>
     <div className={fieldClass}>
-      <label className="block mb-2 text-sm text-slate-600">
-        {labelText} <span className={`${required? '':'hidden'} text-red-700`}>*</span>
+      <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+        {labelText} <span className={`${required? '':'hidden'} text-danger`}>*</span>
       </label>
       <input type={`text`}
              name={fieldName}
              placeholder={placeHolderText}
              value={value}
              onChange={formik.handleChange}
-             className="h-full rounded-[10px] border border-gray-500 px-3 md:w-full"
+             aria-invalid={Boolean(errorText)}
+             className="w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-text-primary transition-colors placeholder:text-text-muted hover:border-border-strong focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/40 disabled:cursor-not-allowed disabled:bg-surface-muted aria-[invalid=true]:border-danger"
              disabled={isDisabled}
       />
-      <p className="mt-1 text-1xl text-red-600 dark:text-red-500 bg-red-300">
-        {errorText}
-      </p>
+      {errorText ? (
+        <p className="mt-1.5 text-xs text-danger">
+          {errorText}
+        </p>
+      ) : null}
     </div>
   </div>
 );

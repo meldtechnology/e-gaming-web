@@ -1,3 +1,4 @@
+import { env } from "../../config/env";
 import Box from "@mui/material/Box";
 import { LicenseTemplate } from "../LicenseTemplate";
 import Container from "../../mui/components/Container";
@@ -7,8 +8,10 @@ import { getItem, storeItem, UpdateDocumentService as reviewApplication } from "
 import Typography from "@mui/material/Typography";
 import { ProgressButton } from "../Form/component/ProgressButton";
 import { checkPermission } from "../../services/autorization";
+import { Button } from "../primitives";
+import { AccessDenied } from "../AccessDenied";
 
-const APPLICATION_URL = process.env.REACT_APP_DOCUMENTS_BASE_URL;
+const APPLICATION_URL = env.DOCUMENTS_BASE_URL;
 export const LicenseForm = () => {
   const [license, setLicense] = useState({});
   const [user, setUser] = useState({});
@@ -24,7 +27,8 @@ export const LicenseForm = () => {
   }
 
   const generatePDf = async () => {
-    const html2pdf = await require('html2pdf.js');
+    const html2pdfModule = await import('html2pdf.js');
+    const html2pdf = html2pdfModule.default ?? html2pdfModule;
     // html2pdf(document.getElementById('license-id'));
     html2pdf().set({filename: 'license.pdf'})
       .from(document.getElementById('license-id'))
@@ -58,7 +62,7 @@ export const LicenseForm = () => {
     if(app !== undefined) setUser(JSON.parse(app));
   }, []);
 
-  return checkPermission('CAN_ISSUE_LICENSE') === '' ? (
+  return checkPermission('CAN_ISSUE_LICENSE') ? (
     <Container>
       <Box>
         <Box display={'block'}
@@ -66,57 +70,54 @@ export const LicenseForm = () => {
           <Typography variant={'h4'} align={'center'}>
             License Certificate
           </Typography>
-          <button type="button"
+          <Button unstyled
+                  type="button"
                   onClick={close}
-                  className="w-[10%] rounded-xl px-3 py-2 text-sm font-semibold bg-red-600 text-white-a700 hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
-            <span className="min-w-full text-center">X</span>
-          </button>
+                  aria-label="Close"
+                  className="float-right inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-raised hover:text-danger">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+          </Button>
         </Box>
         <Box>
-          <button type={'button'}
-                  onClick={generatePDf}
-                  className={`w-[20%] ${license.issuedOn?'':'hidden'} ${show?'hidden':''} rounded-xl p-2 bg-gray-950 text-white-a700 hover:bg-gray-600`} >
-            Download License (PDF)</button>
-          <button type={'button'}
-                  onClick={issueLicense}
-                  className={`w-[20%]  ${license.issuedOn?'hidden':''} ${show?'hidden':''} rounded-xl p-2 bg-gray-950 text-white-a700 hover:bg-gray-600`} >
-            Issue License</button>
+          {license.issuedOn && !show ? (
+            <Button unstyled
+                    type={'button'}
+                    onClick={generatePDf}
+                    className="w-[20%] rounded-xl bg-brand p-2.5 font-semibold text-on-brand transition-colors hover:bg-brand-strong sm:w-full" >
+              Download License (PDF)</Button>
+          ) : null}
+          {!license.issuedOn && !show ? (
+            <Button unstyled
+                    type={'button'}
+                    onClick={issueLicense}
+                    className="w-[20%] rounded-xl bg-brand p-2.5 font-semibold text-on-brand transition-colors hover:bg-brand-strong sm:w-full" >
+              Issue License</Button>
+          ) : null}
           <ProgressButton saving={show} text={'Issuing Licence'} />
         </Box>
-        <Box className={`${isError?'':'!hidden'} !mt-4 !w-full`} >
-          <Typography variant={'p'}
-                      bgcolor={'#FF9999'}
-                      borderRadius={'10px'}
-                      border={'solid 2px #963333'}
-                      padding={'6px'}
-                      marginTop={'3%'}
-                      sx={{
-                        color: '#F93333'
-          }}>
-            {errorMsg}
-          </Typography>
-        </Box>
-        <Box marginTop={'2%'}
-             className={`${license.issuedOn?'':'hidden'}`}>
-          <LicenseTemplate license={license}/>
-        </Box><Box marginTop={'2%'}
-             className={`${license.issuedOn?'hidden':''}`}>
-          <div className={'w-full bg-amber-100 font-bold text-blue-600 text-center p-40 rounded-[10px]'}>
-            NO LICENSE ISSUED
-          </div>
-        </Box>
+        {isError ? (
+          <Box className="!mt-4 !w-full" >
+            <Typography component={'div'}
+                        marginTop={'3%'}
+                        className="rounded-xl border border-danger/30 bg-danger-soft p-3 text-danger">
+              {errorMsg}
+            </Typography>
+          </Box>
+        ) : null}
+        {license.issuedOn ? (
+          <Box marginTop={'2%'}>
+            <LicenseTemplate license={license}/>
+          </Box>
+        ) : (
+          <Box marginTop={'2%'}>
+            <div className={'w-full rounded-2xl border border-dashed border-border-strong bg-surface-muted p-40 text-center font-bold text-text-secondary'}>
+              NO LICENSE ISSUED
+            </div>
+          </Box>
+        )}
       </Box>
     </Container>
   ) : (
-    <>
-      <div className="mr-11 mt-[26px] block justify-items-center gap-5 md:mr-0 md:flex-col">
-        <div className={'mt-8 p-4 text-center text-[2.1rem] text-red-600 font-bold'}>
-          Access Denied! - You do not have sufficient access to view the screen
-        </div>
-        <div className={'w-[70%] h-[]70%'}>
-          <img src={'/images/enugu_logo2.png'} alt={'Enugu_logo'} className={'w-full h-full'} />
-        </div>
-      </div>
-    </>
+    <AccessDenied />
   );
 }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const variants = {
   primary:
-    "border-blue_gray-100 border border-solid checked:border-blue_gray-100 checked:border-[3px] checked:border-solid checked:bg-gray-100_01 checked:focus:bg-gray-100_01 checked:focus:border-blue_gray-100 checked:hover:bg-gray-100_01 checked:hover:border-blue_gray-100",
+    "border-border border border-solid checked:border-border checked:border-[3px] checked:border-solid checked:bg-surface-raised checked:focus:bg-surface-raised checked:focus:border-border checked:hover:bg-surface-raised checked:hover:border-border",
 };
 const sizes = {
   xs: "h-[28px] w-[28px] rounded-[10px]",
@@ -54,5 +54,7 @@ CheckBox.propTypes = {
   size: PropTypes.oneOf(["xs"]),
   variant: PropTypes.oneOf(["primary"]),
 };
+
+CheckBox.displayName = "CheckBox";
 
 export { CheckBox };

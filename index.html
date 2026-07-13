@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/logo.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2f6bff" />
+    <meta
+      name="description"
+      content="Enugu State Gaming Commission — permit applications, licensing and compliance platform."
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Enugu State Gaming Commission</title>
+    <script>
+      // Pre-paint theme to avoid a light/dark flash. The stored preference is
+      // encrypted, so we apply the OS preference here (which is also the app's
+      // first-visit default); the React ThemeProvider corrects an explicit
+      // override on mount.
+      (function () {
+        try {
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.dataset.theme = "dark";
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="dhiwise-code" id="root"></div>
+    <script type="module" src="/src/index.js"></script>
+  </body>
+</html>

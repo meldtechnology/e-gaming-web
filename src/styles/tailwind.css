@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root,
+  .theme-light {
     /*------Color variables------*/
     --amber_500: #f4c417;
     --black_900: #040405;
@@ -64,8 +65,51 @@
     --yellow_500: #f6f636;
     --yellow_800: #deb11d;
 
+    /*------Brand scale (v2 UI, refined royal blue)------*/
+    --brand_50: #eef3ff;
+    --brand_100: #dbe6ff;
+    --brand_200: #bccfff;
+    --brand_300: #8fabff;
+    --brand_400: #5f83f8;
+    --brand_500: #3b6ff6;
+    --brand_600: #2f6bff;
+    --brand_700: #1d4ed8;
+    --brand_800: #1a3fa8;
+    --brand_900: #16307a;
+
+    /*------Semantic color aliases (v2 UI palette)------*/
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8fafc;
+    --color-surface-raised: #f1f5f9;
+    --color-surface-sunken: #eef2f7;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #5f6f86; /* WCAG AA: >=4.5:1 on all light surfaces */
+    --color-text-inverse: #ffffff;
+    --color-on-brand: #ffffff;
+    --color-brand: var(--brand_700);
+    --color-brand-strong: var(--brand_800);
+    --color-brand-soft: var(--brand_50);
+    --color-border: #e2e8f0;
+    --color-border-strong: #cbd5e1;
+    --color-success: #15803d;
+    --color-success-soft: #dcfce7;
+    --color-danger: #b91c1c;
+    --color-danger-soft: #fee2e2;
+    --color-warning: #92400e;
+    --color-warning-soft: #fef3c7;
+    --color-info: #1d4ed8;
+    --color-info-soft: #dbeafe;
+    --color-sidebar: #0f1729;
+    --color-sidebar-muted: #1e293b;
+    --color-sidebar-text: #cbd5e1;
+
     /*------Shadow variables------*/
     --shadow-bs: inset 0 4px 4px 0 #0000003f;
+    --shadow-e1: 0 1px 2px 0 rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(15, 23, 42, 0.1);
+    --shadow-e2: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+    --shadow-e3: 0 10px 20px -5px rgba(15, 23, 42, 0.12), 0 6px 10px -6px rgba(15, 23, 42, 0.08);
+    --shadow-brand: 0 8px 20px -6px rgba(47, 107, 255, 0.45);
 
     /*------Border radius variables------*/
     --radius-xs: 4px;
@@ -102,5 +146,47 @@
     --space-14xl: 26px;
     --space-15xl: 30px;
     --space-16xl: 36px;
+  }
+
+  .theme-light {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-muted);
+    color-scheme: light;
+  }
+
+  .dark {
+    --color-surface: #0f1729;
+    --color-surface-muted: #0b1220;
+    --color-surface-raised: #1e293b;
+    --color-surface-sunken: #0b1220;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #8593a8; /* WCAG AA: >=4.5:1 on all dark surfaces */
+    --color-text-inverse: #0f172a;
+    --color-on-brand: #0b1220;
+    --color-brand: var(--brand_400);
+    --color-brand-strong: var(--brand_300);
+    --color-brand-soft: #16223f;
+    --color-border: #334155;
+    --color-border-strong: #475569;
+    --color-success: #22c55e;
+    --color-success-soft: rgba(34, 197, 94, 0.16);
+    --color-danger: #f87171;
+    --color-danger-soft: rgba(248, 113, 113, 0.16);
+    --color-warning: #fbbf24;
+    --color-warning-soft: rgba(251, 191, 36, 0.16);
+    --color-info: #60a5fa;
+    --color-info-soft: rgba(96, 165, 250, 0.16);
+    --color-sidebar: #0b1220;
+    --color-sidebar-muted: #16223f;
+    --color-sidebar-text: #cbd5e1;
+    --shadow-e1: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-e2: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-e3: 0 10px 20px -5px rgba(0, 0, 0, 0.6);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
   }
 }

@@ -1,1 +1,0 @@
-export { postForm, post, put, get, remove } from './HttpClientConnector';

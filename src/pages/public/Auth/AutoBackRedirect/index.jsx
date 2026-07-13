@@ -13,7 +13,7 @@ export const AutoBackRedirect = () => {
   }, [navigate]);
 
   return (
-    <div className="p-4 text-center text-gray-500">
+    <div className="p-4 text-center text-text-muted">
       Redirecting you back...
     </div>
   );

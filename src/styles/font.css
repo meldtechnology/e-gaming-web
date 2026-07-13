@@ -1,7 +1,4 @@
-@font-face {
-  font-display: swap;
-  font-style: normal;
-  src: url("/public/fonts/InterBold.ttf");
-  font-family: "Inter";
-  font-weight: 700;
-}
+/*
+ * Inter is loaded via <link> in index.html (Google Fonts, weights 400–800).
+ * This file is kept for any future self-hosted @font-face declarations.
+ */

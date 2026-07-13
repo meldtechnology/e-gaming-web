@@ -1,3 +1,4 @@
+import { env } from "../../../../../../config/env";
 import React, { useEffect, useState } from "react";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -7,7 +8,7 @@ import { getItem, GetPublicFileService as generateReference } from "../../../../
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../../../../ui-components/Loader";
 
-const APPLICATION_REFERENCE_URL = process.env.REACT_APP_GENERATE_DOCUMENT_REFERENCE_URL;
+const APPLICATION_REFERENCE_URL = env.GENERATE_DOCUMENT_REFERENCE_URL;
 const Hero = ({setReference}) => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {

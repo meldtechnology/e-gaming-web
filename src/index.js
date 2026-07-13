@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import "./styles/tailwind.css";
 import "./styles/index.css";
 import "./styles/font.css";
+import "flatpickr/dist/flatpickr.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

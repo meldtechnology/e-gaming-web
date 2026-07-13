@@ -8,21 +8,21 @@ export default function AgentProfile({
   ...props
 }) {
   return (
-    <div {...props} className={`${props.className} flex justify-center items-start p-1.5 bg-gray-100 flex-1`}>
+    <div {...props} className={`${props.className} flex justify-center items-start p-1.5 bg-surface-raised flex-1`}>
       {/*<Img*/}
       {/*  src="/images/img_rectangle_4184.png"*/}
       {/*  alt="Ngn 200 K"*/}
       {/*  className="h-[36px] self-end rounded-[5px] object-cover"*/}
       {/*/>*/}
       <div className="ml-[26px] flex flex-1 flex-col items-start gap-0.5 self-center">
-        <Heading as="h6" className="text-[16px] font-bold text-gray-600">
+        <Heading as="h6" className="text-[16px] font-bold text-text-secondary">
           {userName}
         </Heading>
-        <Text size="textxs" as="p" className="text-[12px] font-normal text-gray-600">
+        <Text size="textxs" as="p" className="text-[12px] font-normal text-text-secondary">
           {userEmail}
         </Text>
       </div>
-      <Heading as="h6" className="ml-[18px] text-[16px] font-bold text-gray-600">
+      <Heading as="h6" className="ml-[18px] text-[16px] font-bold text-text-secondary">
         {userPrice}
       </Heading>
     </div>

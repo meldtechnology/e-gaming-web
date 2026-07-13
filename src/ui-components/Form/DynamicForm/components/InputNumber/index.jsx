@@ -19,7 +19,7 @@ export const InputNumber = ({name, value, label, placeHolderText, required ,onCh
       <div className="relative">
         <button
           id="decreaseButton"
-          className="absolute right-9 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className="absolute right-9 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-on-brand transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
         >
           <svg
@@ -34,14 +34,14 @@ export const InputNumber = ({name, value, label, placeHolderText, required ,onCh
         <input type="number"
                name={name}
                value={value}
-               className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+               className="w-full bg-transparent placeholder:text-text-muted text-text-primary text-sm border border-border rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-border-strong hover:border-border-strong shadow-sm focus:shadow"
                placeholder={label}
                required={required}
                onChange={onChange} />
 
         <button
           id="increaseButton"
-          className="absolute right-1 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className="absolute right-1 top-1 rounded bg-brand p-1.5 border border-transparent text-center text-sm text-on-brand transition-all shadow-sm hover:shadow focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
         >
           <svg
@@ -56,8 +56,8 @@ export const InputNumber = ({name, value, label, placeHolderText, required ,onCh
           </svg>
         </button>
 
-        <p className="flex items-start mt-2 text-xs text-slate-400">
-          <span className={`${required ? '' : 'hidden'} pl-2 text-red-700 text-2xl`}>*</span>
+        <p className="flex items-start mt-2 text-xs text-text-muted">
+          <span className={`${required ? '' : 'hidden'} pl-2 text-danger text-2xl`}>*</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mr-1.5">
             <path fillRule="evenodd"
                   d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"

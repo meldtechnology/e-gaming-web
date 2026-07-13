@@ -13,6 +13,7 @@ import { Form } from "../pages/public/Application/Form";
 import { Invoice } from "../pages/public/Application/Invoice";
 import { LoadAuthorities } from "../pages/public/Auth/LoadAuthorities";
 import { LicenseDetails } from "../pages/Documents/License/LicenseDetails";
+import { LicenseVerification } from "../pages/Documents/License";
 
 const PublicRoutes = {
     path: '/',
@@ -66,6 +67,10 @@ const PublicRoutes = {
         {
             path: '/documents/licenses/:number',
             element: <LicenseDetails />
+        },
+        {
+            path: '/document/license/verification',
+            element: <LicenseVerification />
         },
         {
             path: '/apply/operator/form',

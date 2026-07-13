@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormFieldTypes } from "../FormFieldTypes";
 import { Tag } from "../../../../Tag";
 
@@ -29,9 +29,9 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
     return value;
   }
 
-  const handleSelectedTags = (items) => {
+  const handleSelectedTags = useCallback((items) => {
     setOptions(items);
-  }
+  }, []);
 
   useEffect(() => {
     setFieldType(field?.fieldType);
@@ -41,12 +41,12 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
   }, [field?.fieldType, field?.label, field?.hints, field?.required]);
 
   return (
-    <div className={`${openEdit ? '' : 'hidden'} w-[65%] relative bg-gray-200_01 border-solid border-amber-50 rounded-t-3xl`}>
-      <div className="w-[100%] p-2 font-bold bg-amber-400 text-amber-800 text-center rounded-t-full">
+    <div className={`${openEdit ? '' : 'hidden'} w-[65%] relative bg-surface-raised border-solid border-amber-50 rounded-t-3xl`}>
+      <div className="w-[100%] p-2 font-bold bg-brand text-on-brand text-center rounded-t-full">
         <span>Update Form Field</span>
         <span className="float-right pr-4">
           <button type="button"
-                  className="text-white-a700 bg-red-600 rounded-full px-1 py-0"
+                  className="text-text-inverse bg-danger rounded-full px-1 py-0"
                   onClick={close}>
             x
           </button>
@@ -106,17 +106,17 @@ export const EditFieldPopUp = ({ openEdit, field, update, close }) => {
                      type="checkbox"
                      onChange={() => setRequired(!required)}
                      checked={isRequired(required)}
-                     className="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800 cursor-pointer transition-colors duration-300" />
-              <label htmlFor="switch-component-on"
-                     className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer">
-              </label>
+                     className="peer appearance-none w-11 h-5 bg-surface-raised rounded-full checked:bg-brand cursor-pointer transition-colors duration-300" />
+              <span aria-hidden="true"
+                    className="absolute top-0 left-0 w-5 h-5 bg-surface rounded-full border border-border-strong shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-brand cursor-pointer">
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div className={`w-full flex p-4`}>
           <button type="button"
-                  className={`w-full p-2 bg-black-900 text-white-a700 rounded-lg shadow-lg`}
+                  className={`w-full p-2 bg-brand text-on-brand rounded-lg shadow-lg`}
                   onClick={() => update(updateFiled())} >
             Update
           </button>

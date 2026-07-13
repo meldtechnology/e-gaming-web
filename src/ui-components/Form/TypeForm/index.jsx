@@ -1,3 +1,4 @@
+import { env } from "../../../config/env";
 import { useFormik } from "formik";
 import * as yup from 'yup';
 import { TextField } from "../component/TextField";
@@ -19,7 +20,7 @@ const validationSchema = yup.object({
     .required('Please provide category description.'),
 });
 
-const ADD_EDIT_TYPE_URL= process.env.REACT_APP_DOCUMENT_TYPE_URL
+const ADD_EDIT_TYPE_URL= env.DOCUMENT_TYPE_URL
 export const TypeForm = ({selectedType, isNew}) => {
   const [saving, setSaving] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -117,7 +118,7 @@ export const TypeForm = ({selectedType, isNew}) => {
                          errorText={formik.touched.description && formik.errors.description} />
             <button
               disabled={!(formik.dirty && formik.isValid)}
-              className={`${saving ? 'hidden' : ''} mt-4 w-full rounded-md text-white-a700 bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+              className={`${saving ? 'hidden' : ''} mt-4 w-full rounded-md text-on-brand bg-brand py-2 px-4 border border-transparent text-center text-sm text-on-brand transition-all shadow-md hover:shadow-lg focus:bg-brand-strong focus:shadow-none active:bg-brand-strong hover:bg-brand-strong active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
               type="submit">
               {!isEdit? 'Add' : 'Edit' } Category
             </button>
