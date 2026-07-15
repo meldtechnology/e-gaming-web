@@ -62,9 +62,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             GENERATE_SOURCEMAP=${{ env.GENERATE_SOURCEMAP }}
-            VITE_APPLICATION_ID=${{ env.VITE_PROD_APPLICATION_ID }}
-            VITE_BASE_URL=${{ env.VITE_PROD_BASE_URL }}
-            VITE_VALIDATE_URL=${{ env.VITE_PROD_VALIDATE_URL }}
+            VITE_APPLICATION_ID=${{ env.VITE_APPLICATION_ID }}
+            VITE_BASE_URL=${{ env.VITE_BASE_URL }}
+            VITE_VALIDATE_URL=${{ env.VITE_VALIDATE_URL }}
 
       - name: Deploy to AWS - EC2
         id: deploy
