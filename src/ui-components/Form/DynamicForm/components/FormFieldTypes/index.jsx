@@ -1,7 +1,8 @@
+import { env } from "../../../../../config/env";
 import { GetFormTemplateService as getTemplateService } from "../../../../../services";
 import { Loader } from "../../../../Loader";
 
-const FORM_FIELDS_URL = process.env.REACT_APP_FORM_COMPONENTS_URL;
+const FORM_FIELDS_URL = env.FORM_COMPONENTS_URL;
 export const FormFieldTypes = ({currentField, setFieldType}) => {
   const { template, loadingTemplate } = getTemplateService(`${FORM_FIELDS_URL}`);
 

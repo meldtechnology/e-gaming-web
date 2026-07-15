@@ -1,3 +1,4 @@
+import { env } from "../../../../../config/env";
 /* eslint-disable react/no-unescaped-entities */
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -21,7 +22,7 @@ const validationSchema = yup.object({
 });
 
 
-const VERIFY_OTP_URL = process.env.REACT_APP_VERIFY_OTP_URL;
+const VERIFY_OTP_URL = env.VERIFY_OTP_URL;
 const Form = () => {
   const [otp, setOtp] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -141,14 +142,14 @@ const Form = () => {
       >
         <div className={`${verifying ? "" : "hidden"} block mb-2 space-x-2 rtl:space-x-reverse`}>
           <Loader />
-          <p className="text-blue-600 text-center text-[16px]">
+          <p className="text-brand text-center text-[16px]">
             Verifying the provided OTP...
           </p>
         </div>
         <form onSubmit={formik.handleSubmit} className={`${verifying ? "hidden" : ""}`}>
           <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
             <div>
-              <label className="sr-only">First code</label>
+              <label htmlFor="code-1" className="sr-only">First code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-next="code-2"
@@ -156,11 +157,11 @@ const Form = () => {
                      name={'code1'}
                      value={formik.values.code1}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
-              <label className="sr-only">Second code</label>
+              <label htmlFor="code-2" className="sr-only">Second code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-1"
@@ -169,11 +170,11 @@ const Form = () => {
                      name={'code2'}
                      value={formik.values.code2}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
-              <label className="sr-only">Third code</label>
+              <label htmlFor="code-3" className="sr-only">Third code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-2"
@@ -181,11 +182,11 @@ const Form = () => {
                      name={'code3'}
                      value={formik.values.code3}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
-              <label className="sr-only">Fourth code</label>
+              <label htmlFor="code-4" className="sr-only">Fourth code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-3"
@@ -193,11 +194,11 @@ const Form = () => {
                      name={'code4'}
                      value={formik.values.code4}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
-              <label className="sr-only">Fifth code</label>
+              <label htmlFor="code-5" className="sr-only">Fifth code</label>
               <input type="text" maxLength="1" data-focus-input-init=""
                      data-focus-input-prev="code-4"
                      data-focus-input-next="code-6"
@@ -205,25 +206,25 @@ const Form = () => {
                      name={'code5'}
                      value={formik.values.code5}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required />
             </div>
             <div>
-              <label className="sr-only">Sixth code</label>
+              <label htmlFor="code-6" className="sr-only">Sixth code</label>
               <input type="text" maxLength="1"
                      data-focus-input-init=""
                      data-focus-input-prev="code-5" id="code-6"
                      name={'code6'}
                      value={formik.values.code6}
                      onChange={formik.handleChange}
-                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     className="block w-14 h-14 text-[1.4rem] py-3 text-sm font-extrabold text-center text-text-primary bg-surface border border-border rounded-lg focus:ring-primary-500 focus:border-primary-500"
                      required
                      onBlur={(e) => onSubmit(formik.values)}
                      onKeyUp={(e) => onSubmit(formik.values)}
               />
             </div>
           </div>
-          <p id="helper-text-explanation" className="mt-2 text-sm text-center text-gray-900 dark:text-gray-400 mb-4">
+          <p id="helper-text-explanation" className="mt-2 text-sm text-center text-text-primary mb-4">
             Please enter the 6 digit code we sent via email.</p>
             <MeldAlert alertType={AlertType.ERROR} message={errorMsg} show={isError} />
         </form>

@@ -1,3 +1,4 @@
+import { env } from "../../../../config/env";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CreateAuthService as getAccessToken, storeItem } from "../../../../services";
@@ -5,8 +6,8 @@ import { Main } from "../../../../mui/layouts";
 import Box from "@mui/material/Box";
 import { Loader } from "../../../../ui-components/Loader";
 
-const EXCHANGE_CODE_URL = process.env.REACT_APP_TOKEN_URL;
-const APP_ID = process.env.REACT_APP_APPLICATION_ID;
+const EXCHANGE_CODE_URL = env.TOKEN_URL;
+const APP_ID = env.APPLICATION_ID;
 export const ProcessLogin = () => {
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
@@ -30,8 +31,7 @@ export const ProcessLogin = () => {
       }
       setIsLoading(false);
     }
-    authenticate()
-      .finally(() => console.log('Done getting authentication!'));
+    authenticate();
   }, [getToken, navigate]);
 
   return (
@@ -40,7 +40,7 @@ export const ProcessLogin = () => {
         <Box width={0.5}
              className={`my-[25%] mx-auto ${isLoading ? '' : 'hidden'}`}>
           <Loader h={'h-16'} w={'w-16'} />
-          <p className="text-blue-600 text-center text-[16px]">
+          <p className="text-brand text-center text-[16px]">
             Finalizing sign in...
           </p>
         </Box>

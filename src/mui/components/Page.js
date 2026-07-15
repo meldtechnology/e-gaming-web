@@ -4,18 +4,14 @@ import PropTypes from "prop-types";
 import { CssBaseline, Paper, ThemeProvider } from "@mui/material";
 import AOS from "aos";
 import getTheme from '../theme';
+import { getItem, storeItem } from "../../services/secureLocalStorage";
 
 export const useDarkMode = () => {
   const [themeMode, setTheme] = useState('light');
   const [mountedComponent, setMountedComponent] = useState(false);
 
   const setMode = (mode) => {
-    try {
-      window.localStorage.setItem('themeMode', mode);
-    } catch {
-      /* do nothing */
-    }
-
+    storeItem('themeMode', mode);
     setTheme(mode);
   };
 
@@ -24,12 +20,8 @@ export const useDarkMode = () => {
   };
 
   useEffect(() => {
-    try {
-      const localTheme = window.localStorage.getItem('themeMode');
-      localTheme ? setTheme(localTheme) : setMode('light');
-    } catch {
-      setMode('light');
-    }
+    const localTheme = getItem('themeMode');
+    localTheme ? setTheme(localTheme) : setMode('light');
 
     setMountedComponent(true);
   }, []);

@@ -4,8 +4,8 @@ export const DropDown = ({formik, labelText, fieldName, required, placeholderTex
                            error, errorText, selOptions, onChange, fieldClass, isDisabled}) => (
   <div className={fieldClass}>
     <label id="demo-simple-select"
-           className="block mb-2 text-sm text-slate-600">
-      {labelText} <span className={`${required ? "" : "hidden"} text-red-700`}>*</span>
+           className="mb-1.5 block text-sm font-medium text-text-secondary">
+      {labelText} <span className={`${required ? "" : "hidden"} text-danger`}>*</span>
     </label>
     <Select
       id="demo-simple-select"
@@ -14,7 +14,7 @@ export const DropDown = ({formik, labelText, fieldName, required, placeholderTex
       name={fieldName}
       onChange={onChange}
       error={error}
-      className={fieldClass}
+      className={`w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-text-primary transition-colors hover:border-border-strong focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/40 ${fieldClass}`}
       disabled={isDisabled}
     >
       <option value=''>{value}</option>
@@ -22,7 +22,7 @@ export const DropDown = ({formik, labelText, fieldName, required, placeholderTex
         <option value={item.name} key={`role-${index}`}>{item.name}</option>
       )))}
     </Select>
-    <p className="flex items-center mt-2 text-xs text-slate-500">
+    <p className="mt-2 flex items-center text-xs text-text-muted">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -37,8 +37,6 @@ export const DropDown = ({formik, labelText, fieldName, required, placeholderTex
       </svg>
       {placeholderText}
     </p>
-    <p style={{ padding: '2% 1%', color: 'red' }}>
-      {errorText}
-    </p>
+    {errorText ? <p className="mt-1.5 text-xs text-danger">{errorText}</p> : null}
   </div>
 )

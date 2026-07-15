@@ -7,21 +7,21 @@ export const DocumentApplication = ({document}) => {
   const application = document[0];
 
   const highlightStatus = (status) => {
-    return status === 'PAID'? 'bg-[#309630]' : 'bg-[#963030]'
+    return status === 'PAID' ? 'bg-success text-text-inverse' : 'bg-danger text-text-inverse'
   }
 
   const highlightAppStatus = (status) => {
-    return status === 'PENDING'? 'bg-orange-600' :
-      (status === 'REVIEW') ? 'bg-purple-600' :
-      (status === 'APPROVE') ? 'bg-green-600' :
-      (status === 'ISSUED') ? 'bg-blue-600' : 'bg-red-600';
+    return status === 'PENDING' ? 'bg-warning text-text-inverse' :
+      (status === 'REVIEW') ? 'bg-brand text-on-brand' :
+      (status === 'APPROVE') ? 'bg-success text-text-inverse' :
+      (status === 'ISSUED') ? 'bg-info text-text-inverse' : 'bg-danger text-text-inverse';
   }
 
   return (
     <Box>
       <Box margin={0}
            width={1}
-           bgcolor={'#CECECE'}
+           bgcolor={'background.level2'}
            paddingY={'3%'}
            paddingLeft={'2%'}
            borderRadius={'10px'} >
@@ -37,11 +37,11 @@ export const DocumentApplication = ({document}) => {
           <strong>Type:</strong> {application?.typeName} <br />
           <strong>Valid For:</strong> {application?.validity} days <br />
           <p className='overflow-hidden pr-4 pb-2 mt-2'>
-          <span className={`${highlightAppStatus(application?.status)} text-white-a700 p-2 rounded-full float-left`}>
+          <span className={`${highlightAppStatus(application?.status)} p-2 rounded-full float-left`}>
             {application?.status}
           </span>
             <span
-              className={`${highlightStatus(application?.paymentStatus)} text-white-a700 p-2 rounded-full float-right`}>
+              className={`${highlightStatus(application?.paymentStatus)} p-2 rounded-full float-right`}>
           {application?.paymentStatus? application?.paymentStatus:'NOT PAID'}
         </span>
           </p>
@@ -49,7 +49,7 @@ export const DocumentApplication = ({document}) => {
       </Box>
       <Box marginTop={'2%'}
            width={1}
-           bgcolor={'#CECECE'}
+           bgcolor={'background.level2'}
            paddingY={'3%'}
            paddingX={'5%'}
            borderRadius={'10px'} >
@@ -68,7 +68,7 @@ export const DocumentApplication = ({document}) => {
       </Box>
       <Box marginTop={'2%'}
            width={1}
-           bgcolor={'#FEFEFE'}
+           bgcolor={'background.paper'}
            paddingY={'3%'}
            paddingX={'5%'}
            borderRadius={'10px'} >
@@ -86,7 +86,7 @@ export const DocumentApplication = ({document}) => {
       </Box>
       <Box marginTop={'2%'}
            width={1}
-           bgcolor={'#FEFEFE'}
+           bgcolor={'background.paper'}
            paddingY={'3%'}
            paddingX={'5%'}
            borderRadius={'10px'} >
@@ -102,7 +102,7 @@ export const DocumentApplication = ({document}) => {
         </Typography>
         {
           application?.attachments?.map((item, idx) => (
-            <div key={idx} className={'w-full p-4 text-blue-600'}>
+            <div key={idx} className={'w-full p-4 text-brand'}>
               <a href={item?.url} target='_blank' rel="noreferrer">
                 {item?.name}.pdf
               </a>

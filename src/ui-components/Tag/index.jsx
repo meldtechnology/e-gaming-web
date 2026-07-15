@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import Chip from "@material-ui/core/Chip";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import Chip from "@mui/material/Chip";
+import TextField from "@mui/material/TextField";
 import Downshift from "downshift";
 
-const useStyles = makeStyles(theme => ({
-  chip: {
-    margin: theme.spacing(0.5, 0.25)
-  }
-}));
-
-export const Tag = ({ ...props }) => {
-  const classes = useStyles();
-  const {  selectedTags, placeholder, tags, ...other } = props;
+export const Tag = ({ selectedTags, placeholder, tags, ...other }) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedItem, setSelectedItem] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(() =>
+    Array.isArray(tags) ? tags : []
+  );
 
+  // Keep the latest parent callback in a ref so notifying the parent never
+  // depends on `selectedTags` identity. Depending on an inline (non-memoized)
+  // callback here previously caused an infinite render loop.
+  const selectedTagsRef = useRef(selectedTags);
   useEffect(() => {
-    setSelectedItem(tags);
-  }, [tags]);
+    selectedTagsRef.current = selectedTags;
+  }, [selectedTags]);
+
+  // Sync from the `tags` prop by content, not by array reference. A default
+  // `[]` param (or an unmemoized array from the parent) is a fresh reference
+  // every render, which would otherwise re-run this effect forever.
+  const tagsKey = Array.isArray(tags) ? JSON.stringify(tags) : "";
   useEffect(() => {
-    selectedTags(selectedItem);
-  }, [selectedItem, selectedTags]);
+    setSelectedItem(Array.isArray(tags) ? tags : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tagsKey]);
+
+  // Update local state and notify the parent in one place, driven only by
+  // real user actions (add/remove) rather than by an effect.
+  const commit = next => {
+    setSelectedItem(next);
+    selectedTagsRef.current?.(next);
+  };
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
-      const newSelectedItem = [...selectedItem];
-      const duplicatedValues = newSelectedItem.indexOf(
-        event.target.value.trim()
-      );
+      const duplicatedValues = selectedItem.indexOf(event.target.value.trim());
 
       if (duplicatedValues !== -1) {
         setInputValue("");
@@ -37,8 +44,7 @@ export const Tag = ({ ...props }) => {
       }
       if (!event.target.value.replace(/\s/g, "").length) return;
 
-      newSelectedItem.push(event.target.value.trim());
-      setSelectedItem(newSelectedItem);
+      commit([...selectedItem, event.target.value.trim()]);
       setInputValue("");
     }
     if (
@@ -46,7 +52,7 @@ export const Tag = ({ ...props }) => {
       !inputValue.length &&
       event.key === "Backspace"
     ) {
-      setSelectedItem(selectedItem.slice(0, selectedItem.length - 1));
+      commit(selectedItem.slice(0, selectedItem.length - 1));
     }
   }
   function handleChange(item) {
@@ -55,13 +61,13 @@ export const Tag = ({ ...props }) => {
       newSelectedItem = [...newSelectedItem, item];
     }
     setInputValue("");
-    setSelectedItem(newSelectedItem);
+    commit(newSelectedItem);
   }
 
   const handleDelete = item => () => {
     const newSelectedItem = [...selectedItem];
     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
-    setSelectedItem(newSelectedItem);
+    commit(newSelectedItem);
   };
 
   function handleInputChange(event) {
@@ -89,7 +95,7 @@ export const Tag = ({ ...props }) => {
                       key={item}
                       tabIndex={-1}
                       label={item}
-                      className={classes.chip}
+                      sx={{ m: "4px 2px" }}
                       onDelete={handleDelete(item)}
                     />
                   )),
@@ -110,10 +116,7 @@ export const Tag = ({ ...props }) => {
     </>
   )
 }
-Tag.defaultProps = {
-  tags: []
-};
 Tag.propTypes = {
-  selectedTags: PropTypes.func.isRequired,
+  selectedTags: PropTypes.func,
   tags: PropTypes.arrayOf(PropTypes.string)
 };

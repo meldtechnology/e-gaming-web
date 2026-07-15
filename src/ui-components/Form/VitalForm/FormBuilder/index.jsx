@@ -42,9 +42,9 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, attac
     <form onSubmit={formik.handleSubmit} >
       {formConfig?.map((group) => (
         <div key={group?.groupId}>
-          <h2 className='font-bold text-[24px] text-blue-600 pb-4'>
+          <h2 className='font-bold text-[24px] text-brand pb-4'>
             {group.headerTitle}</h2>
-          <hr className="bg-gray-950 h-[2px] mb-3" />
+          <hr className="bg-surface-raised h-[2px] mb-3" />
           { group?.formControls?.map((field) => (
             <Box key={field?.name}
                  padding={'1rem'} >
@@ -64,8 +64,8 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, attac
       ))}
       {(attachment?.hasAttachment)? (
           <div className={'w-full text-[18px]'}>
-            <span className={'text-red-700 text-[18pt] mr-4'}>*</span>
-            <span className={'text-blue-600 font-bold text-center'}>
+            <span className={'text-danger text-[18pt] mr-4'}>*</span>
+            <span className={'text-brand font-bold text-center'}>
               Upload the following PDF Attachments
             </span>
             <table border={0}>
@@ -73,7 +73,7 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, attac
         {attachments?.map((file, index) => (
           <tr key={index} className={"w-full p-4 flex-col gap-3 overflow-hidden"}>
             <td className={'w-1/4'}>{file?.name}.pdf</td>
-            <td className={"w-1/4 font-bold text-orange-400"}>
+            <td className={"w-1/4 font-bold text-warning"}>
               {(file?.url) ? 'Upload Completed' : ''}
             </td>
             <td className={'w-1/4'}>
@@ -99,7 +99,11 @@ export const FormBuilder = ({ formConfig, validationSchema, initialValues, attac
           </div>
         )}
       <button type="submit"
-              className={`w-[100%] bg-gray-950 text-white-a700 p-4 rounded-lg ${formik.isSubmitting ? 'hidden' : ''}`}>
+              className={`w-[100%] !bg-blue-900 bg-surface-raised text-white-a700 p-4 rounded-lg
+              transition-all duration-300 ease-in-out
+              hover:bg-blue-600 hover:-translate-y-0.5 hover:shadow-lg
+              active:translate-y-0 active:bg-blue-900
+               ${formik.isSubmitting ? 'hidden' : ''}`}>
         Submit Application
       </button>
       <ProgressButton saving={formik.isSubmitting} width={'w-[100%]'} position={'justify-center'} />

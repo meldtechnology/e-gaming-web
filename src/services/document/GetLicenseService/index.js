@@ -4,12 +4,14 @@ import { headerConfig as headers } from "../../../core/httpHeaders";
 
 export const GetLicenseService = ( endpoint, delay ) => {
   const { config } = headers();
-  const { data: resp, error, isLoading }
-    = useSWR([endpoint, config], get, { refreshInterval: delay, });
+  const key = endpoint ? [endpoint, config] : null;
+  const { data: resp, error, isLoading, mutate }
+    = useSWR(key, get, { refreshInterval: delay, });
 
   return {
     license: resp?.data,
     isLoading,
-    isError: error
+    isError: error,
+    mutate
   }
 }

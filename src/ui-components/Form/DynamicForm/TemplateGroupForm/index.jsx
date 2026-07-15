@@ -59,7 +59,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
     // Extract out the form controls in the group
     const foundGroup = extractGroupWithId(container, group);
     // Update the form controls with the new one
-    selectedGroup[0].formControls = [...foundGroup?.formControls, createFormField()];
+    selectedGroup[0].formControls = [...(foundGroup?.formControls ?? []), createFormField()];
     // update the container
     setContainer(container.filter(item => {
       if(item.groupId === selectedGroup.groupId) { item = selectedGroup; }
@@ -82,19 +82,19 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
 
   return (
     <>
-      <div className='bg-gray-100 p-3 items-end overflow-hidden'>
+      <div className='mb-2 items-end overflow-hidden rounded-xl bg-surface-muted p-3'>
         <button type="button"
-                className={`${saving ? 'hidden' : ''} bg-gray-900_01 text-white-a700 rounded-xl p-2 float-right `}
+                className={`${saving ? 'hidden' : ''} float-right rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-on-brand transition-colors hover:bg-brand-strong`}
                 onClick={()=> saveTemplate(container)}
         >
           Save Template
         </button>
-        <ProgressButton saving={saving} position="float-right" />`
+        <ProgressButton saving={saving} position="float-right" />
       </div>
 
       {container?.map((comp, index) => (
         <div key={index} className="mb-4 pb-4">
-          <span className="font-bold text-blue-600 text-2xl mb-2 mt-6">
+          <span className="mb-2 mt-6 text-2xl font-bold text-text-primary">
             {comp?.headerTitle}
           </span>
           <EditGroupPopUp openGroup={openGroup === comp.groupId}
@@ -103,7 +103,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
                           editControl={editControl} />
           <span className="float-right py-4 overflow-hidden block ">
             <button type="button"
-                    className="mr-2 bg-blue_gray-900 p-1 rounded-b-xl rounded-t-xl"
+                    className="mr-2 rounded-xl bg-brand p-1.5 transition-colors hover:bg-brand-strong"
                     onClick={()=> addField(comp.groupId)}>
               <svg xmlns="http://www.w3.org/2000/svg"
                    viewBox="0 0 448 512"
@@ -135,7 +135,7 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
               </svg>
             </button>
           </span>
-          <hr className="mt-6" />
+          <hr className="mt-6 border-border" />
           {
             comp?.formControls.map((field, index1) => (
               <div key={index1} >
@@ -173,9 +173,9 @@ export const TemplateGroupForm = ({templateForm, saveTemplate, saving}) => {
         </div>
       ))}
       <button type="button"
-              className="w-full block bg-blue_gray-900 text-white-a700 p-2 mt-8 border-r-2"
+              className="mt-8 block w-full rounded-xl border border-dashed border-border-strong bg-surface p-3 text-sm font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-soft"
               onClick={updateGroup}>
-        Add Group
+        + Add Group
       </button>
     </>
   );

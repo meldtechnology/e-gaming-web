@@ -53,7 +53,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       />
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -72,7 +72,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       />
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -91,7 +91,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       />
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -116,7 +116,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         className={`w-[100%]`}
       />
       <div className={`${required?'':'hidden'}`}>
-                      <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
+                      <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -140,7 +140,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         ))}
       </RadioGroup>
       <div className={`${required?'':'hidden'}`}>
-                      <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
+                      <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -149,7 +149,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   if(fieldType === 'rating') return (
     <>
       <FormLabel id="demo-radio-buttons-group-label">{label} <span
-        className={`${required ? "" : "hidden"} text-red-700`}>*</span></FormLabel>
+        className={`${required ? "" : "hidden"} text-danger`}>*</span></FormLabel>
       <Rating name={name}
               defaultValue={0}
               precision={0.5}
@@ -157,7 +157,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
               onChange={formik.handleChange}
       />
       <div className={`${required?'':'hidden'}`}>
-                      <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
+                      <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -167,7 +167,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
     <>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">{label} <span
-          className={`${required ? "" : "hidden"} text-red-700`}>*</span></InputLabel>
+          className={`${required ? "" : "hidden"} text-danger`}>*</span></InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -186,7 +186,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         </Select>
       </FormControl>
       <div className={`${required?'':'hidden'}`}>
-        <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
+        <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
           {label} must be provided
         </span>
       </div>
@@ -209,7 +209,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         />
       </FormControl>
       <div className={`${required ? "" : "hidden"}`}>
-        <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+        <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
           {label} must be provided
         </span>
       </div>
@@ -227,7 +227,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       </FormGroup>
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -254,7 +254,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
         />
       </FormControl>
       <div className={`${required ? "" : "hidden"}`}>
-                      <span className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
+                      <span className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined)? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -275,7 +275,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       </LocalizationProvider>
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>
@@ -283,7 +283,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
   );
   if (fieldType === "checkbtn") return (
     <>
-      <div>{label} <span className={`${required? '' :'hidden'} text-red-700`}>*</span></div>
+      <div>{label} <span className={`${required? '' :'hidden'} text-danger`}>*</span></div>
       <FormGroup>
         {options?.map((option, idx) => (
           <FormControlLabel key={idx}
@@ -296,7 +296,7 @@ export const Selector = ({fieldType, formik, name, label, required, options, isE
       </FormGroup>
       <div className={`${required ? "" : "hidden"}`}>
                       <span
-                        className={`text-red-700 ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
+                        className={`text-danger ${(isError && formik.getFieldProps(name).value === undefined) ? "" : "hidden"}`}>
                       {label} must be provided
                     </span>
       </div>

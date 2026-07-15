@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# ESGC E-Gaming App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React 19 + Vite frontend for the Enugu State Gaming Commission licensing platform.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- Vite
+- React 19
+- TypeScript, incrementally adopted with `allowJs`
+- MUI v7
+- Tailwind CSS v3
+- Vitest, React Testing Library, MSW
+- SWR data fetching
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm ci
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Copy or configure the required `VITE_*` environment variables before running a production build. Client-exposed variables are documented in `prompts/v1/artifacts/vite-public-env.md`.
 
-### `npm test`
+## Scripts
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm run dev
+```
 
-### `npm run build`
+Starts the Vite dev server.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Builds production assets into `build/`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run preview
+```
 
-### `npm run eject`
+Serves the production build locally through Vite preview.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm run test -- --run
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Runs the Vitest suite.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run typecheck
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Runs the general mixed JS/TS TypeScript check.
 
-## Learn More
+```bash
+npm run typecheck:strict
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Runs strict TypeScript checks for the typed foundation subset.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run lint
+```
 
-### Code Splitting
+Runs flat ESLint, including React, hooks, import, TypeScript, and jsx-a11y rules.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build:check
+```
 
-### Analyzing the Bundle Size
+Checks the current Vite build output against bundle-size budgets. Run `npm run build` first.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Documentation
 
-### Making a Progressive Web App
+- `docs/theming.md`
+- `docs/primitives.md`
+- `docs/routing.md`
+- `docs/data-and-forms.md`
+- `docs/react19-mui7-upgrade.md`
+- `docs/visual-parity.md`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Release Gates
 
-### Advanced Configuration
+Before release, run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm run typecheck
+npm run typecheck:strict
+npm run lint
+npm run test -- --run
+npm run build
+npm run build:check
+```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Manual light/dark visual parity checks are still required. Baseline screenshots and release artifacts live under `prompts/v1/artifacts/`.

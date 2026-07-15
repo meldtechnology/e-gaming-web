@@ -7,13 +7,13 @@ const shapes = {
 };
 const variants = {
   fill: {
-    blue_gray_100: "bg-blue_gray-100 text-black-900_01",
-    blue_gray_900_4c: "bg-blue_gray-900_4c text-white-a700",
-    white_A700: "bg-white-a700 text-black-900_01",
-    blue_gray_900: "bg-blue_gray-900 text-white-a700",
+    blue_gray_100: "bg-surface-raised text-text-primary",
+    blue_gray_900_4c: "bg-brand text-on-brand",
+    white_A700: "bg-surface text-text-primary",
+    blue_gray_900: "bg-brand text-on-brand",
   },
   outline: {
-    white_A700_indigo_A700: "border-gray-900_01 border border-solid bg-gradient",
+    white_A700_indigo_A700: "border-border border border-solid bg-gradient",
   },
 };
 const sizes = {

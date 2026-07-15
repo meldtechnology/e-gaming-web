@@ -6,17 +6,17 @@ const NavList = () => {
   return (
     <ul className="my-2 flex gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <li className="p-1 font-medium">
-        <Link to={`/app/documents/T_46042b50`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/documents/types`} className="flex items-center text-text-secondary transition-colors hover:text-brand">
           Category
         </Link>
       </li>
       <li className="p-1 font-medium">
-        <Link to={`/app/documents/F_322f9837`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/documents/files`} className="flex items-center text-text-secondary transition-colors hover:text-brand">
           Revenue Head
         </Link>
       </li>
       <li className="p-1 font-medium">
-        <Link to={`/app/applications`} className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to={`/app/applications`} className="flex items-center text-text-secondary transition-colors hover:text-brand">
           Applications
         </Link>
       </li>
@@ -34,15 +34,11 @@ export const DocumentNavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className="mx-auto bg-blue_gray-900 text-white-a700 max-w-screen-xl px-6 py-3">
-      <div className="flex items-center justify-between !text-blue-gray-900 text-white">
-        <Link
-          to="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5"
-        >
+    <div className="mx-auto max-w-screen-xl rounded-xl border border-border bg-surface px-6 py-3 text-text-primary">
+      <div className="flex items-center justify-between">
+        <span className="mr-4 py-1.5 font-semibold text-text-primary">
           Document
-        </Link>
+        </span>
         <div className={`hidden ${(width > 1024) ? 'lg:block' : ''}`}>
           <NavList />
         </div>

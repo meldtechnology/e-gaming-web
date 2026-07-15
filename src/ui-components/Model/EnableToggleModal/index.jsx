@@ -1,11 +1,12 @@
+import { env } from "../../../config/env";
 import { MeldAlert } from "../../Alerts";
 import { AlertType } from "../../Alerts/AlertType";
 import { useState } from "react";
 import { UpdateUserService as toggleEnabled } from "../../../services";
 import { Loader } from "../../Loader";
 
-const ENABLE_URL = process.env.REACT_APP_ADMIN_ENABLE_URL;
-const DISABLE_URL = process.env.REACT_APP_ADMIN_DISABLE_URL;
+const ENABLE_URL = env.ADMIN_ENABLE_URL;
+const DISABLE_URL = env.ADMIN_DISABLE_URL;
 export const EnableToggleModal = ({ onClick, userData }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -48,15 +49,15 @@ export const EnableToggleModal = ({ onClick, userData }) => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-blue-300 bg-opacity-45 transition-opacity" aria-hidden="false"></div>
+      <div className="fixed inset-0 bg-brand/30 transition-opacity" aria-hidden="false"></div>
       <div className="fixed  inset-0 z-10 w-screen h-screen ">
         <div className="flex mt-[2%] justify-center p-4 text-center sm:items-center sm:p-0">
           <div
-            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all ">
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
+            className="relative bg-opacity-15 transform overflow-hidden rounded-lg bg-surface text-left shadow-xl transition-all ">
+            <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4 block w-full">
               <button type="button"
                       onClick={onClick}
-                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#373737] hover:text-white-a700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-400 sm:mt-0 sm:w-auto float-right">
+                      className="w-[10%] inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-text-primary hover:text-text-inverse shadow-sm ring-1 ring-inset ring-border-strong hover:bg-danger sm:mt-0 sm:w-auto float-right">
                 <span className="min-w-full text-center">X</span>
               </button>
               <div style={{ display: (error !== null) ? "" : "none" }}>
@@ -66,7 +67,7 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                 <MeldAlert alertType={AlertType.SUCCESS} message={message} show={success !== null} />
               </div>
             </div>
-            <div className="bg-white-a700 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div className="bg-surface px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div className="mt-1 text-left sm:ml-4 sm:mt-0 sm:text-left">
                   <div className="w-[407px] h-[400px] items-center ">
@@ -74,12 +75,12 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                     <div className="align-middle items-center text-center">
                       <span className="font-bold text-[24px] block">Enable/Disable User</span>
                       <span className="text-[14px]">{(isEnabled)? 'Disable' : 'Enable'}
-                        <span className="text-blue-600 pl-1">{userDataSplit[0]}</span>
+                        <span className="text-brand pl-1">{userDataSplit[0]}</span>
                       </span>
                       <span className={`block mt-2 text-[14px] ${(isEnabled)? 'hidden': ''}`}>
                         An activation OTP will be sent to the email
                         <br />associated with account
-                        <span className="text-blue-600 pl-1">{userDataSplit[0]}</span>
+                        <span className="text-brand pl-1">{userDataSplit[0]}</span>
                       </span>
                     </div>
                     <div className="mt-[15%] ml-[14%] w-[303px] pl-6">
@@ -94,17 +95,17 @@ export const EnableToggleModal = ({ onClick, userData }) => {
                                className="sr-only peer"
                                onClick={toggle} />
                         <div
-                          className="relative w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-amber-50 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                          className="relative w-14 h-7 bg-border-strong peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand dark:peer-focus:ring-brand rounded-full peer dark:bg-surface-raised peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-amber-50 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-border peer-checked:bg-brand"></div>
+                        <span className="ms-3 text-sm font-medium text-text-primary dark:text-text-primary">
                           {(isEnabled) ? "Disable" : "Enable"} <span
-                          className="text-blue-600 pl-1">{userDataSplit[0]}</span>
+                          className="text-brand pl-1">{userDataSplit[0]}</span>
                         </span>
                       </label>
 
                     </div>
                     <div className={'w-[70%] mt-4 mx-auto text-[0.8rem] text-center font-bold'}>
                       Note: if the data is not updated immediately, please use the
-                      <span className={'text-red-700'}> refresh data </span> button
+                      <span className={'text-danger'}> refresh data </span> button
                     </div>
                   </div>
                 </div>
