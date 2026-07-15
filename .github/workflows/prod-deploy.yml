@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BASE-IMAGE: josleke/esgc
-      RELEASE-TAG: 2026.07.15-Release
+      RELEASE-TAG: 2026.07.15_1-Release
       GENERATE_SOURCEMAP: "false"
       VITE_APPLICATION_ID: ${{ vars.VITE_APPLICATION_ID || '0db1cf18-d986-44a9-ab8f-682a564cdfd2' }}
       VITE_BASE_URL: ${{ vars.VITE_BASE_URL || 'https://esgc.meld-tech.com' }}
